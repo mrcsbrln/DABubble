@@ -1,6 +1,6 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-
+import { environment } from '../environments/environment';
 import { routes } from './app.routes';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
@@ -12,12 +12,12 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideFirebaseApp(() =>
       initializeApp({
-        projectId: 'dabubble403',
-        appId: '1:737440413813:web:5f70fada3aa89cee1c203c',
-        storageBucket: 'dabubble403.firebasestorage.app',
-        apiKey: '',
-        authDomain: 'dabubble403.firebaseapp.com',
-        messagingSenderId: '737440413813',
+        apiKey: environment.FIREBASE_API_KEY,
+        authDomain: 'dabubble403-6a0f1.firebaseapp.com',
+        projectId: 'dabubble403-6a0f1',
+        storageBucket: 'dabubble403-6a0f1.firebasestorage.app',
+        messagingSenderId: '910988035013',
+        appId: '1:910988035013:web:5db939cbade02842d601ac',
       })
     ),
     provideAuth(() => getAuth()),
