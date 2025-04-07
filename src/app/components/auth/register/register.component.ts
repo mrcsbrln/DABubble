@@ -19,13 +19,13 @@ export class RegisterComponent {
   form = this.formBuilder.nonNullable.group({
     username: ['', Validators.required],
     email: ['', Validators.required],
-    passwort: ['', Validators.required],
+    password: ['', Validators.required],
   });
 
   onSubmit(): void {
     const rawForm = this.form.getRawValue();
     this.authService
-      .register(rawForm.email, rawForm.passwort, rawForm.username)
+      .register(rawForm.email, rawForm.password, rawForm.username)
       .subscribe({
         next: () => {
           this.router.navigateByUrl('/');
