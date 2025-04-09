@@ -5,7 +5,6 @@
 </div>
 } @if(authService.currentUser$()) {
 <div>
-  {{ authService.currentUser$()?.username }}
   <button (click)="this.authService.logout()">Logout</button>
   <app-main />
 </div>
