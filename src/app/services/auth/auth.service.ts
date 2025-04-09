@@ -9,12 +9,14 @@ import {
 } from '@angular/fire/auth';
 import { from, Observable } from 'rxjs';
 import { User } from '../../models/user.model';
+import { doc, setDoc, Firestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   firebaseAuth = inject(Auth);
+  firestore = inject(Firestore);
   user$ = user(this.firebaseAuth);
   currentUser$ = signal<User | null | undefined>(undefined);
 
@@ -27,9 +29,20 @@ export class AuthService {
       this.firebaseAuth,
       email,
       password
-    ).then((response) =>
-      updateProfile(response.user, { displayName: username })
-    );
+    ).then((response) => {
+      const uid = response.user.uid;
+      return updateProfile(response.user, { displayName: username }).then(
+        () => {
+          const userData: User = {
+            username,
+            email,
+            avatarUrl: '',
+            status: 'offline',
+          };
+          return setDoc(doc(this.firestore, 'users', uid), userData);
+        }
+      );
+    });
     return from(promise);
   }
 

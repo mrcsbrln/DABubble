@@ -25,7 +25,7 @@ export class RegisterComponent {
   onSubmit(): void {
     const rawForm = this.form.getRawValue();
     this.authService
-      .register(rawForm.email, rawForm.password, rawForm.username)
+      .register(rawForm.email, rawForm.username, rawForm.password)
       .subscribe({
         next: () => {
           this.router.navigateByUrl('/');
