@@ -10,6 +10,7 @@ import {
 import { from, Observable } from 'rxjs';
 import { User } from '../../models/user.model';
 import { doc, setDoc, Firestore } from '@angular/fire/firestore';
+import { Router } from '@angular/router'; // Router importieren
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +18,7 @@ import { doc, setDoc, Firestore } from '@angular/fire/firestore';
 export class AuthService {
   firebaseAuth = inject(Auth);
   firestore = inject(Firestore);
+  router = inject(Router);
   user$ = user(this.firebaseAuth);
   currentUser$ = signal<User | null | undefined>(undefined);
 
@@ -56,7 +58,18 @@ export class AuthService {
   }
 
   logout(): Observable<void> {
-    const promise = signOut(this.firebaseAuth);
+    const promise = signOut(this.firebaseAuth)
+      .then(() => {
+        // Navigation direkt nach dem Firebase SignOut
+        this.currentUser$.set(null); // Signal explizit auf null setzen
+        this.router.navigate(['/login']);
+        console.log('Logout erfolgreich, Navigation im Service ausgelöst.');
+      })
+      .catch((error) => {
+        console.error('Fehler beim Logout oder Navigieren:', error);
+        // Fehlerbehandlung, vielleicht willst du trotzdem navigieren?
+        // this.router.navigate(['/login']);
+      });
     return from(promise);
   }
 }

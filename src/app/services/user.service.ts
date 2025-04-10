@@ -12,12 +12,4 @@ export class UserService {
   getUsersRef() {
     return collection(this.firestore, 'users');
   }
-
-  async addUser(user: User) {
-    try {
-      await addDoc(this.getUsersRef(), user);
-    } catch (err) {
-      console.error(err);
-    }
-  }
 }

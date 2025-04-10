@@ -1,12 +1,6 @@
-@if(authService.currentUser$() === null) {
-<div>
-  <a routerLink="/login">Login</a>
-  <a routerLink="/register">Register</a>
-</div>
-} @if(authService.currentUser$()) {
+@if(this.authService.currentUser$()) {
 <div>
   <button (click)="this.authService.logout()">Logout</button>
-  <app-main />
 </div>
 }
 
