@@ -1,0 +1,9 @@
+@use "../../../../styles.scss" as *;
+
+h1 {
+  color: $purple-1;
+}
+
+.grid-container {
+  background-color: $bg-color;
+}
