@@ -1,9 +1,113 @@
 @use "../../../../styles.scss" as *;
 
-h1 {
-  color: $purple-1;
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  width: 100%;
 }
 
-.grid-container {
+h1 {
+  color: $purple-1;
+  font-weight: 700;
+  font-size: 46px;
+}
+
+p {
+  text-align: center;
+}
+
+input {
+  border-style: none;
+  background: none;
+  height: 60px;
+  width: 100%;
+  color: $text-gray;
+  font-weight: 500;
+  font-size: 18px;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
+}
+
+.input-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
   background-color: $bg-color;
+  border-radius: 100px;
+  border-style: none;
+  padding: 0 32px;
+  width: 100%;
+  height: 60px;
+  color: $text-gray;
+  font-weight: 500;
+  font-size: 18px;
+  cursor: pointer;
+  &span {
+    color: $purple-1;
+  }
+}
+
+.login-wrapper {
+  background-color: $bg-color;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-box {
+  background-color: #fff;
+  border-radius: 30px;
+  max-width: 600px;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  padding: 64px;
+}
+
+button {
+  font-weight: 700;
+  font-size: 18px;
+  border-radius: 25px;
+  border-style: none;
+  cursor: pointer;
+  height: 60px;
+  padding: 0 25px;
+  &.btn-submit {
+    background-color: $purple-1;
+    color: #fff;
+  }
+  &.btn-guest {
+    background: none;
+    border: 1px solid $purple-2;
+    color: $purple-1;
+  }
+}
+
+.btn-wrapper {
+  display: flex;
+  gap: 32px;
+}
+
+.seperator-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  width: 100%;
+}
+
+.seperator {
+  height: 1px;
+  width: 50%;
+  border: 1px solid $light-purple;
 }

@@ -1,23 +1,45 @@
-<div class="grid-container">
-  <h1>Anmeldung</h1>
+<div class="login-wrapper">
+  <div class="login-box">
+    <h1>Anmeldung</h1>
+    <p>
+      Wir empfehlen dir, die E-Mail-Adresse zu nutzen, die du bei der Arbeit
+      verwendest.
+    </p>
+    @if (errorMessage) {
+    <div>{{ errorMessage }}</div>
+    }
 
-  @if (errorMessage) {
-  <div>{{ errorMessage }}</div>
-  }
-
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div>
-      <input type="text" placeholder="Email" formControlName="email" />
-    </div>
-    <div>
-      <input
-        type="password"
-        placeholder="Password"
-        formControlName="password"
-      />
-    </div>
-    <div>
-      <button type="submit">Sign In</button>
-    </div>
-  </form>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="input-div">
+        <img src="img/mail-icon.svg" alt="" />
+        <input
+          type="text"
+          placeholder="beispielname@email.de"
+          formControlName="email"
+        />
+      </div>
+      <div class="input-div">
+        <img src="img/password-icon.svg" alt="" />
+        <input
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+        />
+      </div>
+      <a href="">Passwort vergessen?</a>
+      <div class="seperator-wrapper">
+        <div class="seperator"></div>
+        ODER
+        <div class="seperator"></div>
+      </div>
+      <div class="input-div">
+        <img src="img/google-icon.svg" alt="" />
+        <span>Anmelden mit Google</span>
+      </div>
+      <div class="btn-wrapper">
+        <button class="btn-submit" type="submit">Anmelden</button>
+        <button class="btn-guest" type="">Gäste-Login</button>
+      </div>
+    </form>
+  </div>
 </div>
