@@ -8,7 +8,7 @@ import {
   user,
 } from '@angular/fire/auth';
 import { from, Observable } from 'rxjs';
-import { User } from '../../models/user.model';
+import { User } from '../../interface/user.interface';
 import { doc, setDoc, Firestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router'; // Router importieren
 
@@ -60,15 +60,11 @@ export class AuthService {
   logout(): Observable<void> {
     const promise = signOut(this.firebaseAuth)
       .then(() => {
-        // Navigation direkt nach dem Firebase SignOut
-        this.currentUser$.set(null); // Signal explizit auf null setzen
+        this.currentUser$.set(null);
         this.router.navigate(['/login']);
-        console.log('Logout erfolgreich, Navigation im Service ausgelöst.');
       })
       .catch((error) => {
         console.error('Fehler beim Logout oder Navigieren:', error);
-        // Fehlerbehandlung, vielleicht willst du trotzdem navigieren?
-        // this.router.navigate(['/login']);
       });
     return from(promise);
   }

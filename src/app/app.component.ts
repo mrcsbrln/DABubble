@@ -22,7 +22,6 @@ export class AppComponent {
       } else {
         this.authService.currentUser$.set(null);
       }
-      console.log(this.authService.currentUser$());
     });
   }
 }

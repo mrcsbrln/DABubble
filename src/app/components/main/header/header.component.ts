@@ -1,5 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
+import { UserService } from '../../../services/user.service';
+import { User } from '../../../interface/user.interface';
 
 @Component({
   selector: 'app-header',
@@ -9,4 +11,5 @@ import { AuthService } from '../../../services/auth/auth.service';
 })
 export class HeaderComponent {
   authService = inject(AuthService);
+  userService = inject(UserService);
 }
