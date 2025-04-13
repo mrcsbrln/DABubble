@@ -13,15 +13,15 @@ export class AppComponent {
   authService = inject(AuthService);
 
   ngOnInit(): void {
-    this.authService.user$.subscribe((user) => {
-      if (user) {
-        this.authService.currentUser$.set({
-          email: user.email!,
-          username: user.displayName!,
-        });
-      } else {
-        this.authService.currentUser$.set(null);
-      }
-    });
+    // this.authService.user$.subscribe((user) => {
+    //   if (user) {
+    //     this.authService.currentUser.set({
+    //       email: user.email!,
+    //       username: user.displayName!,
+    //     });
+    //   } else {
+    //     this.authService.currentUser.set(null);
+    //   }
+    // });
   }
 }

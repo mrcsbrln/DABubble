@@ -1,16 +1,18 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal, computed, Signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import {
   Auth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
-  user,
+  authState,
+  User as FirebaseUser,
 } from '@angular/fire/auth';
-import { from, Observable } from 'rxjs';
-import { User } from '../../interface/user.interface';
+import { Observable, from } from 'rxjs';
+import { User as AppUser } from '../../interface/user.interface'; // Pfad anpassen
 import { doc, setDoc, Firestore } from '@angular/fire/firestore';
-import { Router } from '@angular/router'; // Router importieren
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -19,8 +21,16 @@ export class AuthService {
   firebaseAuth = inject(Auth);
   firestore = inject(Firestore);
   router = inject(Router);
-  user$ = user(this.firebaseAuth);
-  currentUser$ = signal<User | null | undefined>(undefined);
+
+  private authState$: Observable<FirebaseUser | null> = authState(
+    this.firebaseAuth
+  );
+
+  readonly currentUser: Signal<FirebaseUser | null | undefined> = toSignal(
+    this.authState$
+  );
+
+  readonly isLoggedIn: Signal<boolean> = computed(() => !!this.currentUser());
 
   register(
     email: string,
@@ -31,19 +41,16 @@ export class AuthService {
       this.firebaseAuth,
       email,
       password
-    ).then((response) => {
+    ).then(async (response) => {
       const uid = response.user.uid;
-      return updateProfile(response.user, { displayName: username }).then(
-        () => {
-          const userData: User = {
-            username,
-            email,
-            avatarUrl: '',
-            status: 'offline',
-          };
-          return setDoc(doc(this.firestore, 'users', uid), userData);
-        }
-      );
+      await updateProfile(response.user, { displayName: username });
+      const userData: AppUser = {
+        username,
+        email,
+        avatarUrl: '',
+        status: 'online',
+      };
+      return await setDoc(doc(this.firestore, 'users', uid), userData);
     });
     return from(promise);
   }
@@ -60,11 +67,11 @@ export class AuthService {
   logout(): Observable<void> {
     const promise = signOut(this.firebaseAuth)
       .then(() => {
-        this.currentUser$.set(null);
         this.router.navigate(['/login']);
       })
       .catch((error) => {
         console.error('Fehler beim Logout oder Navigieren:', error);
+        throw error;
       });
     return from(promise);
   }
