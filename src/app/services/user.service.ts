@@ -1,4 +1,4 @@
-import { Injectable, inject, OnDestroy, OnInit } from '@angular/core';
+import { Injectable, inject, OnDestroy } from '@angular/core';
 import { User } from '../interface/user.interface';
 import {
   Firestore,
@@ -7,24 +7,21 @@ import {
   onSnapshot,
   Unsubscribe,
 } from '@angular/fire/firestore';
-import { user } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UserService implements OnInit, OnDestroy {
+export class UserService implements OnDestroy {
   users: User[] = [];
   firestore: Firestore = inject(Firestore);
 
   unsubUsersCollection!: Unsubscribe;
   // unsubUserDocument;
 
-  ngOnInit() {
+  constructor() {
     this.unsubUsersCollection = this.subUserCollection();
-    console.log(this.users);
-
     // this.unsubUserDocument = onSnapshot(
-    //   this.getUserRef('users', ''),
+    //   this.userDocRef('users', ''),
     //   (user) => {
     //     console.log(user);
     //   }
@@ -36,16 +33,16 @@ export class UserService implements OnInit, OnDestroy {
     // this.unsubUserDocument();
   }
 
-  getUsersRef() {
+  usersCollectionRef() {
     return collection(this.firestore, 'users');
   }
 
-  getUserRef(colId: string, docId: string) {
+  userDocRef(colId: string, docId: string) {
     return doc(collection(this.firestore, colId, docId));
   }
 
   subUserCollection() {
-    return onSnapshot(this.getUsersRef(), (users) => {
+    return onSnapshot(this.usersCollectionRef(), (users) => {
       this.users = [];
       users.forEach((user) => {
         this.users.push(this.setUserObject(user.data(), user.id));
