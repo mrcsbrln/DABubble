@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
+import { UserProfileComponent } from '../user-profile/user-profile.component';
 
 @Component({
   selector: 'app-chat',
-  imports: [],
+  imports: [UserProfileComponent],
   templateUrl: './chat.component.html',
-  styleUrl: './chat.component.scss'
+  styleUrl: './chat.component.scss',
 })
-export class ChatComponent {
-
-}
+export class ChatComponent {}
