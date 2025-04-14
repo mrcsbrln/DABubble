@@ -1,4 +1,13 @@
-<app-header />
+<div
+class="container"
+[class.no-workspace]="isWorkspaceHidden"
+[class.no-thread]="isThreadHidden"
+>
+<app-header>
 <p>Hallo {{ this.authService.currentUser()?.email }}</p>
-<app-chat />
-<app-thread />
+
+</app-header>
+  <app-workspace *ngIf="!isWorkspaceHidden"></app-workspace>
+  <app-chat></app-chat>
+  <app-thread *ngIf="!isThreadHidden"></app-thread>
+</div>
