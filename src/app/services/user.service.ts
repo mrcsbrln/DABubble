@@ -55,7 +55,7 @@ export class UserService implements OnDestroy {
   }
 
   userDocRef(colId: string, docId: string) {
-    return doc(collection(this.firestore, colId, docId));
+    return doc(this.firestore, colId, docId);
   }
 
   subUserCollection() {
