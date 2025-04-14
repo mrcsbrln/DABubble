@@ -7,10 +7,10 @@ import {
   signOut,
   updateProfile,
   authState,
-  User as FirebaseUser,
+  User,
 } from '@angular/fire/auth';
 import { Observable, from } from 'rxjs';
-import { User as AppUser } from '../../interface/user.interface'; // Pfad anpassen
+import { UserProfil } from '../../interface/user-profile.interface';
 import { doc, setDoc, Firestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 
@@ -22,11 +22,11 @@ export class AuthService {
   firestore = inject(Firestore);
   router = inject(Router);
 
-  private authState$: Observable<FirebaseUser | null> = authState(
-    this.firebaseAuth
-  );
+  private authState$: Observable<User | null> = authState(this.firebaseAuth);
 
-  readonly currentUser: Signal<FirebaseUser | null | undefined> = toSignal(
+  currentUser$ = authState(this.firebaseAuth);
+
+  readonly currentUser: Signal<User | null | undefined> = toSignal(
     this.authState$
   );
 
@@ -44,7 +44,7 @@ export class AuthService {
     ).then(async (response) => {
       const uid = response.user.uid;
       await updateProfile(response.user, { displayName: username });
-      const userData: AppUser = {
+      const userData: UserProfil = {
         username,
         email,
         avatarUrl: '',

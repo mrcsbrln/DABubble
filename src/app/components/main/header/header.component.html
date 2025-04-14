@@ -2,7 +2,7 @@
   <button (click)="this.authService.logout()">Logout</button>
 </div>
 
-@for (user of userService.users; track user.id) {
+@for (user of userService.users; track user.uid) {
 <span>{{ user.username }}</span>
 <span>{{ user.email }}</span>
 } @empty {

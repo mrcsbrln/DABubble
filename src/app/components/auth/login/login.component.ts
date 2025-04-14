@@ -31,7 +31,6 @@ export class LoginComponent {
     const rawForm = this.form.getRawValue();
     this.authService.login(rawForm.email, rawForm.password).subscribe({
       next: () => {
-        console.log('>>> LOGIN SUCCESSFUL (next: block executed) <<<'); // <-- Hinzufügen
         this.router.navigateByUrl('/');
       },
       error: (err) => {

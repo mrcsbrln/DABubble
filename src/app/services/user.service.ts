@@ -1,19 +1,36 @@
 import { Injectable, inject, OnDestroy } from '@angular/core';
-import { User } from '../interface/user.interface';
+import { UserProfil } from '../interface/user-profile.interface';
 import {
   Firestore,
   collection,
   doc,
   onSnapshot,
   Unsubscribe,
+  docData,
 } from '@angular/fire/firestore';
+import { AuthService } from './auth/auth.service';
+import { Observable, of, switchMap } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService implements OnDestroy {
-  users: User[] = [];
+  users: UserProfil[] = [];
   firestore: Firestore = inject(Firestore);
+  authService = inject(AuthService);
+  private currentUserData$ = this.authService.currentUser$.pipe(
+    switchMap((user) => {
+      if (!user) {
+        return of(null);
+      }
+      return docData(
+        this.userDocRef('users', user?.uid)
+      ) as Observable<UserProfil>;
+    })
+  );
+
+  currentUSerData = toSignal(this.currentUserData$);
 
   unsubUsersCollection!: Unsubscribe;
   // unsubUserDocument;
@@ -50,9 +67,9 @@ export class UserService implements OnDestroy {
     });
   }
 
-  setUserObject(obj: any, id: string): User {
+  setUserObject(obj: any, id: string): UserProfil {
     return {
-      id: id,
+      uid: id,
       username: obj.username || '',
       email: obj.email || '',
       avatarUrl: obj.avatarUrl || '',
