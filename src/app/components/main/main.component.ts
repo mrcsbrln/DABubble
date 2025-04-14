@@ -3,10 +3,11 @@ import { AuthService } from '../../services/auth/auth.service';
 import { HeaderComponent } from './header/header.component';
 import { ChatComponent } from './chat/chat.component';
 import { ThreadComponent } from './thread/thread.component';
+import { WorkspaceComponent } from './workspace/workspace.component';
 
 @Component({
   selector: 'app-main',
-  imports: [HeaderComponent, ChatComponent, ThreadComponent],
+  imports: [HeaderComponent, WorkspaceComponent, ChatComponent, ThreadComponent],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
 })

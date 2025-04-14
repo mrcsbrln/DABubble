@@ -1,4 +1,9 @@
-<app-header />
 <p>Hallo {{ this.authService.currentUser()?.email }}</p>
-<app-chat />
-<app-thread />
+
+<div class="container">
+  <app-header></app-header>
+  <app-workspace></app-workspace>
+  <app-chat></app-chat>
+  <app-thread></app-thread>
+</div>
+
