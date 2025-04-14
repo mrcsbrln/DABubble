@@ -1,11 +1,31 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './guards/auth.guard';
+import {
+  canActivate,
+  redirectLoggedInTo,
+  redirectUnauthorizedTo,
+} from '@angular/fire/auth-guard';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { MainComponent } from './components/main/main.component';
 
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
+const redirectLoggedInToHome = () => redirectLoggedInTo(['']);
+
 export const routes: Routes = [
-  { path: '', component: MainComponent, canActivate: [authGuard] },
-  { path: 'register', component: RegisterComponent },
-  { path: 'login', component: LoginComponent },
+  {
+    path: '',
+    component: MainComponent,
+    ...canActivate(redirectUnauthorizedToLogin),
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    ...canActivate(redirectLoggedInToHome),
+  },
+
+  {
+    path: 'login',
+    component: LoginComponent,
+    ...canActivate(redirectLoggedInToHome),
+  },
 ];
