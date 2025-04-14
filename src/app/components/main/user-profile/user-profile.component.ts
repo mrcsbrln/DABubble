@@ -10,5 +10,5 @@ import { UserService } from '../../../services/user.service';
 export class UserProfileComponent {
   userService = inject(UserService);
 
-  currentUser = this.userService.currentUSerData;
+  currentUser = this.userService.currentUserData;
 }

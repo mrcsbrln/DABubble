@@ -30,7 +30,7 @@ export class UserService implements OnDestroy {
     })
   );
 
-  currentUSerData = toSignal(this.currentUserData$);
+  currentUserData = toSignal(this.currentUserData$);
 
   unsubUsersCollection!: Unsubscribe;
   // unsubUserDocument;
