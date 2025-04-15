@@ -1,4 +1,8 @@
 <div class="login-wrapper">
+  <div class="logo-div">
+    <img src="img/dabubble-logo.svg" alt="" />
+    <span>DABubble</span>
+  </div>
   <div class="login-box">
     <h1>Anmeldung</h1>
     <p>
@@ -10,41 +14,42 @@
     }
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div class="input-div">
-        <img src="img/mail-icon.svg" alt="" />
-        <input
-          type="text"
-          placeholder="beispielname@email.de"
-          formControlName="email"
-        />
+      <div class="field-wrapper">
+        <div class="input-div">
+          <img src="img/mail-icon.svg" alt="" />
+          <input
+            type="text"
+            placeholder="beispielname@email.de"
+            formControlName="email"
+          />
+        </div>
+        @if(email?.hasError('required') && email?.touched) {
+        <p>*Diese E-Mail-Adresse ist leider ungültig.</p>
+        } @if(email?.hasError('email') && email?.touched) {
+        <p>*Diese E-Mail-Adresse ist leider ungültig.</p>
+        }
       </div>
-      @if(email?.hasError('required') && email?.touched) {
-      <div class="error">
-        <p>Bitte eine gültige E-Mail-Adresse eingeben!</p>
+      <div class="field-wrapper">
+        <div class="input-div">
+          <img src="img/password-icon.svg" alt="" />
+          <input
+            type="password"
+            placeholder="Password"
+            formControlName="password"
+          />
+        </div>
+        @if(password?.hasError('required') && password?.touched) {
+        <p>Bitte ein gültiges Passwort eingeben!</p>
+        }
       </div>
-      } @if(email?.hasError('email') && email?.touched) {
-      <div class="error">
-        <p>Bitte eine gültige E-Mail-Adresse eingeben!</p>
-      </div>
-      }
-      <div class="input-div">
-        <img src="img/password-icon.svg" alt="" />
-        <input
-          type="password"
-          placeholder="Password"
-          formControlName="password"
-        />
-      </div>
-      @if(password?.hasError('required') && password?.touched) {
-      <p>Bitte ein gültiges Passwort eingeben!</p>
-      }
-      <a href="">Passwort vergessen?</a>
+
+      <a class="password" href="">Passwort vergessen?</a>
       <div class="seperator-wrapper">
         <div class="seperator"></div>
         ODER
         <div class="seperator"></div>
       </div>
-      <div class="input-div" (click)="googleLogin()">
+      <div class="input-div google" (click)="googleLogin()">
         <img src="img/google-icon.svg" alt="" />
         <span>Anmelden mit Google</span>
       </div>

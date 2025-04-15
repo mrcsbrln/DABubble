@@ -99,7 +99,6 @@ export class AuthService {
       uid,
       email: email ?? '',
     };
-
     return Promise.resolve(newProfile);
   }
 }
