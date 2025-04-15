@@ -52,4 +52,13 @@ export class LoginComponent {
         return 'Ein unbekannter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.';
     }
   }
+
+  async googleLogin() {
+    try {
+      await this.authService.googleLogin();
+      this.router.navigate(['']);
+    } catch (err) {
+      console.error(err);
+    }
+  }
 }

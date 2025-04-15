@@ -8,6 +8,9 @@ import {
   updateProfile,
   authState,
   User,
+  GoogleAuthProvider,
+  signInWithPopup,
+  UserCredential,
 } from '@angular/fire/auth';
 import { Observable, from } from 'rxjs';
 import { UserProfil } from '../../interface/user-profile.interface';
@@ -21,6 +24,7 @@ export class AuthService {
   firebaseAuth = inject(Auth);
   firestore = inject(Firestore);
   router = inject(Router);
+  goggleAuthProvider = new GoogleAuthProvider();
 
   private authState$: Observable<User | null> = authState(this.firebaseAuth);
 
@@ -74,5 +78,9 @@ export class AuthService {
         throw error;
       });
     return from(promise);
+  }
+
+  googleLogin(): Promise<UserCredential> {
+    return signInWithPopup(this.firebaseAuth, this.goggleAuthProvider);
   }
 }
