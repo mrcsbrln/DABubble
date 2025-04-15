@@ -22,6 +22,7 @@ a {
   text-decoration: none;
   padding: 8px 16px;
   border-radius: 25px;
+  border: 1px solid transparent;
   &:hover {
     background-color: $bg-color;
     transition: $hover-transition;
@@ -76,6 +77,9 @@ input {
   &span {
     color: $purple-1;
   }
+  .google {
+    color: $purple-1;
+  }
 }
 
 .logo-div {
@@ -92,6 +96,25 @@ input {
     color: black;
     font-weight: 500;
     font-size: 32px;
+  }
+}
+
+.register-div {
+  position: absolute;
+  top: 75px;
+  right: 75px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  a {
+    text-align: end;
+    &:hover {
+      border: 1px solid $purple-2;
+      transition: $hover-transition;
+    }
+  }
+  span {
+    margin-right: 12px;
   }
 }
 
@@ -164,4 +187,15 @@ button {
   height: 1px;
   width: 50%;
   border: 1px solid $light-purple;
+}
+
+.legal-wrapper {
+  position: absolute;
+  bottom: 32px;
+  a {
+    &:hover {
+      border: 1px solid $purple-2;
+      transition: $hover-transition;
+    }
+  }
 }

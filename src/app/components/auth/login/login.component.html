@@ -3,6 +3,10 @@
     <img src="img/dabubble-logo.svg" alt="" />
     <span>DABubble</span>
   </div>
+  <div class="register-div">
+    <span>Neu bei DABubble?</span>
+    <a routerLink="/register">Konto erstellen</a>
+  </div>
   <div class="login-box">
     <h1>Anmeldung</h1>
     <p>
@@ -49,14 +53,18 @@
         ODER
         <div class="seperator"></div>
       </div>
-      <div class="input-div google" (click)="googleLogin()">
+      <div class="input-div" (click)="googleLogin()">
         <img src="img/google-icon.svg" alt="" />
-        <span>Anmelden mit Google</span>
+        <span class="google">Anmelden mit Google</span>
       </div>
       <div class="btn-wrapper">
         <button class="btn-submit" type="submit">Anmelden</button>
         <button class="btn-guest" type="">Gäste-Login</button>
       </div>
     </form>
+  </div>
+  <div class="legal-wrapper">
+    <a href="">Impressum</a>
+    <a href="">Datenschutz</a>
   </div>
 </div>
