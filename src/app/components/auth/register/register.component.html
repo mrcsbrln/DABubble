@@ -1,20 +1,101 @@
-<h1>Register</h1>
+<div class="login-wrapper">
+  <div class="logo-div">
+    <img src="img/dabubble-logo.svg" alt="" />
+    <span>DABubble</span>
+  </div>
+  <div class="login-box">
+    <h1>Konto erstellen</h1>
+    <p>
+      Mit deinem Namen und deiner E-Mail-Adresse hast du dein neues
+      DABubble-Konto.
+    </p>
+    @if (errorMessage) {
+    <div>{{ errorMessage }}</div>
+    }
 
-@if (errorMessage) {
-<div>{{ errorMessage }}</div>
-}
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="field-wrapper">
+        <div class="input-div">
+          <img src="img/user-icon.svg" alt="" />
+          <input
+            type="text"
+            placeholder="Username"
+            formControlName="username"
+          />
+        </div>
+      </div>
+      <div class="field-wrapper">
+        <div class="input-div">
+          <img src="img/password-icon.svg" alt="" />
+          <input
+            type="password"
+            placeholder="Password"
+            formControlName="password"
+          />
+        </div>
+        <!-- @if(password?.hasError('required') && password?.touched) {
+        <p>Bitte ein gültiges Passwort eingeben!</p>
+        } -->
+      </div>
+      <div class="field-wrapper">
+        <div class="input-div">
+          <img src="img/mail-icon.svg" alt="" />
+          <input type="text" placeholder="Email" formControlName="email" />
+        </div>
+      </div>
+      <div class="checkbox-div">
+        <img src="img/checkbox-unchecked.svg" alt="" />
+        <p>
+          Ich stimme der<a routerLink="/privacy-policy">Datenschutzerklärung</a>
+          zu.
+        </p>
+      </div>
+      <div class="btn-wrapper">
+        <button class="btn-submit" type="submit">Weiter</button>
+      </div>
+    </form>
+  </div>
+  <div class="legal-wrapper">
+    <a href="">Impressum</a>
+    <a href="">Datenschutz</a>
+  </div>
+</div>
 
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <div>
-    <input type="text" placeholder="Username" formControlName="username" />
+<!-- <div class="register-wrapper">
+  <div class="register-box">
+    <h1>Konto erstellen</h1>
+    <p>
+      Mit deinem Namen und deiner E-Mail-Adresse hast du dein neues
+      DABubble-Konto.
+    </p>
+    @if (errorMessage) {
+    <div>{{ errorMessage }}</div>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-field">
+        <div class="input-div">
+          <input
+            type="text"
+            placeholder="Username"
+            formControlName="username"
+          />
+        </div>
+      </div>
+
+      <div>
+        <input type="text" placeholder="Email" formControlName="email" />
+      </div>
+      <div>
+        <input
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+        />
+      </div>
+      <div>
+        <button type="submit">Sign Up</button>
+      </div>
+    </form>
   </div>
-  <div>
-    <input type="text" placeholder="Email" formControlName="email" />
-  </div>
-  <div>
-    <input type="password" placeholder="Password" formControlName="password" />
-  </div>
-  <div>
-    <button type="submit">Sign Up</button>
-  </div>
-</form>
+</div> -->
