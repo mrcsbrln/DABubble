@@ -3,7 +3,7 @@
 </div>
 
 @for (user of userService.users; track user.uid) {
-<span>{{ user.username }}</span>
+<span>{{ user.displayName }}</span>
 <span>{{ user.email }}</span>
 } @empty {
 <span>Keine Benutzer geladen...</span> }

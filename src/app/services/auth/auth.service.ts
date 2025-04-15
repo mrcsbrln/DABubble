@@ -10,10 +10,10 @@ import {
   User,
   GoogleAuthProvider,
   signInWithPopup,
-  UserCredential,
+  getAdditionalUserInfo,
 } from '@angular/fire/auth';
 import { Observable, from } from 'rxjs';
-import { UserProfil } from '../../interface/user-profile.interface';
+import { UserProfile } from '../../interface/user-profile.interface';
 import { doc, setDoc, Firestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 
@@ -38,7 +38,7 @@ export class AuthService {
 
   register(
     email: string,
-    username: string,
+    displayName: string,
     password: string
   ): Observable<void> {
     const promise = createUserWithEmailAndPassword(
@@ -47,9 +47,10 @@ export class AuthService {
       password
     ).then(async (response) => {
       const uid = response.user.uid;
-      await updateProfile(response.user, { displayName: username });
-      const userData: UserProfil = {
-        username,
+      await updateProfile(response.user, { displayName: displayName });
+      const userData: UserProfile = {
+        uid,
+        displayName,
         email,
         avatarUrl: '',
         status: 'online',
@@ -80,7 +81,25 @@ export class AuthService {
     return from(promise);
   }
 
-  googleLogin(): Promise<UserCredential> {
-    return signInWithPopup(this.firebaseAuth, this.goggleAuthProvider);
+  async googleLogin(): Promise<UserProfile | null> {
+    const userCredential = await signInWithPopup(
+      this.firebaseAuth,
+      this.goggleAuthProvider
+    );
+    const additionalInfo = getAdditionalUserInfo(userCredential);
+    if (!additionalInfo?.isNewUser) {
+      return Promise.resolve(null);
+    }
+    const {
+      user: { displayName, uid, email },
+    } = userCredential;
+
+    const newProfile = {
+      displayName: displayName ?? '',
+      uid,
+      email: email ?? '',
+    };
+
+    return Promise.resolve(newProfile);
   }
 }

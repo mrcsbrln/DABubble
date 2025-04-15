@@ -1,9 +1,10 @@
 import { Injectable, inject, OnDestroy } from '@angular/core';
-import { UserProfil } from '../interface/user-profile.interface';
+import { UserProfile } from '../interface/user-profile.interface';
 import {
   Firestore,
   collection,
   doc,
+  setDoc,
   onSnapshot,
   Unsubscribe,
   docData,
@@ -16,7 +17,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
   providedIn: 'root',
 })
 export class UserService implements OnDestroy {
-  users: UserProfil[] = [];
+  users: UserProfile[] = [];
   firestore: Firestore = inject(Firestore);
   authService = inject(AuthService);
   private currentUserData$ = this.authService.currentUser$.pipe(
@@ -26,7 +27,7 @@ export class UserService implements OnDestroy {
       }
       return docData(
         this.userDocRef('users', user?.uid)
-      ) as Observable<UserProfil>;
+      ) as Observable<UserProfile>;
     })
   );
 
@@ -67,13 +68,18 @@ export class UserService implements OnDestroy {
     });
   }
 
-  setUserObject(obj: any, id: string): UserProfil {
+  setUserObject(obj: any, id: string): UserProfile {
     return {
       uid: id,
-      username: obj.username || '',
+      displayName: obj.displayName || '',
       email: obj.email || '',
       avatarUrl: obj.avatarUrl || '',
       status: obj.status || 'offline',
     };
+  }
+
+  addUser(user: UserProfile): Promise<void> {
+    const ref = doc(this.firestore, 'users', user.uid);
+    return setDoc(ref, user);
   }
 }

@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,7 @@ export class LoginComponent {
   fb = inject(FormBuilder);
   router = inject(Router);
   authService = inject(AuthService);
+  userService = inject(UserService);
 
   form = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
@@ -55,7 +57,10 @@ export class LoginComponent {
 
   async googleLogin() {
     try {
-      await this.authService.googleLogin();
+      const newUser = await this.authService.googleLogin();
+      if (newUser) {
+        this.userService.addUser(newUser);
+      }
       this.router.navigate(['']);
     } catch (err) {
       console.error(err);
