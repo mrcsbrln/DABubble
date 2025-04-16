@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -11,16 +11,27 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class RegisterComponent {
   authService = inject(AuthService);
-  formBuilder = inject(FormBuilder);
+  fb = inject(FormBuilder);
   router = inject(Router);
 
   errorMessage: string | null = null;
 
-  form = this.formBuilder.nonNullable.group({
+  checkBoxUnchecked = 'img/checkbox-unchecked.svg';
+  checkBoxChecked = 'img/checkbox-checked.svg';
+  isChecked = signal(false);
+  currentCheckBox = computed(() => {
+    return this.isChecked() ? this.checkBoxChecked : this.checkBoxUnchecked;
+  });
+
+  form = this.fb.nonNullable.group({
     username: ['', Validators.required],
-    email: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
   });
+
+  username = this.form.get('username');
+  email = this.form.get('email');
+  password = this.form.get('password');
 
   onSubmit(): void {
     const rawForm = this.form.getRawValue();
@@ -34,5 +45,9 @@ export class RegisterComponent {
           this.errorMessage = err.code;
         },
       });
+  }
+
+  toggleCheckbox(): void {
+    this.isChecked.update((value) => !value);
   }
 }
