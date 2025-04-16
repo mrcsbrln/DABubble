@@ -4,7 +4,12 @@
     <span>DABubble</span>
   </div>
   <div class="login-box">
-    <h1>Konto erstellen</h1>
+    <div class="header-wrapper">
+      <a routerLink="/login">
+        <img src="img/arrow-back.svg" alt="" />
+      </a>
+      <h1>Konto erstellen</h1>
+    </div>
     <p>
       Mit deinem Namen und deiner E-Mail-Adresse hast du dein neues
       DABubble-Konto.
@@ -19,9 +24,15 @@
           <img src="img/user-icon.svg" alt="" />
           <input
             type="text"
-            placeholder="Username"
+            placeholder="Vorname und Nachname"
             formControlName="username"
           />
+        </div>
+      </div>
+      <div class="field-wrapper">
+        <div class="input-div">
+          <img src="img/mail-icon.svg" alt="" />
+          <input type="text" placeholder="Email" formControlName="email" />
         </div>
       </div>
       <div class="field-wrapper">
@@ -36,12 +47,6 @@
         <!-- @if(password?.hasError('required') && password?.touched) {
         <p>Bitte ein gültiges Passwort eingeben!</p>
         } -->
-      </div>
-      <div class="field-wrapper">
-        <div class="input-div">
-          <img src="img/mail-icon.svg" alt="" />
-          <input type="text" placeholder="Email" formControlName="email" />
-        </div>
       </div>
       <div class="checkbox-div">
         <img src="img/checkbox-unchecked.svg" alt="" />

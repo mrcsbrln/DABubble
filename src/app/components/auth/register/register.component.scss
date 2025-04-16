@@ -29,6 +29,26 @@ a {
   }
 }
 
+.header-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  a {
+    display: flex;
+    position: absolute;
+    left: -8px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 100%;
+    &:hover {
+      background-color: $bg-color;
+      transition: $hover-transition;
+    }
+  }
+}
+
 .field-wrapper {
   position: relative;
   width: 100%;
