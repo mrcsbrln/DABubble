@@ -24,7 +24,7 @@ export class AuthService {
   firebaseAuth = inject(Auth);
   firestore = inject(Firestore);
   router = inject(Router);
-  goggleAuthProvider = new GoogleAuthProvider();
+  googleAuthProvider = new GoogleAuthProvider();
 
   private authState$: Observable<User | null> = authState(this.firebaseAuth);
 
@@ -55,7 +55,7 @@ export class AuthService {
         avatarUrl: '',
         status: 'online',
       };
-      return await setDoc(doc(this.firestore, 'users', uid), userData);
+      return setDoc(doc(this.firestore, 'users', uid), userData);
     });
     return from(promise);
   }
@@ -75,7 +75,7 @@ export class AuthService {
         this.router.navigate(['/login']);
       })
       .catch((error) => {
-        console.error('Fehler beim Logout oder Navigieren:', error);
+        console.error(error);
         throw error;
       });
     return from(promise);
@@ -84,21 +84,25 @@ export class AuthService {
   async googleLogin(): Promise<UserProfile | null> {
     const userCredential = await signInWithPopup(
       this.firebaseAuth,
-      this.goggleAuthProvider
+      this.googleAuthProvider
     );
+
     const additionalInfo = getAdditionalUserInfo(userCredential);
     if (!additionalInfo?.isNewUser) {
-      return Promise.resolve(null);
+      return null;
     }
+
     const {
-      user: { displayName, uid, email },
+      user: { displayName, uid, email, photoURL },
     } = userCredential;
 
-    const newProfile = {
+    const newProfile: UserProfile = {
       displayName: displayName ?? '',
       uid,
       email: email ?? '',
+      avatarUrl: photoURL ?? '',
+      status: 'online',
     };
-    return Promise.resolve(newProfile);
+    return newProfile;
   }
 }
