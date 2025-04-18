@@ -3,6 +3,17 @@
     <img src="img/dabubble-logo.svg" alt="" />
     <span>DABubble</span>
   </div>
+  @if(chooseAvatar()) {
+  <div class="avatar-overlay login-box">
+    <a (click)="this.chooseAvatar.set(false)">
+      <img src="img/arrow-back.svg" alt="" />
+    </a>
+    <h2>Wähle deinen Avatar</h2>
+    <img [src]="avatarUrl()" alt="" />
+    <span>{{ userService.currentUserData()?.displayName }}</span>
+    <button class="btn-submit" (click)="navigateToApp()">Weiter</button>
+  </div>
+  } @else {
   <div class="login-box">
     <div class="header-wrapper">
       <a routerLink="/login">
@@ -17,7 +28,6 @@
     @if (errorMessage) {
     <div>{{ errorMessage }}</div>
     }
-
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="field-wrapper">
         <div class="input-div">
@@ -65,51 +75,19 @@
         </p>
       </div>
       <div class="btn-wrapper">
-        <button class="btn-submit" type="submit">Weiter</button>
+        <button
+          class="btn-submit"
+          type="submit"
+          [disabled]="form.invalid || !isChecked()"
+        >
+          Weiter
+        </button>
       </div>
     </form>
   </div>
+  }
   <div class="legal-wrapper">
     <a href="">Impressum</a>
     <a href="">Datenschutz</a>
   </div>
 </div>
-
-<!-- <div class="register-wrapper">
-  <div class="register-box">
-    <h1>Konto erstellen</h1>
-    <p>
-      Mit deinem Namen und deiner E-Mail-Adresse hast du dein neues
-      DABubble-Konto.
-    </p>
-    @if (errorMessage) {
-    <div>{{ errorMessage }}</div>
-    }
-
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div class="form-field">
-        <div class="input-div">
-          <input
-            type="text"
-            placeholder="Username"
-            formControlName="username"
-          />
-        </div>
-      </div>
-
-      <div>
-        <input type="text" placeholder="Email" formControlName="email" />
-      </div>
-      <div>
-        <input
-          type="password"
-          placeholder="Password"
-          formControlName="password"
-        />
-      </div>
-      <div>
-        <button type="submit">Sign Up</button>
-      </div>
-    </form>
-  </div>
-</div> -->

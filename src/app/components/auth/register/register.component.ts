@@ -1,5 +1,6 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
+import { UserService } from '../../../services/user.service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 
@@ -11,6 +12,7 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class RegisterComponent {
   authService = inject(AuthService);
+  userService = inject(UserService);
   fb = inject(FormBuilder);
   router = inject(Router);
 
@@ -23,6 +25,9 @@ export class RegisterComponent {
     return this.isChecked() ? this.checkBoxChecked : this.checkBoxUnchecked;
   });
 
+  chooseAvatar = signal(true);
+  avatarUrl = signal('img/avatar/avatar-default.svg');
+
   form = this.fb.nonNullable.group({
     username: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
@@ -33,18 +38,22 @@ export class RegisterComponent {
   email = this.form.get('email');
   password = this.form.get('password');
 
+  navigateToApp() {
+    this.router.navigateByUrl('/');
+  }
+
   onSubmit(): void {
     const rawForm = this.form.getRawValue();
-    this.authService
-      .register(rawForm.email, rawForm.username, rawForm.password)
-      .subscribe({
-        next: () => {
-          this.router.navigateByUrl('/');
-        },
-        error: (err) => {
-          this.errorMessage = err.code;
-        },
-      });
+    if (this.isChecked()) {
+      this.authService
+        .register(rawForm.email, rawForm.username, rawForm.password)
+        .subscribe({
+          error: (err) => {
+            this.errorMessage = err.code;
+          },
+        });
+      this.chooseAvatar.set(true);
+    }
   }
 
   toggleCheckbox(): void {

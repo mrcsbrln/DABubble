@@ -8,7 +8,8 @@ form {
   width: 100%;
 }
 
-h1 {
+h1,
+h2 {
   color: $purple-1;
   font-weight: 700;
   font-size: 46px;
@@ -143,7 +144,7 @@ input {
   box-shadow: $box-shadow;
 }
 
-button {
+.btn-submit {
   font-weight: 700;
   font-size: 18px;
   border-radius: 100px;
@@ -151,23 +152,14 @@ button {
   cursor: pointer;
   height: 60px;
   padding: 0 25px;
-  &.btn-submit {
-    background-color: $purple-1;
-    color: #fff;
-    &:hover {
-      background-color: $purple-2;
-      transition: $hover-transition;
-    }
+  background-color: $purple-1;
+  color: #fff;
+  &:disabled {
+    background-color: $text-gray;
   }
-  &.btn-guest {
-    background: none;
-    border: 1px solid $purple-2;
-    color: $purple-1;
-    &:hover {
-      background-color: $purple-3;
-      color: #fff;
-      transition: $hover-transition;
-    }
+  &:not(:disabled):hover {
+    background-color: $purple-2;
+    transition: $hover-transition;
   }
 }
 
@@ -189,20 +181,6 @@ button {
   display: flex;
   justify-content: flex-end;
   gap: 32px;
-}
-
-.seperator-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 25px;
-  width: 100%;
-}
-
-.seperator {
-  height: 1px;
-  width: 50%;
-  border: 1px solid $light-purple;
 }
 
 .legal-wrapper {
