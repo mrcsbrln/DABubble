@@ -13,6 +13,11 @@ h2 {
   color: $purple-1;
   font-weight: 700;
   font-size: 46px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 32px;
 }
 
 p {
@@ -48,6 +53,37 @@ a {
       transition: $hover-transition;
     }
   }
+}
+
+.selected-avatar {
+  width: 168px;
+  border-radius: 100%;
+  border: 4px solid transparent;
+  &:hover {
+    border-color: $border-color;
+    transition: $hover-transition;
+  }
+}
+
+.avatars-div {
+  display: flex;
+  gap: 8px;
+}
+
+.avatar {
+  width: 64px;
+  border-radius: 100%;
+  border: 4px solid transparent;
+  cursor: pointer;
+  &:hover {
+    border-color: $border-color;
+    transition: $hover-transition;
+  }
+}
+
+.display-name {
+  font-size: 32px;
+  font-weight: 700;
 }
 
 .field-wrapper {
@@ -161,6 +197,10 @@ input {
     background-color: $purple-2;
     transition: $hover-transition;
   }
+}
+
+.btn-avatar {
+  align-self: flex-end;
 }
 
 .checkbox-div {

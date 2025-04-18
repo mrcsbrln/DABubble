@@ -3,15 +3,32 @@
     <img src="img/dabubble-logo.svg" alt="" />
     <span>DABubble</span>
   </div>
-  @if(chooseAvatar()) {
+  @if(chooseAvatar() && this.authService.currentUser()) {
   <div class="avatar-overlay login-box">
-    <a (click)="this.chooseAvatar.set(false)">
-      <img src="img/arrow-back.svg" alt="" />
-    </a>
-    <h2>Wähle deinen Avatar</h2>
-    <img [src]="avatarUrl()" alt="" />
-    <span>{{ userService.currentUserData()?.displayName }}</span>
-    <button class="btn-submit" (click)="navigateToApp()">Weiter</button>
+    <div class="header-wrapper">
+      <a (click)="this.chooseAvatar.set(false)">
+        <img src="img/arrow-back.svg" alt="" />
+      </a>
+      <h2>Wähle deinen Avatar</h2>
+    </div>
+    <img class="selected-avatar" [src]="avatarUrl()" alt="" />
+    <span class="display-name">{{
+      userService.currentUserData()?.displayName
+    }}</span>
+    <p>Aus der Liste wählen</p>
+    <div class="avatars-div">
+      @for(avatarUrl of avatarUrls; track $index) {
+      <img
+        class="avatar"
+        (click)="setAvatarUrl($index)"
+        [src]="avatarUrl"
+        alt=""
+      />
+      }
+    </div>
+    <button class="btn-submit btn-avatar" (click)="finishRegistration()">
+      Weiter
+    </button>
   </div>
   } @else {
   <div class="login-box">

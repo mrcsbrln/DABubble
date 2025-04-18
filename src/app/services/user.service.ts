@@ -8,6 +8,7 @@ import {
   onSnapshot,
   Unsubscribe,
   docData,
+  updateDoc,
 } from '@angular/fire/firestore';
 import { AuthService } from './auth/auth.service';
 import { Observable, of, switchMap } from 'rxjs';
@@ -81,5 +82,10 @@ export class UserService implements OnDestroy {
   addUser(user: UserProfile): Promise<void> {
     const ref = doc(this.firestore, 'users', user.uid);
     return setDoc(ref, user);
+  }
+
+  updateUserFields(userId: string, data: Partial<UserProfile>): Promise<void> {
+    const userRef = this.userDocRef('users', userId);
+    return updateDoc(userRef, data);
   }
 }

@@ -25,8 +25,16 @@ export class RegisterComponent {
     return this.isChecked() ? this.checkBoxChecked : this.checkBoxUnchecked;
   });
 
-  chooseAvatar = signal(true);
+  chooseAvatar = signal(false);
   avatarUrl = signal('img/avatar/avatar-default.svg');
+  avatarUrls: string[] = [
+    'img/avatar/avatar1.svg',
+    'img/avatar/avatar2.svg',
+    'img/avatar/avatar3.svg',
+    'img/avatar/avatar4.svg',
+    'img/avatar/avatar5.svg',
+    'img/avatar/avatar6.svg',
+  ];
 
   form = this.fb.nonNullable.group({
     username: ['', Validators.required],
@@ -38,8 +46,19 @@ export class RegisterComponent {
   email = this.form.get('email');
   password = this.form.get('password');
 
-  navigateToApp() {
-    this.router.navigateByUrl('/');
+  async finishRegistration() {
+    const currentUser = this.authService.currentUser();
+    if (currentUser?.uid) {
+      const userId = currentUser.uid;
+      try {
+        await this.userService.updateUserFields(userId, {
+          avatarUrl: this.avatarUrl(),
+        });
+      } catch (error) {
+        console.error(error);
+      }
+      this.router.navigateByUrl('/');
+    }
   }
 
   onSubmit(): void {
@@ -58,5 +77,9 @@ export class RegisterComponent {
 
   toggleCheckbox(): void {
     this.isChecked.update((value) => !value);
+  }
+
+  setAvatarUrl(index: number) {
+    this.avatarUrl.set(this.avatarUrls[index]);
   }
 }
