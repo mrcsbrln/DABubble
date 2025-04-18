@@ -41,32 +41,30 @@ export class AuthService {
     displayName: string,
     password: string
   ): Observable<void> {
-    const promise = createUserWithEmailAndPassword(
-      this.firebaseAuth,
-      email,
-      password
-    ).then(async (response) => {
-      const uid = response.user.uid;
-      await updateProfile(response.user, { displayName: displayName });
-      const userData: UserProfile = {
-        uid,
-        displayName,
-        email,
-        avatarUrl: '',
-        status: 'online',
-      };
-      return setDoc(doc(this.firestore, 'users', uid), userData);
-    });
-    return from(promise);
+    return from(
+      createUserWithEmailAndPassword(this.firebaseAuth, email, password).then(
+        async (response) => {
+          const uid = response.user.uid;
+          await updateProfile(response.user, { displayName: displayName });
+          const userData: UserProfile = {
+            uid,
+            displayName,
+            email,
+            avatarUrl: '',
+            status: 'online',
+          };
+          return setDoc(doc(this.firestore, 'users', uid), userData);
+        }
+      )
+    );
   }
 
   login(email: string, password: string): Observable<void> {
-    const promise = signInWithEmailAndPassword(
-      this.firebaseAuth,
-      email,
-      password
-    ).then(() => {});
-    return from(promise);
+    return from(
+      signInWithEmailAndPassword(this.firebaseAuth, email, password).then(
+        () => {}
+      )
+    );
   }
 
   logout(): Observable<void> {
