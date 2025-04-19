@@ -11,9 +11,10 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   getAdditionalUserInfo,
+  sendPasswordResetEmail,
 } from '@angular/fire/auth';
 import { Observable, from } from 'rxjs';
-import { UserProfile } from '../../interface/user-profile.interface';
+import { UserProfile } from '../../interfaces/user-profile.interface';
 import { doc, setDoc, Firestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 
@@ -102,5 +103,9 @@ export class AuthService {
       status: 'online',
     };
     return newProfile;
+  }
+
+  resetPassword(email: string): Promise<void> {
+    return sendPasswordResetEmail(this.firebaseAuth, email);
   }
 }

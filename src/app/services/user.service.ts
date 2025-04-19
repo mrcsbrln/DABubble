@@ -1,5 +1,5 @@
 import { Injectable, inject, OnDestroy } from '@angular/core';
-import { UserProfile } from '../interface/user-profile.interface';
+import { UserProfile } from '../interfaces/user-profile.interface';
 import {
   Firestore,
   collection,
