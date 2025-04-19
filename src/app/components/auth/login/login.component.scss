@@ -12,6 +12,7 @@ h1 {
   color: $purple-1;
   font-weight: 700;
   font-size: 46px;
+  text-align: center;
 }
 
 p {
@@ -23,9 +24,29 @@ a {
   padding: 8px 16px;
   border-radius: 25px;
   border: 1px solid transparent;
+  cursor: pointer;
   &:hover {
     background-color: $bg-color;
     transition: $hover-transition;
+  }
+}
+
+.header-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  a {
+    display: flex;
+    position: absolute;
+    left: -8px;
+    padding: 8px;
+    border-radius: 100%;
+    &:hover {
+      background-color: $bg-color;
+      transition: $hover-transition;
+    }
   }
 }
 
@@ -154,6 +175,13 @@ button {
     background-color: $purple-1;
     color: #fff;
     &:hover {
+      background-color: $purple-2;
+      transition: $hover-transition;
+    }
+    &:disabled {
+      background-color: $text-gray;
+    }
+    &:not(:disabled):hover {
       background-color: $purple-2;
       transition: $hover-transition;
     }

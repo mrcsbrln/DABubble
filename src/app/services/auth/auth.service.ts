@@ -105,7 +105,8 @@ export class AuthService {
     return newProfile;
   }
 
-  resetPassword(email: string): Promise<void> {
-    return sendPasswordResetEmail(this.firebaseAuth, email);
+  resetPassword(email: string) {
+    const promise = sendPasswordResetEmail(this.firebaseAuth, email);
+    return from(promise);
   }
 }

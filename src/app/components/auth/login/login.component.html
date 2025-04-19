@@ -8,6 +8,45 @@
     <a routerLink="/register">Konto erstellen</a>
   </div>
   <div class="login-box">
+    @if (resetPassword()) {
+    <div class="header-wrapper">
+      <a (click)="this.resetPassword.set(false)">
+        <img src="img/arrow-back.svg" alt="" />
+      </a>
+      <h1>Passwort zurücksetzten</h1>
+    </div>
+    <p>Bitte geben Sie Ihre E-Mail-Adresse ein.</p>
+    @if (errorMessage) {
+    <div>{{ errorMessage }}</div>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="onResetPasswordSubmit()">
+      <div class="field-wrapper">
+        <div class="input-div">
+          <img src="img/mail-icon.svg" alt="" />
+          <input
+            type="text"
+            placeholder="beispielname@email.de"
+            formControlName="email"
+          />
+        </div>
+        @if(email?.hasError('required') && email?.touched) {
+        <p>*Diese E-Mail-Adresse ist leider ungültig.</p>
+        } @if(email?.hasError('email') && email?.touched) {
+        <p>*Diese E-Mail-Adresse ist leider ungültig.</p>
+        }
+      </div>
+      <p>
+        Wir senden Ihnen eine E-Mail, über die Sie Ihr Passwort ändern können.
+      </p>
+      <div class="btn-wrapper">
+        <button class="btn-submit" type="submit" [disabled]="!email?.valid">
+          E-mail senden
+        </button>
+      </div>
+    </form>
+
+    } @else {
     <h1>Anmeldung</h1>
     <p>
       Wir empfehlen dir, die E-Mail-Adresse zu nutzen, die du bei der Arbeit
@@ -47,7 +86,9 @@
         }
       </div>
 
-      <a class="password" href="">Passwort vergessen?</a>
+      <a class="password" (click)="this.resetPassword.set(true)"
+        >Passwort vergessen?</a
+      >
       <div class="seperator-wrapper">
         <div class="seperator"></div>
         ODER
@@ -62,6 +103,7 @@
         <button class="btn-guest" type="">Gäste-Login</button>
       </div>
     </form>
+    }
   </div>
   <div class="legal-wrapper">
     <a href="">Impressum</a>
