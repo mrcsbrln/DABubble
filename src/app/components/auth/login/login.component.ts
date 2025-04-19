@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserService } from '../../../services/user.service';
 import { RouterLink } from '@angular/router';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -72,28 +73,32 @@ export class LoginComponent {
 
   onResetPasswordSubmit(): void {
     if (this.email?.valid && this.email.value) {
-      // Prüfe, ob das E-Mail-Feld gültig ist und einen Wert hat
-      const emailValue = this.email.value; // Hole den String-Wert
-      this.errorMessage = null; // Reset error message before trying
-      console.log('Sending password reset email to:', emailValue); // Debugging
-      // Rufe den AuthService mit dem String-Wert auf
-      this.authService.resetPassword(emailValue).subscribe({
-        next: () => {
-          this.errorMessage =
-            'E-Mail zum Zurücksetzen des Passworts wurde gesendet.';
-          // Optional: Zurück zum Login-Formular wechseln
-          // this.resetPassword.set(false);
-        },
-        error: (err) => {
-          console.error('Error sending password reset email:', err);
-          this.errorMessage =
-            'Fehler beim Senden der E-Mail. Bitte versuchen Sie es erneut.';
-        },
-      });
+      this.errorMessage = null;
+      if (
+        this.findUserEmail(this.email.value) &&
+        !this.authService.isGoogleProvider(this.email.value)
+      ) {
+        this.authService.resetPassword(this.email.value).subscribe({
+          next: () => {
+            this.errorMessage =
+              'E-Mail zum Zurücksetzen des Passworts wurde gesendet.';
+          },
+          error: (err) => {
+            console.error('Error sending password reset email:', err);
+            this.errorMessage =
+              'Fehler beim Senden der E-Mail. Bitte versuchen Sie es erneut.';
+          },
+        });
+      }
+      this.resetPassword.set(false);
+      this.email?.reset();
     } else {
-      // Stelle sicher, dass Fehlermeldungen angezeigt werden, falls der Button nicht disabled war
       this.email?.markAsTouched();
       this.errorMessage = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
     }
+  }
+
+  findUserEmail(email: string): boolean {
+    return this.userService.users.some((user) => user.email === email);
   }
 }

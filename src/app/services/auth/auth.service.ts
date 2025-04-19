@@ -12,8 +12,9 @@ import {
   signInWithPopup,
   getAdditionalUserInfo,
   sendPasswordResetEmail,
+  fetchSignInMethodsForEmail,
 } from '@angular/fire/auth';
-import { Observable, from } from 'rxjs';
+import { Observable, from, map } from 'rxjs';
 import { UserProfile } from '../../interfaces/user-profile.interface';
 import { doc, setDoc, Firestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
@@ -105,8 +106,17 @@ export class AuthService {
     return newProfile;
   }
 
-  resetPassword(email: string) {
+  resetPassword(email: string): Observable<void> {
     const promise = sendPasswordResetEmail(this.firebaseAuth, email);
     return from(promise);
+  }
+
+  isGoogleProvider(email: string): Observable<boolean> {
+    const promise = fetchSignInMethodsForEmail(this.firebaseAuth, email);
+    return from(promise).pipe(
+      map((signInMethods: string[]) => {
+        return signInMethods.includes('google.com');
+      })
+    );
   }
 }
