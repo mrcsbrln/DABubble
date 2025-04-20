@@ -105,6 +105,12 @@
     </form>
     }
   </div>
+  @if (this.showConfirmation()) {
+  <div class="confirmation-overlay">
+    <img src="img/send.svg" alt="" />
+    E-mail gesendet.
+  </div>
+  }
   <div class="legal-wrapper">
     <a href="">Impressum</a>
     <a href="">Datenschutz</a>

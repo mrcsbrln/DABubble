@@ -28,6 +28,7 @@ export class LoginComponent {
   password = this.form.get('password');
 
   resetPassword = signal(false);
+  showConfirmation = signal(false);
 
   onSubmit(): void {
     if (this.form.invalid) {
@@ -90,7 +91,7 @@ export class LoginComponent {
           },
         });
       }
-      this.resetPassword.set(false);
+      this.handleConfiramtionOverlay();
       this.email?.reset();
     } else {
       this.email?.markAsTouched();
@@ -100,5 +101,13 @@ export class LoginComponent {
 
   findUserEmail(email: string): boolean {
     return this.userService.users.some((user) => user.email === email);
+  }
+
+  handleConfiramtionOverlay() {
+    this.showConfirmation.set(true);
+    setTimeout(() => {
+      this.showConfirmation.set(false);
+      this.resetPassword.set(false);
+    }, 5000);
   }
 }
