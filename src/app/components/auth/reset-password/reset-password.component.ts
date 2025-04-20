@@ -1,5 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -9,14 +10,26 @@ import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 })
 export class ResetPasswordComponent {
   fb = inject(FormBuilder);
+  authService = inject(AuthService);
 
   form = this.fb.nonNullable.group({
-    password: ['', Validators.required],
+    password1: ['', Validators.required],
+    password2: ['', Validators.required],
   });
-
-  password = this.form.get('password');
 
   errorMessage: string | null = null;
 
-  onSubmit() {}
+  comparePasswords() {
+    return (
+      this.form.controls.password1.value === this.form.controls.password2.value
+    );
+  }
+
+  onSubmit() {
+    const currentUser = this.authService.currentUser();
+    const newPassword = this.form.controls.password1.value;
+    if (currentUser && this.comparePasswords()) {
+      this.authService.updateUserPassword(currentUser, newPassword);
+    }
+  }
 }

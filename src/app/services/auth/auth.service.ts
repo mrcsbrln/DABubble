@@ -13,8 +13,9 @@ import {
   getAdditionalUserInfo,
   sendPasswordResetEmail,
   fetchSignInMethodsForEmail,
+  updatePassword,
 } from '@angular/fire/auth';
-import { Observable, from, map } from 'rxjs';
+import { Observable, from, map, throwError } from 'rxjs';
 import { UserProfile } from '../../interfaces/user-profile.interface';
 import { doc, setDoc, Firestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
@@ -118,5 +119,12 @@ export class AuthService {
         return signInMethods.includes('google.com');
       })
     );
+  }
+
+  updateUserPassword(user: User, newPassword: string): Observable<void> {
+    if (!this.currentUser()) {
+      return throwError(() => new Error('Nutzer nicht gefunden'));
+    }
+    return from(updatePassword(user, newPassword));
   }
 }
