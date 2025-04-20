@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserService } from '../../../services/user.service';
 import { RouterLink } from '@angular/router';
-import { first } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -108,6 +107,6 @@ export class LoginComponent {
     setTimeout(() => {
       this.showConfirmation.set(false);
       this.resetPassword.set(false);
-    }, 5000);
+    }, 1000);
   }
 }

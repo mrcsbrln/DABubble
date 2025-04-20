@@ -36,6 +36,8 @@ export class RegisterComponent {
     'img/avatar/avatar6.svg',
   ];
 
+  showConfirmation = signal(false);
+
   form = this.fb.nonNullable.group({
     username: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
@@ -56,8 +58,9 @@ export class RegisterComponent {
         });
       } catch (error) {
         console.error(error);
+      } finally {
+        this.handleConfiramtionOverlay();
       }
-      this.router.navigateByUrl('/');
     }
   }
 
@@ -81,5 +84,13 @@ export class RegisterComponent {
 
   setAvatarUrl(index: number) {
     this.avatarUrl.set(this.avatarUrls[index]);
+  }
+
+  handleConfiramtionOverlay() {
+    this.showConfirmation.set(true);
+    setTimeout(() => {
+      this.showConfirmation.set(false);
+      this.router.navigateByUrl('/');
+    }, 1000);
   }
 }
