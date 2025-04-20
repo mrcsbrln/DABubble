@@ -1,5 +1,10 @@
 import { Component, inject, signal } from '@angular/core';
-import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  Validators,
+  ReactiveFormsModule,
+  AbstractControl,
+} from '@angular/forms';
 import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
@@ -18,6 +23,13 @@ export class ResetPasswordComponent {
   });
 
   errorMessage: string | null = null;
+
+  get password1(): AbstractControl | null {
+    return this.form.get('password1');
+  }
+  get password2(): AbstractControl | null {
+    return this.form.get('password2');
+  }
 
   comparePasswords() {
     return (
