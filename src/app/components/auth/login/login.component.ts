@@ -4,12 +4,23 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserService } from '../../../services/user.service';
 import { RouterLink } from '@angular/router';
+import { transition, trigger, useAnimation } from '@angular/animations';
+import {
+  slideInRight,
+  slideOutRight,
+} from '../../../services/site-animations.service';
 
 @Component({
   selector: 'app-login',
   imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
+  animations: [
+    trigger('slideInFromRight', [
+      transition(':enter', [useAnimation(slideInRight)]),
+      transition(':leave', [useAnimation(slideOutRight)]),
+    ]),
+  ],
 })
 export class LoginComponent {
   fb = inject(FormBuilder);
