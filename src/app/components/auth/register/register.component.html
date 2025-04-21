@@ -62,7 +62,7 @@
       <div class="field-wrapper">
         <div class="input-div">
           <img src="img/mail-icon.svg" alt="" />
-          <input type="text" placeholder="Email" formControlName="email" />
+          <input type="email" placeholder="Email" formControlName="email" />
         </div>
         @if(email?.hasError('required') && email?.touched) {
         <p>*Diese E-Mail-Adresse ist leider ungültig.</p>
