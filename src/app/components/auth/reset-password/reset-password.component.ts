@@ -7,12 +7,23 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../../services/auth/auth.service';
 import { Router, RouterLink } from '@angular/router';
+import { trigger, transition, useAnimation } from '@angular/animations';
+import {
+  slideInRight,
+  slideOutRight,
+} from '../../../services/site-animations.service';
 
 @Component({
   selector: 'app-reset-password',
   imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './reset-password.component.html',
   styleUrl: './reset-password.component.scss',
+  animations: [
+    trigger('slideInFromRight', [
+      transition(':enter', [useAnimation(slideInRight)]),
+      transition(':leave', [useAnimation(slideOutRight)]),
+    ]),
+  ],
 })
 export class ResetPasswordComponent {
   fb = inject(FormBuilder);

@@ -3,12 +3,23 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { UserService } from '../../../services/user.service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { trigger, transition, useAnimation } from '@angular/animations';
+import {
+  slideInRight,
+  slideOutRight,
+} from '../../../services/site-animations.service';
 
 @Component({
   selector: 'app-register',
   imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
+  animations: [
+    trigger('slideInFromRight', [
+      transition(':enter', [useAnimation(slideInRight)]),
+      transition(':leave', [useAnimation(slideOutRight)]),
+    ]),
+  ],
 })
 export class RegisterComponent {
   authService = inject(AuthService);
