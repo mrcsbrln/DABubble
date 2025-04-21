@@ -127,4 +127,6 @@ export class AuthService {
     }
     return from(updatePassword(user, newPassword));
   }
+
+  getUserByEmail() {}
 }

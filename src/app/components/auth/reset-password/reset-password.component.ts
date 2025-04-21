@@ -10,7 +10,7 @@ import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-reset-password',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './reset-password.component.html',
   styleUrl: './reset-password.component.scss',
 })
@@ -37,6 +37,8 @@ export class ResetPasswordComponent {
 
   comparePasswords() {
     return (
+      this.form.controls.password1.value !== '' &&
+      this.form.controls.password2.value !== '' &&
       this.form.controls.password1.value === this.form.controls.password2.value
     );
   }
