@@ -13,7 +13,8 @@ import {
   getAdditionalUserInfo,
   sendPasswordResetEmail,
   fetchSignInMethodsForEmail,
-  updatePassword,
+  verifyPasswordResetCode,
+  confirmPasswordReset,
 } from '@angular/fire/auth';
 import { Observable, from, map, throwError } from 'rxjs';
 import { UserProfile } from '../../interfaces/user-profile.interface';
@@ -121,12 +122,13 @@ export class AuthService {
     );
   }
 
-  updateUserPassword(user: User, newPassword: string): Observable<void> {
-    if (!this.currentUser()) {
-      return throwError(() => new Error('Nutzer nicht gefunden'));
-    }
-    return from(updatePassword(user, newPassword));
+  handleResetPassword(actionCode: string, newPassword: string) {
+    verifyPasswordResetCode(this.firebaseAuth, actionCode)
+      .then(() => {
+        confirmPasswordReset(this.firebaseAuth, actionCode, newPassword);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
-
-  getUserByEmail() {}
 }
