@@ -35,21 +35,13 @@ export class UserService implements OnDestroy {
   currentUserData = toSignal(this.currentUserData$);
 
   unsubUsersCollection!: Unsubscribe;
-  // unsubUserDocument;
 
   constructor() {
     this.unsubUsersCollection = this.subUserCollection();
-    // this.unsubUserDocument = onSnapshot(
-    //   this.userDocRef('users', ''),
-    //   (user) => {
-    //     console.log(user);
-    //   }
-    // );
   }
 
   ngOnDestroy() {
     this.unsubUsersCollection();
-    // this.unsubUserDocument();
   }
 
   usersCollectionRef() {
@@ -69,7 +61,7 @@ export class UserService implements OnDestroy {
     });
   }
 
-  setUserObject(obj: any, id: string): UserProfile {
+  setUserObject(obj: Partial<UserProfile>, id: string): UserProfile {
     return {
       uid: id,
       displayName: obj.displayName || '',

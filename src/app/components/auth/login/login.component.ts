@@ -82,24 +82,26 @@ export class LoginComponent {
     }
   }
 
-  onResetPasswordSubmit(): void {
-    if (this.email?.valid && this.email.value) {
+  async onResetPasswordSubmit() {
+    if (this.email?.valid && this.form.controls.email.value) {
+      const isGoogle = await this.authService.isGoogleProvider(
+        this.form.controls.email.value
+      );
       this.errorMessage = null;
-      if (
-        this.findUserEmail(this.email.value) &&
-        !this.authService.isGoogleProvider(this.email.value)
-      ) {
-        this.authService.resetPassword(this.email.value).subscribe({
-          next: () => {
-            this.errorMessage =
-              'E-Mail zum Zurücksetzen des Passworts wurde gesendet.';
-          },
-          error: (err) => {
-            console.error('Error sending password reset email:', err);
-            this.errorMessage =
-              'Fehler beim Senden der E-Mail. Bitte versuchen Sie es erneut.';
-          },
-        });
+      if (!isGoogle) {
+        this.authService
+          .resetPassword(this.form.controls.email.value)
+          .subscribe({
+            next: () => {
+              this.errorMessage =
+                'E-Mail zum Zurücksetzen des Passworts wurde gesendet.';
+            },
+            error: (err) => {
+              console.error('Error sending password reset email:', err);
+              this.errorMessage =
+                'Fehler beim Senden der E-Mail. Bitte versuchen Sie es erneut.';
+            },
+          });
       }
       this.handleConfiramtionOverlay();
       this.email?.reset();
@@ -107,10 +109,6 @@ export class LoginComponent {
       this.email?.markAsTouched();
       this.errorMessage = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
     }
-  }
-
-  findUserEmail(email: string): boolean {
-    return this.userService.users.some((user) => user.email === email);
   }
 
   handleConfiramtionOverlay() {

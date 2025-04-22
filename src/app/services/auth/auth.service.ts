@@ -113,13 +113,17 @@ export class AuthService {
     return from(promise);
   }
 
-  isGoogleProvider(email: string): Observable<boolean> {
-    const promise = fetchSignInMethodsForEmail(this.firebaseAuth, email);
-    return from(promise).pipe(
-      map((signInMethods: string[]) => {
-        return signInMethods.includes('google.com');
-      })
-    );
+  async isGoogleProvider(email: string): Promise<boolean> {
+    try {
+      const methods = await fetchSignInMethodsForEmail(
+        this.firebaseAuth,
+        email
+      );
+      return methods.includes('google.com');
+    } catch (err) {
+      console.error(err);
+      return false;
+    }
   }
 
   handleResetPassword(actionCode: string, newPassword: string) {
