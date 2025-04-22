@@ -1,7 +1,4 @@
-
 <div class="main-chat">
-
-
   <div class="channel-info-container">
     <div class="channel-info-group">
       <img src="img/chat/tag.svg" alt="tag" />
@@ -11,14 +8,115 @@
 
     <div class="channel-member-group">
       <div class="channel-member-img">
-        <img src="img/chat/frederik-beck-chat.svg" alt="channel-members-profil-img" />
-        <img src="img/chat/noah-braun-chat.svg" alt="channel-members-profil-img" />
-        <img src="img/chat/sofia-mueller-chat.svg" alt="channel-members-profil-img" />
+        <img
+          src="img/chat/frederik-beck-chat.svg"
+          alt="channel-members-profil-img"
+        />
+        <img
+          src="img/chat/noah-braun-chat.svg"
+          alt="channel-members-profil-img"
+        />
+        <img
+          src="img/chat/sofia-mueller-chat.svg"
+          alt="channel-members-profil-img"
+        />
       </div>
       <span class="channel-members-count">3</span>
-      <img src="img/chat/add-member.svg" alt="add-members" class="add-new-member" />
+      <img
+        src="img/chat/add-member.svg"
+        alt="add-members"
+        class="add-new-member"
+      />
     </div>
   </div>
 
-  <app-user-profile />
+  <div class="message-container">
+    <div class="sended-messages-wrapper">
+      <!-- <div class="message">
+        <img
+          class="user-avatar"
+          src="img/chat/frederik-beck-chat.svg"
+          alt="user-image"
+        />
+        <div class="message-details">
+          <div class="message-header">
+            <b>Username</b>
+            <span>09:30 Uhr</span>
+          </div>
+          <div class="message-content">
+            Welche Version ist die aktuelle von Angular?
+          </div>
+          <div class="answer-time-label">
+            <button>8 Antworten</button>
+            <span>Letzte Antwort 14:39</span>
+          </div>
+        </div>
+      </div> -->
+      <!-- <div class="time-separator">
+        <span class="date-text">08. April 2025</span>
+      </div> -->
+      <div class="message">
+        <img
+          class="user-avatar"
+          src="img/chat/noah-braun-chat.svg"
+          alt="user-image"
+        />
+        <div class="message-details">
+          <div class="message-header">
+            <b>Username</b>
+            <span>10:30 Uhr</span>
+          </div>
+          <div class="message-content">
+            Welche Version ist die aktuelle von Angular?
+          </div>
+          <div class="answer-time-label">
+            <button>2 Antworten</button>
+            <span>Letzte Antwort 10:31</span>
+          </div>
+        </div>
+      </div>
+      <div class="time-separator">
+        <span class="date-text">Heute</span>
+      </div>
+      <div class="message outgoing">
+        <img
+          class="user-avatar"
+          src="img/chat/noah-braun-chat.svg"
+          alt="user-image"
+        />
+        <div class="message-details outgoing">
+          <div class="message-header outgoing">
+            <b>ME</b>
+            <span>10:35 Uhr</span>
+          </div>
+          <div class="message-content outgoing">Version 19.0.2</div>
+          <div class="answer-time-label">
+            <button>1 Antworten</button>
+            <span>Letzte Antwort 10:38</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="write-message-box">
+      <textarea placeholder="Nachricht an #Entwicklerteam"></textarea>
+      <div class="textarea-button-container">
+        <div class="textarea-button-group">
+          <button>
+            <img
+              src="img/chat/add-reaction.svg"
+              alt="add-reaction"
+            />
+          </button>
+          <button>
+            <img src="img/chat/at-icon.svg" alt="add-icon" />
+          </button>
+        </div>
+        <button class="send-button">
+          <img src="img/chat/send.svg" alt="send-message" />
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- <app-user-profile /> -->
 </div>
