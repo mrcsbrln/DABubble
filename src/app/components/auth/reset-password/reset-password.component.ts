@@ -6,7 +6,7 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { AuthService } from '../../../services/auth/auth.service';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { trigger, transition, useAnimation } from '@angular/animations';
 import {
   slideInRight,
@@ -29,6 +29,7 @@ export class ResetPasswordComponent {
   fb = inject(FormBuilder);
   authService = inject(AuthService);
   router = inject(Router);
+  route = inject(ActivatedRoute);
 
   form = this.fb.nonNullable.group({
     password1: ['', Validators.required],
@@ -38,12 +39,22 @@ export class ResetPasswordComponent {
   showConfirmation = signal(false);
 
   errorMessage: string | null = null;
+  actionCode = signal('');
 
   get password1(): AbstractControl | null {
     return this.form.get('password1');
   }
   get password2(): AbstractControl | null {
     return this.form.get('password2');
+  }
+
+  ngOnInit() {
+    this.route.params.subscribe((params) => {
+      const code = params['oobCode'];
+      if (code) {
+        this.actionCode.set(code);
+      }
+    });
   }
 
   comparePasswords() {
@@ -55,10 +66,9 @@ export class ResetPasswordComponent {
   }
 
   onSubmit() {
-    const currentUser = this.authService.currentUser();
-    const newPassword = this.form.controls.password1.value;
-    if (currentUser && this.comparePasswords()) {
-      this.authService.updateUserPassword(currentUser, newPassword);
+    if (this.comparePasswords()) {
+      const newPassword = this.form.controls.password1.value;
+      this.authService.handleResetPassword(this.actionCode(), newPassword);
       this.showConfirmation.set(true);
       setTimeout(() => {
         this.showConfirmation.set(false);
