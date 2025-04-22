@@ -55,8 +55,6 @@
   }
 }
 
-
-
 .write-message-box {
   padding-bottom: 68px;
   background-color: white;
@@ -75,7 +73,6 @@
     padding: 20px;
     resize: none;
     outline: none;
-    // background-color: white;
     width: 100%;
     color: black;
     min-height: 64px;
@@ -105,14 +102,6 @@
         cursor: pointer;
         transform: scale(1.05);
       }
-
-      // &:focus:nth-child(1)>img {
-      //   content: url('img/chat/add-reaction-focus.svg');
-      // }
-
-      // &:focus:nth-child(2)>img {
-      //   content: url('img/chat/at-icon-focus.svg');
-      // }
 
       @media (hover: none) and (pointer: coarse) {
         &:hover {
@@ -150,86 +139,96 @@
 }
 
 .message-container {
-  padding: 25px;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
 }
 
 .sended-messages-wrapper {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   font-size: 18px;
+  overflow-y: auto;
+  max-height: 550px;
+}
 
-  .message {
-    padding: 24px;
+.message {
+  padding: 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.message {
+  padding: 24px;
+  display: flex;
+  // background-color: red;
+  align-items: flex-start;
+  gap: 24px;
+
+  >img {
+    width: 64px;
+    height: 64px;
+  }
+
+  &.outgoing {
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+  }
+
+  .message-details {
     display: flex;
-    // background-color: red;
-    align-items: flex-start;
-    gap: 24px;
+    flex-direction: column;
+    gap: 8px;
 
-    >img {
-      width: 64px;
-      height: 64px;
-    }
+  }
+
+  .message-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 
     &.outgoing {
-      flex-direction: row-reverse;
       justify-content: flex-start;
+      flex-direction: row-reverse;
     }
 
-    .message-details {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+    >span {
+      color: rgba(104, 104, 104, 1);
+      font-size: 14px;
+    }
+  }
 
+  .message-content {
+    background-color: rgba(236, 238, 254, 1);
+    padding: 15px;
+    border-radius: 0px 30px 30px 30px;
+
+    &.outgoing {
+      background-color: rgba(121, 126, 243, 1);
+      border-radius: 30px 0px 30px 30px;
+      color: white;
     }
 
-    .message-header {
-      display: flex;
-      align-items: center;
-      gap: 20px;
+  }
 
-      &.outgoing {
-        justify-content: flex-start;
-        flex-direction: row-reverse;
-      }
+  .answer-time-label {
+    display: flex;
+    align-items: center;
+    gap: 16px;
 
-      >span {
-        color: rgba(104, 104, 104, 1);
-        font-size: 14px;
-      }
+    >button {
+      border: unset;
+      color: rgba(83, 90, 241, 1);
+      background-color: transparent;
+      font-size: 18px;
     }
 
-    .message-content {
-      background-color: rgba(236, 238, 254, 1);
-      padding: 15px;
-      border-radius: 0px 30px 30px 30px;
-
-      &.outgoing {
-        background-color: rgba(121, 126, 243, 1);
-        border-radius: 30px 0px 30px 30px;
-        color: white;
-      }
-
-    }
-
-    .answer-time-label {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-
-      >button {
-        border: unset;
-        color: rgba(83, 90, 241, 1);
-        background-color: transparent;
-        font-size: 18px;
-      }
-
-      >span {
-        color: rgba(104, 104, 104, 1);
-        font-size: 14px;
-      }
+    >span {
+      color: rgba(104, 104, 104, 1);
+      font-size: 14px;
     }
   }
 }

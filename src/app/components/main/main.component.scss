@@ -12,7 +12,7 @@
     "header header header"
     "workspace chat thread"
     "workspace chat thread";
-  grid-template-columns: 366px 2fr 485px;
+    grid-template-columns: minmax(auto, 366px) 2fr minmax(auto, 485px);
   grid-template-rows: auto 1fr;
   height: 100vh;
   max-height: 1080px;
