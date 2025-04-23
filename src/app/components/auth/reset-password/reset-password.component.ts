@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import {
   FormBuilder,
   Validators,
@@ -25,7 +25,7 @@ import {
     ]),
   ],
 })
-export class ResetPasswordComponent {
+export class ResetPasswordComponent implements OnInit {
   fb = inject(FormBuilder);
   authService = inject(AuthService);
   router = inject(Router);
