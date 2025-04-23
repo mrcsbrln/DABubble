@@ -15,6 +15,7 @@ import {
   fetchSignInMethodsForEmail,
   verifyPasswordResetCode,
   confirmPasswordReset,
+  UserCredential,
 } from '@angular/fire/auth';
 import { Observable, from } from 'rxjs';
 import { UserProfile } from '../../interfaces/user-profile.interface';
@@ -63,12 +64,8 @@ export class AuthService {
     );
   }
 
-  login(email: string, password: string): Observable<void> {
-    return from(
-      signInWithEmailAndPassword(this.firebaseAuth, email, password).then(
-        () => {}
-      )
-    );
+  login(email: string, password: string): Observable<UserCredential> {
+    return from(signInWithEmailAndPassword(this.firebaseAuth, email, password));
   }
 
   logout(): Observable<void> {
