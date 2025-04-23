@@ -55,16 +55,16 @@
   }
 }
 
-.write-message-box {
+.message-input {
   padding-bottom: 68px;
   background-color: white;
   display: flex;
   border-radius: 20px;
   position: relative;
-  border: 1px solid rgba(173, 176, 217, 1);
+  border: 1px solid $light-purple;
 
   &:has(textarea:focus) {
-    border: 1px solid rgba(68, 77, 242, 1);
+    border: 1px solid $purple-1;
   }
 
   textarea {
@@ -202,12 +202,12 @@
   }
 
   .message-content {
-    background-color: rgba(236, 238, 254, 1);
+    background-color: $bg-color;
     padding: 15px;
     border-radius: 0px 30px 30px 30px;
 
     &.outgoing {
-      background-color: rgba(121, 126, 243, 1);
+      background-color: $purple-2;
       border-radius: 30px 0px 30px 30px;
       color: white;
     }
@@ -221,13 +221,13 @@
 
     >button {
       border: unset;
-      color: rgba(83, 90, 241, 1);
+      color: $purple-3;
       background-color: transparent;
       font-size: 18px;
     }
 
     >span {
-      color: rgba(104, 104, 104, 1);
+      color: $text-gray;
       font-size: 14px;
     }
   }
@@ -246,14 +246,14 @@
   content: '';
   flex: 1;
   height: 1px;
-  background: rgb(173, 176, 217);
+  background: $light-purple;
 
 }
 
 .date-text {
   font-size: 16px;
   white-space: nowrap;
-  border: 1px solid rgb(173, 176, 217);
+  border: 1px solid $light-purple;
   border-radius: 30px;
   padding: 4px 12px;
 }
