@@ -65,7 +65,20 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<UserCredential> {
-    return from(signInWithEmailAndPassword(this.firebaseAuth, email, password));
+    const promise = signInWithEmailAndPassword(
+      this.firebaseAuth,
+      email,
+      password
+    )
+      .then((userCredential) => {
+        this.router.navigate(['/']);
+        return userCredential;
+      })
+      .catch((error) => {
+        console.error(error);
+        throw error;
+      });
+    return from(promise);
   }
 
   logout(): Observable<void> {

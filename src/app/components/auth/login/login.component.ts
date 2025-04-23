@@ -47,9 +47,6 @@ export class LoginComponent {
     }
     const rawForm = this.form.getRawValue();
     this.authService.login(rawForm.email, rawForm.password).subscribe({
-      next: () => {
-        this.router.navigateByUrl('/');
-      },
       error: (err) => {
         const mappedError = this.mapFirebaseError(err?.code);
         this.errorMessage = mappedError;
