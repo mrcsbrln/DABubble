@@ -10,9 +10,14 @@
   <div class="login-box">
     @if (resetPassword()) {
     <div class="header-wrapper">
-      <a (click)="this.resetPassword.set(false)">
+      <button
+        class="btn-second arrow"
+        type="button"
+        aria-label="Zurück"
+        (click)="resetPassword.set(false)"
+      >
         <img src="img/arrow-back.svg" alt="" />
-      </a>
+      </button>
       <h1>Passwort zurücksetzten</h1>
     </div>
     <p>Bitte geben Sie Ihre E-Mail-Adresse ein.</p>
@@ -86,21 +91,30 @@
         }
       </div>
 
-      <a class="password" (click)="this.resetPassword.set(true)"
-        >Passwort vergessen?</a
+      <button
+        class="btn-second"
+        type="button"
+        (click)="this.resetPassword.set(true)"
       >
+        Passwort vergessen?
+      </button>
       <div class="seperator-wrapper">
         <div class="seperator"></div>
         ODER
         <div class="seperator"></div>
       </div>
-      <div class="input-div" (click)="googleLogin()">
+      <button
+        type="button"
+        class="input-div"
+        aria-label="Anmelden mit Google"
+        (click)="googleLogin()"
+      >
         <img src="img/google-icon.svg" alt="" />
         <span class="google">Anmelden mit Google</span>
-      </div>
+      </button>
       <div class="btn-wrapper">
         <button class="btn-submit" type="submit">Anmelden</button>
-        <button class="btn-guest" type="">Gäste-Login</button>
+        <button class="btn-guest" type="button">Gäste-Login</button>
       </div>
     </form>
     }

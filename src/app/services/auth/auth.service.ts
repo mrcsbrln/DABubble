@@ -1,4 +1,4 @@
-import { inject, Injectable, signal, computed, Signal } from '@angular/core';
+import { inject, Injectable, computed, Signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import {
   Auth,
@@ -15,8 +15,9 @@ import {
   fetchSignInMethodsForEmail,
   verifyPasswordResetCode,
   confirmPasswordReset,
+  UserCredential,
 } from '@angular/fire/auth';
-import { Observable, from, map, throwError } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { UserProfile } from '../../interfaces/user-profile.interface';
 import { doc, setDoc, Firestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
@@ -63,12 +64,21 @@ export class AuthService {
     );
   }
 
-  login(email: string, password: string): Observable<void> {
-    return from(
-      signInWithEmailAndPassword(this.firebaseAuth, email, password).then(
-        () => {}
-      )
-    );
+  login(email: string, password: string): Observable<UserCredential> {
+    const promise = signInWithEmailAndPassword(
+      this.firebaseAuth,
+      email,
+      password
+    )
+      .then((userCredential) => {
+        this.router.navigate(['/']);
+        return userCredential;
+      })
+      .catch((error) => {
+        console.error(error);
+        throw error;
+      });
+    return from(promise);
   }
 
   logout(): Observable<void> {
