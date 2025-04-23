@@ -1,4 +1,4 @@
-import { inject, Injectable, signal, computed, Signal } from '@angular/core';
+import { inject, Injectable, computed, Signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import {
   Auth,
@@ -16,7 +16,7 @@ import {
   verifyPasswordResetCode,
   confirmPasswordReset,
 } from '@angular/fire/auth';
-import { Observable, from, map, throwError } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { UserProfile } from '../../interfaces/user-profile.interface';
 import { doc, setDoc, Firestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
