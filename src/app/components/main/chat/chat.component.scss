@@ -55,7 +55,13 @@
   }
 }
 
-.message-input {
+.message-input-container {
+  padding-bottom: 24px;
+}
+
+.message-input-box {
+  margin-left: 24px;
+  margin-right: 24px;
   padding-bottom: 68px;
   background-color: white;
   display: flex;
@@ -142,7 +148,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 25px;
+  padding: 16px;
 }
 
 .sended-messages-wrapper {
@@ -151,7 +157,7 @@
   flex-direction: column;
   font-size: 18px;
   overflow-y: auto;
-  max-height: 550px;
+  max-height: 529px;
 }
 
 .message {
