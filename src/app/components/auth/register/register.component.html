@@ -13,6 +13,9 @@
     </div>
     <img class="selected-avatar" [src]="avatarUrl()" alt="" />
     <span class="display-name">{{ newUser.displayName }}</span>
+    @if (errorMessage) {
+    <div>{{ errorMessage }}</div>
+    }
     <p>Aus der Liste wählen</p>
     <div class="avatars-div">
       @for(avatarUrl of avatarUrls; track $index) {
