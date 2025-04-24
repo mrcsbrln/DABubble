@@ -48,14 +48,10 @@
         <div class="message-details outgoing">
           <div class="message-header outgoing">
             <b>{{ message.username }}</b>
-            <span>10:30 Uhr</span>
+            <span>{{ message.timestamp?.toDate() | date: 'HH:mm' }} Uhr</span>
           </div>
           <div class="message-content outgoing">
-            <!-- {{ message.content }} -->
-          </div>
-          <div class="answer-time-label">
-            <button>2 Antworten</button>
-            <span>Letzte Antwort 10:31</span>
+            {{ message.content }}
           </div>
         </div>
       </div>
