@@ -6,13 +6,13 @@
   @if(chooseAvatar()) {
   <div class="avatar-overlay login-box">
     <div class="header-wrapper">
-      <button (click)="this.chooseAvatar.set(false)">
+      <button class="btn-second arrow" (click)="this.chooseAvatar.set(false)">
         <img src="img/arrow-back.svg" alt="" />
       </button>
       <h2>Wähle deinen Avatar</h2>
     </div>
     <img class="selected-avatar" [src]="avatarUrl()" alt="" />
-    <span class="display-name">Testname</span>
+    <span class="display-name">{{ newUser.displayName }}</span>
     <p>Aus der Liste wählen</p>
     <div class="avatars-div">
       @for(avatarUrl of avatarUrls; track $index) {
