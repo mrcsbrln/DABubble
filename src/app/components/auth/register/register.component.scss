@@ -24,15 +24,9 @@ p {
   text-align: center;
 }
 
-a {
-  text-decoration: none;
-  padding: 8px 16px;
-  border-radius: 25px;
+button {
+  background: transparent;
   border: 1px solid transparent;
-  &:hover {
-    background-color: $bg-color;
-    transition: $hover-transition;
-  }
 }
 
 .header-wrapper {

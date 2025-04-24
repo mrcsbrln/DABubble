@@ -3,32 +3,25 @@
     <img src="img/dabubble-logo.svg" alt="" />
     <span>DABubble</span>
   </div>
-  @if(chooseAvatar() && this.authService.currentUser()) {
+  @if(chooseAvatar()) {
   <div class="avatar-overlay login-box">
     <div class="header-wrapper">
-      <a (click)="this.chooseAvatar.set(false)">
+      <button (click)="this.chooseAvatar.set(false)">
         <img src="img/arrow-back.svg" alt="" />
-      </a>
+      </button>
       <h2>Wähle deinen Avatar</h2>
     </div>
     <img class="selected-avatar" [src]="avatarUrl()" alt="" />
-    <span class="display-name">{{
-      userService.currentUserData()?.displayName
-    }}</span>
+    <span class="display-name">Testname</span>
     <p>Aus der Liste wählen</p>
     <div class="avatars-div">
       @for(avatarUrl of avatarUrls; track $index) {
-      <img
-        class="avatar"
-        (click)="setAvatarUrl($index)"
-        [src]="avatarUrl"
-        alt=""
-      />
+      <button (click)="setAvatarUrl($index)">
+        <img class="avatar" [src]="avatarUrl" alt="" />
+      </button>
       }
     </div>
-    <button class="btn-submit btn-avatar" (click)="finishRegistration()">
-      Weiter
-    </button>
+    <button class="btn-submit btn-avatar" (click)="onSubmit()">Weiter</button>
   </div>
   } @else {
   <div class="login-box">
@@ -45,7 +38,7 @@
     @if (errorMessage) {
     <div>{{ errorMessage }}</div>
     }
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form [formGroup]="form" (ngSubmit)="setNewUser()">
       <div class="field-wrapper">
         <div class="input-div">
           <img src="img/user-icon.svg" alt="" />
@@ -84,7 +77,15 @@
         }
       </div>
       <div class="checkbox-div">
-        <img [src]="currentCheckBox()" (click)="toggleCheckbox()" alt="" />
+        <button
+          type="button"
+          class="checkbox-toggle"
+          (click)="toggleCheckbox()"
+          [attr.aria-checked]="isChecked()"
+          aria-label="Ich stimme der Datenschutzerklärung zu"
+        >
+          <img [src]="currentCheckBox()" alt="" />
+        </button>
         <p>
           Ich stimme der
           <a routerLink="/privacy-policy">Datenschutzerklärung</a>

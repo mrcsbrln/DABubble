@@ -8,6 +8,7 @@ import {
   slideInRight,
   slideOutRight,
 } from '../../../services/site-animations.service';
+import { User } from '../../../classes/user.class';
 
 @Component({
   selector: 'app-register',
@@ -59,7 +60,39 @@ export class RegisterComponent {
   email = this.form.get('email');
   password = this.form.get('password');
 
-  async finishRegistration() {
+  newUser!: User;
+  newUserPassword = '';
+
+  setNewUser() {
+    const rawForm = this.form.getRawValue();
+    if (this.isChecked() && this.form.valid) {
+      this.newUser = new User(rawForm.username, rawForm.email);
+      this.newUserPassword = rawForm.password;
+      this.chooseAvatar.set(true);
+    }
+  }
+
+  onSubmit(): void {
+    if (this.isChecked()) {
+      this.authService
+        .register(
+          this.newUser.email,
+          this.newUser.displayName,
+          this.newUserPassword
+        )
+        .subscribe({
+          next: () => {
+            this.updateAvatarUrl();
+          },
+          error: (err) => {
+            this.errorMessage = err.code;
+            console.error(err);
+          },
+        });
+    }
+  }
+
+  async updateAvatarUrl() {
     const currentUser = this.authService.currentUser();
     if (currentUser?.uid) {
       const userId = currentUser.uid;
@@ -72,20 +105,6 @@ export class RegisterComponent {
       } finally {
         this.handleConfiramtionOverlay();
       }
-    }
-  }
-
-  onSubmit(): void {
-    const rawForm = this.form.getRawValue();
-    if (this.isChecked()) {
-      this.authService
-        .register(rawForm.email, rawForm.username, rawForm.password)
-        .subscribe({
-          error: (err) => {
-            this.errorMessage = err.code;
-          },
-        });
-      this.chooseAvatar.set(true);
     }
   }
 
