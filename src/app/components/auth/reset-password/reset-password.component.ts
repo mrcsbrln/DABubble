@@ -49,10 +49,13 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe((params) => {
+    this.route.queryParams.subscribe((params) => {
       const code = params['oobCode'];
       if (code) {
         this.actionCode.set(code);
+        console.log(code);
+      } else {
+        console.log('kein action code');
       }
     });
   }
