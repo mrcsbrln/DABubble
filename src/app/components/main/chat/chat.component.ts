@@ -18,13 +18,15 @@ export class ChatComponent {
 
   displayName = computed(() => this.currentUser()?.displayName);
   userUid = computed(() => this.currentUser()?.uid);
+  avatarUrl = computed(() => this.currentUser()?.avatarUrl);
 
   newMessage: string = '';
   messages: Message[] = [
     {
       username: this.displayName(),
       senderId: this.userUid(),
-      content: 'onclick test message  => console log'
+      content: 'onclick test message  => console log',
+      avatarUrl: 'img/chat/sofia-mueller-chat.svg'
     }
 
   ];
@@ -38,7 +40,8 @@ export class ChatComponent {
         username: this.displayName(),
         content: this.newMessage,
         timestamp: timestamp,
-        senderId: this.userUid()
+        senderId: this.userUid(),
+        avatarUrl: this.avatarUrl(),
       });
       this.newMessage = '';
     }
@@ -48,9 +51,9 @@ export class ChatComponent {
 
   editMessage(index: number): void {
     if (this.messages[index].senderId === this.userUid()) {
-      console.log("Message is current user's message");
+      console.log("Message belongs to logged-in user");
     } else {
-      console.log("Message is NOT current user's message");
+      console.log("Message belongs NOT to logged-in user");
     }
     console.log('Message index:', index);
   }

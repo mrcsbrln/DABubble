@@ -42,7 +42,7 @@
       <div class="message outgoing" (click)="editMessage(i)">
         <img
         class="user-avatar"
-        src="img/chat/noah-braun-chat.svg"
+        [src]="message.avatarUrl"
         alt="user-image"
         />
         <div class="message-details outgoing">
