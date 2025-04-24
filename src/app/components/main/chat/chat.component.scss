@@ -168,11 +168,22 @@
 }
 
 .message {
-  padding: 24px;
+  padding: 8px 24px;
   display: flex;
-  // background-color: red;
   align-items: flex-start;
   gap: 24px;
+  background-color: $hover-transition;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $bg-color;
+  }
+
+  @media (hover: none) and (pointer: coarse) {
+    &:hover {
+      cursor: default;
+    }
+  }
 
   >img {
     width: 64px;
@@ -211,6 +222,7 @@
     background-color: $bg-color;
     padding: 15px;
     border-radius: 0px 30px 30px 30px;
+    word-break: break-word;
 
     &.outgoing {
       background-color: $purple-2;

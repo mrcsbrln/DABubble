@@ -34,12 +34,12 @@
     <div class="sended-messages-wrapper">
 
 
-      @for (message of messages; track message.content){
+      @for (message of messages; track message.content; let i = $index){
       <div class="time-separator">
         <span class="date-text">08. April 2025</span>
       </div>
 
-      <div class="message outgoing">
+      <div class="message outgoing" (click)="editMessage(i)">
         <img
         class="user-avatar"
         src="img/chat/noah-braun-chat.svg"

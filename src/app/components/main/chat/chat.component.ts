@@ -20,19 +20,38 @@ export class ChatComponent {
   userUid = computed(() => this.currentUser()?.uid);
 
   newMessage: string = '';
-  messages: Message[] = [];
+  messages: Message[] = [
+    {
+      username: this.displayName(),
+      senderId: this.userUid(),
+      content: 'onclick test message  => console log'
+    }
+
+  ];
 
   sendMessage(): void {
     if (this.newMessage.trim() !== '') {
-      const timestamp = Timestamp.now(); // Erzeuge einen Zeitstempel
+      const timestamp = Timestamp.now();
+      console.log(timestamp, );
+
       this.messages.push({
         username: this.displayName(),
         content: this.newMessage,
-        timestamp: timestamp, // Füge den Zeitstempel hinzu
+        timestamp: timestamp,
+        senderId: this.userUid()
       });
       this.newMessage = '';
     }
     console.log(this.messages);
     console.log(this.userUid());
+  }
+
+  editMessage(index: number): void {
+    if (this.messages[index].senderId === this.userUid()) {
+      console.log("Message is current user's message");
+    } else {
+      console.log("Message is NOT current user's message");
+    }
+    console.log('Message index:', index);
   }
 }
