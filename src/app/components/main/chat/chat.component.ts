@@ -1,14 +1,14 @@
 import { Component, computed, inject } from '@angular/core';
-import { UserProfileComponent } from '../user-profile/user-profile.component';
+// import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { FormsModule } from '@angular/forms';
 import { Message } from '../../../interfaces/message.interface';
 import { UserService } from '../../../services/user.service';
-import { Timestamp } from '@angular/fire/firestore'; // Importiere Timestamp
+import { Timestamp } from '@angular/fire/firestore';
 import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-chat',
-  imports: [UserProfileComponent, FormsModule, DatePipe],
+  imports: [FormsModule, DatePipe],
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.scss',
 })
@@ -25,10 +25,9 @@ export class ChatComponent {
     {
       username: this.displayName(),
       senderId: this.userUid(),
-      content: 'onclick test message  => console log',
+      content: 'onclick message test  => console log',
       avatarUrl: 'img/chat/sofia-mueller-chat.svg'
     }
-
   ];
 
   sendMessage(): void {
@@ -46,7 +45,6 @@ export class ChatComponent {
       this.newMessage = '';
     }
     console.log(this.messages);
-    console.log(this.userUid());
   }
 
   editMessage(index: number): void {
