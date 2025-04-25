@@ -39,12 +39,10 @@
         <span class="date-text">08. April 2025</span>
       </div>
 
-      <div
+      <button
         class="message"
         [class.outgoing]="message.senderId === (userUid() || null)"
         (click)="editMessage(i)"
-        (keydown.enter)="editMessage(i)"
-        tabindex="0"
       >
         <img class="user-avatar" [src]="message.avatarUrl" alt="user-image" />
         <div
@@ -65,7 +63,7 @@
             {{ message.content }}
           </div>
         </div>
-      </div>
+      </button>
       }
     <!-- } -->
     </div>

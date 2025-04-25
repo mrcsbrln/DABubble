@@ -161,13 +161,8 @@
 }
 
 .message {
-  padding: 24px;
-  display: flex;
-  align-items: flex-start;
-  gap: 24px;
-}
-
-.message {
+  border: unset;
+  background-color: transparent;
   padding: 8px 24px;
   display: flex;
   align-items: flex-start;
