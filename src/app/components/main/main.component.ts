@@ -19,8 +19,8 @@ import { WorkspaceComponent } from './workspace/workspace.component';
 
 export class MainComponent {
   authService = inject(AuthService);
-  isWorkspaceHidden: boolean = false;
-  isThreadHidden: boolean = false;
+  isWorkspaceHidden = false;
+  isThreadHidden = false;
 
   toggleWorkspaceVisibility(): void {
     this.isWorkspaceHidden = !this.isWorkspaceHidden;
@@ -29,5 +29,4 @@ export class MainComponent {
   toggleThreadVisibility(): void {
     this.isThreadHidden = !this.isThreadHidden;
   }
-
 }
