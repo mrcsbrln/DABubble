@@ -74,7 +74,7 @@
   <div class="message-input-container">
     <div class="message-input-box">
       <textarea
-        (keydown.enter)="sendMessage()"
+      (keydown.enter)="$event.preventDefault(); sendMessage()"
         placeholder="Nachricht an #Entwicklerteam"
         [(ngModel)]="newMessage"
       ></textarea>
