@@ -1,4 +1,5 @@
 @use "../../../../styles.scss" as *;
+
 :host {
   flex: 8;
   display: flex;
@@ -41,6 +42,7 @@
       display: flex;
       align-items: center;
     }
+
     .channel-member-img img {
       width: 40px;
       height: 40px;
@@ -49,6 +51,7 @@
       border: 2px solid white;
       box-shadow: $box-shadow;
     }
+
     .channel-member-img img:first-child {
       margin-left: 0;
     }
@@ -140,7 +143,6 @@
         transform: none;
       }
     }
-
   }
 }
 
@@ -148,13 +150,13 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 16px;
 }
 
 .sended-messages-wrapper {
   flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   font-size: 18px;
   overflow-y: auto;
   max-height: 529px;
@@ -163,7 +165,7 @@
 .message {
   border: unset;
   background-color: transparent;
-  padding: 8px 24px;
+  padding: 8px 40px;
   display: flex;
   align-items: flex-start;
   gap: 24px;
@@ -172,6 +174,10 @@
   &:hover {
     cursor: pointer;
     background-color: $bg-color;
+
+    .message-content {
+      background-color: white;
+    }
   }
 
   @media (hover: none) and (pointer: coarse) {
@@ -194,7 +200,6 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-
   }
 
   .message-header {
@@ -218,13 +223,13 @@
     padding: 15px;
     border-radius: 0px 30px 30px 30px;
     word-break: break-word;
+    background-color: $hover-transition;
 
     &.outgoing {
       background-color: $purple-2;
       border-radius: 30px 0px 30px 30px;
       color: white;
     }
-
   }
 
   .answer-time-label {
@@ -251,7 +256,7 @@
 .time-separator {
   display: flex;
   align-items: center;
-  margin: 20px 0;
+  margin: 20px 40px;
 }
 
 .time-separator::before,
