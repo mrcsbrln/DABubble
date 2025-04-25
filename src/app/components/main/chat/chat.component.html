@@ -32,8 +32,8 @@
 
   <div class="message-container">
     <div class="sended-messages-wrapper">
-      @if (userUid()) {
-      @for (message of messages; track message.content; let i = $index){
+      @if (userUid()) { @for (message of messages; track message.content; let i
+      = $index){
       <div class="time-separator">
         <span class="date-text">08. April 2025</span>
       </div>
@@ -42,21 +42,30 @@
         class="message"
         [class.outgoing]="message.senderId === userUid()"
         (click)="editMessage(i)"
+        (keydown.enter)="editMessage(i)"
+        tabindex="0"
       >
         <img class="user-avatar" [src]="message.avatarUrl" alt="user-image" />
-        <div class="message-details" [class.outgoing]="message.senderId === userUid()">
-          <div class="message-header" [class.outgoing]="message.senderId === userUid()">
+        <div
+          class="message-details"
+          [class.outgoing]="message.senderId === userUid()"
+        >
+          <div
+            class="message-header"
+            [class.outgoing]="message.senderId === userUid()"
+          >
             <b>{{ message.username }}</b>
             <span>{{ message.timestamp?.toDate() | date : "HH:mm" }} Uhr</span>
           </div>
-          <div class="message-content"
-          [class.outgoing]="message.senderId === userUid()">
+          <div
+            class="message-content"
+            [class.outgoing]="message.senderId === userUid()"
+          >
             {{ message.content }}
           </div>
         </div>
       </div>
-      }
-    }
+      } }
 
       <!--
       <div class="time-separator">
@@ -88,6 +97,7 @@
   <div class="message-input-container">
     <div class="message-input-box">
       <textarea
+        (keydown.enter)="sendMessage()"
         placeholder="Nachricht an #Entwicklerteam"
         [(ngModel)]="newMessage"
       ></textarea>
