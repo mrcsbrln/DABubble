@@ -32,7 +32,8 @@
 
   <div class="message-container">
     <div class="sended-messages-wrapper">
-      @if (userUid()) { @for (message of messages; track message.content; let i
+      <!-- @if (userUid()) { -->
+        @for (message of messages; track message.content; let i
       = $index){
       <div class="time-separator">
         <span class="date-text">08. April 2025</span>
@@ -40,7 +41,7 @@
 
       <div
         class="message"
-        [class.outgoing]="message.senderId === userUid()"
+        [class.outgoing]="message.senderId === (userUid() || null)"
         (click)="editMessage(i)"
         (keydown.enter)="editMessage(i)"
         tabindex="0"
@@ -48,24 +49,25 @@
         <img class="user-avatar" [src]="message.avatarUrl" alt="user-image" />
         <div
           class="message-details"
-          [class.outgoing]="message.senderId === userUid()"
+          [class.outgoing]="message.senderId === (userUid() || null)"
         >
           <div
             class="message-header"
-            [class.outgoing]="message.senderId === userUid()"
+            [class.outgoing]="message.senderId === (userUid() || null)"
           >
             <b>{{ message.username }}</b>
             <span>{{ message.timestamp?.toDate() | date : "HH:mm" }} Uhr</span>
           </div>
           <div
             class="message-content"
-            [class.outgoing]="message.senderId === userUid()"
+            [class.outgoing]="message.senderId === (userUid() || null)"
           >
             {{ message.content }}
           </div>
         </div>
       </div>
-      } }
+      }
+    <!-- } -->
     </div>
   </div>
 

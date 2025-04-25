@@ -20,7 +20,7 @@ export class ChatComponent {
   userUid = computed(() => this.currentUser()?.uid);
   avatarUrl = computed(() => this.currentUser()?.avatarUrl);
 
-  newMessage: string = '';
+  newMessage = '';
   messages: Message[] = [
     {
       username: this.displayName(),
