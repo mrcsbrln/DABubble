@@ -85,7 +85,8 @@ export class RegisterComponent {
             this.updateAvatarUrl();
           },
           error: (err) => {
-            this.errorMessage = err.code;
+            const mappedError = this.mapFirebaseError(err?.code);
+            this.errorMessage = mappedError;
             console.error(err);
           },
         });
@@ -122,5 +123,14 @@ export class RegisterComponent {
       this.showConfirmation.set(false);
       this.router.navigateByUrl('/');
     }, 1000);
+  }
+
+  private mapFirebaseError(errorCode: string): string {
+    switch (errorCode) {
+      case 'auth/email-already-in-use':
+        return 'Email existiert bereits.';
+      default:
+        return 'Ein unbekannter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.';
+    }
   }
 }
