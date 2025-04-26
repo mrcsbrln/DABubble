@@ -26,14 +26,15 @@ export class ChatComponent {
       username: this.displayName(),
       senderId: this.userUid(),
       content: 'onclick message test  => console log',
-      avatarUrl: 'img/chat/sofia-mueller-chat.svg'
+      avatarUrl: 'img/chat/sofia-mueller-chat.svg',
+      timestamp: Timestamp.now()
     }
   ];
 
   sendMessage(): void {
     if (this.newMessage.trim() !== '') {
       const timestamp = Timestamp.now();
-      console.log(timestamp, );
+      console.log(timestamp);
 
       this.messages.push({
         username: this.displayName(),
@@ -45,6 +46,19 @@ export class ChatComponent {
       this.newMessage = '';
     }
     console.log(this.messages);
+    console.log(Timestamp.now());
+  }
+
+  isNewDay(index: number): boolean {
+    if (index === 0) return true;
+    const current = this.messages[index].timestamp?.toDate();
+    const prev = this.messages[index - 1].timestamp?.toDate();
+    if (!current || !prev) return false;
+    return (
+      current.getFullYear() !== prev.getFullYear() ||
+      current.getMonth() !== prev.getMonth() ||
+      current.getDate() !== prev.getDate()
+    );
   }
 
   editMessage(index: number): void {
