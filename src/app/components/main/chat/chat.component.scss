@@ -63,8 +63,7 @@
 }
 
 .message-input-box {
-  margin-left: 24px;
-  margin-right: 24px;
+  margin: 24px 24px 0 24px;
   padding-bottom: 68px;
   background-color: white;
   display: flex;
@@ -163,6 +162,7 @@
 }
 
 .message {
+  position: relative;
   border: unset;
   background-color: transparent;
   padding: 16px 40px;
@@ -170,7 +170,7 @@
   align-items: flex-start;
   gap: 24px;
   background-color: $hover-transition;
-  margin: 10px 0;
+  margin: 8px 0;
 
   &:hover {
     cursor: pointer;
@@ -225,6 +225,7 @@
     border-radius: 0px 30px 30px 30px;
     word-break: break-word;
     background-color: $hover-transition;
+    text-align: left;
 
     &.outgoing {
       background-color: $purple-2;
@@ -252,12 +253,46 @@
   }
 }
 
+.message {
+  position: relative;
+
+  .reaction-bar {
+    position: absolute;
+    top: 0;
+    right: 5%;
+    transform: translate(0, -50%);
+    display: flex;
+    padding: 0 8px;
+    background: white;
+    border: 1px solid $light-purple;
+    border-radius: 25px 25px 0px 25px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+
+    img {
+      width: 39px;
+      height: 39px;
+      cursor: pointer;
+      transition: transform 0.1s;
+
+      &:hover {
+        transform: scale(1.15);
+      }
+    }
+  }
+
+  &:hover .reaction-bar {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
 
 
 .time-separator {
   display: flex;
   align-items: center;
-  margin: 10px 40px;
+  margin: 16px 40px;
 }
 
 .time-separator::before,
