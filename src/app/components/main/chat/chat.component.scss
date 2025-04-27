@@ -170,6 +170,7 @@
   align-items: flex-start;
   gap: 24px;
   background-color: $hover-transition;
+  margin: 10px 0;
 
   &:hover {
     cursor: pointer;
@@ -256,7 +257,7 @@
 .time-separator {
   display: flex;
   align-items: center;
-  margin: 20px 40px;
+  margin: 10px 40px;
 }
 
 .time-separator::before,
