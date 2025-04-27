@@ -259,7 +259,7 @@
   .reaction-bar {
     position: absolute;
     top: 0;
-    right: 5%;
+    right: 7%;
     transform: translate(0, -50%);
     display: flex;
     padding: 0 8px;
@@ -268,7 +268,7 @@
     border-radius: 25px 25px 0px 25px;
     pointer-events: none;
     opacity: 0;
-    transition: opacity 0.3s;
+    transition: opacity 0.2s, right 0.3s;
 
     img {
       width: 39px;
@@ -285,6 +285,7 @@
   &:hover .reaction-bar {
     opacity: 1;
     pointer-events: auto;
+    right: 5%;
   }
 }
 
