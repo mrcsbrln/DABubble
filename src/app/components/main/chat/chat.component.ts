@@ -69,4 +69,15 @@ export class ChatComponent {
     }
     console.log('Message index:', index);
   }
+
+  addReaction(messageIndex: number, reactionType: string, iconUrl: string) {
+    const msg = this.messages[messageIndex];
+    if (!msg.reactions) msg.reactions = [];
+    const found = msg.reactions.find(r => r.type === reactionType);
+    if (found) {
+      found.count++;
+    } else {
+      msg.reactions.push({ type: reactionType, iconUrl, count: 1 });
+    }
+  }
 }

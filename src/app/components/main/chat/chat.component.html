@@ -46,7 +46,10 @@
         [class.outgoing]="message.senderId === (userUid() || null)"
         (click)="editMessage(i)"
       >
-        <div class="message-content-wrapper" [class.outgoing]="message.senderId === (userUid() || null)">
+        <div
+          class="message-content-wrapper"
+          [class.outgoing]="message.senderId === (userUid() || null)"
+        >
           <img class="user-avatar" [src]="message.avatarUrl" alt="user-image" />
           <div
             class="message-details"
@@ -57,7 +60,9 @@
               [class.outgoing]="message.senderId === (userUid() || null)"
             >
               <b>{{ message.username }}</b>
-              <span>{{ message.timestamp?.toDate() | date : "HH:mm" }} Uhr</span>
+              <span
+                >{{ message.timestamp?.toDate() | date : "HH:mm" }} Uhr</span
+              >
             </div>
             <div
               class="message-content"
@@ -68,21 +73,54 @@
           </div>
         </div>
         <div class="set-reaction">
+          @for (reaction of message.reactions ?? []; track reaction.type) {
           <span class="reaction-wrapper">
-            <img src="img/chat/check-mark.svg" alt="check" />
-            <span class="reaction-count">2</span>
+            <img [src]="reaction.iconUrl" [alt]="reaction.type" />
+            <span class="reaction-count">{{ reaction.count }}</span>
           </span>
+          }
         </div>
 
         <div
           class="reaction-bar"
           [class.outgoing]="message.senderId === (userUid() || null)"
         >
-          <img src="img/chat/check-mark.svg" alt="check" />
-          <img src="img/chat/thumps-up.svg" alt="like" />
-          <img src="img/chat/add-reaction-comment.svg" alt="reaction" />
-          <img src="img/chat/answer.svg" alt="answer" />
-          <img src="img/chat/dots.svg" alt="more" />
+          <button
+            type="button"
+            (click)="
+              addReaction(i, 'check', 'img/chat/check-mark.svg');
+              $event.stopPropagation()
+            "
+            aria-label="check"
+          >
+            <img src="img/chat/check-mark.svg" alt="check" />
+          </button>
+          <button
+            type="button"
+            (click)="
+              addReaction(i, 'like', 'img/chat/thumps-up.svg');
+              $event.stopPropagation()
+            "
+            aria-label="like"
+          >
+            <img src="img/chat/thumps-up.svg" alt="like" />
+          </button>
+          <button
+            type="button"
+            (click)="
+              addReaction(i, 'reaction', 'img/chat/add-reaction-comment.svg');
+              $event.stopPropagation()
+            "
+            aria-label="reaction"
+          >
+            <img src="img/chat/add-reaction-comment.svg" alt="reaction" />
+          </button>
+          <button type="button">
+            <img src="img/chat/answer.svg" alt="answer" />
+          </button>
+          <button type="button" aria-label="more">
+            <img src="img/chat/dots.svg" alt="more" />
+          </button>
         </div>
       </button>
       }
