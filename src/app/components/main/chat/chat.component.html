@@ -33,7 +33,7 @@
   <div class="message-container">
     <div class="sended-messages-wrapper">
       <!-- @if (userUid()) { -->
-      @for (message of messages; track message.content; let i = $index){
+      @for (message of messages; track message.timestamp; let i = $index){
       @if(isNewDay(i)) {
       <div class="time-separator">
         <span class="date-text">
@@ -46,26 +46,38 @@
         [class.outgoing]="message.senderId === (userUid() || null)"
         (click)="editMessage(i)"
       >
-        <img class="user-avatar" [src]="message.avatarUrl" alt="user-image" />
-        <div
-          class="message-details"
-          [class.outgoing]="message.senderId === (userUid() || null)"
-        >
+        <div class="message-content-wrapper" [class.outgoing]="message.senderId === (userUid() || null)">
+          <img class="user-avatar" [src]="message.avatarUrl" alt="user-image" />
           <div
-            class="message-header"
+            class="message-details"
             [class.outgoing]="message.senderId === (userUid() || null)"
           >
-            <b>{{ message.username }}</b>
-            <span>{{ message.timestamp?.toDate() | date : "HH:mm" }} Uhr</span>
-          </div>
-          <div
-            class="message-content"
-            [class.outgoing]="message.senderId === (userUid() || null)"
-          >
-            {{ message.content }}
+            <div
+              class="message-header"
+              [class.outgoing]="message.senderId === (userUid() || null)"
+            >
+              <b>{{ message.username }}</b>
+              <span>{{ message.timestamp?.toDate() | date : "HH:mm" }} Uhr</span>
+            </div>
+            <div
+              class="message-content"
+              [class.outgoing]="message.senderId === (userUid() || null)"
+            >
+              {{ message.content }}
+            </div>
           </div>
         </div>
-        <div class="reaction-bar">
+        <div class="set-reaction">
+          <span class="reaction-wrapper">
+            <img src="img/chat/check-mark.svg" alt="check" />
+            <span class="reaction-count">2</span>
+          </span>
+        </div>
+
+        <div
+          class="reaction-bar"
+          [class.outgoing]="message.senderId === (userUid() || null)"
+        >
           <img src="img/chat/check-mark.svg" alt="check" />
           <img src="img/chat/thumps-up.svg" alt="like" />
           <img src="img/chat/add-reaction-comment.svg" alt="reaction" />

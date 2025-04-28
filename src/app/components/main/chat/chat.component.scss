@@ -167,10 +167,16 @@
   background-color: transparent;
   padding: 16px 40px;
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
-  gap: 24px;
+  gap: 8px;
   background-color: $hover-transition;
   margin: 8px 0;
+
+  &.outgoing {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
 
   &:hover {
     cursor: pointer;
@@ -192,10 +198,7 @@
     height: 64px;
   }
 
-  &.outgoing {
-    flex-direction: row-reverse;
-    justify-content: flex-start;
-  }
+
 
   .message-details {
     display: flex;
@@ -218,6 +221,18 @@
       font-size: 14px;
     }
   }
+
+  .message-content-wrapper {
+    display: flex;
+    width: 100%;
+    gap: 24px;
+
+    &.outgoing {
+      flex-direction: row-reverse;
+      justify-content: flex-start;
+    }
+  }
+
 
   .message-content {
     background-color: $bg-color;
@@ -254,8 +269,6 @@
 }
 
 .message {
-  position: relative;
-
   .reaction-bar {
     position: absolute;
     top: 0;
@@ -268,7 +281,9 @@
     border-radius: 25px 25px 0px 25px;
     pointer-events: none;
     opacity: 0;
-    transition: opacity 0.2s, right 0.3s;
+    //TODO
+    // opacity: 1;
+    transition: opacity 0.2s, right 0.3s, left 0.3s;
 
     img {
       width: 39px;
@@ -281,6 +296,11 @@
       }
     }
   }
+  &.outgoing {
+    flex-direction: column;
+    // justify-content: flex-start;
+    align-items: flex-end;
+  }
 
   &:hover .reaction-bar {
     opacity: 1;
@@ -289,6 +309,19 @@
   }
 }
 
+.message {
+  .reaction-bar {
+    &.outgoing {
+      right: auto;
+      left: 7%;
+    }
+  }
+
+  &:hover .reaction-bar.outgoing {
+    right: auto;
+    left: 5%;
+  }
+}
 
 .time-separator {
   display: flex;
@@ -310,4 +343,32 @@
   border: 1px solid $light-purple;
   border-radius: 30px;
   padding: 4px 12px;
+}
+
+.set-reaction {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 8px;
+
+  .reaction-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px; // Abstand zwischen Icon und Zahl
+    border: 1px solid $purple-2;
+    border-radius: 30px;
+    padding: 0px 14px 0px 0px;
+  }
+
+  img {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+  }
+
+  .reaction-count {
+    font-size: 16px;
+    padding: 0;
+  }
 }
