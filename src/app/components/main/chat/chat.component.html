@@ -30,9 +30,8 @@
     </div>
   </div>
 
-  <div class="message-container">
+  <!-- <div class="message-container">
     <div class="sended-messages-wrapper">
-      <!-- @if (userUid()) { -->
       @for (message of messages; track message.timestamp; let i = $index){
       @if(isNewDay(i)) {
       <div class="time-separator">
@@ -124,30 +123,33 @@
         </div>
       </button>
       }
-      <!-- } -->
     </div>
-  </div>
-
-  <div class="message-input-container">
-    <div class="message-input-box">
-      <textarea
-        (keydown.enter)="$event.preventDefault(); sendMessage()"
-        placeholder="Nachricht an #Entwicklerteam"
-        [(ngModel)]="newMessage"
-      ></textarea>
-      <div class="textarea-button-container">
-        <div class="textarea-button-group">
-          <button>
-            <img src="img/chat/add-reaction.svg" alt="add-reaction" />
-          </button>
-          <button>
-            <img src="img/chat/at-icon.svg" alt="add-icon" />
+  </div> -->
+  <form (ngSubmit)="sendMessage()">
+    <div class="message-input-container">
+      <div class="message-input-box">
+        <textarea
+          [formControl]="formControl"
+          placeholder="Nachricht an #Entwicklerteam..."
+        ></textarea>
+        <div class="textarea-button-container">
+          <div class="textarea-button-group">
+            <button>
+              <img src="img/chat/add-reaction.svg" alt="add-reaction" />
+            </button>
+            <button>
+              <img src="img/chat/at-icon.svg" alt="add-icon" />
+            </button>
+          </div>
+          <button
+            type="submit"
+            class="send-button"
+            [disabled]="formControl.invalid"
+          >
+            <img src="img/chat/send.svg" alt="send-message" />
           </button>
         </div>
-        <button class="send-button" (click)="sendMessage()">
-          <img src="img/chat/send.svg" alt="send-message" />
-        </button>
       </div>
     </div>
-  </div>
+  </form>
 </div>
