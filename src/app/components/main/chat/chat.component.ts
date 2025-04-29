@@ -3,7 +3,12 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { UserService } from '../../../services/user.service';
 import { MessageService } from '../../../services/message.service';
 import { serverTimestamp } from '@angular/fire/firestore';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Message } from '../../../interfaces/message.interface';
 
 type MessageData = Omit<Message, 'id'>;
@@ -19,23 +24,24 @@ export class ChatComponent {
   userService = inject(UserService);
   messageService = inject(MessageService);
 
-  formControl = new FormControl('', [
-    Validators.required,
-    Validators.minLength(1),
-  ]);
+  form = new FormGroup({
+    content: new FormControl('', [
+      Validators.required,
+      Validators.minLength(1),
+    ]),
+  });
 
-  sendMessage() {
-    console.log('Wurde aufgerufen');
-    const messageText = this.formControl.value?.trim();
+  onSubmit() {
+    const messageText = this.form.controls.content.value?.trim();
     const senderId = this.authService.currentUser()?.uid;
-    if (this.formControl.valid && messageText && senderId) {
+    if (this.form.controls.content.valid && messageText && senderId) {
       const messageDataToSend: MessageData = {
         senderId: senderId,
         content: messageText,
         timestamp: serverTimestamp(),
       };
       this.messageService.addMessage(messageDataToSend);
-      this.formControl.reset();
+      this.form.controls.content.reset();
 
       console.log(messageDataToSend);
     } else if (!senderId) {

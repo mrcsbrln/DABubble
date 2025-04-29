@@ -125,26 +125,26 @@
       }
     </div>
   </div> -->
-  <form (ngSubmit)="sendMessage()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="message-input-container">
       <div class="message-input-box">
         <textarea
-          [formControl]="formControl"
+          [formControl]="form.controls.content"
           placeholder="Nachricht an #Entwicklerteam..."
         ></textarea>
         <div class="textarea-button-container">
           <div class="textarea-button-group">
-            <button>
+            <button type="button">
               <img src="img/chat/add-reaction.svg" alt="add-reaction" />
             </button>
-            <button>
+            <button type="button">
               <img src="img/chat/at-icon.svg" alt="add-icon" />
             </button>
           </div>
           <button
             type="submit"
             class="send-button"
-            [disabled]="formControl.invalid"
+            [disabled]="form.controls.content.invalid"
           >
             <img src="img/chat/send.svg" alt="send-message" />
           </button>
