@@ -192,14 +192,7 @@
       cursor: default;
     }
   }
-
-  >img {
-    width: 64px;
-    height: 64px;
-  }
-
-
-
+  
   .message-details {
     display: flex;
     flex-direction: column;
@@ -230,6 +223,11 @@
     &.outgoing {
       flex-direction: row-reverse;
       justify-content: flex-start;
+    }
+
+    >img {
+      width: 64px;
+      height: 64px;
     }
   }
 
