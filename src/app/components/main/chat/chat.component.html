@@ -125,6 +125,11 @@
       }
     </div>
   </div> -->
+  <div>
+    @for(message of messageService.messages; track message.id) {
+    {{ message.content }}
+    }
+  </div>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="message-input-container">
       <div class="message-input-box">

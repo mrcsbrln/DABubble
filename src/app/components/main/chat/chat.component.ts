@@ -42,8 +42,6 @@ export class ChatComponent {
       };
       this.messageService.addMessage(messageDataToSend);
       this.form.controls.content.reset();
-
-      console.log(messageDataToSend);
     } else if (!senderId) {
       console.error('Benutzter nicht gefunden!');
     }
