@@ -3,15 +3,14 @@
   [class.no-workspace]="isWorkspaceHidden"
   [class.no-thread]="isThreadHidden"
 >
-  <app-header>
-    <p>Hallo {{ this.authService.currentUser()?.email }}</p>
-  </app-header>
+  <app-header />
+
   @if (!isWorkspaceHidden) {
-  <app-workspace></app-workspace>
+  <app-workspace />
   }
-  <app-chat></app-chat>
+  <app-chat />
 
   @if (!isThreadHidden) {
-  <app-thread></app-thread>
+  <app-thread />
   }
 </div>
