@@ -22,7 +22,7 @@ export class MessageService implements OnDestroy {
   unsubMessages!: Unsubscribe;
 
   constructor() {
-    this.unsubMessages = this.subUserCollection();
+    this.unsubMessages = this.subMessageCollection();
   }
 
   messagesCollectionRef() {
@@ -37,16 +37,16 @@ export class MessageService implements OnDestroy {
     }
   }
 
-  subUserCollection() {
+  subMessageCollection() {
     return onSnapshot(this.messagesCollectionRef(), (messages) => {
       this.messages = [];
       messages.forEach((message) => {
-        this.messages.push(this.setUserObject(message.data(), message.id));
+        this.messages.push(this.setMessageObject(message.data(), message.id));
       });
     });
   }
 
-  setUserObject(obj: Partial<Message>, id: string): Message {
+  setMessageObject(obj: Partial<Message>, id: string): Message {
     return {
       id: id,
       senderId: obj.senderId || '',

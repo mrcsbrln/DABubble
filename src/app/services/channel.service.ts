@@ -17,26 +17,26 @@ export class ChannelService implements OnDestroy {
 
   channels: Channel[] = [];
 
-  unsubMessages!: Unsubscribe;
+  unsubChannels!: Unsubscribe;
 
   constructor() {
-    this.unsubMessages = this.subChannelCollection();
+    this.unsubChannels = this.subChannelCollection();
   }
 
-  messagesCollectionRef() {
-    return collection(this.firestore, 'messages');
+  channelsCollectionRef() {
+    return collection(this.firestore, 'channels');
   }
 
   async addMessage(channelData: Channel) {
     try {
-      await addDoc(this.messagesCollectionRef(), channelData);
+      await addDoc(this.channelsCollectionRef(), channelData);
     } catch (error) {
       console.error(error);
     }
   }
 
   subChannelCollection() {
-    return onSnapshot(this.messagesCollectionRef(), (channels) => {
+    return onSnapshot(this.channelsCollectionRef(), (channels) => {
       this.channels = [];
       channels.forEach((channel) => {
         this.channels.push(this.setChannelObject(channel.data(), channel.id));
@@ -56,6 +56,6 @@ export class ChannelService implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.unsubMessages();
+    this.unsubChannels();
   }
 }
