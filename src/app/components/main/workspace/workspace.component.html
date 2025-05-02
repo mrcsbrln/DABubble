@@ -1,1 +1,7 @@
 <p>workspace works!</p>
+<button class="add-channel-btn" (click)="onOpenChannelDialog()">
+  Channel hinzufügen
+</button>
+@if(addChannelDialogOpen()) {
+<app-add-channel (closeDialog)="onCloseAddChannel()" />
+}
