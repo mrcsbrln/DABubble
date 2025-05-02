@@ -15,15 +15,15 @@ type MessageData = Omit<Message, 'id'>;
   providedIn: 'root',
 })
 export class MessageService implements OnDestroy {
-  constructor() {
-    this.unsubMessages = this.subUserCollection();
-  }
-
   firestore = inject(Firestore);
 
   messages: Message[] = [];
 
   unsubMessages!: Unsubscribe;
+
+  constructor() {
+    this.unsubMessages = this.subUserCollection();
+  }
 
   messagesCollectionRef() {
     return collection(this.firestore, 'messages');
