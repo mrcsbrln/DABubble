@@ -48,19 +48,8 @@ export class AddChannelComponent {
         memberIds: [],
         createdAt: serverTimestamp(),
       };
-      console.log(channelToSend);
+      this.channelService.addChannel(channelToSend);
     }
     this.form.reset();
-    // if (this.form.controls.content.valid && messageText && senderId) {
-    //   const messageDataToSend: MessageData = {
-    //     senderId: senderId,
-    //     content: messageText,
-    //     timestamp: serverTimestamp(),
-    //   };
-    //   this.messageService.addMessage(messageDataToSend);
-    //   this.form.controls.content.reset();
-    // } else if (!senderId) {
-    //   console.error('Benutzter nicht gefunden!');
-    // }
   }
 }

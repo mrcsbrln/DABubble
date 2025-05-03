@@ -3,6 +3,8 @@ import { Message } from '../interfaces/message.interface';
 import {
   addDoc,
   collection,
+  CollectionReference,
+  DocumentData,
   Firestore,
   onSnapshot,
   serverTimestamp,
@@ -29,9 +31,12 @@ export class MessageService implements OnDestroy {
     return collection(this.firestore, 'messages');
   }
 
-  async addMessage(messageData: MessageData) {
+  async addMessageToChannel(
+    docRef: CollectionReference<DocumentData, DocumentData>,
+    messageData: MessageData
+  ) {
     try {
-      await addDoc(this.messagesCollectionRef(), messageData);
+      await addDoc(docRef, messageData);
     } catch (error) {
       console.error(error);
     }

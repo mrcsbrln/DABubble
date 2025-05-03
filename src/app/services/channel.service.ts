@@ -3,11 +3,14 @@ import { Channel } from '../interfaces/channel.interface';
 import {
   addDoc,
   collection,
+  doc,
   Firestore,
   onSnapshot,
   serverTimestamp,
   Unsubscribe,
 } from '@angular/fire/firestore';
+
+type channelData = Omit<Channel, 'id'>;
 
 @Injectable({
   providedIn: 'root',
@@ -20,23 +23,31 @@ export class ChannelService implements OnDestroy {
   unsubChannels!: Unsubscribe;
 
   constructor() {
-    this.unsubChannels = this.subChannelCollection();
+    this.unsubChannels = this.subChannelsCollection();
   }
 
-  channelsCollectionRef() {
+  getChannelDocRef() {
+    return doc(this.getChannelsCollectionRef());
+  }
+
+  getChannelsCollectionRef() {
     return collection(this.firestore, 'channels');
   }
 
-  async addMessage(channelData: Channel) {
+  getChannelSubCollectionMessagesRef() {
+    return collection(this.getChannelDocRef(), 'messages');
+  }
+
+  async addChannel(channelData: channelData) {
     try {
-      await addDoc(this.channelsCollectionRef(), channelData);
+      await addDoc(this.getChannelsCollectionRef(), channelData);
     } catch (error) {
       console.error(error);
     }
   }
 
-  subChannelCollection() {
-    return onSnapshot(this.channelsCollectionRef(), (channels) => {
+  subChannelsCollection() {
+    return onSnapshot(this.getChannelsCollectionRef(), (channels) => {
       this.channels = [];
       channels.forEach((channel) => {
         this.channels.push(this.setChannelObject(channel.data(), channel.id));
