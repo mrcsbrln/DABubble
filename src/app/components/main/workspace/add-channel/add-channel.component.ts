@@ -49,6 +49,7 @@ export class AddChannelComponent {
         createdAt: serverTimestamp(),
       };
       this.channelService.addChannel(channelToSend);
+      this.onCloseDialog();
     }
     this.form.reset();
   }

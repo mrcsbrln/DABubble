@@ -34,9 +34,9 @@ export class ChannelService implements OnDestroy {
     return collection(this.firestore, 'channels');
   }
 
-  getChannelSubCollectionMessagesRef() {
-    return collection(this.getChannelDocRef(), 'messages');
-  }
+  // getChannelSubCollectionMessagesRef() {
+  //   return collection(this.getChannelDocRef(), 'messages');
+  // }
 
   async addChannel(channelData: channelData) {
     try {

@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserService } from '../../../services/user.service';
 import { MessageService } from '../../../services/message.service';
-import { ChannelService } from '../../../services/channel.service';
 import { serverTimestamp } from '@angular/fire/firestore';
 import {
   FormControl,
@@ -24,7 +23,6 @@ export class ChatComponent {
   authService = inject(AuthService);
   userService = inject(UserService);
   messageService = inject(MessageService);
-  channelService = inject(ChannelService);
 
   form = new FormGroup({
     content: new FormControl('', [
@@ -33,21 +31,21 @@ export class ChatComponent {
     ]),
   });
 
+  getMessages() {
+    return this.messageService.messagesByChannelId; //At a later stage, it should be possible to select which messages are displayed in the chat
+  }
+
   onSubmit() {
     const messageText = this.form.controls.content.value?.trim();
     const senderId = this.authService.currentUser()?.uid;
-    const channelSubCollectionMessagesRef =
-      this.channelService.getChannelSubCollectionMessagesRef();
     if (this.form.controls.content.valid && messageText && senderId) {
       const messageDataToSend: MessageData = {
         senderId: senderId,
         content: messageText,
         timestamp: serverTimestamp(),
+        channelId: 'W2A17eoejK29BIlWgY7z',
       };
-      this.messageService.addMessageToChannel(
-        channelSubCollectionMessagesRef,
-        messageDataToSend
-      );
+      this.messageService.addMessage(messageDataToSend);
       this.form.controls.content.reset();
     } else if (!senderId) {
       console.error('Benutzter nicht gefunden!');

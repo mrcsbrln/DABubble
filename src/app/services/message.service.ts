@@ -1,14 +1,14 @@
-import { Injectable, OnDestroy, inject } from '@angular/core';
+import { Injectable, OnDestroy, inject, signal } from '@angular/core';
 import { Message } from '../interfaces/message.interface';
 import {
   addDoc,
   collection,
-  CollectionReference,
-  DocumentData,
   Firestore,
   onSnapshot,
+  query,
   serverTimestamp,
   Unsubscribe,
+  where,
 } from '@angular/fire/firestore';
 
 type MessageData = Omit<Message, 'id'>;
@@ -20,23 +20,27 @@ export class MessageService implements OnDestroy {
   firestore = inject(Firestore);
 
   messages: Message[] = [];
+  messagesByChannelId: Message[] = [];
+
+  channelId = signal('W2A17eoejK29BIlWgY7z'); //will become dynamic at a later stage
 
   unsubMessages!: Unsubscribe;
+  unsubMessagesByChannelId!: Unsubscribe;
 
   constructor() {
     this.unsubMessages = this.subMessageCollection();
+    this.unsubMessagesByChannelId = this.subMessagesByChannelId(
+      this.channelId()
+    );
   }
 
   messagesCollectionRef() {
     return collection(this.firestore, 'messages');
   }
 
-  async addMessageToChannel(
-    docRef: CollectionReference<DocumentData, DocumentData>,
-    messageData: MessageData
-  ) {
+  async addMessage(messageData: MessageData) {
     try {
-      await addDoc(docRef, messageData);
+      await addDoc(this.messagesCollectionRef(), messageData);
     } catch (error) {
       console.error(error);
     }
@@ -57,7 +61,23 @@ export class MessageService implements OnDestroy {
       senderId: obj.senderId || '',
       content: obj.content || '',
       timestamp: obj.timestamp || serverTimestamp(),
+      channelId: obj.channelId,
     };
+  }
+
+  subMessagesByChannelId(channelId: string) {
+    const q = query(
+      this.messagesCollectionRef(),
+      where('channelId', '==', channelId)
+    );
+    return onSnapshot(q, (messages) => {
+      this.messagesByChannelId = [];
+      messages.forEach((message) => {
+        this.messagesByChannelId.push(
+          this.setMessageObject(message.data(), message.id)
+        );
+      });
+    });
   }
 
   ngOnDestroy() {

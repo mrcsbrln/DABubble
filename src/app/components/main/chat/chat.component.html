@@ -126,7 +126,7 @@
     </div>
   </div> -->
   <div>
-    @for(message of messageService.messages; track message.id) {
+    @for(message of getMessages(); track message.id) {
     {{ message.content }}
     }
   </div>
