@@ -10,6 +10,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Message } from '../../../interfaces/message.interface';
+import { ActivatedRoute } from '@angular/router';
 
 type MessageData = Omit<Message, 'id'>;
 
@@ -30,6 +31,11 @@ export class ChatComponent {
       Validators.minLength(1),
     ]),
   });
+
+  constructor(route: ActivatedRoute) {
+    const id: string = route.snapshot.params['id'];
+    console.log('channel id: ', id);
+  }
 
   getMessages() {
     return this.messageService.messagesByChannelId; //At a later stage, it should be possible to select which messages are displayed in the chat
