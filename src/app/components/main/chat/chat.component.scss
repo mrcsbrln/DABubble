@@ -1,11 +1,15 @@
 @use "../../../../styles.scss" as *;
 
+:host {
+  grid-area: chat;
+}
+
 .main-chat {
-  background-color: white;
-  flex: 1;
+  background-color: #fff;
   border-radius: 30px;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .channel-info-container {

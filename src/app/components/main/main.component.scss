@@ -4,7 +4,6 @@
   display: grid;
   grid-template-areas:
     "header header header"
-    "workspace chat thread"
     "workspace chat thread";
   grid-template-columns: 1fr 3fr 1fr;
   grid-template-rows: auto 1fr;
@@ -14,29 +13,23 @@
   padding: 16px;
 }
 
-.container.no-workspace {
-  grid-template-areas:
-    "header header header"
-    "chat chat thread"
-    "chat chat thread";
-  grid-template-columns: 2fr minmax(485px);
-}
+// .container.no-workspace {
+//   grid-template-areas:
+//     "header header header"
+//     "chat chat thread";
+// }
 
-.container.no-thread {
-  grid-template-areas:
-    "header header header"
-    "workspace chat chat"
-    "workspace chat chat";
-  grid-template-columns: 366px 3fr;
-}
+// .container.no-thread {
+//   grid-template-areas:
+//     "header header header"
+//     "workspace chat chat";
+// }
 
-.container.no-workspace.no-thread {
-  grid-template-areas:
-    "header header header"
-    "chat chat chat"
-    "chat chat chat";
-  grid-template-columns: 1fr;
-}
+// .container.no-workspace.no-thread {
+//   grid-template-areas:
+//     "header header header"
+//     "chat chat chat";
+// }
 
 app-header {
   grid-area: header;
@@ -46,9 +39,9 @@ app-workspace {
   grid-area: workspace;
 }
 
-app-chat {
-  grid-area: chat;
-}
+// router-outlet {
+//   grid-area: chat;
+// }
 
 app-thread {
   grid-area: thread;

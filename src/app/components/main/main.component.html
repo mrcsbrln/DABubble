@@ -1,12 +1,12 @@
 <div class="grid-container">
   <app-header />
 
-  @if (isWorkspaceHidden()) {
+  @if (!isWorkspaceHidden()) {
   <app-workspace />
   }
   <router-outlet />
 
-  @if (isThreadHidden()) {
+  @if (!isThreadHidden()) {
   <app-thread />
   }
 </div>
