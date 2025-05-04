@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { HeaderComponent } from './header/header.component';
 import { ThreadComponent } from './thread/thread.component';
@@ -13,14 +13,14 @@ import { RouterOutlet } from '@angular/router';
 })
 export class MainComponent {
   authService = inject(AuthService);
-  isWorkspaceHidden = false;
-  isThreadHidden = false;
+  isWorkspaceHidden = signal(true);
+  isThreadHidden = signal(true);
 
   toggleWorkspaceVisibility(): void {
-    this.isWorkspaceHidden = !this.isWorkspaceHidden;
+    this.isWorkspaceHidden.update((value) => !value);
   }
 
   toggleThreadVisibility(): void {
-    this.isThreadHidden = !this.isThreadHidden;
+    this.isThreadHidden.update((value) => !value);
   }
 }

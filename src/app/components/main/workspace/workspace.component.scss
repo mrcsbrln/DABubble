@@ -1,5 +1,12 @@
 @use "../../../../styles.scss" as *;
 
+.wrapper {
+  background-color: #fff;
+  height: 100%;
+  border-radius: 30px;
+  padding: 16px;
+}
+
 .users-list {
   display: flex;
   flex-direction: column;

@@ -1,15 +1,12 @@
 @use "../../../styles.scss" as *;
 
-.container {
+.grid-container {
   display: grid;
   grid-template-areas:
     "header header header"
     "workspace chat thread"
     "workspace chat thread";
-  grid-template-columns: minmax(auto, 366px) minmax(500px, 2fr) minmax(
-      auto,
-      485px
-    );
+  grid-template-columns: 1fr 3fr 1fr;
   grid-template-rows: auto 1fr;
   background-color: $bg-color;
   height: 100vh;
@@ -43,12 +40,10 @@
 
 app-header {
   grid-area: header;
-  background-color: #fff;
 }
 
 app-workspace {
   grid-area: workspace;
-  background-color: #fff;
 }
 
 app-chat {
@@ -57,5 +52,4 @@ app-chat {
 
 app-thread {
   grid-area: thread;
-  background-color: #fff;
 }
