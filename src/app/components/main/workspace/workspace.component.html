@@ -1,7 +1,14 @@
-<p>workspace works!</p>
 <button class="add-channel-btn" (click)="onOpenChannelDialog()">
   Channel hinzufügen
 </button>
 @if(addChannelDialogOpen()) {
 <app-add-channel (closeDialog)="onCloseAddChannel()" />
 }
+
+<div class="users-list">
+  @for (user of userService.users; track user.uid) {
+  <span>{{ user.displayName }}</span>
+  } @empty {
+  <span>Keine Benutzer geladen...</span>
+  }
+</div>

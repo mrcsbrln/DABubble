@@ -1,10 +1,4 @@
-:host {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: rgb(236, 238, 254);
-}
+@use "../../../styles.scss" as *;
 
 .container {
   display: grid;
@@ -12,13 +6,13 @@
     "header header header"
     "workspace chat thread"
     "workspace chat thread";
-  grid-template-columns: minmax(auto, 366px) minmax(500px, 2fr) minmax(auto, 485px);
+  grid-template-columns: minmax(auto, 366px) minmax(500px, 2fr) minmax(
+      auto,
+      485px
+    );
   grid-template-rows: auto 1fr;
+  background-color: $bg-color;
   height: 100vh;
-  max-height: 1080px;
-  width: 100%;
-  max-width: 1920px;
-  margin: 0 auto;
   gap: 16px;
   padding: 16px;
 }
@@ -49,12 +43,12 @@
 
 app-header {
   grid-area: header;
-  background-color: aqua;
+  background-color: #fff;
 }
 
 app-workspace {
   grid-area: workspace;
-  background-color: aquamarine;
+  background-color: #fff;
 }
 
 app-chat {
@@ -63,5 +57,5 @@ app-chat {
 
 app-thread {
   grid-area: thread;
-  background-color: lightgreen;
+  background-color: #fff;
 }

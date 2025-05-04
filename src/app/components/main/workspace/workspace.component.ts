@@ -1,6 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { ChannelService } from '../../../services/channel.service';
 import { AddChannelComponent } from './add-channel/add-channel.component';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-workspace',
@@ -9,6 +10,7 @@ import { AddChannelComponent } from './add-channel/add-channel.component';
   styleUrl: './workspace.component.scss',
 })
 export class WorkspaceComponent {
+  userService = inject(UserService);
   channelService = inject(ChannelService);
 
   addChannelDialogOpen = signal(false);
