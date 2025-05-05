@@ -8,9 +8,7 @@
 
   <div class="channels-list">
     @for(channel of channelService.channels; track channel.id) {
-    <a [routerLink]="['/channels', channel.name.toLowerCase()]">
-      {{ channel.name }}</a
-    >
+    <a [routerLink]="['/channels', channel.id]"> {{ channel.name }}</a>
     }
   </div>
 
