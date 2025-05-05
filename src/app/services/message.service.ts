@@ -22,7 +22,7 @@ export class MessageService implements OnDestroy {
   messages: Message[] = [];
   messagesByChannelId: Message[] = [];
 
-  channelId = signal('W2A17eoejK29BIlWgY7z'); //will become dynamic at a later stage
+  currentChannelId = signal('W2A17eoejK29BIlWgY7z'); //will become dynamic at a later stage
 
   unsubMessages!: Unsubscribe;
   unsubMessagesByChannelId!: Unsubscribe;
@@ -30,7 +30,7 @@ export class MessageService implements OnDestroy {
   constructor() {
     this.unsubMessages = this.subMessageCollection();
     this.unsubMessagesByChannelId = this.subMessagesByChannelId(
-      this.channelId()
+      this.currentChannelId()
     );
   }
 
