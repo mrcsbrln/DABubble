@@ -6,6 +6,12 @@
   <app-add-channel (closeDialog)="onCloseAddChannel()" />
   }
 
+  <div class="channels-list">
+    @for(channel of channelService.channels; track channel.id) {
+    <a [routerLink]="['/channels', channel.name]"> {{ channel.name }}</a>
+    }
+  </div>
+
   <div class="users-list">
     @for (user of userService.users; track user.uid) {
     <span>{{ user.displayName }}</span>

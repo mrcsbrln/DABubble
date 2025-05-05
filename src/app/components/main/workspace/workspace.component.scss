@@ -1,13 +1,33 @@
 @use "../../../../styles.scss" as *;
 
+button {
+  cursor: pointer;
+}
+
 .wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   background-color: #fff;
   height: 100%;
   border-radius: 30px;
   padding: 16px;
 }
 
+.channels-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  a {
+    cursor: pointer;
+  }
+}
+
 .users-list {
   display: flex;
   flex-direction: column;
+  gap: 4px;
+  span {
+    cursor: pointer;
+  }
 }
