@@ -1,4 +1,11 @@
-import { Component, inject } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+  signal,
+  WritableSignal,
+  OnDestroy,
+} from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserService } from '../../../services/user.service';
 import { MessageService } from '../../../services/message.service';
@@ -10,7 +17,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Message } from '../../../interfaces/message.interface';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 type MessageData = Omit<Message, 'id'>;
 
@@ -20,10 +28,11 @@ type MessageData = Omit<Message, 'id'>;
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.scss',
 })
-export class ChatComponent {
+export class ChatComponent implements OnInit, OnDestroy {
   authService = inject(AuthService);
   userService = inject(UserService);
   messageService = inject(MessageService);
+  route = inject(ActivatedRoute);
 
   form = new FormGroup({
     content: new FormControl('', [
@@ -32,9 +41,17 @@ export class ChatComponent {
     ]),
   });
 
-  constructor(route: ActivatedRoute) {
-    const id: string = route.snapshot.params['id'];
-    console.log('channel id: ', id);
+  currentChannel: WritableSignal<string | null> = signal(null);
+  subRoute!: Subscription;
+
+  ngOnInit() {
+    this.subRouteParams();
+  }
+
+  ngOnDestroy() {
+    if (this.subRoute) {
+      this.subRoute.unsubscribe();
+    }
   }
 
   getMessages() {
@@ -54,8 +71,21 @@ export class ChatComponent {
       this.messageService.addMessage(messageDataToSend);
       this.form.controls.content.reset();
     } else if (!senderId) {
-      console.error('Benutzter nicht gefunden!');
+      console.error('User not found');
     }
+  }
+
+  subRouteParams() {
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      const channelName = params.get('channel');
+      if (channelName) {
+        this.currentChannel.set(channelName);
+        console.log(this.currentChannel());
+      } else {
+        this.currentChannel.set(null);
+        console.log('No route');
+      }
+    });
   }
 
   // isNewDay(index: number): boolean {

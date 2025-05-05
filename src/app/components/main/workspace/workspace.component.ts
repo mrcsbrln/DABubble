@@ -2,11 +2,11 @@ import { Component, inject, signal } from '@angular/core';
 import { ChannelService } from '../../../services/channel.service';
 import { AddChannelComponent } from './add-channel/add-channel.component';
 import { UserService } from '../../../services/user.service';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-workspace',
-  imports: [AddChannelComponent, RouterLink, RouterLinkActive],
+  imports: [AddChannelComponent, RouterLink],
   templateUrl: './workspace.component.html',
   styleUrl: './workspace.component.scss',
 })

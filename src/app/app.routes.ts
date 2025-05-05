@@ -22,7 +22,7 @@ export const routes: Routes = [
     children: [
       { path: '', component: NewMessageComponent },
       {
-        path: 'channels/:id',
+        path: 'channels/:channel',
         component: ChatComponent,
       },
     ],
