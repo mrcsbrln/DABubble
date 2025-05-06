@@ -1,4 +1,10 @@
-import { Injectable, inject, OnDestroy } from '@angular/core';
+import {
+  Injectable,
+  inject,
+  OnDestroy,
+  EnvironmentInjector,
+  runInInjectionContext,
+} from '@angular/core';
 import { UserProfile } from '../interfaces/user-profile.interface';
 import {
   Firestore,
@@ -21,14 +27,17 @@ export class UserService implements OnDestroy {
   users: UserProfile[] = [];
   firestore: Firestore = inject(Firestore);
   authService = inject(AuthService);
+  injector = inject(EnvironmentInjector);
   private currentUserData$ = this.authService.currentUser$.pipe(
     switchMap((user) => {
       if (!user) {
         return of(null);
       }
-      return docData(
-        this.userDocRef('users', user?.uid)
-      ) as Observable<UserProfile>;
+      return runInInjectionContext(
+        this.injector,
+        () =>
+          docData(this.userDocRef('users', user.uid)) as Observable<UserProfile>
+      );
     })
   );
 

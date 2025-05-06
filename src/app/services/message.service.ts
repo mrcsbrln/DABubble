@@ -1,4 +1,12 @@
-import { Injectable, OnDestroy, effect, inject, signal } from '@angular/core';
+import {
+  Injectable,
+  OnDestroy,
+  effect,
+  inject,
+  signal,
+  Injector,
+  runInInjectionContext,
+} from '@angular/core';
 import { Message } from '../interfaces/message.interface';
 import {
   addDoc,
@@ -18,11 +26,12 @@ type MessageData = Omit<Message, 'id'>;
 })
 export class MessageService implements OnDestroy {
   firestore = inject(Firestore);
+  injector = inject(Injector);
 
   messages: Message[] = [];
   messagesByChannelId: Message[] = [];
 
-  currentChannelId = signal('W2A17eoejK29BIlWgY7z'); //will become dynamic at a later stage
+  currentChannelId = signal('');
 
   unsubMessages!: Unsubscribe;
   unsubMessagesByChannelId!: Unsubscribe;
@@ -30,10 +39,20 @@ export class MessageService implements OnDestroy {
   constructor() {
     this.unsubMessages = this.subMessageCollection();
     effect(() => {
+      if (this.unsubMessagesByChannelId) this.unsubMessagesByChannelId();
       this.unsubMessagesByChannelId = this.subMessagesByChannelId(
         this.currentChannelId()
       );
     });
+  }
+
+  ngOnDestroy() {
+    if (this.unsubMessages) {
+      this.unsubMessages();
+    }
+    if (this.unsubMessagesByChannelId) {
+      this.unsubMessagesByChannelId();
+    }
   }
 
   messagesCollectionRef() {
@@ -49,10 +68,12 @@ export class MessageService implements OnDestroy {
   }
 
   subMessageCollection() {
-    return onSnapshot(this.messagesCollectionRef(), (messages) => {
-      this.messages = [];
-      messages.forEach((message) => {
-        this.messages.push(this.setMessageObject(message.data(), message.id));
+    return runInInjectionContext(this.injector, () => {
+      return onSnapshot(this.messagesCollectionRef(), (messages) => {
+        this.messages = [];
+        messages.forEach((message) => {
+          this.messages.push(this.setMessageObject(message.data(), message.id));
+        });
       });
     });
   }
@@ -72,17 +93,15 @@ export class MessageService implements OnDestroy {
       this.messagesCollectionRef(),
       where('channelId', '==', channelId)
     );
-    return onSnapshot(q, (messages) => {
-      this.messagesByChannelId = [];
-      messages.forEach((message) => {
-        this.messagesByChannelId.push(
-          this.setMessageObject(message.data(), message.id)
-        );
+    return runInInjectionContext(this.injector, () => {
+      return onSnapshot(q, (messages) => {
+        this.messagesByChannelId = [];
+        messages.forEach((message) => {
+          this.messagesByChannelId.push(
+            this.setMessageObject(message.data(), message.id)
+          );
+        });
       });
     });
-  }
-
-  ngOnDestroy() {
-    this.unsubMessages();
   }
 }

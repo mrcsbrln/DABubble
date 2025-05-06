@@ -1,11 +1,4 @@
-import {
-  Component,
-  inject,
-  OnInit,
-  signal,
-  WritableSignal,
-  OnDestroy,
-} from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserService } from '../../../services/user.service';
 import { MessageService } from '../../../services/message.service';
@@ -41,7 +34,6 @@ export class ChatComponent implements OnInit, OnDestroy {
     ]),
   });
 
-  currentChannel: WritableSignal<string | null> = signal(null);
   subRoute!: Subscription;
 
   ngOnInit() {
@@ -61,12 +53,18 @@ export class ChatComponent implements OnInit, OnDestroy {
   onSubmit() {
     const messageText = this.form.controls.content.value?.trim();
     const senderId = this.authService.currentUser()?.uid;
-    if (this.form.controls.content.valid && messageText && senderId) {
+    const currentChannelId = this.messageService.currentChannelId();
+    if (
+      this.form.controls.content.valid &&
+      messageText &&
+      senderId &&
+      currentChannelId
+    ) {
       const messageDataToSend: MessageData = {
         senderId: senderId,
         content: messageText,
         timestamp: serverTimestamp(),
-        channelId: 'W2A17eoejK29BIlWgY7z',
+        channelId: currentChannelId,
       };
       this.messageService.addMessage(messageDataToSend);
       this.form.controls.content.reset();
@@ -80,7 +78,6 @@ export class ChatComponent implements OnInit, OnDestroy {
       const channelId = params.get('channel');
       if (channelId) {
         this.messageService.currentChannelId.set(channelId);
-        console.log(this.messageService.currentChannelId());
       } else {
         console.log('No route');
       }
