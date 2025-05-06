@@ -26,6 +26,10 @@ dialog {
   border-radius: 30px;
   box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.2);
   padding: 40px;
+
+  >p {
+    margin-bottom: 24px;
+  }
 }
 
 .add-channel-header {
@@ -33,6 +37,7 @@ dialog {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  margin-bottom: 24px;
 }
 
 button {
@@ -45,10 +50,10 @@ button {
 .add-channel-header {
   button {
     display: flex;
-  align-items: center;
-  justify-content: center;
+    align-items: center;
+    justify-content: center;
     border-radius: 50%;
-    transition: background 0.15s;
+    transition: background-color 150ms;
     padding: 10px;
   }
 }
@@ -56,5 +61,96 @@ button {
 @media (hover: hover) and (pointer: fine) {
   .add-channel-header button:hover {
     background: #e5e5e5;
+  }
+}
+
+form>div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+form label {
+  font-weight: 700;
+  margin-bottom: 4px;
+  font-size: 18px;
+
+  span {
+    font-weight: 400;
+    color: $text-gray;
+  }
+}
+
+form input[type="text"],
+form textarea {
+  border-radius: 40px;
+  padding: 18px 20px 18px 24px;
+  border: 1px solid $light-purple;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s;
+  overflow-y: auto;
+}
+
+form textarea {
+  resize: vertical;
+}
+
+form input[type="text"] {
+  padding: 18px 20px 18px 48px;
+  width: 100%;
+}
+
+form input[type="text"]:hover,
+form textarea:hover {
+  border-color: $purple-2;
+}
+
+form input[type="text"]:focus,
+form textarea:focus {
+  border-color: $purple-3;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper img {
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+}
+
+.input-wrapper input[type="text"] {
+  padding-left: 56px;
+}
+
+form .actions {
+  text-align: right;
+  margin-bottom: 0;
+  align-items: flex-end;
+
+  button {
+    color: white;
+    border-radius: 40px;
+    padding: 14px 20px;
+    border: 1px solid $purple-1;
+    max-width: 120px;
+    border-radius: 25px;
+    background-color: $purple-1;
+    margin-top: 8px;
+    font-size: 18px;
+    transition: background-color 150ms;
+
+    &:hover {
+      background-color: $purple-2;
+    }
   }
 }
