@@ -20,4 +20,41 @@
 dialog {
   position: relative;
   z-index: 1001;
+  width: 100%;
+  max-width: 872px;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.2);
+  padding: 40px;
+}
+
+.add-channel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+button {
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.add-channel-header {
+  button {
+    display: flex;
+  align-items: center;
+  justify-content: center;
+    border-radius: 50%;
+    transition: background 0.15s;
+    padding: 10px;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .add-channel-header button:hover {
+    background: #e5e5e5;
+  }
 }

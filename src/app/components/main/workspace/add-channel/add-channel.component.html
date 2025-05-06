@@ -10,7 +10,16 @@
     (keydown)="$event.stopPropagation()"
     tabindex="0"
   >
-    <h2>Channel erstellen</h2>
+    <div class="add-channel-header">
+      <h2>Channel erstellen</h2>
+      <button type="button" (click)="onCloseDialog()">
+        <img src="img/close.svg" alt="close" />
+      </button>
+    </div>
+    <p>
+      Channels dienen deinem Team zur Kommunikation. Am besten sollten sie
+      themenbezogen sein #marketing zum Beispiel.
+    </p>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <p>
         <label for="channel-name">Channel-Name</label>
