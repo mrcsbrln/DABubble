@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy, inject, signal } from '@angular/core';
+import { Injectable, OnDestroy, effect, inject, signal } from '@angular/core';
 import { Message } from '../interfaces/message.interface';
 import {
   addDoc,
@@ -29,9 +29,11 @@ export class MessageService implements OnDestroy {
 
   constructor() {
     this.unsubMessages = this.subMessageCollection();
-    this.unsubMessagesByChannelId = this.subMessagesByChannelId(
-      this.currentChannelId()
-    );
+    effect(() => {
+      this.unsubMessagesByChannelId = this.subMessagesByChannelId(
+        this.currentChannelId()
+      );
+    });
   }
 
   messagesCollectionRef() {
