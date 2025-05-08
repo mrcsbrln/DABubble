@@ -2,6 +2,8 @@ import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { MessageService } from '../../../services/message.service';
 import { serverTimestamp } from '@angular/fire/firestore';
+import { Timestamp } from '@angular/fire/firestore';
+import { DatePipe } from '@angular/common';
 import {
   FormControl,
   FormGroup,
@@ -12,12 +14,13 @@ import { Message } from '../../../interfaces/message.interface';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ChannelService } from '../../../services/channel.service';
+import { UserService } from '../../../services/user.service';
 
 type MessageData = Omit<Message, 'id'>;
 
 @Component({
   selector: 'app-chat',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, DatePipe],
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.scss',
 })
@@ -26,6 +29,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   private messageService = inject(MessageService);
   private route = inject(ActivatedRoute);
   private channelService = inject(ChannelService);
+  private userService = inject(UserService);
 
   form = new FormGroup({
     content: new FormControl('', [
@@ -52,6 +56,17 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   getChannelName() {
     return this.channelService.getChannelById()?.name;
+  }
+
+  getUserBySenderId(senderId: string) {
+    return this.userService.users.find((user) => user.uid === senderId);
+  }
+
+  getDateOfMessageById(messageId: string) {
+    const timestamp = this.messageService.messages.find(
+      (message) => message.id === messageId
+    )?.timestamp as Timestamp;
+    return timestamp.toDate();
   }
 
   onSubmit() {

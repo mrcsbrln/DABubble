@@ -142,10 +142,13 @@
   }
 }
 
-.message-container {
-  flex: 1;
+.messages-container {
   display: flex;
   flex-direction: column;
+}
+
+.message-container {
+  display: flex;
 }
 
 .sended-messages-wrapper {
