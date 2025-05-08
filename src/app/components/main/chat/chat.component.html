@@ -126,11 +126,12 @@
     </div>
   </div> -->
   <div class="messages-container">
-    @for(message of getMessages(); track message.id) {
+    @for(message of getMessagesByChannelId(); track message.id) {
     <div class="message-container">
       {{ message.content }}
       {{ getUserBySenderId(message.senderId)?.displayName }}
       {{ getDateOfMessageById(message.id) | date : "EEEE, d. MMMM" : "" }}
+      {{ getDateOfMessageById(message.id) | date : "HH:mm 'Uhr'" : "" }}
     </div>
     }
   </div>

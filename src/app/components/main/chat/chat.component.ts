@@ -50,7 +50,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     }
   }
 
-  getMessages() {
+  getMessagesByChannelId() {
     return this.messageService.messagesByChannelId;
   }
 
@@ -67,6 +67,14 @@ export class ChatComponent implements OnInit, OnDestroy {
       (message) => message.id === messageId
     )?.timestamp as Timestamp;
     return timestamp.toDate();
+  }
+
+  isCurrentUserSenderOfMessage(messageId: string): boolean {
+    const currentUserId = this.authService.currentUser()?.uid;
+    const message = this.getMessagesByChannelId().find(
+      (message) => message.id === messageId
+    );
+    return message?.senderId === currentUserId;
   }
 
   onSubmit() {
