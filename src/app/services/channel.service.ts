@@ -1,5 +1,6 @@
 import { Injectable, inject, OnDestroy } from '@angular/core';
 import { Channel } from '../interfaces/channel.interface';
+import { MessageService } from './message.service';
 import {
   addDoc,
   collection,
@@ -16,7 +17,8 @@ type channelData = Omit<Channel, 'id'>;
   providedIn: 'root',
 })
 export class ChannelService implements OnDestroy {
-  firestore = inject(Firestore);
+  private firestore = inject(Firestore);
+  private messageServive = inject(MessageService);
 
   channels: Channel[] = [];
 
@@ -26,12 +28,22 @@ export class ChannelService implements OnDestroy {
     this.unsubChannels = this.subChannelsCollection();
   }
 
+  ngOnDestroy() {
+    this.unsubChannels();
+  }
+
   getChannelDocRef() {
     return doc(this.getChannelsCollectionRef());
   }
 
   getChannelsCollectionRef() {
     return collection(this.firestore, 'channels');
+  }
+
+  getChannelById() {
+    return this.channels.find(
+      (channel) => channel.id === this.messageServive.currentChannelId()
+    );
   }
 
   // getChannelSubCollectionMessagesRef() {
@@ -64,9 +76,5 @@ export class ChannelService implements OnDestroy {
       memberIds: obj.memberIds || [],
       createdAt: obj.createdAt || serverTimestamp(),
     };
-  }
-
-  ngOnDestroy() {
-    this.unsubChannels();
   }
 }

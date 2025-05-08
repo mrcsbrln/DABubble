@@ -1,6 +1,5 @@
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
-import { UserService } from '../../../services/user.service';
 import { MessageService } from '../../../services/message.service';
 import { serverTimestamp } from '@angular/fire/firestore';
 import {
@@ -12,6 +11,7 @@ import {
 import { Message } from '../../../interfaces/message.interface';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { ChannelService } from '../../../services/channel.service';
 
 type MessageData = Omit<Message, 'id'>;
 
@@ -22,10 +22,10 @@ type MessageData = Omit<Message, 'id'>;
   styleUrl: './chat.component.scss',
 })
 export class ChatComponent implements OnInit, OnDestroy {
-  authService = inject(AuthService);
-  userService = inject(UserService);
-  messageService = inject(MessageService);
-  route = inject(ActivatedRoute);
+  private authService = inject(AuthService);
+  private messageService = inject(MessageService);
+  private route = inject(ActivatedRoute);
+  private channelService = inject(ChannelService);
 
   form = new FormGroup({
     content: new FormControl('', [
@@ -47,7 +47,11 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   getMessages() {
-    return this.messageService.messagesByChannelId; //At a later stage, it should be possible to select which messages are displayed in the chat
+    return this.messageService.messagesByChannelId;
+  }
+
+  getChannelName() {
+    return this.channelService.getChannelById()?.name;
   }
 
   onSubmit() {

@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
-import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -10,5 +9,4 @@ import { UserService } from '../../../services/user.service';
 })
 export class HeaderComponent {
   authService = inject(AuthService);
-  userService = inject(UserService);
 }

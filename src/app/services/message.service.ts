@@ -25,8 +25,8 @@ type MessageData = Omit<Message, 'id'>;
   providedIn: 'root',
 })
 export class MessageService implements OnDestroy {
-  firestore = inject(Firestore);
-  injector = inject(Injector);
+  private firestore = inject(Firestore);
+  private injector = inject(Injector);
 
   messages: Message[] = [];
   messagesByChannelId: Message[] = [];

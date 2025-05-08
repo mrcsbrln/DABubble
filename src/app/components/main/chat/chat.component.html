@@ -2,7 +2,7 @@
   <div class="channel-info-container">
     <div class="channel-info-group">
       <img src="img/chat/tag.svg" alt="tag" />
-      <span class="channel-name">Entwicklerteam</span>
+      <span class="channel-name">{{ getChannelName() }}</span>
       <img src="img/chat/channel-info-arrow-down.svg" alt="arrow" />
     </div>
 
@@ -135,7 +135,7 @@
       <div class="message-input-box">
         <textarea
           [formControl]="form.controls.content"
-          placeholder="Nachricht an #Entwicklerteam..."
+          [placeholder]="getChannelName()"
         ></textarea>
         <div class="textarea-button-container">
           <div class="textarea-button-group">
