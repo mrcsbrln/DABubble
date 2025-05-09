@@ -11,10 +11,18 @@ import { RouterLink } from '@angular/router';
   styleUrl: './workspace.component.scss',
 })
 export class WorkspaceComponent {
-  userService = inject(UserService);
-  channelService = inject(ChannelService);
+  private userService = inject(UserService);
+  private channelService = inject(ChannelService);
 
   addChannelDialogOpen = signal(false);
+
+  getChannels() {
+    return this.channelService.channels;
+  }
+
+  getUsers() {
+    return this.userService.users;
+  }
 
   onOpenChannelDialog() {
     this.addChannelDialogOpen.set(true);

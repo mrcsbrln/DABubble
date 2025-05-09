@@ -7,13 +7,13 @@
   }
 
   <div class="channels-list">
-    @for(channel of channelService.channels; track channel.id) {
+    @for(channel of getChannels(); track channel.id) {
     <a [routerLink]="['/channels', channel.id]"> {{ channel.name }}</a>
     }
   </div>
 
   <div class="users-list">
-    @for (user of userService.users; track user.uid) {
+    @for (user of getUsers(); track user.uid) {
     <span>{{ user.displayName }}</span>
     } @empty {
     <span>Keine Benutzer geladen...</span>
