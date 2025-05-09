@@ -1,3 +1,4 @@
 <div class="wrapper">
-  <button (click)="this.authService.logout()">Logout</button>
+  <button (click)="onLogout()">Logout</button>
+  <span>{{ getCurrentUserName() }}</span>
 </div>

@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -8,5 +9,16 @@ import { AuthService } from '../../../services/auth/auth.service';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  authService = inject(AuthService);
+  private authService = inject(AuthService);
+  private userService = inject(UserService);
+
+  getCurrentUserName() {
+    return this.userService.users.find(
+      (user) => user.uid === this.authService.currentUser()?.uid
+    )?.displayName;
+  }
+
+  onLogout() {
+    this.authService.logout();
+  }
 }
