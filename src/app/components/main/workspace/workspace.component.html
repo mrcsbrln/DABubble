@@ -7,6 +7,7 @@
   }
 
   <div class="channels-list">
+    <a [routerLink]="['/']">Neue Nachricht</a>
     @for(channel of getChannels(); track channel.id) {
     <a [routerLink]="['/channels', channel.id]"> {{ channel.name }}</a>
     }
