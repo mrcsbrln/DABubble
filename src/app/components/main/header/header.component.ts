@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserService } from '../../../services/user.service';
 
@@ -12,10 +12,16 @@ export class HeaderComponent {
   private authService = inject(AuthService);
   private userService = inject(UserService);
 
-  getCurrentUserName() {
+  arrowDownOpen = signal(false);
+
+  getCurrentUser() {
     return this.userService.users.find(
       (user) => user.uid === this.authService.currentUser()?.uid
-    )?.displayName;
+    );
+  }
+
+  toogleArrowDown() {
+    this.arrowDownOpen.update((value) => !value);
   }
 
   onLogout() {
