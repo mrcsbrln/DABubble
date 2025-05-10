@@ -1,5 +1,34 @@
 @use "../../../../styles.scss" as *;
 
+.arrow-down {
+  cursor: pointer;
+}
+
+.avatar {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  img {
+    border-radius: 100%;
+  }
+}
+
+.status {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #fff;
+  border-radius: 100%;
+  background-color: $text-gray;
+  &.online {
+    background-color: $online-green;
+  }
+}
+
 .wrapper {
   background-color: #fff;
+  display: flex;
 }

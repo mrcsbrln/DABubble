@@ -1,4 +1,9 @@
 <div class="wrapper">
   <button (click)="onLogout()">Logout</button>
-  <span>{{ getCurrentUserName() }}</span>
+  <span>{{ getCurrentUser()?.displayName }}</span>
+  <span class="avatar">
+    <img [src]="getCurrentUser()?.avatarUrl" alt="" />
+    <span class="status"></span>
+  </span>
+  <img class="arrow-down" src="img/arrow-down.svg" alt="" />
 </div>
