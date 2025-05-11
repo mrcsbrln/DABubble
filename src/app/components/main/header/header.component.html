@@ -1,9 +1,27 @@
 <div class="wrapper">
-  <button (click)="onLogout()">Logout</button>
-  <span>{{ getCurrentUser()?.displayName }}</span>
-  <span class="avatar">
-    <img [src]="getCurrentUser()?.avatarUrl" alt="" />
-    <span class="status"></span>
-  </span>
-  <img class="arrow-down" src="img/arrow-down.svg" alt="" />
+  <div class="logo-wrapper">
+    <img src="img/dabubble-logo.svg" alt="" />
+    <span>DABubble</span>
+  </div>
+  <div class="input-wrapper">
+    <input type="text" placeholder="Devspace durchsuchen" />
+  </div>
+  <div class="current-user-wrapper">
+    <span>{{ getCurrentUser()?.displayName }}</span>
+    <span class="avatar">
+      <img [src]="getCurrentUser()?.avatarUrl" alt="" />
+      <span class="status"></span>
+    </span>
+    <img
+      (click)="toogleArrowDown()"
+      (keydown)="toogleArrowDown()"
+      tabindex="0"
+      class="arrow-down"
+      src="img/arrow-down.svg"
+      alt=""
+    />
+    @if(arrowDownOpen()) {
+    <button (click)="onLogout()">Logout</button>
+    }
+  </div>
 </div>
