@@ -1,5 +1,9 @@
 @use "../../../../styles.scss" as *;
 
+:host {
+  padding-bottom: 16px;
+}
+
 .arrow-down {
   cursor: pointer;
 }
@@ -21,6 +25,7 @@
   width: 100%;
   height: 100vh;
   background-color: $backdrop;
+  z-index: 1000;
 }
 
 .current-user-wrapper {
@@ -36,6 +41,21 @@
 
 .first-overlay {
   position: absolute;
+  top: 32px;
+  right: 32px;
+  padding: 64px;
+  background: #fff;
+  border-radius: 30px 0 30px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 1001;
+  button {
+    background-color: transparent;
+    border-style: none;
+    cursor: pointer;
+    font-size: 24px;
+  }
 }
 
 .input-wrapper {
@@ -87,6 +107,6 @@
 .wrapper {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
-  gap: 16px;
+  column-gap: 16px;
   height: 70px;
 }

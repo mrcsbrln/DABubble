@@ -1,10 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserService } from '../../../services/user.service';
+import { UserProfileComponent } from '../user-profile/user-profile.component';
 
 @Component({
   selector: 'app-header',
-  imports: [],
+  imports: [UserProfileComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
@@ -13,6 +14,7 @@ export class HeaderComponent {
   private userService = inject(UserService);
 
   arrowDownOpen = signal(false);
+  userProfileDialogOpen = signal(false);
 
   getCurrentUser() {
     return this.userService.users.find(
@@ -22,6 +24,10 @@ export class HeaderComponent {
 
   toogleArrowDown() {
     this.arrowDownOpen.update((value) => !value);
+  }
+
+  onOpenDialog() {
+    this.userProfileDialogOpen.set(true);
   }
 
   onLogout() {

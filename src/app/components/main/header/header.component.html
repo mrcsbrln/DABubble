@@ -22,10 +22,15 @@
     />
   </div>
   @if(arrowDownOpen()) {
-  <div class="backdrop">
-    <div class="first-overlay">
-      <button (click)="onLogout()">Logout</button>
-    </div>
+  <div class="first-overlay">
+    <button (click)="onOpenDialog()">Profile</button>
+    <button (click)="onLogout()">Log out</button>
   </div>
+  <div
+    (click)="toogleArrowDown()"
+    (keydown)="toogleArrowDown()"
+    tabindex="0"
+    class="backdrop"
+  ></div>
   }
 </div>
