@@ -4,10 +4,6 @@
   padding-bottom: 16px;
 }
 
-.arrow-down {
-  cursor: pointer;
-}
-
 .avatar {
   position: relative;
   width: 70px;
@@ -35,6 +31,7 @@
   align-items: center;
   gap: 16px;
   padding-right: 30px;
+  cursor: pointer;
   span {
     font-size: 32px;
     font-weight: 700;
