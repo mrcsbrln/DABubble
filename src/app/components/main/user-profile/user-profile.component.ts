@@ -8,5 +8,5 @@ import { UserService } from '../../../services/user.service';
   styleUrl: './user-profile.component.scss',
 })
 export class UserProfileComponent {
-  userService = inject(UserService);
+  private userService = inject(UserService);
 }

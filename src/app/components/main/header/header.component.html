@@ -20,8 +20,12 @@
       src="img/arrow-down.svg"
       alt=""
     />
-    @if(arrowDownOpen()) {
-    <button (click)="onLogout()">Logout</button>
-    }
   </div>
+  @if(arrowDownOpen()) {
+  <div class="backdrop">
+    <div class="first-overlay">
+      <button (click)="onLogout()">Logout</button>
+    </div>
+  </div>
+  }
 </div>
