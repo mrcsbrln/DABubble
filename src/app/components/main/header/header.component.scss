@@ -31,8 +31,10 @@
 .current-user-wrapper {
   position: relative;
   display: flex;
+  justify-content: flex-end;
   align-items: center;
   gap: 16px;
+  padding-right: 30px;
   span {
     font-size: 32px;
     font-weight: 700;
@@ -50,6 +52,7 @@
   flex-direction: column;
   gap: 16px;
   z-index: 1001;
+  box-shadow: $box-shadow-overlay;
   button {
     background-color: transparent;
     border-style: none;

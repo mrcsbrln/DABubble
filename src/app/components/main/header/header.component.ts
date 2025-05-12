@@ -30,6 +30,11 @@ export class HeaderComponent {
     this.userProfileDialogOpen.set(true);
   }
 
+  onCloseUserProfileDialog() {
+    this.userProfileDialogOpen.set(false);
+    this.arrowDownOpen.set(false);
+  }
+
   onLogout() {
     this.authService.logout();
   }

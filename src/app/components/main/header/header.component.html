@@ -21,7 +21,7 @@
       alt=""
     />
   </div>
-  @if(arrowDownOpen()) {
+  @if(arrowDownOpen() && !userProfileDialogOpen()) {
   <div class="first-overlay">
     <button (click)="onOpenDialog()">Profile</button>
     <button (click)="onLogout()">Log out</button>
@@ -32,5 +32,7 @@
     tabindex="0"
     class="backdrop"
   ></div>
+  } @if(userProfileDialogOpen()) {
+  <app-user-profile (closeDialog)="onCloseUserProfileDialog()" />
   }
 </div>
