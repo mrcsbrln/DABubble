@@ -4,5 +4,37 @@
   tabindex="0"
   class="wrapper"
 >
-  <div class="user-profile">Profile</div>
+  <div
+    (click)="$event.stopPropagation()"
+    (keydown)="$event.stopPropagation()"
+    tabindex="0"
+    class="user-profile"
+  >
+    <div class="header">
+      <span>Profile</span>
+      <img
+        (click)="onCloseDialog()"
+        (keydown)="onCloseDialog()"
+        tabindex="0"
+        src="img/close.svg"
+        alt=""
+      />
+    </div>
+    <img [src]="getCurrentUserInUserCollection()?.avatarUrl" alt="" />
+    @if (!isEditMode()) {
+    <div class="row">
+      <span>{{ getCurrentUserInUserCollection()?.displayName }}</span>
+      <button (click)="toggleEditMode()">Bearbeiten</button>
+    </div>
+    @if(getCurrentUserInUserCollection()?.status === 'online') {
+    <div class="status-wrapper">
+      <span class="status online"></span>
+      <span class="status-text online">Aktiv </span>
+    </div>
+    } @else {
+    <div class="status-wrapper">
+      <span class="status"></span> <span class="status-text">Inaktiv</span>
+    </div>
+    } }
+  </div>
 </div>
