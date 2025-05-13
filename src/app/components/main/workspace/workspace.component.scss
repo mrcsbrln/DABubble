@@ -12,21 +12,27 @@ button {
   height: 100%;
   border-radius: 30px;
   padding: 16px;
+  max-height: 638px;
 }
 
 .channels-list {
   display: flex;
   flex-direction: column;
   gap: 4px;
+
   a {
     cursor: pointer;
   }
 }
 
 .users-list {
+  background-color: green;
   display: flex;
   flex-direction: column;
   gap: 4px;
+  flex: 1;
+  overflow-y: auto; // Scrollbar bei Überlauf
+
   span {
     cursor: pointer;
   }
