@@ -60,6 +60,7 @@
 
 .input-wrapper {
   display: flex;
+  justify-content: space-between;
   padding: 0 32px;
   height: 100%;
   border-radius: 42px;
@@ -73,6 +74,9 @@
     &:focus {
       outline: none;
     }
+  }
+  img {
+    width: 35px;
   }
 }
 
