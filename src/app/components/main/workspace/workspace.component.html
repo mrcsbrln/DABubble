@@ -13,23 +13,34 @@
     }
   </div>
 
+  <div>
+    <span>&#x2BC6;</span>
+    <span>Direktnachrichten</span>
+  </div>
+
   <div class="users-list">
     @for (user of getUsers(); track user.uid) {
     <div class="user-entry">
       <div class="avatar-wrapper">
         <img [src]="user.avatarUrl" alt="Avatar" />
-        <span class="status-dot" [style.backgroundColor]="getStatusColor(user)"></span>
+        <span
+          class="status-dot"
+          [style.backgroundColor]="getStatusColor(user)"
+        ></span>
       </div>
-      <span>{{ user.displayName }} &#x2BC6;</span>
+      <span>{{ user.displayName }}</span>
     </div>
     <div class="user-entry">
       <div class="avatar-wrapper">
         <img [src]="user.avatarUrl" alt="Avatar" />
-        <span class="status-dot" [style.backgroundColor]="getStatusColor(user)"></span>
+        <span
+          class="status-dot"
+          [style.backgroundColor]="getStatusColor(user)"
+        ></span>
       </div>
       <span>{{ user.displayName }}</span>
     </div>
-  
+
     } @empty {
     <span>Keine Benutzer geladen...</span>
     }

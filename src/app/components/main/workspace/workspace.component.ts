@@ -3,7 +3,7 @@ import { ChannelService } from '../../../services/channel.service';
 import { AddChannelComponent } from './add-channel/add-channel.component';
 import { UserService } from '../../../services/user.service';
 import { RouterLink } from '@angular/router';
-
+import { UserProfile } from '../../../interfaces/user-profile.interface';
 
 @Component({
   selector: 'app-workspace',
@@ -33,16 +33,14 @@ export class WorkspaceComponent {
     this.addChannelDialogOpen.set(false);
   }
 
-  getStatusColor(user: any): string {
-  switch (user.status) {
-    case 'online':
-      return '#92c83e';
-    case 'away':
-      return '#ffc107';
-    case 'offline':
-      return '#686868';
-    default:
-      return '#686868';
+  getStatusColor(user: UserProfile): string {
+    switch (user.status) {
+      case 'online':
+        return '#92c83e';
+      case 'offline':
+        return '#686868';
+      default:
+        return '#686868';
+    }
   }
-}
 }
