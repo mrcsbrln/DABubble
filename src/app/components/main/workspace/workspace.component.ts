@@ -43,4 +43,7 @@ export class WorkspaceComponent {
         return '#686868';
     }
   }
+
+  directMessageUserListOpen = signal(true);
+
 }
