@@ -24,18 +24,18 @@
   <app-add-channel (closeDialog)="onCloseAddChannel()" />
   }
 
-  <button (click)="toggleDirectMessageUserList()">
+  <button class="direct-message-container" (click)="toggleDirectMessageUserList()">
     <img
       class="arrow-drop-down"
+      [class.open]="directMessageUserListOpen()"
       src="img/arrow-drop-down.svg"
       alt="arrow-drop-down"
     />
-    <img src="img/workspaces.svg" alt="account-circle" />
+    <img src="img/account-circle.svg" alt="account-circle" />
     Direktnachrichten
   </button>
 
   @if(directMessageUserListOpen()) {
-
   <div class="users-list">
     @for (user of getUsers(); track user.uid) {
     <div class="user-entry">

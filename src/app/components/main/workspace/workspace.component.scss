@@ -1,33 +1,5 @@
 @use "../../../../styles.scss" as *;
 
-button {
-  border: none;
-  background-color: unset;
-  padding: 4px 10px;
-
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 12px;
-  border-radius: 20px;
-  cursor: pointer;
-  width: fit-content;
-  font-size: 18px;
-  font-weight: 700;
-
-  img {
-    width: 20px;
-    height: 20px;
-  }
-
-  .arrow-drop-down {
-    width: 10px;
-    height: 10px;
-    transform: rotate(-90deg);
-  }
-
-}
-
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -39,11 +11,57 @@ button {
   max-height: 638px;
 }
 
+button {
+  border: none;
+  background-color: unset;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+  border-radius: 20px;
+  width: fit-content;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 4px 10px;
+  transition: color 125ms;
+
+  img {
+    width: 20px;
+    height: 20px;
+  }
+
+  &:hover {
+    color: $purple-3;
+  }
+
+  .arrow-drop-down {
+    width: 12px;
+    height: 12px;
+    transform: rotate(-90deg);
+
+    &.open {
+      transform: rotate(0deg);
+    }
+  }
+}
+
 .channels-list {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
+
+.direct-message-container {
+  &:hover :first-child {
+    content: url('/img/arrow-drop-down-hover.svg');
+  }
+
+  &:hover :nth-child(2) {
+    content: url('/img/account-circle-hover.svg');
+  }
+}
+
 
 .users-list {
   background-color: green;
