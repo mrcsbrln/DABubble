@@ -68,7 +68,6 @@ button {
 
 
 .users-list {
-  background-color: green;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -79,7 +78,6 @@ button {
 }
 
 .user-entry {
-  background-color: aqua;
   border-radius: 30px;
   padding: 4px 16px;
   display: flex;
@@ -118,6 +116,5 @@ button {
       background-color: $bg-color;
       color: $purple-3;
     }
-
   }
 }
