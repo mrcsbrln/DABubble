@@ -20,20 +20,34 @@ button {
   flex-direction: column;
   gap: 4px;
 
-  a {
-    cursor: pointer;
-  }
+
 }
 
 .users-list {
   background-color: green;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
   flex: 1;
-  overflow-y: auto; // Scrollbar bei Überlauf
+  overflow-y: auto;
+  padding: 0 8px;
+  padding-top: 16px;
+}
 
-  span {
-    cursor: pointer;
+.user-entry {
+  background-color: aqua;
+  border-radius: 30px;
+  padding: 4px 12px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+
+  img {
+    margin-left: 4px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
   }
 }
