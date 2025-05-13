@@ -102,10 +102,7 @@
   height: 14px;
   border: 2px solid #fff;
   border-radius: 100%;
-  background-color: $text-gray;
-  &.online {
-    background-color: $online-green;
-  }
+  background-color: $online-green;
 }
 
 .wrapper {

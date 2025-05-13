@@ -20,10 +20,16 @@
         alt=""
       />
     </div>
-    <img [src]="getCurrentUserInUserCollection()?.avatarUrl" alt="" />
+    <img
+      class="avatar"
+      [src]="getCurrentUserInUserCollection()?.avatarUrl"
+      alt=""
+    />
     @if (!isEditMode()) {
     <div class="row">
-      <span>{{ getCurrentUserInUserCollection()?.displayName }}</span>
+      <span class="username">{{
+        getCurrentUserInUserCollection()?.displayName
+      }}</span>
       <button (click)="toggleEditMode()">Bearbeiten</button>
     </div>
     @if(getCurrentUserInUserCollection()?.status === 'online') {
@@ -35,6 +41,24 @@
     <div class="status-wrapper">
       <span class="status"></span> <span class="status-text">Inaktiv</span>
     </div>
-    } }
+    }
+    <div class="row">
+      <img src="img/mail-icon.svg" alt="" />
+      <span>E-Mail-Adresse</span>
+      <span class="email">{{ getCurrentUserInUserCollection()?.email }}</span>
+    </div>
+    } @else if (isEditMode()) {
+    <div class="edit-header">
+      <img src="img/account-circle.svg" alt="" />
+      <span class="edit-name">Vollständiger Name</span>
+    </div>
+    <div class="input-wrapper">
+      <input type="text" placeholder="Dein Name hier" />
+    </div>
+    <div class="button-wrapper">
+      <button class="cancel">Abbrechen</button>
+      <button class="save">Speichern</button>
+    </div>
+    }
   </div>
 </div>
