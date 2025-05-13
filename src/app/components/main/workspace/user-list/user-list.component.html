@@ -1,0 +1,16 @@
+<div class="users-list">
+    @for (user of getUsers(); track user.uid) {
+    <div class="user-entry">
+      <div class="avatar-wrapper">
+        <img [src]="user.avatarUrl" alt="Avatar" />
+        <span
+          class="status-dot"
+          [style.backgroundColor]="getStatusColor(user)"
+        ></span>
+      </div>
+      <span>{{ user.displayName }}</span>
+    </div>
+    } @empty {
+    <span>Keine Benutzer geladen...</span>
+    }
+  </div>

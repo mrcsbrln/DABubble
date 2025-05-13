@@ -24,8 +24,10 @@
   <app-add-channel (closeDialog)="onCloseAddChannel()" />
   }
 
-
-  <button class="direct-message-container" (click)="toggleDirectMessageUserList()">
+  <button
+    class="direct-message-container"
+    (click)="toggleDirectMessageUserList()"
+  >
     <img
       class="arrow-drop-down"
       [class.open]="directMessageUserListOpen()"
@@ -37,32 +39,6 @@
   </button>
 
   @if(directMessageUserListOpen()) {
-  <div class="users-list">
-    @for (user of getUsers(); track user.uid) {
-    <div class="user-entry">
-      <div class="avatar-wrapper">
-        <img [src]="user.avatarUrl" alt="Avatar" />
-        <span
-          class="status-dot"
-          [style.backgroundColor]="getStatusColor(user)"
-        ></span>
-      </div>
-      <span>{{ user.displayName }}</span>
-    </div>
-    <div class="user-entry">
-      <div class="avatar-wrapper">
-        <img [src]="user.avatarUrl" alt="Avatar" />
-        <span
-          class="status-dot"
-          [style.backgroundColor]="getStatusColor(user)"
-        ></span>
-      </div>
-      <span>{{ user.displayName }}</span>
-    </div>
-
-    } @empty {
-    <span>Keine Benutzer geladen...</span>
-    }
-  </div>
+  <app-user-list />
   }
 </div>

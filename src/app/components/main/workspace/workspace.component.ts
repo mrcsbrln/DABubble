@@ -3,11 +3,11 @@ import { ChannelService } from '../../../services/channel.service';
 import { AddChannelComponent } from './add-channel/add-channel.component';
 import { UserService } from '../../../services/user.service';
 import { RouterLink } from '@angular/router';
-import { UserProfile } from '../../../interfaces/user-profile.interface';
+import { UserListComponent } from './user-list/user-list.component';
 
 @Component({
   selector: 'app-workspace',
-  imports: [AddChannelComponent, RouterLink],
+  imports: [AddChannelComponent, RouterLink, UserListComponent],
   templateUrl: './workspace.component.html',
   styleUrl: './workspace.component.scss',
 })
@@ -37,16 +37,4 @@ export class WorkspaceComponent {
   toggleDirectMessageUserList() {
     this.directMessageUserListOpen.update((open) => !open);
   }
-
-  getStatusColor(user: UserProfile): string {
-    switch (user.status) {
-      case 'online':
-        return '#92c83e';
-      case 'offline':
-        return '#686868';
-      default:
-        return '#686868';
-    }
-  }
-
 }
