@@ -14,6 +14,10 @@ export class UserProfileComponent {
   private authService = inject(AuthService);
 
   isEditMode = signal(false);
+  isHovering = signal(false);
+
+  closeIconSrc = 'img/close.svg';
+  closeIconHoverSrc = 'img/close-hover.svg';
 
   getCurrentUserInUserCollection() {
     return this.userService.users.find(

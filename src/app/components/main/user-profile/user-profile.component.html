@@ -13,11 +13,15 @@
     <div class="header">
       <span>Profile</span>
       <img
+        (mouseover)="isHovering.set(true)"
+        (mouseout)="isHovering.set(false)"
+        (focus)="isHovering.set(true)"
+        (blur)="isHovering.set(false)"
         (click)="onCloseDialog()"
         (keydown)="onCloseDialog()"
         tabindex="0"
-        src="img/close.svg"
-        alt=""
+        [src]="isHovering() ? closeIconHoverSrc : closeIconSrc"
+        alt="close-icon"
       />
     </div>
     <img

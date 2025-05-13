@@ -55,6 +55,14 @@
     border-style: none;
     cursor: pointer;
     font-size: 24px;
+    padding: 16px;
+    border-radius: 30px;
+    &.btn-logout {
+      &:hover {
+        background-color: $bg-color;
+        transition: $hover-transition;
+      }
+    }
   }
 }
 

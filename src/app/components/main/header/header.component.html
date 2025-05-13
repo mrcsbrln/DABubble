@@ -23,7 +23,7 @@
   @if(arrowDownOpen() && !userProfileDialogOpen()) {
   <div class="first-overlay">
     <button (click)="onOpenDialog()">Profile</button>
-    <button (click)="onLogout()">Log out</button>
+    <button class="btn-logout" (click)="onLogout()">Log out</button>
   </div>
   <div
     (click)="toogleArrowDown()"

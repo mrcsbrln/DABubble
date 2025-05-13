@@ -101,8 +101,16 @@ button {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
     img {
+      width: 32px;
       cursor: pointer;
+      padding: 8px;
+      border-radius: 100%;
+      &:hover {
+        background-color: $bg-color;
+        transition: $hover-transition;
+      }
     }
     span {
       font-size: 24px;
