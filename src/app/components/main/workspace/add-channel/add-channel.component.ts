@@ -21,8 +21,8 @@ type AddChannelData = Omit<Channel, 'id'>;
 export class AddChannelComponent {
   @Output() closeDialog = new EventEmitter<void>();
 
-  channelService = inject(ChannelService);
-  authService = inject(AuthService);
+  private channelService = inject(ChannelService);
+  private authService = inject(AuthService);
 
   form = new FormGroup({
     channelName: new FormControl('', [
@@ -40,12 +40,12 @@ export class AddChannelComponent {
     const channelName = this.form.controls.channelName.value;
     const description = this.form.controls.description.value;
     const creatorId = this.authService.currentUser()?.uid;
-    if (this.form.controls.channelName.valid) {
+    if (this.form.controls.channelName.valid && creatorId) {
       const channelToSend: AddChannelData = {
         name: channelName!,
         description: description || null,
         creatorId: creatorId!,
-        memberIds: [],
+        memberIds: [creatorId],
         createdAt: serverTimestamp(),
       };
       this.channelService.addChannel(channelToSend);
