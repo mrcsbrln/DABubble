@@ -31,8 +31,10 @@ button {
     height: 20px;
   }
 
-  &:hover {
-    color: $purple-3;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      color: $purple-3;
+    }
   }
 
   .arrow-drop-down {
@@ -53,12 +55,14 @@ button {
 }
 
 .direct-message-container {
-  &:hover :first-child {
-    content: url('/img/arrow-drop-down-hover.svg');
-  }
+  @media (hover: hover) and (pointer: fine) {
+    &:hover :first-child {
+      content: url('/img/arrow-drop-down-hover.svg');
+    }
 
-  &:hover :nth-child(2) {
-    content: url('/img/account-circle-hover.svg');
+    &:hover :nth-child(2) {
+      content: url('/img/account-circle-hover.svg');
+    }
   }
 }
 
