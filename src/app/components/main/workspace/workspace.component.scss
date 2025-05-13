@@ -19,8 +19,6 @@ button {
   display: flex;
   flex-direction: column;
   gap: 4px;
-
-
 }
 
 .users-list {
@@ -44,10 +42,35 @@ button {
   gap: 10px;
   font-size: 16px;
 
-  img {
-    margin-left: 4px;
+  .avatar-wrapper {
+    position: relative;
     width: 44px;
     height: 44px;
-    border-radius: 50%;
+
+    img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .status-dot {
+      position: absolute;
+      right: -1px;
+      bottom: 1px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      cursor: pointer;
+      background-color: $bg-color;
+      color: $purple-3;
+      font-weight: 700;
+    }
   }
 }
