@@ -33,6 +33,11 @@ export class WorkspaceComponent {
     this.addChannelDialogOpen.set(false);
   }
 
+  directMessageUserListOpen = signal(false);
+  toggleDirectMessageUserList() {
+    this.directMessageUserListOpen.update((open) => !open);
+  }
+
   getStatusColor(user: UserProfile): string {
     switch (user.status) {
       case 'online':
@@ -43,7 +48,5 @@ export class WorkspaceComponent {
         return '#686868';
     }
   }
-
-  directMessageUserListOpen = signal(true);
 
 }

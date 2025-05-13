@@ -1,32 +1,40 @@
 <div class="wrapper">
   <button>
-    <img class="arrow-drop-down" src="img/arrow-drop-down.svg" alt="arrow-drop-down">
-    <img src="img/workspaces.svg" alt="account-circle">
+    <img
+      class="arrow-drop-down"
+      src="img/arrow-drop-down.svg"
+      alt="arrow-drop-down"
+    />
+    <img src="img/workspaces.svg" alt="account-circle" />
     Channels
   </button>
-  @if(addChannelDialogOpen()) {
-    <app-add-channel (closeDialog)="onCloseAddChannel()" />
-  }
 
   <div class="channels-list">
     <a [routerLink]="['/']">Neue Nachricht</a>
     @for(channel of getChannels(); track channel.id) {
-      <a [routerLink]="['/channels', channel.id]"> {{ channel.name }}</a>
+    <a [routerLink]="['/channels', channel.id]"> {{ channel.name }}</a>
     }
   </div>
 
   <button class="add-channel-btn" (click)="onOpenChannelDialog()">
-    <img src="img/add-circle.svg" alt="">
+    <img src="img/add-circle.svg" alt="" />
     Channel hinzufügen
   </button>
+  @if(addChannelDialogOpen()) {
+  <app-add-channel (closeDialog)="onCloseAddChannel()" />
+  }
 
-  <button>
-    <img class="arrow-drop-down" src="img/arrow-drop-down.svg" alt="arrow-drop-down">
-    <img src="img/workspaces.svg" alt="account-circle">
+  <button (click)="toggleDirectMessageUserList()">
+    <img
+      class="arrow-drop-down"
+      src="img/arrow-drop-down.svg"
+      alt="arrow-drop-down"
+    />
+    <img src="img/workspaces.svg" alt="account-circle" />
     Direktnachrichten
   </button>
 
-    @if(directMessageUserListOpen()) {
+  @if(directMessageUserListOpen()) {
 
   <div class="users-list">
     @for (user of getUsers(); track user.uid) {
@@ -55,6 +63,5 @@
     <span>Keine Benutzer geladen...</span>
     }
   </div>
-}
-
+  }
 </div>
