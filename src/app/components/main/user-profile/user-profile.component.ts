@@ -25,6 +25,10 @@ export class UserProfileComponent {
     );
   }
 
+  saveNewName() {
+    //
+  }
+
   toggleEditMode() {
     this.isEditMode.update((value) => !value);
   }

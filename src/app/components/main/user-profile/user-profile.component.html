@@ -57,11 +57,14 @@
       <span class="edit-name">Vollständiger Name</span>
     </div>
     <div class="input-wrapper">
-      <input type="text" placeholder="Dein Name hier" />
+      <input
+        type="text"
+        [placeholder]="getCurrentUserInUserCollection()?.displayName"
+      />
     </div>
     <div class="button-wrapper">
       <button class="cancel">Abbrechen</button>
-      <button class="save">Speichern</button>
+      <button class="save" (click)="saveNewName()">Speichern</button>
     </div>
     }
   </div>

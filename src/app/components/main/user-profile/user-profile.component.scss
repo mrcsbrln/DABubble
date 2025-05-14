@@ -11,10 +11,19 @@ button {
   padding: 15px 20px;
   &.cancel {
     border: 1px solid $purple-1;
+    &:hover {
+      background-color: $purple-1;
+      color: #fff;
+      transition: $hover-transition;
+    }
   }
   &.save {
     background-color: $purple-1;
     color: #fff;
+    &:hover {
+      background-color: $purple-2;
+      transition: $hover-transition;
+    }
   }
 }
 
