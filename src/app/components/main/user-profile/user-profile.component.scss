@@ -29,8 +29,8 @@ button {
 
 .button-wrapper {
   display: flex;
-  justify-content: space-between;
-  gap: 8px;
+  justify-content: center;
+  gap: 32px;
 }
 
 .edit-header {
@@ -101,6 +101,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 25%;
   .avatar {
     border-radius: 100%;
     width: 200px;
