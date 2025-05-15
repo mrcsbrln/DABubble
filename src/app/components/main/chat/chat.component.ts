@@ -2,7 +2,7 @@ import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { MessageService } from '../../../services/message.service';
 import { serverTimestamp } from '@angular/fire/firestore';
-import { Timestamp } from '@angular/fire/firestore';
+import { Timestamp, FieldValue } from '@angular/fire/firestore';
 import { DatePipe } from '@angular/common';
 import {
   FormControl,
@@ -124,15 +124,31 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   isNewDay(index: number): boolean {
     if (index === 0) return true;
-    const messages = this.getMessagesByChannelId();
-    const current = this.getDateOfMessageById(messages[index].id);
-    const prev = this.getDateOfMessageById(messages[index - 1].id);
-    if (!current || !prev) return false;
-    return (
-      current.getFullYear() !== prev.getFullYear() ||
-      current.getMonth() !== prev.getMonth() ||
-      current.getDate() !== prev.getDate()
-    );
+    const messages = this.getSortedMessagesByChannelId();
+    const currentTimestamp = messages[index]?.timestamp;
+    const previousTimestamp = messages[index - 1]?.timestamp;
+
+    if (!currentTimestamp || !previousTimestamp) return false;
+
+    const currentDate = this.getDateOnly(currentTimestamp);
+    const previousDate = this.getDateOnly(previousTimestamp);
+
+    return currentDate.getTime() !== previousDate.getTime();
+  }
+
+  getDateOnly(timestamp: Timestamp | FieldValue | Date): Date {
+    if (timestamp instanceof Timestamp) {
+      const date = timestamp.toDate();
+      return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    }
+    if (timestamp instanceof Date) {
+      return new Date(
+        timestamp.getFullYear(),
+        timestamp.getMonth(),
+        timestamp.getDate()
+      );
+    }
+    return new Date(0);
   }
 
   addReaction(messageIndex: number, reactionType: string, iconUrl: string) {
