@@ -60,7 +60,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   getUserBySenderId(senderId: string) {
-    console.log('this.userService.users.find((user) => user.uid === senderId)', this.userService.users.find((user) => user.uid === senderId));
+    // console.log('this.userService.users.find((user) => user.uid === senderId)', this.userService.users.find((user) => user.uid === senderId));
 
     return this.userService.users.find((user) => user.uid === senderId);
   }
@@ -130,6 +130,9 @@ isNewDay(index: number): boolean {
 }
 
 
+addReaction(messageIndex: number, reactionType: string, iconUrl: string) {
+  console.log('addReaction');
+}
 
   // addReaction(messageIndex: number, reactionType: string, iconUrl: string) {
   //   const msg = this.messages[messageIndex];
