@@ -93,7 +93,7 @@
     right: 0;
     left: 0;
 
-    > div {
+    >div {
       display: flex;
     }
   }
@@ -145,6 +145,8 @@
 .messages-container {
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  max-height: 550px; // TODO später anpassen
 }
 
 .message-container {
@@ -209,7 +211,7 @@
       flex-direction: row-reverse;
     }
 
-    > span {
+    >span {
       color: rgba(104, 104, 104, 1);
       font-size: 14px;
     }
@@ -252,14 +254,14 @@
     align-items: center;
     gap: 16px;
 
-    > button {
+    >button {
       border: unset;
       color: $purple-3;
       background-color: transparent;
       font-size: 18px;
     }
 
-    > span {
+    >span {
       color: $text-gray;
       font-size: 14px;
     }
@@ -267,10 +269,10 @@
 }
 
 .user-avatar {
-     width: 64px;
-      height: 64px;
+  width: 64px;
+  height: 64px;
 
-  }
+}
 
 .message {
   .reaction-bar {
@@ -306,6 +308,7 @@
       }
     }
   }
+
   &.outgoing {
     flex-direction: column;
     // justify-content: flex-start;

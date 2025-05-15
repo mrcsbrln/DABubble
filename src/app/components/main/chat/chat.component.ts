@@ -51,8 +51,18 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   getMessagesByChannelId() {
-    // console.log(this.messageService.messagesByChannelId);
+    console.log(this.messageService.messagesByChannelId);
     return this.messageService.messagesByChannelId;
+  }
+
+  getSortedMessagesByChannelId() {
+    return this.getMessagesByChannelId()
+      .slice()
+      .sort((a, b) => {
+        const dateA = this.getDateOfMessageById(a.id);
+        const dateB = this.getDateOfMessageById(b.id);
+        return dateA.getTime() - dateB.getTime();
+      });
   }
 
   getChannelName() {
