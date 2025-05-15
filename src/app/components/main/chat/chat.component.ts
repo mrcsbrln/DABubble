@@ -51,7 +51,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   getMessagesByChannelId() {
-    console.log(this.messageService.messagesByChannelId);
+    // console.log(this.messageService.messagesByChannelId);
     return this.messageService.messagesByChannelId;
   }
 
@@ -60,6 +60,8 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   getUserBySenderId(senderId: string) {
+    console.log('this.userService.users.find((user) => user.uid === senderId)', this.userService.users.find((user) => user.uid === senderId));
+
     return this.userService.users.find((user) => user.uid === senderId);
   }
 
@@ -67,7 +69,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     const timestamp = this.messageService.messages.find(
       (message) => message.id === messageId
     )?.timestamp as Timestamp;
-    console.log('timestamp.toDate()', timestamp.toDate());
+    // console.log('timestamp.toDate()', timestamp.toDate());
 
     return timestamp.toDate();
   }
@@ -127,14 +129,7 @@ isNewDay(index: number): boolean {
   );
 }
 
-  // editMessage(index: number): void {
-  //   if (this.messages[index].senderId === this.userUid()) {
-  //     console.log('Message belongs to logged-in user');
-  //   } else {
-  //     console.log('Message belongs NOT to logged-in user');
-  //   }
-  //   console.log('Message index:', index);
-  // }
+
 
   // addReaction(messageIndex: number, reactionType: string, iconUrl: string) {
   //   const msg = this.messages[messageIndex];

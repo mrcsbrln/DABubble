@@ -36,13 +36,14 @@
 
       <button
         class="message"
-        [class.outgoing]="message.senderId === (userUid() || null)"
-        (click)="editMessage(i)"
+        [class.outgoing]="isCurrentUserSenderOfMessage(message.id)"
       >
         <div
           class="message-content-wrapper"
           [class.outgoing]="message.senderId === (userUid() || null)"
         >
+
+
           <img class="user-avatar" [src]="message.avatarUrl" alt="user-image" />
           <div
             class="message-details"
@@ -54,7 +55,8 @@
             >
               <b>{{ message.username }}</b>
               <span
-                >{{ message.timestamp?.toDate() | date : "HH:mm" }} Uhr</span
+                >{{ message.timestamp?.toDate() | date : "HH:mm" }} Uhr
+                </span
               >
             </div>
             <div
@@ -65,6 +67,8 @@
             </div>
           </div>
         </div>
+
+
         <div class="set-reaction">
           @for (reaction of message.reactions ?? []; track reaction.type) {
           <span class="reaction-wrapper">
@@ -131,16 +135,47 @@
     </div>
     }
 
-    <div class="message-header" [class.outgoing]="isCurrentUserSenderOfMessage(message.id)">
-      <b>{{ getUserBySenderId(message.senderId)?.displayName }}</b>
-      <span>{{
-        getDateOfMessageById(message.id) | date : "HH:mm 'Uhr'" : "No Date"
-      }}</span>
-    </div>
+    <button
+      class="message"
+      [class.outgoing]="isCurrentUserSenderOfMessage(message.id)"
+    >
+      <div
+        class="message-content-wrapper"
+        [class.outgoing]="isCurrentUserSenderOfMessage(message.id)"
+      >
+        <img
+          class="user-avatar"
+          [src]="getUserBySenderId(message.senderId)?.avatarUrl"
+          alt="user-image"
+        />
+        <div
+          class="message-details"
+          [class.outgoing]="isCurrentUserSenderOfMessage(message.id)"
+        >
+          <div
+            class="message-header"
+            [class.outgoing]="isCurrentUserSenderOfMessage(message.id)"
+          >
+            <b>{{ getUserBySenderId(message.senderId)?.displayName }}</b>
+            <span>{{
+              getDateOfMessageById(message.id)
+                | date : "HH:mm 'Uhr'" : "No Date"
+            }}</span>
+          </div>
+          <div
+            class="message-content"
+            [class.outgoing]="isCurrentUserSenderOfMessage(message.id)"
+          >
+            {{ message.content }}
+          </div>
+        </div>
+      </div>
 
-    <div class="message-container">
-      {{ message.content }}
-    </div>
+
+
+      
+    </button>
+
     }
   </div>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
