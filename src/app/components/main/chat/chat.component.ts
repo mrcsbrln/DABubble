@@ -60,8 +60,6 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   getUserBySenderId(senderId: string) {
-    // console.log('this.userService.users.find((user) => user.uid === senderId)', this.userService.users.find((user) => user.uid === senderId));
-
     return this.userService.users.find((user) => user.uid === senderId);
   }
 
@@ -69,8 +67,6 @@ export class ChatComponent implements OnInit, OnDestroy {
     const timestamp = this.messageService.messages.find(
       (message) => message.id === messageId
     )?.timestamp as Timestamp;
-    // console.log('timestamp.toDate()', timestamp.toDate());
-
     return timestamp.toDate();
   }
 
@@ -116,23 +112,25 @@ export class ChatComponent implements OnInit, OnDestroy {
     });
   }
 
-isNewDay(index: number): boolean {
-  if (index === 0) return true;
-  const messages = this.getMessagesByChannelId();
-  const current = this.getDateOfMessageById(messages[index].id);
-  const prev = this.getDateOfMessageById(messages[index - 1].id);
-  if (!current || !prev) return false;
-  return (
-    current.getFullYear() !== prev.getFullYear() ||
-    current.getMonth() !== prev.getMonth() ||
-    current.getDate() !== prev.getDate()
-  );
-}
+  isNewDay(index: number): boolean {
+    if (index === 0) return true;
+    const messages = this.getMessagesByChannelId();
+    const current = this.getDateOfMessageById(messages[index].id);
+    const prev = this.getDateOfMessageById(messages[index - 1].id);
+    if (!current || !prev) return false;
+    return (
+      current.getFullYear() !== prev.getFullYear() ||
+      current.getMonth() !== prev.getMonth() ||
+      current.getDate() !== prev.getDate()
+    );
+  }
 
-
-addReaction(messageIndex: number, reactionType: string, iconUrl: string) {
-  console.log('addReaction');
-}
+  addReaction(messageIndex: number, reactionType: string, iconUrl: string) {
+    messageIndex;
+    reactionType;
+    iconUrl;
+    console.log('addReaction');
+  }
 
   // addReaction(messageIndex: number, reactionType: string, iconUrl: string) {
   //   const msg = this.messages[messageIndex];

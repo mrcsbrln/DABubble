@@ -86,51 +86,47 @@
           }
         </div> -->
 
-        <div
-          class="reaction-bar"
-                    [class.outgoing]="isCurrentUserSenderOfMessage(message.id)"
-
+      <div
+        class="reaction-bar"
+        [class.outgoing]="isCurrentUserSenderOfMessage(message.id)"
+      >
+        <button
+          type="button"
+          (click)="
+            addReaction(i, 'check', 'img/chat/check-mark.svg');
+            $event.stopPropagation()
+          "
+          aria-label="check"
         >
-          <button
-            type="button"
-            (click)="
-              addReaction(i, 'check', 'img/chat/check-mark.svg');
-              $event.stopPropagation()
-            "
-            aria-label="check"
-          >
-            <img src="img/chat/check-mark.svg" alt="check" />
-          </button>
-          <button
-            type="button"
-            (click)="
-              addReaction(i, 'like', 'img/chat/thumps-up.svg');
-              $event.stopPropagation()
-            "
-            aria-label="like"
-          >
-            <img src="img/chat/thumps-up.svg" alt="like" />
-          </button>
-          <button
-            type="button"
-            (click)="
-              addReaction(i, 'reaction', 'img/chat/add-reaction-comment.svg');
-              $event.stopPropagation()
-            "
-            aria-label="reaction"
-          >
-            <img src="img/chat/add-reaction-comment.svg" alt="reaction" />
-          </button>
-          <button type="button">
-            <img src="img/chat/answer.svg" alt="answer" />
-          </button>
-          <button type="button" aria-label="more">
-            <img src="img/chat/dots.svg" alt="more" />
-          </button>
-        </div>
-
-
-
+          <img src="img/chat/check-mark.svg" alt="check" />
+        </button>
+        <button
+          type="button"
+          (click)="
+            addReaction(i, 'like', 'img/chat/thumps-up.svg');
+            $event.stopPropagation()
+          "
+          aria-label="like"
+        >
+          <img src="img/chat/thumps-up.svg" alt="like" />
+        </button>
+        <button
+          type="button"
+          (click)="
+            addReaction(i, 'reaction', 'img/chat/add-reaction-comment.svg');
+            $event.stopPropagation()
+          "
+          aria-label="reaction"
+        >
+          <img src="img/chat/add-reaction-comment.svg" alt="reaction" />
+        </button>
+        <button type="button">
+          <img src="img/chat/answer.svg" alt="answer" />
+        </button>
+        <button type="button" aria-label="more">
+          <img src="img/chat/dots.svg" alt="more" />
+        </button>
+      </div>
     </button>
 
     }
