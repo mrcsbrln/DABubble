@@ -33,13 +33,7 @@
   <!-- <div class="message-container">
     <div class="sended-messages-wrapper">
       @for (message of messages; track message.timestamp; let i = $index){
-      @if(isNewDay(i)) {
-      <div class="time-separator">
-        <span class="date-text">
-          {{ message.timestamp?.toDate() | date : "dd. MMMM yyyy" }}
-        </span>
-      </div>
-      }
+   
       <button
         class="message"
         [class.outgoing]="message.senderId === (userUid() || null)"
@@ -126,22 +120,21 @@
     </div>
   </div> -->
   <div class="messages-container">
-    @for(message of getMessagesByChannelId(); track message.id) {
-    <div class="time-separator">
-      <span class="date-text">
-        {{
-          getDateOfMessageById(message.id) | date : "EEEE, d. MMMM" : "No Date"
-        }}
-      </span>
-    </div>
-    <div class="message-container">
-      <!-- <div class="message-content">
+    @for(message of getMessagesByChannelId(); track message.id; let i = $index) {
+
+      @if(isNewDay(i)) {
+        <div class="time-separator">
+          <span class="date-text">
+            {{ getDateOfMessageById(message.id) | date : "EEEE, d. MMMM" : "No Date" }}
+          </span>
+        </div>
+      }
+
+      <div class="message-container">
         {{ message.content }}
-      </div> -->
-      {{ message.content }}
-      {{ getUserBySenderId(message.senderId)?.displayName }}
-      {{ getDateOfMessageById(message.id) | date : "HH:mm 'Uhr'" : "No Date" }}
-    </div>
+        {{ getUserBySenderId(message.senderId)?.displayName }}
+        {{ getDateOfMessageById(message.id) | date : "HH:mm 'Uhr'" : "No Date" }}
+      </div>
     }
   </div>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">

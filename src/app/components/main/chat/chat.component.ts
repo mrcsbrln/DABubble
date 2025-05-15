@@ -67,6 +67,8 @@ export class ChatComponent implements OnInit, OnDestroy {
     const timestamp = this.messageService.messages.find(
       (message) => message.id === messageId
     )?.timestamp as Timestamp;
+    console.log('timestamp.toDate()', timestamp.toDate());
+
     return timestamp.toDate();
   }
 
@@ -112,17 +114,18 @@ export class ChatComponent implements OnInit, OnDestroy {
     });
   }
 
-  // isNewDay(index: number): boolean {
-  //   if (index === 0) return true;
-  //   const current = this.messages[index].timestamp?.toDate();
-  //   const prev = this.messages[index - 1].timestamp?.toDate();
-  //   if (!current || !prev) return false;
-  //   return (
-  //     current.getFullYear() !== prev.getFullYear() ||
-  //     current.getMonth() !== prev.getMonth() ||
-  //     current.getDate() !== prev.getDate()
-  //   );
-  // }
+isNewDay(index: number): boolean {
+  if (index === 0) return true;
+  const messages = this.getMessagesByChannelId();
+  const current = this.getDateOfMessageById(messages[index].id);
+  const prev = this.getDateOfMessageById(messages[index - 1].id);
+  if (!current || !prev) return false;
+  return (
+    current.getFullYear() !== prev.getFullYear() ||
+    current.getMonth() !== prev.getMonth() ||
+    current.getDate() !== prev.getDate()
+  );
+}
 
   // editMessage(index: number): void {
   //   if (this.messages[index].senderId === this.userUid()) {
