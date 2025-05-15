@@ -10,17 +10,6 @@
       </div>
       <span>{{ user.displayName }}</span>
     </button>
-    
-    <button class="user-entry">
-      <div class="avatar-wrapper">
-        <img [src]="user.avatarUrl" alt="Avatar" />
-        <span
-          class="status-dot"
-          [style.backgroundColor]="getStatusColor(user)"
-        ></span>
-      </div>
-      <span>{{ user.displayName }}</span>
-    </button>
     } @empty {
     <span>Keine Benutzer geladen...</span>
     }
