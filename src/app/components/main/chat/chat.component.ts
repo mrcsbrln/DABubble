@@ -1,9 +1,9 @@
-import { Component, inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy, LOCALE_ID } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { MessageService } from '../../../services/message.service';
 import { serverTimestamp } from '@angular/fire/firestore';
 import { Timestamp, FieldValue } from '@angular/fire/firestore';
-import { DatePipe } from '@angular/common';
+import { DatePipe, registerLocaleData } from '@angular/common';
 import {
   FormControl,
   FormGroup,
@@ -15,14 +15,18 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ChannelService } from '../../../services/channel.service';
 import { UserService } from '../../../services/user.service';
+import localeDe from '@angular/common/locales/de';
 
 type MessageData = Omit<Message, 'id'>;
+
+registerLocaleData(localeDe);
 
 @Component({
   selector: 'app-chat',
   imports: [ReactiveFormsModule, DatePipe],
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.scss',
+  providers: [{ provide: LOCALE_ID, useValue: 'de' }],
 })
 export class ChatComponent implements OnInit, OnDestroy {
   private authService = inject(AuthService);
