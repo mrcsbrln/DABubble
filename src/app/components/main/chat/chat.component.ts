@@ -55,7 +55,6 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   getMessagesByChannelId() {
-    console.log(this.messageService.messagesByChannelId);
     return this.messageService.messagesByChannelId;
   }
 

@@ -11,25 +11,10 @@
   height: 100vh;
   column-gap: 16px;
   padding: 16px;
+  &.thread-hidden {
+    grid-template-columns: 1fr 3fr;
+  }
 }
-
-// .container.no-workspace {
-//   grid-template-areas:
-//     "header header header"
-//     "chat chat thread";
-// }
-
-// .container.no-thread {
-//   grid-template-areas:
-//     "header header header"
-//     "workspace chat chat";
-// }
-
-// .container.no-workspace.no-thread {
-//   grid-template-areas:
-//     "header header header"
-//     "chat chat chat";
-// }
 
 app-header {
   grid-area: header;
@@ -38,10 +23,6 @@ app-header {
 app-workspace {
   grid-area: workspace;
 }
-
-// router-outlet {
-//   grid-area: chat;
-// }
 
 app-thread {
   grid-area: thread;
