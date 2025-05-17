@@ -1,4 +1,11 @@
-import { Component, inject, OnInit, OnDestroy, LOCALE_ID } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+  OnDestroy,
+  LOCALE_ID,
+  signal,
+} from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { MessageService } from '../../../services/message.service';
 import { serverTimestamp } from '@angular/fire/firestore';
@@ -43,6 +50,8 @@ export class ChatComponent implements OnInit, OnDestroy {
   });
 
   subRoute!: Subscription;
+
+  isAddMembersDialogOpen = signal(false);
 
   ngOnInit() {
     this.subRouteParams();
