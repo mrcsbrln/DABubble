@@ -143,12 +143,13 @@
 }
 
 .messages-container {
-  height: 100%;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
-  // max-height: 750px; // TODO später anpassen
   flex-grow: 1;
+  // max-height: 750px;
+  // height: 100%;
+  overflow-y: auto;
+  max-height: calc(100% - 750px);
 }
 
 .message-container {
