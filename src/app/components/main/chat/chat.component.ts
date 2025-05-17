@@ -170,6 +170,10 @@ export class ChatComponent implements OnInit, OnDestroy {
     console.log('addReaction');
   }
 
+  toogleAddMemebersDialog() {
+    this.isAddMembersDialogOpen.update((value) => !value);
+  }
+
   // addReaction(messageIndex: number, reactionType: string, iconUrl: string) {
   //   const msg = this.messages[messageIndex];
   //   if (!msg.reactions) msg.reactions = [];
