@@ -1,14 +1,17 @@
 import { Injectable, inject, OnDestroy } from '@angular/core';
 import { Channel } from '../interfaces/channel.interface';
 import { MessageService } from './message.service';
+import { UserService } from './user.service';
 import {
   addDoc,
+  arrayUnion,
   collection,
   doc,
   Firestore,
   onSnapshot,
   serverTimestamp,
   Unsubscribe,
+  updateDoc,
 } from '@angular/fire/firestore';
 
 type channelData = Omit<Channel, 'id'>;
@@ -19,6 +22,7 @@ type channelData = Omit<Channel, 'id'>;
 export class ChannelService implements OnDestroy {
   private firestore = inject(Firestore);
   private messageServive = inject(MessageService);
+  private userService = inject(UserService);
 
   channels: Channel[] = [];
 
@@ -30,6 +34,17 @@ export class ChannelService implements OnDestroy {
 
   ngOnDestroy() {
     this.unsubChannels();
+  }
+
+  async addUserToChannel(userId: string) {
+    const channelDocRef = this.getChannelDocRef();
+    try {
+      await updateDoc(channelDocRef, {
+        memberIds: arrayUnion(userId),
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   getChannelDocRef() {
