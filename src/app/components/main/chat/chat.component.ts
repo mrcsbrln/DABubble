@@ -23,6 +23,7 @@ import { Subscription } from 'rxjs';
 import { ChannelService } from '../../../services/channel.service';
 import { UserService } from '../../../services/user.service';
 import localeDe from '@angular/common/locales/de';
+import { AddMembersComponent } from '../add-members/add-members.component';
 
 type MessageData = Omit<Message, 'id'>;
 
@@ -30,7 +31,7 @@ registerLocaleData(localeDe);
 
 @Component({
   selector: 'app-chat',
-  imports: [ReactiveFormsModule, DatePipe],
+  imports: [AddMembersComponent, ReactiveFormsModule, DatePipe],
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.scss',
   providers: [{ provide: LOCALE_ID, useValue: 'de' }],
