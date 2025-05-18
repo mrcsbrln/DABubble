@@ -33,9 +33,8 @@
     </div>
   </div>
   <div class="messages-container">
-    @for(message of getMessagesReversed(); track message.id; let i =
-    $index) {
-      @if(isNewDay(i)) {
+    @for(message of getMessagesReversed(); track message.id; let i = $index) {
+    @if(isNewDay(i)) {
     <div class="time-separator">
       <span class="date-text">
         {{
@@ -164,7 +163,7 @@
   </form>
 </div>
 @if(isAddMembersDialogOpen()){
-<div class="add-members-wrapper">
+<div class="add-members-dialog-wrapper">
   <app-add-members />
 </div>
 }

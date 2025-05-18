@@ -5,6 +5,18 @@
   overflow-y: scroll;
 }
 
+.add-members-dialog-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: $backdrop;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .main-chat {
   background-color: #fff;
   border-radius: 30px;
@@ -35,6 +47,10 @@
     justify-content: flex-end;
     align-items: center;
     gap: 16px;
+
+    .add-new-member {
+      cursor: pointer;
+    }
 
     .channel-member-img {
       display: flex;
