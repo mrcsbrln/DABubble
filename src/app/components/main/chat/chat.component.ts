@@ -78,6 +78,10 @@ export class ChatComponent implements OnInit, OnDestroy {
       });
   }
 
+  getMessagesReversed() {
+    return this.getSortedMessagesByChannelId().slice().reverse();
+  }
+
   getChannelName() {
     return this.channelService.getChannelById()?.name;
   }

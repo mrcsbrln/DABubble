@@ -33,8 +33,9 @@
     </div>
   </div>
   <div class="messages-container">
-    @for(message of getSortedMessagesByChannelId(); track message.id; let i =
-    $index) { @if(isNewDay(i)) {
+    @for(message of getMessagesReversed(); track message.id; let i =
+    $index) {
+      @if(isNewDay(i)) {
     <div class="time-separator">
       <span class="date-text">
         {{
