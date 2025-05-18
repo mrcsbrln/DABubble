@@ -11,8 +11,14 @@
   height: 100vh;
   column-gap: 16px;
   padding: 16px;
+  &.workspace-hidden {
+    grid-template-columns: 0 4fr 1fr;
+  }
   &.thread-hidden {
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 1fr 4fr 0;
+  }
+  &.workspace-hidden.thread-hidden {
+    grid-template-columns: 0 1fr 0;
   }
 }
 
