@@ -140,18 +140,18 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   isNewDay(index: number): boolean {
-    if (index === 0) return true;
-    const messages = this.getSortedMessagesByChannelId();
-    const currentTimestamp = messages[index]?.timestamp;
-    const previousTimestamp = messages[index - 1]?.timestamp;
+  const messages = this.getMessagesReversed();
+  if (index === messages.length - 1) return true; // Letzte (ursprünglich älteste) Nachricht
+  const currentTimestamp = messages[index]?.timestamp;
+  const nextTimestamp = messages[index + 1]?.timestamp;
 
-    if (!currentTimestamp || !previousTimestamp) return false;
+  if (!currentTimestamp || !nextTimestamp) return false;
 
-    const currentDate = this.getDateOnly(currentTimestamp);
-    const previousDate = this.getDateOnly(previousTimestamp);
+  const currentDate = this.getDateOnly(currentTimestamp);
+  const nextDate = this.getDateOnly(nextTimestamp);
 
-    return currentDate.getTime() !== previousDate.getTime();
-  }
+  return currentDate.getTime() !== nextDate.getTime();
+}
 
   getDateOnly(timestamp: Timestamp | FieldValue | Date): Date {
     if (timestamp instanceof Timestamp) {
