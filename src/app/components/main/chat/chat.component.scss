@@ -145,9 +145,9 @@
 
 .messages-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
+  overflow-y: auto;
   flex-grow: 1;
-  overflow-y: scroll;
 }
 
 .message-container {
