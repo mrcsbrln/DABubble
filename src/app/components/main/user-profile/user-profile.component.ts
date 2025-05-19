@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output, signal } from '@angular/core';
+import { Component, inject, output, signal } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { AuthService } from '../../../services/auth/auth.service';
 import { FormsModule } from '@angular/forms';
@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './user-profile.component.scss',
 })
 export class UserProfileComponent {
-  @Output() closeDialog = new EventEmitter<void>();
+  closeDialog = output<void>();
   private userService = inject(UserService);
   private authService = inject(AuthService);
 
