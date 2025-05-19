@@ -42,4 +42,19 @@
       }
     }
   }
+  button {
+    background-color: $purple-1;
+    border-style: none;
+    border-radius: 25px;
+    color: #fff;
+    padding: 12px 25px;
+    cursor: pointer;
+    &:hover {
+      background-color: $purple-2;
+    }
+    &:disabled {
+      background-color: $text-gray;
+      cursor: not-allowed;
+    }
+  }
 }

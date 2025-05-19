@@ -14,6 +14,7 @@ export class AddMembersComponent {
   closeIconHoverSrc = 'img/close-hover.svg';
 
   isHovering = signal(false);
+  isButtonDisabled = signal(true);
 
   onCloseDialog() {
     this.closeDialog.emit();
