@@ -27,7 +27,12 @@
         <img class="close-icon" src="img/close.svg" alt="" />
       </span>
     </span>
-    <input type="text" placeholder="Name eingeben" />
+    <input type="text" placeholder="Name eingeben" [(ngModel)]="userInput" />
+  </div>
+  <div class="filter-user">
+    @for(user of filteredUsers(); track user.uid) {
+    {{ user.displayName }}
+    } @empty { Keine Benutzer gefunden }
   </div>
   <button [disabled]="isButtonDisabled()">Hinzufügen</button>
 </div>

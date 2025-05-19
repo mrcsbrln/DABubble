@@ -1,9 +1,17 @@
-import { Component, inject, input, output, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  input,
+  output,
+  signal,
+} from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-add-members',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './add-members.component.html',
   styleUrl: './add-members.component.scss',
 })
@@ -18,9 +26,19 @@ export class AddMembersComponent {
   isHovering = signal(false);
   isButtonDisabled = signal(true);
 
+  userInput = signal('');
+
   getUsers() {
     return this.userService.users;
   }
+
+  filteredUsers = computed(() => {
+    const userInput = this.userInput().toLowerCase().trim();
+    if (!userInput) return [];
+    return this.getUsers().filter((user) =>
+      user.displayName.toLowerCase().includes(this.userInput().toLowerCase())
+    );
+  });
 
   onCloseDialog() {
     this.closeDialog.emit();
