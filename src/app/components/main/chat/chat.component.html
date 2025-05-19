@@ -164,6 +164,6 @@
 </div>
 @if(isAddMembersDialogOpen()){
 <div class="add-members-dialog-wrapper">
-  <app-add-members />
+  <app-add-members (closeDialog)="toogleAddMemebersDialog()" />
 </div>
 }

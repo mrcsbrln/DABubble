@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, inject, output } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -19,7 +19,7 @@ type AddChannelData = Omit<Channel, 'id'>;
   styleUrl: './add-channel.component.scss',
 })
 export class AddChannelComponent {
-  @Output() closeDialog = new EventEmitter<void>();
+  closeDialog = output<void>();
 
   private channelService = inject(ChannelService);
   private authService = inject(AuthService);
