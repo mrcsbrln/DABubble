@@ -1,4 +1,9 @@
-<div class="dialog">
+<div
+  (click)="$event.stopPropagation()"
+  (keydown)="$event.stopPropagation()"
+  tabindex="0"
+  class="dialog"
+>
   <div class="card-header">
     <span>Leute hinzufügen</span>
     <img

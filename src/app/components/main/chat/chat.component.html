@@ -163,7 +163,12 @@
   </form>
 </div>
 @if(isAddMembersDialogOpen()){
-<div class="add-members-dialog-wrapper">
+<div
+  (click)="toogleAddMemebersDialog()"
+  (keydown)="toogleAddMemebersDialog()"
+  tabindex="0"
+  class="add-members-dialog-wrapper"
+>
   <app-add-members (closeDialog)="toogleAddMemebersDialog()" />
 </div>
 }
