@@ -1,4 +1,4 @@
-import { Component, output, signal } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 
 @Component({
   selector: 'app-add-members',
@@ -8,6 +8,7 @@ import { Component, output, signal } from '@angular/core';
 })
 export class AddMembersComponent {
   closeDialog = output<void>();
+  channelName = input<string>();
 
   closeIconSrc = 'img/close.svg';
   closeIconHoverSrc = 'img/close-hover.svg';

@@ -169,6 +169,9 @@
   tabindex="0"
   class="add-members-dialog-wrapper"
 >
-  <app-add-members (closeDialog)="toogleAddMemebersDialog()" />
+  <app-add-members
+    (closeDialog)="toogleAddMemebersDialog()"
+    [channelName]="getChannelName()"
+  />
 </div>
 }
