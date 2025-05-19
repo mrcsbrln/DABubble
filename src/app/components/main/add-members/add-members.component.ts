@@ -1,4 +1,5 @@
-import { Component, input, output, signal } from '@angular/core';
+import { Component, inject, input, output, signal } from '@angular/core';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-add-members',
@@ -7,6 +8,7 @@ import { Component, input, output, signal } from '@angular/core';
   styleUrl: './add-members.component.scss',
 })
 export class AddMembersComponent {
+  private userService = inject(UserService);
   closeDialog = output<void>();
   channelName = input<string>();
 
@@ -15,6 +17,10 @@ export class AddMembersComponent {
 
   isHovering = signal(false);
   isButtonDisabled = signal(true);
+
+  getUsers() {
+    return this.userService.users;
+  }
 
   onCloseDialog() {
     this.closeDialog.emit();

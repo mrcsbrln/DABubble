@@ -35,6 +35,9 @@
     padding: 8px 16px;
     border: 1px solid $light-purple;
     border-radius: 30px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     input {
       border-style: none;
       &:focus {
@@ -55,6 +58,28 @@
     &:disabled {
       background-color: $text-gray;
       cursor: not-allowed;
+    }
+  }
+}
+
+.tags {
+  background-color: $bg-color;
+  border-radius: 20px;
+  padding: 3px 20px;
+  display: inline-block;
+  margin: 0 auto;
+  cursor: pointer;
+  span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    img {
+      width: 34px;
+      border-radius: 100%;
+    }
+    .close-icon {
+      width: 10px;
     }
   }
 }
