@@ -141,7 +141,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   isNewDay(index: number): boolean {
     const messages = this.getMessagesReversed();
-    if (index === messages.length - 1) return true; // Letzte (ursprünglich älteste) Nachricht
+    if (index === messages.length - 1) return true;
     const currentTimestamp = messages[index]?.timestamp;
     const nextTimestamp = messages[index + 1]?.timestamp;
 
@@ -168,12 +168,12 @@ export class ChatComponent implements OnInit, OnDestroy {
     return new Date(0);
   }
 
-  addReaction(messageIndex: number, reactionType: string, iconUrl: string) {
-    messageIndex;
-    reactionType;
-    iconUrl;
-    console.log('addReaction');
-  }
+  // addReaction(messageIndex: number, reactionType: string, iconUrl: string) {
+  //   messageIndex;
+  //   reactionType;
+  //   iconUrl;
+  //   console.log('addReaction');
+  // }
 
   toogleAddMemebersDialog() {
     this.isAddMembersDialogOpen.update((value) => !value);
