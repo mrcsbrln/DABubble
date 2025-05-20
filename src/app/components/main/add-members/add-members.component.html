@@ -29,9 +29,12 @@
     </span>
     <input type="text" placeholder="Name eingeben" [(ngModel)]="userInput" />
     @if(filteredUsers().length > 0) {
-    <div class="filter-user">
+    <div class="filtered-users">
       @for(user of filteredUsers(); track user.uid) {
-      <span class="user">{{ user.displayName }}</span>
+      <span class="user-selection">
+        <img [src]="user.avatarUrl" alt="" />
+        <span>{{ user.displayName }}</span>
+      </span>
       }
     </div>
     }

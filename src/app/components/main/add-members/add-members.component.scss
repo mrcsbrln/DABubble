@@ -45,18 +45,32 @@
         outline: none;
       }
     }
-    .filter-user {
+    .filtered-users {
       position: absolute;
       top: 64px;
       padding: 32px;
       background-color: #fff;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 16px;
       border-radius: 0 30px 30px 30px;
       border: 1px solid $light-purple;
       box-shadow: $box-shadow-overlay;
       cursor: pointer;
+      .user-selection {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        &:hover {
+          background-color: $bg-color;
+          border-radius: 30px;
+        }
+        img {
+          width: 50px;
+          border-radius: 100%;
+        }
+      }
     }
   }
   button {
