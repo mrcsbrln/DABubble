@@ -29,10 +29,9 @@
     /></span>
     } }
     <input type="text" placeholder="Name eingeben" [(ngModel)]="userInput" />
-    @if(filteredUsers().length > 0) {
+    @if(filteredSelectableUsers().length > 0) {
     <div class="filtered-users">
-      @for(user of filteredUsers(); track user.uid) {
-      @if(!selectedUsers().includes(user) && filteredUsers().length > 0) {
+      @for(user of filteredSelectableUsers(); track user.uid) {
       <span
         (click)="pushSelectedUser(user.uid)"
         (keydown)="pushSelectedUser(user.uid)"
@@ -42,7 +41,7 @@
         <img [src]="user.avatarUrl" alt="" />
         <span>{{ user.displayName }}</span>
       </span>
-      } }
+      }
     </div>
     }
   </div>

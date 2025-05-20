@@ -39,6 +39,13 @@ export class AddMembersComponent {
     );
   });
 
+  filteredSelectableUsers = computed(() => {
+    const selectedUsers = this.selectedUsers().map((user) => user.uid);
+    return this.filteredUsers().filter(
+      (user) => !selectedUsers.includes(user.uid)
+    );
+  });
+
   private getUsers() {
     return this.userService.users;
   }
