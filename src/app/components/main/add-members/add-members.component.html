@@ -20,18 +20,24 @@
   </div>
   <div class="channel-name"># {{ channelName() }}</div>
   <div class="input-wrapper">
-    <span class="tags">
-      <span>
-        <img src="img/avatar/avatar1.svg" alt="" />
-        <span>Elise Roth</span>
-        <img class="close-icon" src="img/close.svg" alt="" />
-      </span>
-    </span>
+    @if(selectedUsers().length > 0) { @for(user of selectedUsers(); track
+    user.uid){
+    <span class="tag">
+      <img [src]="user.avatarUrl" alt="" />
+      <span>{{ user.displayName }}</span>
+      <img class="close-icon" src="img/close.svg" alt=""
+    /></span>
+    } }
     <input type="text" placeholder="Name eingeben" [(ngModel)]="userInput" />
     @if(filteredUsers().length > 0) {
     <div class="filtered-users">
       @for(user of filteredUsers(); track user.uid) {
-      <span class="user-selection">
+      <span
+        (click)="pushSelectedUser(user.uid)"
+        (keydown)="pushSelectedUser(user.uid)"
+        tabindex="0"
+        class="user-selection"
+      >
         <img [src]="user.avatarUrl" alt="" />
         <span>{{ user.displayName }}</span>
       </span>

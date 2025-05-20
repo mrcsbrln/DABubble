@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
+import { UserProfile } from '../../../interfaces/user-profile.interface';
 
 @Component({
   selector: 'app-add-members',
@@ -28,6 +29,8 @@ export class AddMembersComponent {
 
   userInput = signal('');
 
+  selectedUsers = signal<UserProfile[]>([]);
+
   getUsers() {
     return this.userService.users;
   }
@@ -39,6 +42,13 @@ export class AddMembersComponent {
       user.displayName.toLowerCase().includes(this.userInput().toLowerCase())
     );
   });
+
+  pushSelectedUser(userId: string) {
+    const user = this.userService.users.find((user) => user.uid === userId);
+    if (user) {
+      this.selectedUsers.update((current) => [...current, user]);
+    }
+  }
 
   onCloseDialog() {
     this.closeDialog.emit();
