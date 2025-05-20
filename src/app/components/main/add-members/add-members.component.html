@@ -32,6 +32,7 @@
     @if(filteredUsers().length > 0) {
     <div class="filtered-users">
       @for(user of filteredUsers(); track user.uid) {
+      @if(!selectedUsers().includes(user) && filteredUsers().length > 0) {
       <span
         (click)="pushSelectedUser(user.uid)"
         (keydown)="pushSelectedUser(user.uid)"
@@ -41,7 +42,7 @@
         <img [src]="user.avatarUrl" alt="" />
         <span>{{ user.displayName }}</span>
       </span>
-      }
+      } }
     </div>
     }
   </div>

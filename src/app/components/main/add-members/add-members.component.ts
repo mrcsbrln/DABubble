@@ -31,10 +31,6 @@ export class AddMembersComponent {
 
   selectedUsers = signal<UserProfile[]>([]);
 
-  getUsers() {
-    return this.userService.users;
-  }
-
   filteredUsers = computed(() => {
     const userInput = this.userInput().toLowerCase().trim();
     if (!userInput) return [];
@@ -43,10 +39,15 @@ export class AddMembersComponent {
     );
   });
 
+  private getUsers() {
+    return this.userService.users;
+  }
+
   pushSelectedUser(userId: string) {
     const user = this.userService.users.find((user) => user.uid === userId);
     if (user) {
       this.selectedUsers.update((current) => [...current, user]);
+      this.userInput.set('');
     }
   }
 
