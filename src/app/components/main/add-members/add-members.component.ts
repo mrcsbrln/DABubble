@@ -58,6 +58,12 @@ export class AddMembersComponent {
     }
   }
 
+  deleteSelectedUser(userId: string) {
+    this.selectedUsers.update((current) =>
+      current.filter((user) => user.uid !== userId)
+    );
+  }
+
   onCloseDialog() {
     this.closeDialog.emit();
   }
