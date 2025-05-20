@@ -28,11 +28,14 @@
       </span>
     </span>
     <input type="text" placeholder="Name eingeben" [(ngModel)]="userInput" />
+    @if(filteredUsers().length > 0) {
+    <div class="filter-user">
+      @for(user of filteredUsers(); track user.uid) {
+      <span class="user">{{ user.displayName }}</span>
+      }
+    </div>
+    }
   </div>
-  <div class="filter-user">
-    @for(user of filteredUsers(); track user.uid) {
-    {{ user.displayName }}
-    } @empty { Keine Benutzer gefunden }
-  </div>
+
   <button [disabled]="isButtonDisabled()">Hinzufügen</button>
 </div>

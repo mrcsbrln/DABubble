@@ -32,6 +32,7 @@
     font-size: 18px;
   }
   .input-wrapper {
+    position: relative;
     padding: 8px 16px;
     border: 1px solid $light-purple;
     border-radius: 30px;
@@ -43,6 +44,19 @@
       &:focus {
         outline: none;
       }
+    }
+    .filter-user {
+      position: absolute;
+      top: 64px;
+      padding: 32px;
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      border-radius: 0 30px 30px 30px;
+      border: 1px solid $light-purple;
+      box-shadow: $box-shadow-overlay;
+      cursor: pointer;
     }
   }
   button {
