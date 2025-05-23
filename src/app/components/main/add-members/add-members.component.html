@@ -39,7 +39,7 @@
     <label for="selection">Auswahl hinzufügen</label>
   </div>
 
-  }
+  } @if(!selectAll()) {
   <div class="input-wrapper">
     @if(selectedUsers().length > 0) { @for(user of selectedUsers(); track
     user.uid){
@@ -73,6 +73,7 @@
     </div>
     }
   </div>
+  }
 
   <button [disabled]="isButtonDisabled()">Hinzufügen</button>
 </div>
