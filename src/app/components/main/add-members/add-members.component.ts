@@ -9,6 +9,7 @@ import {
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
 import { UserProfile } from '../../../interfaces/user-profile.interface';
+import { ChannelService } from '../../../services/channel.service';
 
 @Component({
   selector: 'app-add-members',
@@ -18,6 +19,7 @@ import { UserProfile } from '../../../interfaces/user-profile.interface';
 })
 export class AddMembersComponent {
   private userService = inject(UserService);
+  private channelService = inject(ChannelService);
   closeDialog = output<void>();
   channelName = input<string>();
 
@@ -68,6 +70,16 @@ export class AddMembersComponent {
     if (this.selectedUsers().length < 1) {
       this.isButtonDisabled.set(true);
     }
+  }
+
+  onSave() {
+    const channelId = this.channelService.getChannelById();
+    if (channelId) {
+      this.selectedUsers().forEach((user) => {
+        this.channelService.addUserToChannel(user.uid, channelId.id);
+      });
+    }
+    this.onCloseDialog();
   }
 
   onCloseDialog() {

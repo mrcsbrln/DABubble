@@ -75,5 +75,5 @@
   </div>
   }
 
-  <button [disabled]="isButtonDisabled()">Hinzufügen</button>
+  <button (click)="onSave()" [disabled]="isButtonDisabled()">Hinzufügen</button>
 </div>
