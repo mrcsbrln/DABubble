@@ -31,6 +31,8 @@ export class AddMembersComponent {
 
   selectedUsers = signal<UserProfile[]>([]);
 
+  selectAll = signal(false);
+
   filteredUsers = computed(() => {
     const userInput = this.userInput().toLowerCase().trim();
     if (!userInput) return [];
@@ -55,6 +57,7 @@ export class AddMembersComponent {
     if (user) {
       this.selectedUsers.update((current) => [...current, user]);
       this.userInput.set('');
+      this.isButtonDisabled.set(false);
     }
   }
 
@@ -62,6 +65,9 @@ export class AddMembersComponent {
     this.selectedUsers.update((current) =>
       current.filter((user) => user.uid !== userId)
     );
+    if (this.selectedUsers().length < 1) {
+      this.isButtonDisabled.set(true);
+    }
   }
 
   onCloseDialog() {

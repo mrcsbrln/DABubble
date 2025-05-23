@@ -19,6 +19,27 @@
     />
   </div>
   <div class="channel-name"># {{ channelName() }}</div>
+  @if(selectedUsers().length > 1) {
+  <div class="radio-wrapper">
+    <input
+      type="radio"
+      name="member-selection"
+      [(ngModel)]="selectAll"
+      [value]="true"
+    />
+    <label for="all">Alle Mitglieder hinzufügen</label>
+  </div>
+  <div class="radio-wrapper">
+    <input
+      type="radio"
+      name="member-selection"
+      [(ngModel)]="selectAll"
+      [value]="false"
+    />
+    <label for="selection">Auswahl hinzufügen</label>
+  </div>
+
+  }
   <div class="input-wrapper">
     @if(selectedUsers().length > 0) { @for(user of selectedUsers(); track
     user.uid){

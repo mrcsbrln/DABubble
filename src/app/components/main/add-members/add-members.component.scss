@@ -93,6 +93,11 @@
   }
 }
 
+.radio-wrapper {
+  display: flex;
+  gap: 16px;
+}
+
 .tag {
   background-color: $bg-color;
   border-radius: 20px;
