@@ -5,23 +5,15 @@
       <span class="channel-name">{{ getChannelName() }}</span>
       <img src="img/chat/channel-info-arrow-down.svg" alt="arrow" />
     </div>
-
     <div class="channel-member-group">
       <div class="channel-member-img">
-        <img
-          src="img/chat/frederik-beck-chat.svg"
-          alt="channel-members-profil-img"
-        />
-        <img
-          src="img/chat/noah-braun-chat.svg"
-          alt="channel-members-profil-img"
-        />
-        <img
-          src="img/chat/sofia-mueller-chat.svg"
-          alt="channel-members-profil-img"
-        />
+        @for(member of getMembersOfCurrentChannel(); track member?.uid) {
+        <img [src]="member?.avatarUrl" alt="channel-members-profil-img" />
+        }
       </div>
-      <span class="channel-members-count">3</span>
+      <span class="channel-members-count">{{
+        getMembersOfCurrentChannel()?.length
+      }}</span>
       <img
         (click)="toogleAddMemebersDialog()"
         (keydown)="toogleAddMemebersDialog()"
@@ -72,46 +64,36 @@
       </div>
 
       <div class="set-reaction">
-          <!-- @for (reaction of message.reactions ?? []; track reaction.type) { -->
-          <span class="reaction-wrapper">
-            <img src="img/chat/add-reaction.svg" alt="add reaction">
-            <span class="reaction-count">1</span>
-          </span>
-          <!-- } -->
-        </div>
+        <!-- @for (reaction of message.reactions ?? []; track reaction.type) { -->
+        <span class="reaction-wrapper">
+          <img src="img/chat/add-reaction.svg" alt="add reaction" />
+          <span class="reaction-count">1</span>
+        </span>
+        <!-- } -->
+      </div>
 
       <div
         class="reaction-bar"
         [class.outgoing]="isCurrentUserSenderOfMessage(message.id)"
       >
-        <button
-          type="button"
-
-          aria-label="check"
-        >
+        <button type="button" aria-label="check">
           <img src="img/chat/check-mark.svg" alt="check" />
         </button>
-        <button
-          type="button"
-
-          aria-label="like"
-        >
+        <button type="button" aria-label="like">
           <img src="img/chat/thumps-up.svg" alt="like" />
         </button>
-        <button
-          type="button"
-
-          aria-label="reaction"
-        >
+        <button type="button" aria-label="reaction">
           <img src="img/chat/add-reaction-comment.svg" alt="reaction" />
         </button>
         <button type="button">
           <img src="img/chat/answer.svg" alt="answer" />
         </button>
         <button type="button" aria-label="more">
-          <img src="img/chat/dots.svg" alt="more" [class.d-none]="!isCurrentUserSenderOfMessage(message.id)" />
-
-
+          <img
+            src="img/chat/dots.svg"
+            alt="more"
+            [class.d-none]="!isCurrentUserSenderOfMessage(message.id)"
+          />
         </button>
       </div>
     </button>

@@ -63,6 +63,11 @@ export class ChannelService implements OnDestroy {
     return this.channels.find((channel) => channel.id === channelId);
   }
 
+  getMembersOfChannel(channelId: string) {
+    const channel = this.channels.find((channel) => channel.id === channelId);
+    return channel?.memberIds;
+  }
+
   // getChannelSubCollectionMessagesRef() {
   //   return collection(this.getChannelDocRef(), 'messages');
   // }

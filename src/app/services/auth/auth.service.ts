@@ -11,7 +11,6 @@ import {
   User,
   GoogleAuthProvider,
   signInWithPopup,
-  signInAnonymously,
   getAdditionalUserInfo,
   sendPasswordResetEmail,
   fetchSignInMethodsForEmail,
@@ -95,10 +94,6 @@ export class AuthService {
       });
     return from(promise);
   }
-
-  // async signInAnonymously() {
-  //   this.firebaseAuth.signInAnonymously();
-  // }
 
   async googleLogin(): Promise<UserProfile | null> {
     const userCredential = await signInWithPopup(

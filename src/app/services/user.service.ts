@@ -85,6 +85,10 @@ export class UserService implements OnDestroy {
     return setDoc(ref, user);
   }
 
+  getUserById(id: string) {
+    return this.users.find((user) => user.uid === id);
+  }
+
   updateUserFields(userId: string, data: Partial<UserProfile>): Promise<void> {
     const userRef = this.userDocRef('users', userId);
     return updateDoc(userRef, data);

@@ -68,6 +68,13 @@ export class ChatComponent implements OnInit, OnDestroy {
     return this.messageService.messagesByChannelId;
   }
 
+  getMembersOfCurrentChannel() {
+    const currentChannelId = this.messageService.currentChannelId();
+    const memberIdsOfChannel =
+      this.channelService.getMembersOfChannel(currentChannelId);
+    return memberIdsOfChannel?.map((id) => this.userService.getUserById(id));
+  }
+
   getSortedMessagesByChannelId() {
     return this.getMessagesByChannelId()
       .slice()
