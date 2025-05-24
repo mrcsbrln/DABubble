@@ -73,7 +73,7 @@ export class AddMembersComponent {
   }
 
   onSave() {
-    const channelId = this.channelService.getChannelById();
+    const channelId = this.channelService.getCurrentChannel();
     if (channelId) {
       this.selectedUsers().forEach((user) => {
         this.channelService.addUserToChannel(user.uid, channelId.id);

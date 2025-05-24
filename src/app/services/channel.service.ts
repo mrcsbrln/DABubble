@@ -53,10 +53,14 @@ export class ChannelService implements OnDestroy {
     return collection(this.firestore, 'channels');
   }
 
-  getChannelById() {
+  getCurrentChannel() {
     return this.channels.find(
       (channel) => channel.id === this.messageServive.currentChannelId()
     );
+  }
+
+  getChannelById(channelId: string) {
+    return this.channels.find((channel) => channel.id === channelId);
   }
 
   // getChannelSubCollectionMessagesRef() {

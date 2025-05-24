@@ -83,7 +83,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   getChannelName() {
-    return this.channelService.getChannelById()?.name;
+    return this.channelService.getCurrentChannel()?.name;
   }
 
   getUserBySenderId(senderId: string) {

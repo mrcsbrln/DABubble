@@ -2,6 +2,7 @@ import { inject, Injectable, computed, Signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import {
   Auth,
+  getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
@@ -10,6 +11,7 @@ import {
   User,
   GoogleAuthProvider,
   signInWithPopup,
+  signInAnonymously,
   getAdditionalUserInfo,
   sendPasswordResetEmail,
   fetchSignInMethodsForEmail,
@@ -27,6 +29,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   firebaseAuth = inject(Auth);
+  auth = getAuth();
   firestore = inject(Firestore);
   router = inject(Router);
   googleAuthProvider = new GoogleAuthProvider();
@@ -92,6 +95,10 @@ export class AuthService {
       });
     return from(promise);
   }
+
+  // async signInAnonymously() {
+  //   this.firebaseAuth.signInAnonymously();
+  // }
 
   async googleLogin(): Promise<UserProfile | null> {
     const userCredential = await signInWithPopup(

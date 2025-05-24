@@ -4,6 +4,7 @@ import { AddChannelComponent } from './add-channel/add-channel.component';
 import { UserService } from '../../../services/user.service';
 import { RouterLink } from '@angular/router';
 import { UserListComponent } from './user-list/user-list.component';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-workspace',
@@ -14,6 +15,7 @@ import { UserListComponent } from './user-list/user-list.component';
 export class WorkspaceComponent {
   private userService = inject(UserService);
   private channelService = inject(ChannelService);
+  private authService = inject(AuthService);
 
   addChannelDialogOpen = signal(false);
 
@@ -23,6 +25,15 @@ export class WorkspaceComponent {
 
   getUsers() {
     return this.userService.users;
+  }
+
+  checkIfUserIsMemberOfChannel(channelId: string): boolean {
+    const currentUserUid = this.authService.currentUser()?.uid;
+    const channelMembers =
+      this.channelService.getChannelById(channelId)?.memberIds;
+    if (currentUserUid && channelMembers) {
+      return channelMembers.includes(currentUserUid);
+    } else return false;
   }
 
   onOpenChannelDialog() {
