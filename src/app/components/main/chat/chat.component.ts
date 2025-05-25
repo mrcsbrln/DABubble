@@ -60,6 +60,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   isAddMembersDialogOpen = signal(false);
   isEditChannelDialogOpen = signal(false);
+  isShowMembersDialogOpen = signal(false);
 
   ngOnInit() {
     this.subRouteParams();
@@ -188,5 +189,9 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   toogleEditChannelDialog() {
     this.isEditChannelDialogOpen.update((value) => !value);
+  }
+
+  toggleShowMembersDialog() {
+    this.isShowMembersDialogOpen.update((value) => !value);
   }
 }
