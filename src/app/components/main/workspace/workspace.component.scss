@@ -47,10 +47,41 @@ button {
   }
 }
 
+.channel-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.channel-img-container {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover :first-child {
+      content: url('/img/arrow-drop-down-hover.svg');
+    }
+
+    &:hover :nth-child(2) {
+      content: url('/img/workspace-hover.svg');
+    }
+  }
+}
+
+.add-btn-container {
+  img {
+    width: 16px;
+    height: 16px;
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        content: url('/img/add-hover.svg');
+      }
+    }
+  }
+}
+
 .channels-list {
   display: flex;
   flex-direction: column;
   gap: 4px;
+
 }
 
 .direct-message-container {

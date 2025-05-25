@@ -17,8 +17,6 @@ export class WorkspaceComponent {
   private channelService = inject(ChannelService);
   private authService = inject(AuthService);
 
-  addChannelDialogOpen = signal(false);
-
   getChannels() {
     return this.channelService.channels;
   }
@@ -36,6 +34,14 @@ export class WorkspaceComponent {
     } else return false;
   }
 
+  channelListOpen = signal(false);
+  addChannelDialogOpen = signal(false);
+  directMessageUserListOpen = signal(false);
+
+  toggleChannelList() {
+    this.channelListOpen.update((open) => !open);
+  }
+
   onOpenChannelDialog() {
     this.addChannelDialogOpen.set(true);
   }
@@ -43,16 +49,6 @@ export class WorkspaceComponent {
   onCloseAddChannel() {
     this.addChannelDialogOpen.set(false);
   }
-
-
-
-  channelListOpen = signal(false);
-
-  toggleChannelList() {
-    this.channelListOpen.update((open) => !open);
-  }
-
-  directMessageUserListOpen = signal(false);
 
   toggleDirectMessageUserList() {
     this.directMessageUserListOpen.update((open) => !open);
