@@ -7,7 +7,7 @@ import { Component, input, output, signal } from '@angular/core';
   styleUrl: './edit-channel.component.scss',
 })
 export class EditChannelComponent {
-  closeDialog = output<void>();
+  closeDialogEditChannel = output<void>();
   channelName = input<string>();
 
   isHovering = signal(false);
@@ -16,6 +16,6 @@ export class EditChannelComponent {
   closeIconHoverSrc = 'img/close-hover.svg';
 
   onCloseDialog() {
-    this.closeDialog.emit();
+    this.closeDialogEditChannel.emit();
   }
 }
