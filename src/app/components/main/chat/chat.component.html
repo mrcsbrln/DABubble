@@ -164,6 +164,9 @@
   tabindex="0"
   class="edit-channel-dialog-wrapper"
 >
-  <app-edit-channel (closeDialog)="toogleEditChannelDialog()" />
+  <app-edit-channel
+    (closeDialog)="toogleEditChannelDialog()"
+    [channelName]="getChannelName()"
+  />
 </div>
 }
