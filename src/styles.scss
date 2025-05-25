@@ -136,6 +136,21 @@ $box-shadow-overlay: 0px 6px 10px 0px #00000033;
 
 $hover-transition: all 0.3s ease-in-out;
 
+::-webkit-scrollbar {
+  width: 0.5em;
+  height: 0.5em;
+  background: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $purple-2;
+  border-radius: 100vw;
+}
+
 * {
   margin: 0;
   padding: 0;
