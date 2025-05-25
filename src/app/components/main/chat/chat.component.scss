@@ -41,7 +41,7 @@
     gap: 4px;
   }
 
-  .channel-member-group {
+  .channel-members-group {
     flex: 1;
     display: flex;
     justify-content: flex-end;
@@ -50,24 +50,36 @@
 
     .add-new-member {
       cursor: pointer;
+      width: 40px;
     }
 
-    .channel-member-img {
+    .channel-members-info {
       display: flex;
       align-items: center;
-    }
-
-    .channel-member-img img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      margin-left: -10px;
-      border: 2px solid white;
-      box-shadow: $box-shadow;
-    }
-
-    .channel-member-img img:first-child {
-      margin-left: 0;
+      padding: 4px 8px;
+      border-radius: 30px;
+      &:hover {
+        background-color: $bg-color;
+      }
+      cursor: pointer;
+      gap: 16px;
+      .channel-members-img {
+        display: flex;
+        align-items: center;
+        &:hover {
+          background-color: $bg-color;
+        }
+        img {
+          width: 40px;
+          border-radius: 50%;
+          margin-left: -10px;
+          border: 2px solid white;
+          box-shadow: $box-shadow;
+          &:first-child {
+            margin-left: 0;
+          }
+        }
+      }
     }
   }
 }

@@ -5,15 +5,17 @@
       <span class="channel-name">{{ getChannelName() }}</span>
       <img src="img/chat/channel-info-arrow-down.svg" alt="arrow" />
     </div>
-    <div class="channel-member-group">
-      <div class="channel-member-img">
-        @for(member of getMembersOfCurrentChannel(); track member?.uid) {
-        <img [src]="member?.avatarUrl" alt="channel-members-profil-img" />
-        }
+    <div class="channel-members-group">
+      <div class="channel-members-info">
+        <div class="channel-members-img">
+          @for(member of getMembersOfCurrentChannel(); track member?.uid) {
+          <img [src]="member?.avatarUrl" alt="channel-members-profil-img" />
+          }
+        </div>
+        <span class="channel-members-count">{{
+          getMembersOfCurrentChannel()?.length
+        }}</span>
       </div>
-      <span class="channel-members-count">{{
-        getMembersOfCurrentChannel()?.length
-      }}</span>
       <img
         (click)="toogleAddMemebersDialog()"
         (keydown)="toogleAddMemebersDialog()"
