@@ -120,22 +120,21 @@ button {
 
 .add-channel-container {
   gap: 8px;
-  flex: 1;
-  // padding-right: 8px;
+  // flex: 1;
   padding-left: 24px;
   max-height: 500px; //TODO später anpassen
   overflow-y: auto;
+
   button {
     text-align: left;
     font-size: 17px;
   }
 }
 
-
-
 .add-channel-btn {
   font-size: 18px;
   font-weight: 400;
+
   @media (hover: hover) and (pointer: fine) {
     &:hover :first-child {
       content: url('/img/add-circle-hover.svg');
