@@ -80,11 +80,61 @@ button {
 .channels-list {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
+  // flex: 1;
+  padding-right: 8px;
+  padding-left: 24px;
+  max-height: 500px; //TODO
+  overflow-y: auto;
 
+  >div {
+    border-radius: 30px;
+    padding: 4px 16px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    width: fit-content;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .channel-entry {
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        cursor: pointer;
+        background-color: $bg-color;
+        color: $purple-3;
+      }
+
+      &:hover>img {
+        content: url('/img/tag-hover.svg');
+      }
+    }
+  }
 }
 
+.add-channel-container {
+  gap: 8px;
+  flex: 1;
+  // padding-right: 8px;
+  padding-left: 24px;
+  max-height: 500px; //TODO später anpassen
+  overflow-y: auto;
+  button {
+    text-align: left;
+    font-size: 17px;
+  }
+}
+
+
+
 .add-channel-btn {
+  font-size: 18px;
+  font-weight: 400;
   @media (hover: hover) and (pointer: fine) {
     &:hover :first-child {
       content: url('/img/add-circle-hover.svg');
