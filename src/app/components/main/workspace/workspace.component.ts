@@ -34,7 +34,7 @@ export class WorkspaceComponent {
     } else return false;
   }
 
-  channelListOpen = signal(false);
+  channelListOpen = signal(true);
   addChannelDialogOpen = signal(false);
   directMessageUserListOpen = signal(false);
 

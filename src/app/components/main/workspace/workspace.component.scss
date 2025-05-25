@@ -84,6 +84,14 @@ button {
 
 }
 
+.add-channel-btn {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover :first-child {
+      content: url('/img/add-circle-hover.svg');
+    }
+  }
+}
+
 .direct-message-container {
   @media (hover: hover) and (pointer: fine) {
     &:hover :first-child {
