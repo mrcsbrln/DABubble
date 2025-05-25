@@ -44,7 +44,16 @@ export class WorkspaceComponent {
     this.addChannelDialogOpen.set(false);
   }
 
+
+
+  channelListOpen = signal(false);
+
+  toggleChannelList() {
+    this.channelListOpen.update((open) => !open);
+  }
+
   directMessageUserListOpen = signal(false);
+
   toggleDirectMessageUserList() {
     this.directMessageUserListOpen.update((open) => !open);
   }
