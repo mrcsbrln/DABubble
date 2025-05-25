@@ -1,9 +1,16 @@
 <div class="main-chat">
   <div class="channel-info-container">
     <div class="channel-info-group">
-      <img src="img/chat/tag.svg" alt="tag" />
-      <span class="channel-name">{{ getChannelName() }}</span>
-      <img src="img/chat/channel-info-arrow-down.svg" alt="arrow" />
+      <div
+        (click)="toogleEditChannelDialog()"
+        (keydown)="toogleEditChannelDialog()"
+        tabindex="0"
+        class="channel-info"
+      >
+        <img src="img/chat/tag.svg" alt="tag" />
+        <span class="channel-name">{{ getChannelName() }}</span>
+        <img src="img/chat/channel-info-arrow-down.svg" alt="arrow" />
+      </div>
     </div>
     <div class="channel-members-group">
       <div class="channel-members-info">
@@ -149,5 +156,14 @@
     (closeDialog)="toogleAddMemebersDialog()"
     [channelName]="getChannelName()"
   />
+</div>
+} @if(isEditChannelDialogOpen()){
+<div
+  (click)="toogleEditChannelDialog()"
+  (keydown)="toogleEditChannelDialog()"
+  tabindex="0"
+  class="edit-channel-dialog-wrapper"
+>
+  <app-edit-channel (closeDialog)="toogleEditChannelDialog()" />
 </div>
 }

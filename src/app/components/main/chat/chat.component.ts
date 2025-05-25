@@ -24,6 +24,7 @@ import { ChannelService } from '../../../services/channel.service';
 import { UserService } from '../../../services/user.service';
 import localeDe from '@angular/common/locales/de';
 import { AddMembersComponent } from '../add-members/add-members.component';
+import { EditChannelComponent } from './edit-channel/edit-channel.component';
 
 type MessageData = Omit<Message, 'id'>;
 
@@ -31,7 +32,12 @@ registerLocaleData(localeDe);
 
 @Component({
   selector: 'app-chat',
-  imports: [AddMembersComponent, ReactiveFormsModule, DatePipe],
+  imports: [
+    AddMembersComponent,
+    ReactiveFormsModule,
+    DatePipe,
+    EditChannelComponent,
+  ],
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.scss',
   providers: [{ provide: LOCALE_ID, useValue: 'de' }],
@@ -53,6 +59,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   subRoute!: Subscription;
 
   isAddMembersDialogOpen = signal(false);
+  isEditChannelDialogOpen = signal(false);
 
   ngOnInit() {
     this.subRouteParams();
@@ -175,25 +182,11 @@ export class ChatComponent implements OnInit, OnDestroy {
     return new Date(0);
   }
 
-  // addReaction(messageIndex: number, reactionType: string, iconUrl: string) {
-  //   messageIndex;
-  //   reactionType;
-  //   iconUrl;
-  //   console.log('addReaction');
-  // }
-
   toogleAddMemebersDialog() {
     this.isAddMembersDialogOpen.update((value) => !value);
   }
 
-  // addReaction(messageIndex: number, reactionType: string, iconUrl: string) {
-  //   const msg = this.messages[messageIndex];
-  //   if (!msg.reactions) msg.reactions = [];
-  //   const found = msg.reactions.find((r) => r.type === reactionType);
-  //   if (found) {
-  //     found.count++;
-  //   } else {
-  //     msg.reactions.push({ type: reactionType, iconUrl, count: 1 });
-  //   }
-  // }
+  toogleEditChannelDialog() {
+    this.isEditChannelDialogOpen.update((value) => !value);
+  }
 }
