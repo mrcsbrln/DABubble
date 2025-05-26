@@ -10,6 +10,7 @@ import { MainComponent } from './components/main/main.component';
 import { ResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
 import { ChatComponent } from './components/main/chat/chat.component';
 import { NewMessageComponent } from './components/main/new-message/new-message.component';
+import { DirectMessageComponent } from './components/main/direct-message/direct-message.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['']);
@@ -24,6 +25,10 @@ export const routes: Routes = [
       {
         path: 'channels/:channel',
         component: ChatComponent,
+      },
+      {
+        path: 'direct-message/:user',
+        component: DirectMessageComponent,
       },
     ],
   },
