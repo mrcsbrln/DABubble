@@ -45,6 +45,7 @@
       padding: 4px 8px;
       border-radius: 30px;
       cursor: pointer;
+
       &:hover {
         background-color: $bg-color;
         transition: $hover-transition;
@@ -69,21 +70,26 @@
       align-items: center;
       padding: 4px 8px;
       border-radius: 30px;
+
       &:hover {
         background-color: $bg-color;
         transition: $hover-transition;
       }
+
       cursor: pointer;
       gap: 16px;
+
       .channel-members-img {
         display: flex;
         align-items: center;
+
         img {
           width: 40px;
           border-radius: 50%;
           margin-left: -10px;
           border: 2px solid white;
           box-shadow: $box-shadow;
+
           &:first-child {
             margin-left: 0;
           }
@@ -132,7 +138,7 @@
     right: 0;
     left: 0;
 
-    > div {
+    >div {
       display: flex;
     }
   }
@@ -141,6 +147,7 @@
     button {
       border: unset;
       background-color: transparent;
+      width: 40px;
 
       @media (hover: none) and (pointer: coarse) {
         &:hover {
@@ -148,11 +155,6 @@
           transform: none;
         }
       }
-    }
-
-    img {
-      width: 32px;
-      height: 32px;
     }
   }
 
@@ -245,7 +247,7 @@
       flex-direction: row-reverse;
     }
 
-    > span {
+    >span {
       color: rgba(104, 104, 104, 1);
       font-size: 14px;
     }
@@ -287,14 +289,14 @@
     align-items: center;
     gap: 16px;
 
-    > button {
+    >button {
       border: unset;
       color: $purple-3;
       background-color: transparent;
       font-size: 18px;
     }
 
-    > span {
+    >span {
       color: $text-gray;
       font-size: 14px;
     }
@@ -401,7 +403,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 4px; // Abstand zwischen Icon und Zahl
+    gap: 4px;
     border: 1px solid $purple-2;
     border-radius: 30px;
     padding: 0px 14px 0px 0px;
@@ -419,10 +421,10 @@
 
 .emoji-container {
   position: relative;
-
-  .add-reaction:hover {
-    cursor: pointer;
-  }
+  // >img:hover{
+  //   cursor: pointer;
+  //   content: url('/img/add-reaction-hover.svg');
+  // }
 }
 
 .emoji-picker {
@@ -450,7 +452,9 @@
   border-radius: 6px;
   transition: background 0.2s;
 
-  &:hover {
-    outline: 2px solid $text-gray;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      outline: 2px solid $text-gray;
+    }
   }
 }

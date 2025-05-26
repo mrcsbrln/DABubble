@@ -72,7 +72,8 @@ app-thread {
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
-      padding: 16px 21px;
+      width: 327px;
+      padding: 16px 24px;
       color: $purple-3;
 
       img {
