@@ -18,13 +18,13 @@
   @if(channelListOpen()) {
   <div class="channels-list">
     <div class="channel-entry">
-      <img src="/img/tag-black.svg" alt="tag" />
+      <img src="img/tag-black.svg" alt="tag" />
       <a [routerLink]="['/']">Neue Nachricht</a>
     </div>
     @for(channel of getChannels(); track channel.id) {
     @if(checkIfUserIsMemberOfChannel(channel.id)) {
     <div class="channel-entry">
-      <img src="/img/tag-black.svg" alt="tag" />
+      <img src="img/tag-black.svg" alt="tag" />
       <a [routerLink]="['/channels', channel.id]">
         {{ channel.name }}
       </a>

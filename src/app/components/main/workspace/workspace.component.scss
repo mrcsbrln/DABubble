@@ -89,7 +89,7 @@ button {
 
   >div {
     border-radius: 30px;
-    padding: 4px 16px;
+    padding: 4px 12px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -100,6 +100,15 @@ button {
 
   a {
     text-decoration: none;
+    // color: black;
+
+    // &:active {
+    //   color: inherit; /* Oder eine andere Farbe deiner Wahl */
+    //   outline: none; /* Entfernt den Fokus-Rahmen */
+    // }
+    &:hover {
+
+    }
 
   }
 
@@ -108,7 +117,9 @@ button {
       &:hover {
         cursor: pointer;
         background-color: $bg-color;
-        color: $purple-3;
+        a{
+          color: $purple-3;
+        }
       }
 
       &:hover>img {

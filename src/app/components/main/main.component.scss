@@ -1,7 +1,9 @@
 @use "../../../styles.scss" as *;
 
 .grid-container {
+  max-width: 1920px;
   display: grid;
+  position: relative;
   grid-template-areas:
     "header header header"
     "workspace chat thread";
@@ -11,12 +13,15 @@
   height: 100vh;
   column-gap: 16px;
   padding: 16px;
+
   &.workspace-hidden {
     grid-template-columns: 0 4fr 1fr;
   }
+
   &.thread-hidden {
     grid-template-columns: 1fr 4fr 0;
   }
+
   &.workspace-hidden.thread-hidden {
     grid-template-columns: 0 1fr 0;
   }
@@ -32,4 +37,39 @@ app-workspace {
 
 app-thread {
   grid-area: thread;
+}
+
+.workspace-button {
+  position: absolute;
+  left: 0;
+  top: 66%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-origin: top left;
+  transform: rotate(-90deg) translateX(-50%);
+  background-color: white;
+  padding: 24px 24px;
+  border-radius: 0px 0px 30px 30px;
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+  box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.2);
+  gap: 16px;
+
+  img {
+    margin-right: 8px;
+    width: 20px;
+    height: 20px;
+    transform: rotate(-90deg);
+  }
+
+  span {
+    font-size: 20px;
+  }
+
+  &:hover {
+    transform: scale(1.02) rotate(-90deg) translateX(-50%);
+    
+  }
 }
