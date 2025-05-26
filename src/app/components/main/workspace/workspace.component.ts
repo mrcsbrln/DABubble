@@ -3,12 +3,12 @@ import { ChannelService } from '../../../services/channel.service';
 import { AddChannelComponent } from './add-channel/add-channel.component';
 import { UserService } from '../../../services/user.service';
 import { RouterLink } from '@angular/router';
-import { UserListComponent } from './user-list/user-list.component';
 import { AuthService } from '../../../services/auth/auth.service';
+import { UserProfile } from '../../../interfaces/user-profile.interface';
 
 @Component({
   selector: 'app-workspace',
-  imports: [AddChannelComponent, RouterLink, UserListComponent],
+  imports: [AddChannelComponent, RouterLink],
   templateUrl: './workspace.component.html',
   styleUrl: './workspace.component.scss',
 })
@@ -23,6 +23,17 @@ export class WorkspaceComponent {
 
   getUsers() {
     return this.userService.users;
+  }
+
+  getStatusColor(user: UserProfile): string {
+    switch (user.status) {
+      case 'online':
+        return '#92c83e';
+      case 'offline':
+        return '#686868';
+      default:
+        return '#686868';
+    }
   }
 
   checkIfUserIsMemberOfChannel(channelId: string): boolean {
@@ -53,5 +64,4 @@ export class WorkspaceComponent {
   onCloseAddChannel() {
     this.addChannelDialogOpen.set(false);
   }
-
 }

@@ -55,11 +55,11 @@ button {
 .channel-img-container {
   @media (hover: hover) and (pointer: fine) {
     &:hover :first-child {
-      content: url('/img/arrow-drop-down-hover.svg');
+      content: url("/img/arrow-drop-down-hover.svg");
     }
 
     &:hover :nth-child(2) {
-      content: url('/img/workspace-hover.svg');
+      content: url("/img/workspace-hover.svg");
     }
   }
 }
@@ -71,7 +71,7 @@ button {
 
     @media (hover: hover) and (pointer: fine) {
       &:hover {
-        content: url('/img/add-hover.svg');
+        content: url("/img/add-hover.svg");
       }
     }
   }
@@ -87,7 +87,7 @@ button {
   max-height: 500px; //TODO
   overflow-y: auto;
 
-  >div {
+  > div {
     border-radius: 30px;
     padding: 4px 12px;
     display: flex;
@@ -107,9 +107,7 @@ button {
     //   outline: none; /* Entfernt den Fokus-Rahmen */
     // }
     &:hover {
-
     }
-
   }
 
   .channel-entry {
@@ -117,13 +115,13 @@ button {
       &:hover {
         cursor: pointer;
         background-color: $bg-color;
-        a{
+        a {
           color: $purple-3;
         }
       }
 
-      &:hover>img {
-        content: url('/img/tag-hover.svg');
+      &:hover > img {
+        content: url("/img/tag-hover.svg");
       }
     }
   }
@@ -148,7 +146,7 @@ button {
 
   @media (hover: hover) and (pointer: fine) {
     &:hover :first-child {
-      content: url('/img/add-circle-hover.svg');
+      content: url("/img/add-circle-hover.svg");
     }
   }
 }
@@ -156,11 +154,77 @@ button {
 .direct-message-container {
   @media (hover: hover) and (pointer: fine) {
     &:hover :first-child {
-      content: url('/img/arrow-drop-down-hover.svg');
+      content: url("/img/arrow-drop-down-hover.svg");
     }
 
     &:hover :nth-child(2) {
-      content: url('/img/account-circle-hover.svg');
+      content: url("/img/account-circle-hover.svg");
+    }
+  }
+}
+
+button {
+  border: unset;
+  background-color: unset;
+}
+
+.users-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  padding: 8px;
+  padding-left: 24px;
+}
+.users-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  padding: 8px;
+  padding-left: 24px;
+  max-height: 500px; //TODO später anpassen
+  overflow-y: auto;
+}
+
+.user-entry {
+  border-radius: 30px;
+  padding: 4px 16px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  width: fit-content;
+
+  .avatar-wrapper {
+    position: relative;
+    width: 44px;
+    height: 44px;
+
+    img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .status-dot {
+      position: absolute;
+      right: -1px;
+      bottom: 1px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      cursor: pointer;
+      background-color: $bg-color;
+      color: $purple-3;
     }
   }
 }
