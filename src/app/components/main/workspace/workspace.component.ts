@@ -25,10 +25,6 @@ export class WorkspaceComponent {
     return this.userService.users;
   }
 
-  isUserOnline() {
-    return this.userService.users.find((user) => user.status === 'online');
-  }
-
   checkIfUserIsMemberOfChannel(channelId: string): boolean {
     const currentUserUid = this.authService.currentUser()?.uid;
     const channelMembers =
