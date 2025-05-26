@@ -58,7 +58,7 @@
   @if(directMessageUserListOpen()) {
   <div class="users-list">
     @for (user of getUsers(); track user.uid) {
-    <a class="user-entry" [routerLink]="['/direct-message', user.uid]">
+    <a class="user-entry" [routerLink]="['/user', user.displayName, user.uid]">
       <div class="avatar-wrapper">
         <img [src]="user.avatarUrl" alt="Avatar" />
         <span

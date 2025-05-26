@@ -32,6 +32,8 @@ export class MessageService implements OnDestroy {
   messagesByChannelId: Message[] = [];
 
   currentChannelId = signal('');
+  selectedUsername = signal('');
+  selectedUserId = signal('');
 
   unsubMessages!: Unsubscribe;
   unsubMessagesByChannelId!: Unsubscribe;

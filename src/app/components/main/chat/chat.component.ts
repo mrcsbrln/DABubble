@@ -25,6 +25,7 @@ import { UserService } from '../../../services/user.service';
 import localeDe from '@angular/common/locales/de';
 import { AddMembersComponent } from '../add-members/add-members.component';
 import { EditChannelComponent } from './edit-channel/edit-channel.component';
+import { user } from '@angular/fire/auth';
 
 type MessageData = Omit<Message, 'id'>;
 
@@ -63,7 +64,20 @@ export class ChatComponent implements OnInit, OnDestroy {
   isShowMembersDialogOpen = signal(false);
 
   isShowEmojiPicker = signal(false);
-  emojis: string[] = ['😀', '😂', '😢', '🤓', '😱', '👍', '👌', '👋', '🎉', '🚀', '🙏', '✅'];
+  emojis: string[] = [
+    '😀',
+    '😂',
+    '😢',
+    '🤓',
+    '😱',
+    '👍',
+    '👌',
+    '👋',
+    '🎉',
+    '🚀',
+    '🙏',
+    '✅',
+  ];
 
   ngOnInit() {
     this.subRouteParams();
@@ -149,8 +163,13 @@ export class ChatComponent implements OnInit, OnDestroy {
   subRouteParams() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       const channelId = params.get('channel');
+      const username = params.get('username');
+      const userId = params.get('userId');
       if (channelId) {
         this.messageService.currentChannelId.set(channelId);
+      } else if (username && userId) {
+        this.messageService.selectedUsername.set(username);
+        this.messageService.selectedUserId.set(userId);
       } else {
         console.log('No route');
       }
