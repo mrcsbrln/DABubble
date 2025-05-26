@@ -9,8 +9,8 @@
   @if (!isThreadHidden()) {
   <app-thread />
   }
-    <button class="workspace-button">
+    <button class="workspace-button" (click)="toggleWorkspaceVisibility()">
       <span>Workspace-Menü schließen</span>
-      <img src="img/workspace-open.svg" alt="Workspace Icon">
+      <img [class.rotated]="!isWorkspaceHidden()" src="img/workspace-open.svg" alt="Workspace Icon">
     </button>
 </div>
