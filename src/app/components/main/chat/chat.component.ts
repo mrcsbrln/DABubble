@@ -62,6 +62,9 @@ export class ChatComponent implements OnInit, OnDestroy {
   isEditChannelDialogOpen = signal(false);
   isShowMembersDialogOpen = signal(false);
 
+  isShowEmojiPicker = signal(false);
+  emojis: string[] = ['😀', '😂', '😢', '🤓', '😱', '👍', '👌', '👋', '🎉', '🚀', '🙏', '✅'];
+
   ngOnInit() {
     this.subRouteParams();
   }
@@ -193,5 +196,16 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   toggleShowMembersDialog() {
     this.isShowMembersDialogOpen.update((value) => !value);
+  }
+
+  toggleEmojiPicker() {
+    this.isShowEmojiPicker.update((value) => !value);
+  }
+
+  addEmojiToInput(emoji: string) {
+    const current = this.form.controls.content.value || '';
+    this.form.controls.content.setValue(current + emoji);
+    this.isShowEmojiPicker.update((value) => !value);
+    this.toggleEmojiPicker();
   }
 }
