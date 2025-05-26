@@ -169,6 +169,10 @@ button {
   padding-left: 24px;
   max-height: 500px; //TODO später anpassen
   overflow-y: auto;
+  a {
+    text-decoration: none;
+    color: #000;
+  }
 }
 
 .user-entry {

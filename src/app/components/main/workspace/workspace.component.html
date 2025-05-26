@@ -58,7 +58,7 @@
   @if(directMessageUserListOpen()) {
   <div class="users-list">
     @for (user of getUsers(); track user.uid) {
-    <button class="user-entry">
+    <a class="user-entry" [routerLink]="['/direct-message', user.uid]">
       <div class="avatar-wrapper">
         <img [src]="user.avatarUrl" alt="Avatar" />
         <span
@@ -67,7 +67,7 @@
         ></span>
       </div>
       <span>{{ user.displayName }}</span>
-    </button>
+    </a>
     } @empty {
     <span>Keine Benutzer geladen...</span>
     }

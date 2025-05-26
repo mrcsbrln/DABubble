@@ -1,0 +1,13 @@
+@use "../../../../styles.scss" as *;
+
+:host {
+  grid-area: chat;
+}
+
+.wrapper {
+  height: 100%;
+  background-color: #fff;
+  border-radius: 30px;
+  padding: 16px;
+  min-height: 100%;
+}
