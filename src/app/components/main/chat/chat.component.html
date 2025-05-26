@@ -13,7 +13,12 @@
       </div>
     </div>
     <div class="channel-members-group">
-      <div class="channel-members-info">
+      <div
+        class="channel-members-info"
+        (click)="isShowMembersDialogOpen()"
+        (keydown)="isShowMembersDialogOpen()"
+        tabindex="0"
+      >
         <div class="channel-members-img">
           @for(member of getMembersOfCurrentChannel(); track member?.uid) {
           <img [src]="member?.avatarUrl" alt="channel-members-profil-img" />
@@ -32,6 +37,16 @@
         class="add-new-member"
       />
     </div>
+    @if(isShowMembersDialogOpen()){
+    <div
+      (click)="toggleShowMembersDialog()"
+      (keydown)="toggleShowMembersDialog()"
+      tabindex="0"
+      class="show-members-dialog-wrapper"
+    >
+      <app-edit-channel (closeDialogEditChannel)="toggleShowMembersDialog()" />
+    </div>
+    }
   </div>
   <div class="messages-container">
     @for(message of getMessagesReversed(); track message.id; let i = $index) {
