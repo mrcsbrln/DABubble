@@ -21,7 +21,6 @@ button {
   width: fit-content;
   cursor: pointer;
   font-size: 18px;
-  font-weight: 700;
   padding: 4px 10px;
   transition: color 125ms;
 
@@ -161,19 +160,6 @@ button {
   }
 }
 
-button {
-  border: unset;
-  background-color: unset;
-}
-
-.users-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  flex: 1;
-  padding: 8px;
-  padding-left: 24px;
-}
 .users-list {
   display: flex;
   flex-direction: column;
@@ -215,6 +201,10 @@ button {
       height: 12px;
       border-radius: 50%;
       border: 2px solid #fff;
+      background-color: $text-gray;
+      &.online {
+        background-color: $online-green;
+      }
     }
   }
 

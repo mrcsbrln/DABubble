@@ -61,10 +61,7 @@
     <button class="user-entry">
       <div class="avatar-wrapper">
         <img [src]="user.avatarUrl" alt="Avatar" />
-        <span
-          class="status-dot"
-          [style.backgroundColor]="getStatusColor(user)"
-        ></span>
+        <span class="status-dot" [ngClass]="{ online: isUserOnline() }"></span>
       </div>
       <span>{{ user.displayName }}</span>
     </button>

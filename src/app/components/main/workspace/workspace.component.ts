@@ -1,14 +1,14 @@
 import { Component, inject, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ChannelService } from '../../../services/channel.service';
 import { AddChannelComponent } from './add-channel/add-channel.component';
 import { UserService } from '../../../services/user.service';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
-import { UserProfile } from '../../../interfaces/user-profile.interface';
 
 @Component({
   selector: 'app-workspace',
-  imports: [AddChannelComponent, RouterLink],
+  imports: [AddChannelComponent, CommonModule, RouterLink],
   templateUrl: './workspace.component.html',
   styleUrl: './workspace.component.scss',
 })
@@ -25,15 +25,8 @@ export class WorkspaceComponent {
     return this.userService.users;
   }
 
-  getStatusColor(user: UserProfile): string {
-    switch (user.status) {
-      case 'online':
-        return '#92c83e';
-      case 'offline':
-        return '#686868';
-      default:
-        return '#686868';
-    }
+  isUserOnline() {
+    return this.userService.users.find((user) => user.status === 'online');
   }
 
   checkIfUserIsMemberOfChannel(channelId: string): boolean {
