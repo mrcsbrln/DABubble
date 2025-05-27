@@ -84,7 +84,12 @@
         </div>
         <div class="members-list">
           @for(member of getMembersOfCurrentChannel(); track member?.uid) {
-          <span>{{ member?.displayName }}</span>
+          <button
+            (click)="toggleUserProfileDialog()"
+            (click)="toggleShowMembersDialog()"
+          >
+            {{ member?.displayName }}
+          </button>
           }
         </div>
         <button

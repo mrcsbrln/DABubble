@@ -61,6 +61,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   isAddMembersDialogOpen = signal(false);
   isEditChannelDialogOpen = signal(false);
   isShowMembersDialogOpen = signal(false);
+  isUserProfileDialogOpen = signal(false);
 
   isHovering = signal(false);
 
@@ -219,6 +220,10 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   toggleShowMembersDialog() {
     this.isShowMembersDialogOpen.update((value) => !value);
+  }
+
+  toggleUserProfileDialog() {
+    this.isUserProfileDialogOpen.update((value) => !value);
   }
 
   toggleEmojiPicker() {
