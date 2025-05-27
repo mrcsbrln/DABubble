@@ -59,10 +59,8 @@
         (closeDialog)="toogleAddMemebersDialog()"
         [channelName]="getChannelName()"
       />
-      }
-    </div>
-    @if(isShowMembersDialogOpen()){
-    <div class="show-members-dialog-wrapper">
+      } @if(isShowMembersDialogOpen()){
+      <div class="show-members-dialog-wrapper"></div>
       <div
         class="dialog"
         (click)="$event.stopPropagation()"
@@ -91,8 +89,8 @@
         </div>
         <button>Mitglieder hinzufügen</button>
       </div>
+      }
     </div>
-    }
   </div>
   <div class="messages-container">
     @for(message of getMessagesReversed(); track message.id; let i = $index) {
