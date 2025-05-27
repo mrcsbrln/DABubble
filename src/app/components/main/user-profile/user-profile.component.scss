@@ -1,0 +1,38 @@
+@use "../../../../styles.scss" as *;
+
+:host {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1001;
+}
+
+.dialog {
+  background-color: #fff;
+  border-radius: 0 30px 30px 30px;
+  box-shadow: $box-shadow-overlay;
+  padding: 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 500px;
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    span {
+      font-size: 24px;
+      font-weight: 700;
+    }
+    img {
+      cursor: pointer;
+      width: 32px;
+      padding: 8px;
+      border-radius: 100%;
+      &:hover {
+        background-color: $bg-color;
+      }
+    }
+  }
+}

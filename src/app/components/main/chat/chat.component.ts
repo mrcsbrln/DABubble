@@ -25,6 +25,7 @@ import { UserService } from '../../../services/user.service';
 import localeDe from '@angular/common/locales/de';
 import { AddMembersComponent } from '../add-members/add-members.component';
 import { EditChannelComponent } from './edit-channel/edit-channel.component';
+import { UserProfileComponent } from '../user-profile/user-profile.component';
 
 type MessageData = Omit<Message, 'id'>;
 
@@ -37,6 +38,7 @@ registerLocaleData(localeDe);
     ReactiveFormsModule,
     DatePipe,
     EditChannelComponent,
+    UserProfileComponent,
   ],
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.scss',

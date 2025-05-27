@@ -234,3 +234,7 @@
     </div>
   </form>
 </div>
+@if(isUserProfileDialogOpen()) {
+<div class="dialog-backdrop"></div>
+<app-user-profile (closeDialogUserProfile)="toggleUserProfileDialog()" />
+}

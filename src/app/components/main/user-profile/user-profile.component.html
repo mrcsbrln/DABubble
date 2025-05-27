@@ -1,1 +1,22 @@
-<p>user-profile works!</p>
+<div
+  class="dialog"
+  (click)="$event.stopPropagation()"
+  (keydown)="$event.stopPropagation()"
+  tabindex="0"
+  class="dialog"
+>
+  <div class="card-header">
+    <span>Username</span>
+    <img
+      (click)="onCloseDialog()"
+      (keydown)="onCloseDialog()"
+      tabindex="0"
+      (mouseover)="isHovering.set(true)"
+      (mouseout)="isHovering.set(false)"
+      (focus)="isHovering.set(true)"
+      (blur)="isHovering.set(false)"
+      [src]="isHovering() ? closeIconHoverSrc : closeIconSrc"
+      alt=""
+    />
+  </div>
+</div>
