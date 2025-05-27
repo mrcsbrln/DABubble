@@ -16,7 +16,7 @@
         (click)="toogleEditChannelDialog()"
         (keydown)="toogleEditChannelDialog()"
         tabindex="0"
-        class="edit-channel-dialog-wrapper"
+        class="dialog-backdrop"
       ></div>
       <app-edit-channel
         (closeDialogEditChannel)="toogleEditChannelDialog()"
@@ -53,14 +53,14 @@
         (click)="toogleAddMemebersDialog()"
         (keydown)="toogleAddMemebersDialog()"
         tabindex="0"
-        class="add-members-dialog-wrapper"
+        class="dialog-backdrop"
       ></div>
       <app-add-members
         (closeDialog)="toogleAddMemebersDialog()"
         [channelName]="getChannelName()"
       />
       } @if(isShowMembersDialogOpen()){
-      <div class="show-members-dialog-wrapper"></div>
+      <div class="dialog-backdrop"></div>
       <div
         class="dialog"
         (click)="$event.stopPropagation()"

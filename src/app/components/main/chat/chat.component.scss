@@ -5,9 +5,7 @@
   overflow-y: scroll;
 }
 
-.add-members-dialog-wrapper,
-.edit-channel-dialog-wrapper,
-.show-members-dialog-wrapper {
+.dialog-backdrop {
   position: fixed;
   top: 0;
   left: 0;
