@@ -87,7 +87,12 @@
           <span>{{ member?.displayName }}</span>
           }
         </div>
-        <button>Mitglieder hinzufügen</button>
+        <button
+          (click)="toogleAddMemebersDialog()"
+          (click)="toggleShowMembersDialog()"
+        >
+          <img src="img/chat/add-member.svg" alt="" />Mitglieder hinzufügen
+        </button>
       </div>
       }
     </div>

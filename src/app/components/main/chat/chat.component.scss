@@ -48,6 +48,14 @@
       }
     }
   }
+  button {
+    background: unset;
+    border: unset;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
 }
 .members-list {
   display: flex;
