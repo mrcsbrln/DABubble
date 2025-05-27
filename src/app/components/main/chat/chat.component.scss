@@ -8,48 +8,46 @@
 .add-members-dialog-wrapper,
 .edit-channel-dialog-wrapper,
 .show-members-dialog-wrapper {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
   background-color: $backdrop;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   z-index: 1000;
-  .dialog {
-    background-color: #fff;
-    border-radius: 30px 0 30px 30px;
-    box-shadow: $box-shadow-overlay;
-    padding: 64px;
+}
+
+.dialog {
+  background-color: #fff;
+  border-radius: 30px 0 30px 30px;
+  box-shadow: $box-shadow-overlay;
+  padding: 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 500px;
+  .card-header {
     display: flex;
-    flex-direction: column;
-    gap: 16px;
-    min-width: 500px;
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      span {
-        font-size: 24px;
-        font-weight: 700;
-      }
-      img {
-        cursor: pointer;
-        width: 32px;
-        padding: 8px;
-        border-radius: 100%;
-        &:hover {
-          background-color: $bg-color;
-        }
+    justify-content: space-between;
+    align-items: center;
+    span {
+      font-size: 24px;
+      font-weight: 700;
+    }
+    img {
+      cursor: pointer;
+      width: 32px;
+      padding: 8px;
+      border-radius: 100%;
+      &:hover {
+        background-color: $bg-color;
       }
     }
   }
-  .members-list {
-    display: flex;
-    flex-direction: column;
-  }
+}
+.members-list {
+  display: flex;
+  flex-direction: column;
 }
 
 .main-chat {
@@ -69,6 +67,7 @@
   border-radius: 30px 30px 0 0;
 
   .channel-info-group {
+    position: relative;
     .channel-info {
       display: flex;
       align-items: center;
@@ -91,6 +90,7 @@
     justify-content: flex-end;
     align-items: center;
     gap: 16px;
+    position: relative;
 
     .add-new-member {
       cursor: pointer;

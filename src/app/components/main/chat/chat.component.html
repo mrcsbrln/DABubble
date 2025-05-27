@@ -11,6 +11,18 @@
         <span class="channel-name">{{ getChannelName() }}</span>
         <img src="img/chat/channel-info-arrow-down.svg" alt="arrow" />
       </div>
+      @if(isEditChannelDialogOpen()){
+      <div
+        (click)="toogleEditChannelDialog()"
+        (keydown)="toogleEditChannelDialog()"
+        tabindex="0"
+        class="edit-channel-dialog-wrapper"
+      ></div>
+      <app-edit-channel
+        (closeDialogEditChannel)="toogleEditChannelDialog()"
+        [channelName]="getChannelName()"
+      />
+      }
     </div>
     <div class="channel-members-group">
       <div
@@ -36,6 +48,18 @@
         alt="add-members"
         class="add-new-member"
       />
+      @if(isAddMembersDialogOpen()){
+      <div
+        (click)="toogleAddMemebersDialog()"
+        (keydown)="toogleAddMemebersDialog()"
+        tabindex="0"
+        class="add-members-dialog-wrapper"
+      ></div>
+      <app-add-members
+        (closeDialog)="toogleAddMemebersDialog()"
+        [channelName]="getChannelName()"
+      />
+      }
     </div>
     @if(isShowMembersDialogOpen()){
     <div class="show-members-dialog-wrapper">
@@ -202,28 +226,3 @@
     </div>
   </form>
 </div>
-@if(isAddMembersDialogOpen()){
-<div
-  (click)="toogleAddMemebersDialog()"
-  (keydown)="toogleAddMemebersDialog()"
-  tabindex="0"
-  class="add-members-dialog-wrapper"
->
-  <app-add-members
-    (closeDialog)="toogleAddMemebersDialog()"
-    [channelName]="getChannelName()"
-  />
-</div>
-} @if(isEditChannelDialogOpen()){
-<div
-  (click)="toogleEditChannelDialog()"
-  (keydown)="toogleEditChannelDialog()"
-  tabindex="0"
-  class="edit-channel-dialog-wrapper"
->
-  <app-edit-channel
-    (closeDialogEditChannel)="toogleEditChannelDialog()"
-    [channelName]="getChannelName()"
-  />
-</div>
-}
