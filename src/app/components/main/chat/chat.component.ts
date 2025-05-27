@@ -25,7 +25,6 @@ import { UserService } from '../../../services/user.service';
 import localeDe from '@angular/common/locales/de';
 import { AddMembersComponent } from '../add-members/add-members.component';
 import { EditChannelComponent } from './edit-channel/edit-channel.component';
-import { user } from '@angular/fire/auth';
 
 type MessageData = Omit<Message, 'id'>;
 
@@ -62,6 +61,11 @@ export class ChatComponent implements OnInit, OnDestroy {
   isAddMembersDialogOpen = signal(false);
   isEditChannelDialogOpen = signal(false);
   isShowMembersDialogOpen = signal(false);
+
+  isHovering = signal(false);
+
+  closeIconSrc = 'img/close.svg';
+  closeIconHoverSrc = 'img/close-hover.svg';
 
   isShowEmojiPicker = signal(false);
   emojis: string[] = [

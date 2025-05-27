@@ -15,8 +15,8 @@
     <div class="channel-members-group">
       <div
         class="channel-members-info"
-        (click)="isShowMembersDialogOpen()"
-        (keydown)="isShowMembersDialogOpen()"
+        (click)="toggleShowMembersDialog()"
+        (keydown)="toggleShowMembersDialog()"
         tabindex="0"
       >
         <div class="channel-members-img">
@@ -38,13 +38,35 @@
       />
     </div>
     @if(isShowMembersDialogOpen()){
-    <div
-      (click)="toggleShowMembersDialog()"
-      (keydown)="toggleShowMembersDialog()"
-      tabindex="0"
-      class="show-members-dialog-wrapper"
-    >
-      <app-edit-channel (closeDialogEditChannel)="toggleShowMembersDialog()" />
+    <div class="show-members-dialog-wrapper">
+      <div
+        class="dialog"
+        (click)="$event.stopPropagation()"
+        (keydown)="$event.stopPropagation()"
+        tabindex="0"
+        class="dialog"
+      >
+        <div class="card-header">
+          <span>Mitglieder</span>
+          <img
+            (click)="toggleShowMembersDialog()"
+            (keydown)="toggleShowMembersDialog()"
+            tabindex="0"
+            (mouseover)="isHovering.set(true)"
+            (mouseout)="isHovering.set(false)"
+            (focus)="isHovering.set(true)"
+            (blur)="isHovering.set(false)"
+            [src]="isHovering() ? closeIconHoverSrc : closeIconSrc"
+            alt=""
+          />
+        </div>
+        <div class="members-list">
+          @for(member of getMembersOfCurrentChannel(); track member?.uid) {
+          <span>{{ member?.displayName }}</span>
+          }
+        </div>
+        <button>Mitglieder hinzufügen</button>
+      </div>
     </div>
     }
   </div>
@@ -141,10 +163,13 @@
         ></textarea>
         <div class="textarea-button-container">
           <div class="textarea-button-group">
-
             <button type="button" (click)="toggleEmojiPicker()">
               <div class="emoji-container">
-                <img class="add-reaction-textarea" src="img/chat/add-reaction.svg" alt="add-reaction" />
+                <img
+                  class="add-reaction-textarea"
+                  src="img/chat/add-reaction.svg"
+                  alt="add-reaction"
+                />
                 @if(isShowEmojiPicker()) {
                 <div class="emoji-picker">
                   @for (emoji of emojis; track $index) {
@@ -158,8 +183,6 @@
                   }
                 </div>
                 }
-
-
               </div>
             </button>
 
