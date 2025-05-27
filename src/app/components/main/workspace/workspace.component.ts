@@ -21,6 +21,14 @@ export class WorkspaceComponent {
     return this.channelService.channels;
   }
 
+  getCurrentUser() {
+    const currentUserId = this.userService.currentUserData()?.uid;
+    if (!currentUserId) {
+      return null;
+    }
+    return this.userService.getUserById(currentUserId);
+  }
+
   getUsers() {
     return this.userService.users;
   }

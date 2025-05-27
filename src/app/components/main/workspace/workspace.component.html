@@ -57,6 +57,23 @@
 
   @if(directMessageUserListOpen()) {
   <div class="users-list">
+    <a
+      class="user-entry"
+      [routerLink]="[
+        '/user',
+        getCurrentUser()?.displayName,
+        getCurrentUser()?.uid
+      ]"
+    >
+      <div class="avatar-wrapper">
+        <img [src]="getCurrentUser()?.avatarUrl" alt="Avatar" />
+        <span
+          class="status-dot"
+          [ngClass]="{ online: getCurrentUser()?.status === 'online' }"
+        ></span>
+      </div>
+      <span>{{ getCurrentUser()?.displayName }} (Du)</span>
+    </a>
     @for (user of getUsers(); track user.uid) {
     <a class="user-entry" [routerLink]="['/user', user.displayName, user.uid]">
       <div class="avatar-wrapper">
