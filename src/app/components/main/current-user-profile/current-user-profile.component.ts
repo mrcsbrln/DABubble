@@ -4,12 +4,12 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-user-profile',
+  selector: 'app-current-user-profile',
   imports: [FormsModule],
-  templateUrl: './user-profile.component.html',
-  styleUrl: './user-profile.component.scss',
+  templateUrl: './current-user-profile.component.html',
+  styleUrl: './current-user-profile.component.scss',
 })
-export class UserProfileComponent {
+export class CurrentUserProfileComponent {
   closeDialog = output<void>();
   private userService = inject(UserService);
   private authService = inject(AuthService);

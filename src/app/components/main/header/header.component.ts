@@ -1,11 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserService } from '../../../services/user.service';
-import { UserProfileComponent } from '../user-profile/user-profile.component';
+import { CurrentUserProfileComponent } from '../current-user-profile/current-user-profile.component';
 
 @Component({
   selector: 'app-header',
-  imports: [UserProfileComponent],
+  imports: [CurrentUserProfileComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
