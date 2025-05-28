@@ -87,6 +87,7 @@
           <button
             (click)="toggleUserProfileDialog()"
             (click)="toggleShowMembersDialog()"
+            (click)="setSelectedMemeberId(member?.uid!)"
           >
             {{ member?.displayName }}
           </button>
@@ -238,5 +239,8 @@
 </div>
 @if(isUserProfileDialogOpen()) {
 <div class="dialog-backdrop"></div>
-<app-user-profile (closeDialogUserProfile)="toggleUserProfileDialog()" />
+<app-user-profile
+  [selectedMemberId]="selectedMemberId()"
+  (closeDialogUserProfile)="toggleUserProfileDialog()"
+/>
 }

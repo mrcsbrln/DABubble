@@ -71,6 +71,8 @@ export class ChatComponent implements OnInit, OnDestroy {
   isShowMembersDialogOpen = signal(false);
   isUserProfileDialogOpen = signal(false);
 
+  selectedMemberId = signal('');
+
   isHovering = signal(false);
   isEmojiPickerOpen = signal(false);
 
@@ -216,6 +218,11 @@ export class ChatComponent implements OnInit, OnDestroy {
       );
     }
     return new Date(0);
+  }
+
+  setSelectedMemeberId(memberId: string) {
+    if (!memberId) return;
+    this.selectedMemberId.set(memberId);
   }
 
   toogleAddMemebersDialog() {
