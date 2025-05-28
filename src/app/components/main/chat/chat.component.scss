@@ -28,24 +28,29 @@
   gap: 16px;
   min-width: 500px;
   z-index: 1001;
+
   .card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     span {
       font-size: 24px;
       font-weight: 700;
     }
+
     img {
       cursor: pointer;
       width: 32px;
       padding: 8px;
       border-radius: 100%;
+
       &:hover {
         background-color: $bg-color;
       }
     }
   }
+
   button {
     background: unset;
     border: unset;
@@ -55,6 +60,7 @@
     gap: 16px;
   }
 }
+
 .members-list {
   display: flex;
   flex-direction: column;
@@ -79,6 +85,7 @@
 
   .channel-info-group {
     position: relative;
+
     .channel-info {
       display: flex;
       align-items: center;
@@ -181,7 +188,7 @@
     right: 0;
     left: 0;
 
-    > div {
+    >div {
       display: flex;
     }
   }
@@ -190,7 +197,6 @@
     button {
       border: unset;
       background-color: transparent;
-      width: 40px;
 
       @media (hover: none) and (pointer: coarse) {
         &:hover {
@@ -290,7 +296,7 @@
       flex-direction: row-reverse;
     }
 
-    > span {
+    >span {
       color: rgba(104, 104, 104, 1);
       font-size: 14px;
     }
@@ -332,14 +338,14 @@
     align-items: center;
     gap: 16px;
 
-    > button {
+    >button {
       border: unset;
       color: $purple-3;
       background-color: transparent;
       font-size: 18px;
     }
 
-    > span {
+    >span {
       color: $text-gray;
       font-size: 14px;
     }
@@ -464,15 +470,27 @@
 
 .emoji-container {
   position: relative;
-  // >img:hover{
-  //   cursor: pointer;
-  //   content: url('/img/add-reaction-hover.svg');
-  // }
+  width: 48px;
+
+  >img {
+    width: 48px;
+    height: 48px;
+  }
+
+  >img:hover {
+    cursor: pointer;
+    content: url('/img/add-reaction-hover.svg');
+    width: 24px;
+    height: 48px;
+  }
 }
 
 .emoji-picker {
   position: absolute;
-  bottom: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 48px;
   left: 0;
   background-color: rgba(255, 255, 255);
   border: 1px solid #ccc;
@@ -480,7 +498,6 @@
   padding: 8px;
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   z-index: 10;
   width: 153px;
