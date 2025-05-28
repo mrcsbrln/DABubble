@@ -195,7 +195,12 @@
         ></textarea>
         <div class="textarea-button-container">
           <div class="textarea-button-group">
-            <button type="button" class="emoji-container" (click)="(null)">
+            <button
+              type="button"
+              class="emoji-container"
+              #emojiToggleBtn
+              (mousedown)="handleEmojiToggleMouseDown(emojiToggleBtn, $event)"
+            >
               <img
                 class="add-reaction-textarea"
                 src="img/chat/add-reaction.svg"

@@ -232,4 +232,15 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.form.controls.content.setValue(current + emoji);
     btn.blur();
   }
+
+  handleEmojiToggleMouseDown(btn: HTMLButtonElement, event: MouseEvent) {
+    const emojiPicker = btn.querySelector('.emoji-picker');
+    if (emojiPicker && emojiPicker.contains(event.target as Node)) {
+      return;
+    }
+    if (document.activeElement === btn) {
+      btn.blur();
+      event.preventDefault();
+    }
+  }
 }
