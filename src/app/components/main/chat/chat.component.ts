@@ -70,7 +70,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   closeIconSrc = 'img/close.svg';
   closeIconHoverSrc = 'img/close-hover.svg';
 
-  isShowEmojiPicker = signal(false);
+  isShowEmojiPicker = signal(true);
   emojis: string[] = [
     '😀',
     '😂',
@@ -228,14 +228,13 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.isUserProfileDialogOpen.update((value) => !value);
   }
 
-  toggleEmojiPicker() {
-    this.isShowEmojiPicker.update((value) => !value);
-  }
+  // toggleEmojiPicker() {
+  //   this.isShowEmojiPicker.update((value) => !value);
+  // }
 
-  addEmojiToInput(emoji: string) {
-    const current = this.form.controls.content.value || '';
-    this.form.controls.content.setValue(current + emoji);
-    this.isShowEmojiPicker.update((value) => !value);
-    this.toggleEmojiPicker();
-  }
+  addEmojiToInput(emoji: string, btn: HTMLButtonElement) {
+  const current = this.form.controls.content.value || '';
+  this.form.controls.content.setValue(current + emoji);
+  btn.blur(); // Entfernt den Fokus, Emoji-Picker schließt sich durch :focus CSS
+}
 }

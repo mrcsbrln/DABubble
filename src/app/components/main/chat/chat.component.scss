@@ -477,27 +477,30 @@
     height: 48px;
   }
 
-  >img:hover {
+  &:hover >img{
     cursor: pointer;
     content: url('/img/add-reaction-hover.svg');
     width: 24px;
     height: 48px;
   }
+  &:focus-within .emoji-picker,
+  &:focus .emoji-picker {
+    display: flex;
+  }
 }
 
 .emoji-picker {
-  position: absolute;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+  position: absolute;
   bottom: 48px;
   left: 0;
   background-color: rgba(255, 255, 255);
   border: 1px solid #ccc;
   border-radius: 25px;
   padding: 8px;
-  display: flex;
-  flex-wrap: wrap;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   z-index: 10;
   width: 153px;
