@@ -471,6 +471,7 @@
 .emoji-container {
   position: relative;
   width: 48px;
+  cursor: pointer;
 
   >img {
     width: 48px;
@@ -478,7 +479,6 @@
   }
 
   &:hover >img{
-    cursor: pointer;
     content: url('/img/add-reaction-hover.svg');
     width: 24px;
     height: 48px;

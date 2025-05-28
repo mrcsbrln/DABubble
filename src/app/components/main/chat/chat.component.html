@@ -201,7 +201,6 @@
                 src="img/chat/add-reaction.svg"
                 alt="add-reaction"
               />
-              @if(isShowEmojiPicker()) {
               <div class="emoji-picker">
                 @for (emoji of emojis; track $index) {
                 <button
@@ -214,7 +213,6 @@
                 </button>
                 }
               </div>
-              }
             </button>
 
             <button type="button">
