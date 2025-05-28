@@ -74,7 +74,8 @@
       </div>
       <span>{{ getCurrentUser()?.displayName }} (Du)</span>
     </a>
-    @for (user of getUsers(); track user.uid) {
+    @for (user of getUsers(); track user.uid) { @if(user.uid !==
+    getCurrentUser()?.uid) {
     <a class="user-entry" [routerLink]="['/user', user.displayName, user.uid]">
       <div class="avatar-wrapper">
         <img [src]="user.avatarUrl" alt="Avatar" />
@@ -85,7 +86,7 @@
       </div>
       <span>{{ user.displayName }}</span>
     </a>
-    } @empty {
+    } } @empty {
     <span>Keine Benutzer geladen...</span>
     }
   </div>
