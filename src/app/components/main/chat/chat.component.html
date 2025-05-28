@@ -186,7 +186,7 @@
     </div>
     } }
   </div>
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" (keydown.enter)="onSubmit()">
     <div class="message-input-container">
       <div class="message-input-box">
         <textarea
