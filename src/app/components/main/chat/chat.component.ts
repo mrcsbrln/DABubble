@@ -259,4 +259,12 @@ export class ChatComponent implements OnInit, OnDestroy {
       this.isEmojiPickerOpen.set(false);
     }
   }
+
+  @HostListener('blur', ['$event.target'])
+  onBlur(target: HTMLElement) {
+    if (target === this.emojiToggleBtnRef.nativeElement) {
+      this.emojiToggleBtnRef.nativeElement.querySelector('img').src =
+        '/img/add-reaction.svg';
+    }
+  }
 }

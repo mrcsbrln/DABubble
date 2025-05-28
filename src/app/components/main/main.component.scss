@@ -58,7 +58,7 @@ app-thread {
   gap: 18px;
   white-space: nowrap;
   font-size: 20px;
-  width: 325px;
+  width: 335px;
 
   img {
     width: 20px;
@@ -72,7 +72,7 @@ app-thread {
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
-      width: 327px;
+      width: 330px;
       padding: 16px 24px;
       color: $purple-3;
 
