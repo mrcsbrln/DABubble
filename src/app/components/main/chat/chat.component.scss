@@ -483,14 +483,10 @@
     width: 24px;
     height: 48px;
   }
-  &:focus-within .emoji-picker,
-  &:focus .emoji-picker {
-    display: flex;
-  }
 }
 
 .emoji-picker {
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;

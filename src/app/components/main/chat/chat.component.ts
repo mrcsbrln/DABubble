@@ -1,10 +1,13 @@
 import {
   Component,
+  ElementRef,
+  HostListener,
   inject,
-  OnInit,
   OnDestroy,
+  OnInit,
   LOCALE_ID,
   signal,
+  ViewChild,
 } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { MessageService } from '../../../services/message.service';
@@ -51,6 +54,9 @@ export class ChatComponent implements OnInit, OnDestroy {
   private channelService = inject(ChannelService);
   private userService = inject(UserService);
 
+  @ViewChild('emojiPicker') emojiPickerRef!: ElementRef;
+  @ViewChild('emojiToggleBtn') emojiToggleBtnRef!: ElementRef;
+
   form = new FormGroup({
     content: new FormControl('', [
       Validators.required,
@@ -66,6 +72,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   isUserProfileDialogOpen = signal(false);
 
   isHovering = signal(false);
+  isEmojiPickerOpen = signal(false);
 
   closeIconSrc = 'img/close.svg';
   closeIconHoverSrc = 'img/close-hover.svg';
@@ -227,20 +234,29 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.isUserProfileDialogOpen.update((value) => !value);
   }
 
-  addEmojiToInput(emoji: string, btn: HTMLButtonElement) {
-    const current = this.form.controls.content.value || '';
-    this.form.controls.content.setValue(current + emoji);
-    btn.blur();
+  toggleEmojiPicker(event: MouseEvent) {
+    event.stopPropagation();
+    this.isEmojiPickerOpen.update((open) => !open);
   }
 
-  handleEmojiToggleMouseDown(btn: HTMLButtonElement, event: MouseEvent) {
-    const emojiPicker = btn.querySelector('.emoji-picker');
-    if (emojiPicker && emojiPicker.contains(event.target as Node)) {
-      return;
-    }
-    if (document.activeElement === btn) {
-      btn.blur();
-      event.preventDefault();
+  addEmojiToInput(emoji: string) {
+    const current = this.form.controls.content.value || '';
+    this.form.controls.content.setValue(current + emoji);
+    this.isEmojiPickerOpen.set(false);
+  }
+
+  @HostListener('document:mousedown', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    const picker = this.emojiPickerRef?.nativeElement;
+    const btn = this.emojiToggleBtnRef?.nativeElement;
+    if (
+      this.isEmojiPickerOpen() &&
+      picker &&
+      !picker.contains(event.target) &&
+      btn &&
+      !btn.contains(event.target)
+    ) {
+      this.isEmojiPickerOpen.set(false);
     }
   }
 }

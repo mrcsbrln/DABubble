@@ -198,28 +198,28 @@
             <button
               type="button"
               class="emoji-container"
+              (click)="toggleEmojiPicker($event)"
               #emojiToggleBtn
-              (mousedown)="handleEmojiToggleMouseDown(emojiToggleBtn, $event)"
             >
               <img
                 class="add-reaction-textarea"
                 src="img/chat/add-reaction.svg"
                 alt="add-reaction"
               />
-              <div class="emoji-picker">
-                @for (emoji of emojis; track $index) {
-                <button
-                  type="button"
-                  class="emoji-btn"
-                  #emojiBtn
-                  (click)="addEmojiToInput(emoji, emojiBtn)"
-                >
-                  {{ emoji }}
-                </button>
-                }
-              </div>
             </button>
-
+            @if(isEmojiPickerOpen()) {
+            <div class="emoji-picker" #emojiPicker>
+              @for (emoji of emojis; track $index) {
+              <button
+                type="button"
+                class="emoji-btn"
+                (click)="addEmojiToInput(emoji)"
+              >
+                {{ emoji }}
+              </button>
+              }
+            </div>
+            }
             <button type="button">
               <img src="img/chat/at-icon.svg" alt="add-icon" />
             </button>
