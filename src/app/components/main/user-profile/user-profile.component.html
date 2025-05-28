@@ -6,7 +6,7 @@
   class="dialog"
 >
   <div class="card-header">
-    <span>{{ getSelectedChannelMember()?.displayName }}</span>
+    <span>Profil</span>
     <img
       (click)="onCloseDialog()"
       (keydown)="onCloseDialog()"
@@ -19,4 +19,17 @@
       alt=""
     />
   </div>
+  <img [src]="getSelectedChannelMember()?.avatarUrl" alt="" />
+  <span>{{ getSelectedChannelMember()?.displayName }}</span>
+  <span>{{ getSelectedChannelMember()?.status }}</span>
+  <span>{{ getSelectedChannelMember()?.email }}</span>
+  <a
+    class="user-entry"
+    [routerLink]="[
+      '/user',
+      getSelectedChannelMember()?.displayName,
+      getSelectedChannelMember()?.uid
+    ]"
+    >Nachricht</a
+  >
 </div>
