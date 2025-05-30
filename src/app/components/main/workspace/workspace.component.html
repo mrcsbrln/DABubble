@@ -57,14 +57,7 @@
 
   @if(directMessageUserListOpen()) {
   <div class="users-list">
-    <a
-      class="user-entry"
-      [routerLink]="[
-        '/user',
-        getCurrentUser()?.displayName,
-        getCurrentUser()?.uid
-      ]"
-    >
+    <a class="user-entry" [routerLink]="['/user', getCurrentUser()?.uid]">
       <div class="avatar-wrapper">
         <img [src]="getCurrentUser()?.avatarUrl" alt="Avatar" />
         <span
