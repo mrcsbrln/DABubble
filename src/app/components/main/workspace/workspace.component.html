@@ -76,7 +76,7 @@
     </a>
     @for (user of getUsers(); track user.uid) { @if(user.uid !==
     getCurrentUser()?.uid) {
-    <a class="user-entry" [routerLink]="['/user', user.displayName, user.uid]">
+    <a class="user-entry" [routerLink]="['/user', user.uid]">
       <div class="avatar-wrapper">
         <img [src]="user.avatarUrl" alt="Avatar" />
         <span

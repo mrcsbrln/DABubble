@@ -178,12 +178,10 @@ export class ChatComponent implements OnInit, OnDestroy {
   subRouteParams() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       const channelId = params.get('channel');
-      const username = params.get('username');
       const userId = params.get('userId');
       if (channelId) {
         this.messageService.currentChannelId.set(channelId);
-      } else if (username && userId) {
-        this.messageService.selectedUsername.set(username);
+      } else if (userId) {
         this.messageService.selectedUserId.set(userId);
       } else {
         console.log('No route');

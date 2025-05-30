@@ -27,7 +27,7 @@ export const routes: Routes = [
         component: ChatComponent,
       },
       {
-        path: 'user/:username/:userId',
+        path: 'user/:userId',
         component: DirectMessageComponent,
       },
     ],
