@@ -1,12 +1,14 @@
 import { Component, inject, signal } from '@angular/core';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { UserService } from '../../../services/user.service';
+import { DirectMessageService } from '../../../services/direct-message.service';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-direct-message',
@@ -16,6 +18,9 @@ import {
 })
 export class DirectMessageComponent {
   userService = inject(UserService);
+  directMessageService = inject(DirectMessageService);
+
+  route = inject(ActivatedRoute);
 
   form = new FormGroup({
     content: new FormControl('', [
@@ -47,6 +52,17 @@ export class DirectMessageComponent {
 
   getSelectedUser() {
     //
+  }
+
+  subRouteParams() {
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      const userId = params.get('userId');
+      if (userId) {
+        this.directMessageService.selectedUserId.set(userId);
+      } else {
+        console.log('No user');
+      }
+    });
   }
 
   toggleUserProfileDialog() {

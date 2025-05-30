@@ -29,7 +29,6 @@ export class DirectMessageService implements OnDestroy {
   messagesByChannelId: DirectMessage[] = [];
 
   currentChannelId = signal('');
-  selectedUsername = signal('');
   selectedUserId = signal('');
 
   unsubMessages!: Unsubscribe;
