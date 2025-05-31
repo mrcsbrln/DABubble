@@ -196,7 +196,6 @@
   .textarea-button-group {
     button {
       border: unset;
-      background-color: transparent;
 
       @media (hover: none) and (pointer: coarse) {
         &:hover {
@@ -223,6 +222,25 @@
         cursor: default;
         transform: none;
       }
+    }
+  }
+}
+
+.at-icon-button {
+  background-color: transparent;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $bg-color;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 48px;
+
+    img {
+      content: url('/img/at-icon-hover.svg');
     }
   }
 }
@@ -472,6 +490,7 @@
   position: relative;
   width: 48px;
   cursor: pointer;
+  background-color: transparent;
 
   >img {
     width: 48px;
@@ -484,10 +503,18 @@
     height: 48px;
   }
 
-  &:focus >img{
+  &:focus>img {
     content: url('/img/add-reaction-hover.svg');
-  width: 24px;
+    width: 24px;
     height: 48px;
+  }
+
+  &:hover {
+    background-color: $bg-color;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
