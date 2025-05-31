@@ -1,12 +1,12 @@
 <div class="main-chat">
-  <div class="channel-info-container"></div>
+  <div class="channel-info-container">{{ getSelectedUser()?.displayName }}</div>
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()" (keydown.enter)="onSubmit()">
     <div class="message-input-container">
       <div class="message-input-box">
         <textarea
           [formControl]="form.controls.content"
-          [placeholder]=""
+          [placeholder]="'Nachricht an ' + getSelectedUser()?.displayName"
         ></textarea>
         <div class="textarea-button-container">
           <div class="textarea-button-group">

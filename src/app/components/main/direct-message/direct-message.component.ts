@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, OnInit } from '@angular/core';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { UserService } from '../../../services/user.service';
 import { DirectMessageService } from '../../../services/direct-message.service';
@@ -16,7 +16,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
   templateUrl: './direct-message.component.html',
   styleUrl: './direct-message.component.scss',
 })
-export class DirectMessageComponent {
+export class DirectMessageComponent implements OnInit {
   userService = inject(UserService);
   directMessageService = inject(DirectMessageService);
 
@@ -50,8 +50,14 @@ export class DirectMessageComponent {
     '✅',
   ];
 
+  ngOnInit() {
+    this.subRouteParams();
+  }
+
   getSelectedUser() {
-    //
+    const selecetedUserId = this.directMessageService.selectedUserId();
+    if (!selecetedUserId) return;
+    return this.userService.users.find((user) => user.uid === selecetedUserId);
   }
 
   subRouteParams() {
