@@ -20,7 +20,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Message } from '../../../interfaces/message.interface';
+import { Message } from '../../../interfaces/channel-message.interface';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ChannelService } from '../../../services/channel.service';

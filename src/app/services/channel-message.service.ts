@@ -7,7 +7,7 @@ import {
   Injector,
   runInInjectionContext,
 } from '@angular/core';
-import { Message } from '../interfaces/message.interface';
+import { Message } from '../interfaces/channel-message.interface';
 import {
   addDoc,
   collection,
