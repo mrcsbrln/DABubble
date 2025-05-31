@@ -8,7 +8,7 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { LoginComponent } from './components/auth/login/login.component';
 import { MainComponent } from './components/main/main.component';
 import { ResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
-import { ChatComponent } from './components/main/chat/chat.component';
+import { ChannelMessageComponent } from './components/main/channel-message/channel-message.component';
 import { NewMessageComponent } from './components/main/new-message/new-message.component';
 import { DirectMessageComponent } from './components/main/direct-message/direct-message.component';
 
@@ -24,7 +24,7 @@ export const routes: Routes = [
       { path: '', component: NewMessageComponent },
       {
         path: 'channels/:channel',
-        component: ChatComponent,
+        component: ChannelMessageComponent,
       },
       {
         path: 'user/:userId',

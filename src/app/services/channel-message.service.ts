@@ -7,7 +7,7 @@ import {
   Injector,
   runInInjectionContext,
 } from '@angular/core';
-import { Message } from '../interfaces/message.interface';
+import { Message } from '../interfaces/channel-message.interface';
 import {
   addDoc,
   collection,
@@ -24,7 +24,7 @@ type MessageData = Omit<Message, 'id'>;
 @Injectable({
   providedIn: 'root',
 })
-export class MessageService implements OnDestroy {
+export class ChannelMessageService implements OnDestroy {
   private firestore = inject(Firestore);
   private injector = inject(Injector);
 

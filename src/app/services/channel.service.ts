@@ -1,6 +1,6 @@
 import { Injectable, inject, OnDestroy } from '@angular/core';
 import { Channel } from '../interfaces/channel.interface';
-import { MessageService } from './message.service';
+import { ChannelMessageService } from './channel-message.service';
 import {
   addDoc,
   arrayUnion,
@@ -20,7 +20,7 @@ type channelData = Omit<Channel, 'id'>;
 })
 export class ChannelService implements OnDestroy {
   private firestore = inject(Firestore);
-  private messageServive = inject(MessageService);
+  private channelMessageServive = inject(ChannelMessageService);
 
   channels: Channel[] = [];
 
@@ -55,7 +55,7 @@ export class ChannelService implements OnDestroy {
 
   getCurrentChannel() {
     return this.channels.find(
-      (channel) => channel.id === this.messageServive.currentChannelId()
+      (channel) => channel.id === this.channelMessageServive.currentChannelId()
     );
   }
 

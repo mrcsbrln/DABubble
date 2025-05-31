@@ -1,5 +1,5 @@
 import { FieldValue } from '@angular/fire/firestore';
-import { Message } from '../interfaces/message.interface';
+import { Message } from '../interfaces/channel-message.interface';
 import { Reaction } from '../interfaces/reaction.interface';
 
 export class ChatMessage implements Message {
