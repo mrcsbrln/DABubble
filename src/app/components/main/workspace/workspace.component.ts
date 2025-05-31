@@ -5,6 +5,7 @@ import { AddChannelComponent } from './add-channel/add-channel.component';
 import { UserService } from '../../../services/user.service';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
+import { DirectMessageService } from '../../../services/direct-message.service';
 
 @Component({
   selector: 'app-workspace',
@@ -16,12 +17,13 @@ export class WorkspaceComponent {
   private userService = inject(UserService);
   private channelService = inject(ChannelService);
   private authService = inject(AuthService);
+  private directMessageService = inject(DirectMessageService);
 
   getChannels() {
     return this.channelService.channels;
   }
 
-  getCurrentUser() {
+  getCurrentUserData() {
     const currentUserId = this.userService.currentUserData()?.uid;
     if (!currentUserId) {
       return null;

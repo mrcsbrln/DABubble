@@ -64,18 +64,18 @@
 
   @if(directMessageUserListOpen()) {
   <div class="users-list">
-    <a class="user-entry" [routerLink]="['/user', getCurrentUser()?.uid]">
+    <a class="user-entry" [routerLink]="['/user', getCurrentUserData()?.uid]">
       <div class="avatar-wrapper">
-        <img [src]="getCurrentUser()?.avatarUrl" alt="Avatar" />
+        <img [src]="getCurrentUserData()?.avatarUrl" alt="Avatar" />
         <span
           class="status-dot"
-          [ngClass]="{ online: getCurrentUser()?.status === 'online' }"
+          [ngClass]="{ online: getCurrentUserData()?.status === 'online' }"
         ></span>
       </div>
-      <span>{{ getCurrentUser()?.displayName }} (Du)</span>
+      <span>{{ getCurrentUserData()?.displayName }} (Du)</span>
     </a>
     @for (user of getUsers(); track user.uid) { @if(user.uid !==
-    getCurrentUser()?.uid) {
+    getCurrentUserData()?.uid) {
     <a class="user-entry" [routerLink]="['/user', user.uid]">
       <div class="avatar-wrapper">
         <img [src]="user.avatarUrl" alt="Avatar" />
