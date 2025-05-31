@@ -24,7 +24,7 @@ type MessageData = Omit<Message, 'id'>;
 @Injectable({
   providedIn: 'root',
 })
-export class MessageService implements OnDestroy {
+export class ChannelMessageService implements OnDestroy {
   private firestore = inject(Firestore);
   private injector = inject(Injector);
 

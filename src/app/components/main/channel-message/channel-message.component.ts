@@ -10,7 +10,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
-import { MessageService } from '../../../services/message.service';
+import { ChannelMessageService } from '../../../services/channel-message.service';
 import { serverTimestamp } from '@angular/fire/firestore';
 import { Timestamp, FieldValue } from '@angular/fire/firestore';
 import { DatePipe, registerLocaleData } from '@angular/common';
@@ -35,7 +35,7 @@ type MessageData = Omit<Message, 'id'>;
 registerLocaleData(localeDe);
 
 @Component({
-  selector: 'app-chat',
+  selector: 'app-channel-message',
   imports: [
     AddMembersComponent,
     ReactiveFormsModule,
@@ -43,13 +43,13 @@ registerLocaleData(localeDe);
     EditChannelComponent,
     UserProfileComponent,
   ],
-  templateUrl: './chat.component.html',
-  styleUrl: './chat.component.scss',
+  templateUrl: './channel-message.component.html',
+  styleUrl: './channel-message.component.scss',
   providers: [{ provide: LOCALE_ID, useValue: 'de' }],
 })
-export class ChatComponent implements OnInit, OnDestroy {
+export class ChannelMessageComponent implements OnInit, OnDestroy {
   private authService = inject(AuthService);
-  private messageService = inject(MessageService);
+  private channelMessageService = inject(ChannelMessageService);
   private route = inject(ActivatedRoute);
   private channelService = inject(ChannelService);
   private userService = inject(UserService);
@@ -105,11 +105,11 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   getMessagesByChannelId() {
-    return this.messageService.messagesByChannelId;
+    return this.channelMessageService.messagesByChannelId;
   }
 
   getMembersOfCurrentChannel() {
-    const currentChannelId = this.messageService.currentChannelId();
+    const currentChannelId = this.channelMessageService.currentChannelId();
     const memberIdsOfChannel =
       this.channelService.getMembersOfChannel(currentChannelId);
     return memberIdsOfChannel?.map((id) => this.userService.getUserById(id));
@@ -138,7 +138,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   getDateOfMessageById(messageId: string) {
-    const timestamp = this.messageService.messages.find(
+    const timestamp = this.channelMessageService.messages.find(
       (message) => message.id === messageId
     )?.timestamp as Timestamp;
     return timestamp.toDate();
@@ -155,7 +155,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   onSubmit() {
     const messageText = this.form.controls.content.value?.trim();
     const senderId = this.authService.currentUser()?.uid;
-    const currentChannelId = this.messageService.currentChannelId();
+    const currentChannelId = this.channelMessageService.currentChannelId();
     if (
       this.form.controls.content.valid &&
       messageText &&
@@ -168,7 +168,7 @@ export class ChatComponent implements OnInit, OnDestroy {
         timestamp: serverTimestamp(),
         channelId: currentChannelId,
       };
-      this.messageService.addMessage(messageDataToSend);
+      this.channelMessageService.addMessage(messageDataToSend);
       this.form.controls.content.reset();
     } else if (!senderId) {
       console.error('User not found');
@@ -179,7 +179,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.route.paramMap.subscribe((params: ParamMap) => {
       const channelId = params.get('channel');
       if (channelId) {
-        this.messageService.currentChannelId.set(channelId);
+        this.channelMessageService.currentChannelId.set(channelId);
       } else {
         console.log('No route');
       }
