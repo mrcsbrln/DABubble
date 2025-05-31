@@ -34,15 +34,35 @@ button {
       color: $purple-3;
     }
   }
+}
 
-  .arrow-drop-down {
-    width: 12px;
-    height: 12px;
-    transform: rotate(-90deg);
+.devspace-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    &.open {
-      transform: rotate(0deg);
+  button:hover {
+    background-color: $bg-color;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      content: url("/img/new-message-channel-hover.svg");
     }
+  }
+}
+
+button .arrow-drop-down {
+  width: 12px;
+  height: 12px;
+  transform: rotate(-90deg);
+
+  &.open {
+    transform: rotate(0deg);
   }
 }
 
@@ -86,7 +106,7 @@ button {
   max-height: 500px; //TODO
   overflow-y: auto;
 
-  > div {
+  >div {
     border-radius: 30px;
     padding: 4px 12px;
     display: flex;
@@ -112,12 +132,13 @@ button {
       &:hover {
         cursor: pointer;
         background-color: $bg-color;
+
         a {
           color: $purple-3;
         }
       }
 
-      &:hover > img {
+      &:hover>img {
         content: url("/img/tag-hover.svg");
       }
     }
@@ -169,6 +190,7 @@ button {
   padding-left: 24px;
   max-height: 500px; //TODO später anpassen
   overflow-y: auto;
+
   a {
     text-decoration: none;
     color: #000;
@@ -206,6 +228,7 @@ button {
       border-radius: 50%;
       border: 2px solid #fff;
       background-color: $text-gray;
+
       &.online {
         background-color: $online-green;
       }
