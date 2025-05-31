@@ -1,6 +1,7 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { UserService } from '../../../services/user.service';
+import { AuthService } from '../../../services/auth/auth.service';
 import { DirectMessageService } from '../../../services/direct-message.service';
 import {
   FormControl,
@@ -9,6 +10,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { serverTimestamp } from '@angular/fire/firestore';
+import { DirectMessage } from '../../../interfaces/direct-message.interface';
+
+type DirectMessageData = Omit<DirectMessage, 'id'>;
 
 @Component({
   selector: 'app-direct-message',
@@ -17,6 +22,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
   styleUrl: './direct-message.component.scss',
 })
 export class DirectMessageComponent implements OnInit {
+  authService = inject(AuthService);
   userService = inject(UserService);
   directMessageService = inject(DirectMessageService);
 
@@ -87,6 +93,19 @@ export class DirectMessageComponent implements OnInit {
   }
 
   onSubmit() {
-    //
+    // const messageText = this.form.controls.content.value?.trim();
+    // const participantIds = [
+    //   this.authService.currentUser()?.uid,
+    //   this.directMessageService.selectedUserId(),
+    // ];
+    // if (this.form.controls.content.valid && messageText && participantIds) {
+    //   const directMessageDataToSend: DirectMessageData = {
+    //     participantIds: participantIds,
+    //     content: messageText,
+    //     timestamp: serverTimestamp(),
+    //   };
+    //   this.directMessageService.addMessage(directMessageDataToSend);
+    //   this.form.controls.content.reset();
+    // }
   }
 }

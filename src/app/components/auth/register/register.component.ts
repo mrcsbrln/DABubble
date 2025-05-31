@@ -8,7 +8,7 @@ import {
   slideInRight,
   slideOutRight,
 } from '../../../services/site-animations.service';
-import { User } from '../../../classes/user.class';
+import { UserProfile } from '../../../interfaces/user-profile.interface';
 
 @Component({
   selector: 'app-register',
@@ -60,29 +60,55 @@ export class RegisterComponent {
   email = this.form.get('email');
   password = this.form.get('password');
 
-  newUser!: User;
+  newUser!: Partial<UserProfile>;
   newUserPassword = '';
 
   setNewUser() {
     const rawForm = this.form.getRawValue();
     if (this.isChecked() && this.form.valid) {
-      this.newUser = new User(rawForm.username, rawForm.email);
+      const userWithoutUid: Omit<UserProfile, 'uid'> = {
+        displayName: rawForm.username,
+        email: rawForm.email,
+        avatarUrl: this.avatarUrl(),
+        status: 'offline',
+      };
       this.newUserPassword = rawForm.password;
+
+      this.newUser = {
+        ...userWithoutUid,
+        uid: '',
+      };
+
       this.chooseAvatar.set(true);
     }
   }
 
   onSubmit(): void {
     if (this.isChecked()) {
+      const { email, displayName } = this.newUser;
+
+      if (!email || !displayName) {
+        this.errorMessage = 'Fehlende Benutzerdaten';
+        return;
+      }
+
       this.authService
-        .register(
-          this.newUser.email,
-          this.newUser.displayName,
-          this.newUserPassword
-        )
+        .register(email, displayName, this.newUserPassword)
         .subscribe({
-          next: () => {
-            this.updateAvatarUrl();
+          next: async () => {
+            const currentUser = this.authService.currentUser();
+            if (currentUser?.uid) {
+              const completedUser: UserProfile = {
+                uid: currentUser.uid,
+                displayName,
+                email,
+                avatarUrl: this.newUser.avatarUrl ?? '',
+                status: this.newUser.status ?? 'offline',
+              };
+
+              await this.userService.addUser(completedUser);
+              await this.updateAvatarUrl();
+            }
           },
           error: (err) => {
             const mappedError = this.mapFirebaseError(err?.code);
