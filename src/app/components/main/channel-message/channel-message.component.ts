@@ -215,6 +215,15 @@ export class ChannelMessageComponent implements OnInit, OnDestroy {
     return new Date(0);
   }
 
+  isToday(date: Date): boolean {
+    const today = new Date();
+    return (
+      date.getDate() === today.getDate() &&
+      date.getMonth() === today.getMonth() &&
+      date.getFullYear() === today.getFullYear()
+    );
+  }
+
   setSelectedMemeberId(memberId: string) {
     if (!memberId) return;
     this.selectedMemberId.set(memberId);

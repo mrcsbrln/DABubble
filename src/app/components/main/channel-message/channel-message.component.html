@@ -181,7 +181,10 @@
     <div class="time-separator">
       <span class="date-text">
         {{
-          getDateOfMessageById(message.id) | date : "EEEE, d. MMMM" : "No Date"
+          isToday(getDateOfMessageById(message.id))
+            ? "Heute"
+            : (getDateOfMessageById(message.id)
+              | date : "EEEE, d. MMMM" : "No Date")
         }}
       </span>
     </div>
