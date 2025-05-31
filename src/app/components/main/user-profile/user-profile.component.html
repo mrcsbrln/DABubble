@@ -25,11 +25,7 @@
   <span>{{ getSelectedChannelMember()?.email }}</span>
   <a
     class="user-entry"
-    [routerLink]="[
-      '/user',
-      getSelectedChannelMember()?.displayName,
-      getSelectedChannelMember()?.uid
-    ]"
+    [routerLink]="['/user', getSelectedChannelMember()?.uid]"
     >Nachricht</a
   >
 </div>

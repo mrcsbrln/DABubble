@@ -16,6 +16,7 @@ import {
 } from '@angular/fire/firestore';
 import { DirectMessage } from '../interfaces/direct-message.interface';
 import { AuthService } from './auth/auth.service';
+import { UserService } from './user.service';
 
 type DirectMessageData = Omit<DirectMessage, 'id'>;
 
@@ -26,6 +27,7 @@ export class DirectMessageService implements OnDestroy {
   private firestore = inject(Firestore);
   private injector = inject(Injector);
   private authService = inject(AuthService);
+  private userService = inject(UserService);
 
   directMessages: DirectMessage[] = [];
   messagesByChannelId: DirectMessage[] = [];
@@ -73,6 +75,13 @@ export class DirectMessageService implements OnDestroy {
     const directMessages = this.getDirectMessagesOfCurrentUser();
     return directMessages.map((dm) =>
       dm.participantIds.find((id) => id !== currentUserId)
+    );
+  }
+
+  getUserDataOfOtherParcipitants() {
+    const otherParticipantIds = this.getAllOtherParcipitantsIds();
+    return this.userService.users.filter((user) =>
+      otherParticipantIds.includes(user.uid)
     );
   }
 

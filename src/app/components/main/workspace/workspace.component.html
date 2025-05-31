@@ -74,8 +74,8 @@
       </div>
       <span>{{ getCurrentUserData()?.displayName }} (Du)</span>
     </a>
-    @for (user of getUsers(); track user.uid) { @if(user.uid !==
-    getCurrentUserData()?.uid) {
+    @for (user of getUserDataOfOtherParcipitants(); track user.uid) {
+    @if(user.uid !== getCurrentUserData()?.uid) {
     <a class="user-entry" [routerLink]="['/user', user.uid]">
       <div class="avatar-wrapper">
         <img [src]="user.avatarUrl" alt="Avatar" />

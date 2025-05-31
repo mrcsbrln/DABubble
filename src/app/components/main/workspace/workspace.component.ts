@@ -35,6 +35,10 @@ export class WorkspaceComponent {
     return this.userService.users;
   }
 
+  getUserDataOfOtherParcipitants() {
+    return this.directMessageService.getUserDataOfOtherParcipitants();
+  }
+
   checkIfUserIsMemberOfChannel(channelId: string): boolean {
     const currentUserUid = this.authService.currentUser()?.uid;
     const channelMembers =
