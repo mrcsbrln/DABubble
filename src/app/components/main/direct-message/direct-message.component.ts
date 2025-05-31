@@ -93,19 +93,22 @@ export class DirectMessageComponent implements OnInit {
   }
 
   onSubmit() {
-    // const messageText = this.form.controls.content.value?.trim();
-    // const participantIds = [
-    //   this.authService.currentUser()?.uid,
-    //   this.directMessageService.selectedUserId(),
-    // ];
-    // if (this.form.controls.content.valid && messageText && participantIds) {
-    //   const directMessageDataToSend: DirectMessageData = {
-    //     participantIds: participantIds,
-    //     content: messageText,
-    //     timestamp: serverTimestamp(),
-    //   };
-    //   this.directMessageService.addMessage(directMessageDataToSend);
-    //   this.form.controls.content.reset();
-    // }
+    const messageText = this.form.controls.content.value?.trim();
+    const currentUserId = this.authService.currentUser()?.uid;
+    const selectedUserId = this.directMessageService.selectedUserId();
+    if (
+      this.form.controls.content.valid &&
+      messageText &&
+      currentUserId &&
+      selectedUserId
+    ) {
+      const directMessageDataToSend: DirectMessageData = {
+        participantIds: [currentUserId, selectedUserId],
+        content: messageText,
+        timestamp: serverTimestamp(),
+      };
+      this.directMessageService.addMessage(directMessageDataToSend);
+      this.form.controls.content.reset();
+    }
   }
 }
