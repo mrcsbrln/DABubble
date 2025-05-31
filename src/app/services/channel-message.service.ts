@@ -56,7 +56,7 @@ export class ChannelMessageService implements OnDestroy {
   }
 
   messagesCollectionRef() {
-    return collection(this.firestore, 'messages');
+    return collection(this.firestore, 'channel-messages');
   }
 
   async addMessage(messageData: MessageData) {
