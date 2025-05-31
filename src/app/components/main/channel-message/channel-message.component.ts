@@ -20,7 +20,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Message } from '../../../interfaces/channel-message.interface';
+import { ChannelMessage } from '../../../interfaces/channel-message.interface';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ChannelService } from '../../../services/channel.service';
@@ -30,7 +30,7 @@ import { AddMembersComponent } from '../add-members/add-members.component';
 import { EditChannelComponent } from './edit-channel/edit-channel.component';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 
-type MessageData = Omit<Message, 'id'>;
+type ChannelMessageData = Omit<ChannelMessage, 'id'>;
 
 registerLocaleData(localeDe);
 
@@ -162,7 +162,7 @@ export class ChannelMessageComponent implements OnInit, OnDestroy {
       senderId &&
       currentChannelId
     ) {
-      const messageDataToSend: MessageData = {
+      const messageDataToSend: ChannelMessageData = {
         senderId: senderId,
         content: messageText,
         timestamp: serverTimestamp(),

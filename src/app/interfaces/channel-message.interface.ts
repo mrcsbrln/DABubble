@@ -1,7 +1,7 @@
 import { FieldValue } from '@angular/fire/firestore';
 // import { Reaction } from './reaction.interface';
 
-export interface Message {
+export interface ChannelMessage {
   id: string; // Eindeutige ID der Nachricht (Firestore Document ID)
   senderId: string; // UID des Absenders (Referenz zu UserProfile.uid)
   content: string; // Textinhalt der Nachricht

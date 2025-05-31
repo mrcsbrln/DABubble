@@ -7,7 +7,7 @@ import {
   Injector,
   runInInjectionContext,
 } from '@angular/core';
-import { Message } from '../interfaces/channel-message.interface';
+import { ChannelMessage } from '../interfaces/channel-message.interface';
 import {
   addDoc,
   collection,
@@ -19,7 +19,7 @@ import {
   where,
 } from '@angular/fire/firestore';
 
-type MessageData = Omit<Message, 'id'>;
+type MessageData = Omit<ChannelMessage, 'id'>;
 
 @Injectable({
   providedIn: 'root',
@@ -28,8 +28,8 @@ export class ChannelMessageService implements OnDestroy {
   private firestore = inject(Firestore);
   private injector = inject(Injector);
 
-  messages: Message[] = [];
-  messagesByChannelId: Message[] = [];
+  messages: ChannelMessage[] = [];
+  messagesByChannelId: ChannelMessage[] = [];
 
   currentChannelId = signal('');
 
@@ -78,7 +78,7 @@ export class ChannelMessageService implements OnDestroy {
     });
   }
 
-  setMessageObject(obj: Partial<Message>, id: string): Message {
+  setMessageObject(obj: Partial<ChannelMessage>, id: string): ChannelMessage {
     return {
       id: id,
       senderId: obj.senderId || '',
