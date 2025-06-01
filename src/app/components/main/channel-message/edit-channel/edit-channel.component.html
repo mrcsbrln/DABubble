@@ -20,9 +20,15 @@
     />
   </div>
 
-  <div>
-    <span>Channel-Name</span>
-    <button>Bearbeiten</button>
+  <div class="channel-name-container">
+    <div>
+      <span>Channel-Name</span>
+      <button>Bearbeiten</button>
+    </div>
+    <input [ngModel]="inputValue()"/>
   </div>
-  <input [(ngModel)]="inputValue" />
+
+
+
+
 </div>

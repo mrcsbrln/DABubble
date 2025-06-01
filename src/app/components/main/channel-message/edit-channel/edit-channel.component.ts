@@ -1,9 +1,9 @@
-import { Component, input, output, signal } from '@angular/core';
+import { Component, input, output, signal, effect } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-channel',
-  imports: [ FormsModule ],
+  imports: [FormsModule],
   templateUrl: './edit-channel.component.html',
   styleUrl: './edit-channel.component.scss',
 })
@@ -20,11 +20,11 @@ export class EditChannelComponent {
     this.closeDialogEditChannel.emit();
   }
 
-  inputValue = '';
-  ngOnInit() {
-  this.inputValue = '# ' + this.channelName();
-}
+  inputValue = signal('');
 
+  effect = effect(() => {
+    this.inputValue.set('# ' + (this.channelName() ?? ''));
+  });
 
 
 }
