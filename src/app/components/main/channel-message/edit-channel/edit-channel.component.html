@@ -23,7 +23,7 @@
     <span>Beschreibungstext hier einfügen</span>
   </div>
 
-  <div class="channel-name-container">
+  <div class="channel-name-container" [class.border-light-purple]="isInputReadonly()">
     <div>
       <span>Channel-Name</span>
       <button (click)="activateEditMode()">Bearbeiten</button>
