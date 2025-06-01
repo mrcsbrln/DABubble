@@ -85,6 +85,20 @@ export class DirectMessageService implements OnDestroy {
     );
   }
 
+  getDirectMessagesOfSelectedUser() {
+    const currentUserId = this.authService.currentUser()?.uid;
+    const selectedUserId = this.selectedUserId();
+
+    if (!currentUserId || !selectedUserId) return [];
+    if (currentUserId === selectedUserId) return [];
+
+    return this.directMessages.filter(
+      (dm) =>
+        dm.participantIds.includes(currentUserId) &&
+        dm.participantIds.includes(selectedUserId)
+    );
+  }
+
   subMessageCollection() {
     return runInInjectionContext(this.injector, () => {
       return onSnapshot(this.directMessagesCollectionRef(), (messages) => {

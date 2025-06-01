@@ -66,6 +66,10 @@ export class DirectMessageComponent implements OnInit {
     return this.userService.users.find((user) => user.uid === selecetedUserId);
   }
 
+  getDirectMessageOfSelectedUser() {
+    return this.directMessageService.getDirectMessagesOfSelectedUser();
+  }
+
   subRouteParams() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       const userId = params.get('userId');

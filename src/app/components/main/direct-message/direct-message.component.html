@@ -1,6 +1,13 @@
 <div class="main-chat">
   <div class="channel-info-container">{{ getSelectedUser()?.displayName }}</div>
 
+  <div>
+    @for(dm of getDirectMessageOfSelectedUser(); track dm.id){
+    <div>{{ dm.content }}</div>
+    <div>{{ dm.timestamp }}</div>
+    }
+  </div>
+
   <form [formGroup]="form" (ngSubmit)="onSubmit()" (keydown.enter)="onSubmit()">
     <div class="message-input-container">
       <div class="message-input-box">
