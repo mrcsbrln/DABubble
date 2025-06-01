@@ -11,7 +11,8 @@
         <span class="channel-name">{{ getChannelName() }}</span>
         <img src="img/chat/channel-info-arrow-down.svg" alt="arrow" />
       </div>
-      @if(isEditChannelDialogOpen()){
+      @if(!isEditChannelDialogOpen()){
+        <!-- TODO  -->
       <div
         (click)="toogleEditChannelDialog()"
         (keydown)="toogleEditChannelDialog()"

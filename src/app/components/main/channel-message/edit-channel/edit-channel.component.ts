@@ -1,8 +1,9 @@
 import { Component, input, output, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-channel',
-  imports: [],
+  imports: [ FormsModule ],
   templateUrl: './edit-channel.component.html',
   styleUrl: './edit-channel.component.scss',
 })
@@ -18,4 +19,12 @@ export class EditChannelComponent {
   onCloseDialog() {
     this.closeDialogEditChannel.emit();
   }
+
+  inputValue = '';
+  ngOnInit() {
+  this.inputValue = '# ' + this.channelName();
+}
+
+
+
 }

@@ -8,10 +8,10 @@
   <div class="card-header">
     <span># {{ channelName() }}</span>
     <img
-      (click)="onCloseDialog()"
-      (keydown)="onCloseDialog()"
-      tabindex="0"
-      (mouseover)="isHovering.set(true)"
+    (click)="onCloseDialog()"
+    (keydown)="onCloseDialog()"
+    tabindex="0"
+    (mouseover)="isHovering.set(true)"
       (mouseout)="isHovering.set(false)"
       (focus)="isHovering.set(true)"
       (blur)="isHovering.set(false)"
@@ -19,4 +19,10 @@
       alt=""
     />
   </div>
+
+  <div>
+    <span>Channel-Name</span>
+    <button>Bearbeiten</button>
+  </div>
+  <input [(ngModel)]="inputValue" />
 </div>
