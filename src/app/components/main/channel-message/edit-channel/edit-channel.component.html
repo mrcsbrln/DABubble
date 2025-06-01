@@ -23,12 +23,24 @@
     <span>Beschreibungstext hier einfügen</span>
   </div>
 
-  <div class="channel-name-container">
+  <div
+    class="channel-name-container"
+    [class.border-light-purple]="isInputReadonly()"
+  >
     <div>
-      <span>Channel-Name</span>
-      <button>Bearbeiten</button>
+
+      <div class="channel-name-group" [class.reduce-padding]="!isInputReadonly()">
+        <span>Channel-Name</span>
+        <button (click)="confirmChannelNameEdit()" [style.display]="!isInputReadonly() ? 'none' : 'inline-block'">Bearbeiten</button>
+        <button (click)="confirmChannelNameEdit()" [style.display]="isInputReadonly() ? 'none' : 'inline-block'">Speichern</button>
+      </div>
     </div>
-    <input class="border-light-purple" [readonly]="isInputReadonly()" [placeholder]="inputValue()" />
+    <input
+      [class.border-light-purple]="!isInputReadonly()"
+      [readonly]="isInputReadonly()"
+      [value]="inputValue()"
+      (input)="onInput($event)"
+    />
   </div>
 
   <div>

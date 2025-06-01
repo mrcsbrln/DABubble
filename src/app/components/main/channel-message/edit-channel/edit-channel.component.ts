@@ -21,14 +21,21 @@ export class EditChannelComponent {
   }
 
   inputValue = signal('');
-  effect = effect(() => {
-    this.inputValue.set('# ' + (this.channelName() ?? ''));
-    console.log(this.inputValue());
-    
-  });
+
+  constructor() {
+    effect(() => {
+        this.inputValue.set('# ' + (this.channelName() ?? ''));
+    });
+  }
+
+  onInput(event: Event) {
+    const newValue = (event.target as HTMLInputElement).value;
+    this.inputValue.set(newValue);
+  }
 
   isInputReadonly = signal(true);
-  activateEditMode() {
+  confirmChannelNameEdit() {
     this.isInputReadonly.update((currentValue) => !currentValue);
   }
+
 }

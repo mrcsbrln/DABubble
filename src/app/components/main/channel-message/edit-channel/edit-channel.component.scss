@@ -11,7 +11,7 @@
   background-color: #fff;
   border-radius: 0 30px 30px 30px;
   box-shadow: $box-shadow-overlay;
-  padding: 40px;
+  padding: 44px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -63,29 +63,60 @@
     }
   }
 
+  input {
+    border: none;
+  }
+
   .channel-name-container {
+    // padding: 24px;
+    border-radius: 30px;
+
+    .channel-name-group {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 24px 0px 24px;
+      transition: padding 0.2s;
+    }
+    .reduce-padding {
+    padding: 0px 0px 24px 0px;
+  }
+
     span {
       font-size: 18px;
       font-weight: 700;
     }
 
-    input {
+    button {
+      background-color: transparent;
+      color: $purple-3;
+      font-size: 18px;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: center;
+      min-width: 100px;
       border: none;
+
+      &:hover {
+        font-weight: 600;
+      }
+    }
+
+    input {
       border-radius: 40px;
-      padding: 18px 20px;
+      padding: 18px 20px 18px 20px;
       width: 100%;
+      font-size: 16px;
 
       &:focus {
         outline: none;
       }
-
-      .border-light-purple {
-        border: 1px solid $light-purple;
-      }
     }
   }
 
-
+  .border-light-purple {
+    border: 1px solid $light-purple;
+  }
 
 
 }
