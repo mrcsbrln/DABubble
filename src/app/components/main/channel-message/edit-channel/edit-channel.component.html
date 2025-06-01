@@ -6,29 +6,39 @@
   class="dialog"
 >
   <div class="card-header">
-    <span># {{ channelName() }}</span>
-    <img
-    (click)="onCloseDialog()"
-    (keydown)="onCloseDialog()"
-    tabindex="0"
-    (mouseover)="isHovering.set(true)"
-      (mouseout)="isHovering.set(false)"
-      (focus)="isHovering.set(true)"
-      (blur)="isHovering.set(false)"
-      [src]="isHovering() ? closeIconHoverSrc : closeIconSrc"
-      alt=""
-    />
+    <div>
+      <span># {{ channelName() }}</span>
+      <img
+        (click)="onCloseDialog()"
+        (keydown)="onCloseDialog()"
+        tabindex="0"
+        (mouseover)="isHovering.set(true)"
+        (mouseout)="isHovering.set(false)"
+        (focus)="isHovering.set(true)"
+        (blur)="isHovering.set(false)"
+        [src]="isHovering() ? closeIconHoverSrc : closeIconSrc"
+        alt=""
+      />
+    </div>
+    <span>Beschreibungstext hier einfügen</span>
   </div>
 
   <div class="channel-name-container">
     <div>
       <span>Channel-Name</span>
-      <button>Bearbeiten</button>
+      <button (click)="activateEditMode()">Bearbeiten</button>
     </div>
-    <input [ngModel]="inputValue()"/>
+    <input [class.border-light-purple]="!isInputReadonly()" [readonly]="isInputReadonly()" [placeholder]="inputValue()" />
   </div>
 
-
-
-
+  <div>
+    <div>
+      <span>Beschreibung</span>
+      <button>Bearbeiten</button>
+    </div>
+    <input type="text" />
+    <div class="separatorX"></div>
+    <span>Erstellt von</span>
+    <span class="created-by"> Username </span>
+  </div>
 </div>

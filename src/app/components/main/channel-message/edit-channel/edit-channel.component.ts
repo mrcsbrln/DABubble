@@ -21,10 +21,12 @@ export class EditChannelComponent {
   }
 
   inputValue = signal('');
-
   effect = effect(() => {
     this.inputValue.set('# ' + (this.channelName() ?? ''));
   });
 
-
+  isInputReadonly = signal(true);
+  activateEditMode() {
+    this.isInputReadonly.update((currentValue) => !currentValue);
+  }
 }
