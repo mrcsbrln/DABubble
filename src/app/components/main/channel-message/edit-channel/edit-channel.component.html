@@ -23,12 +23,12 @@
     <span>Beschreibungstext hier einfügen</span>
   </div>
 
-  <div class="channel-name-container" [class.border-light-purple]="isInputReadonly()">
+  <div class="channel-name-container">
     <div>
       <span>Channel-Name</span>
-      <button (click)="activateEditMode()">Bearbeiten</button>
+      <button>Bearbeiten</button>
     </div>
-    <input [class.border-light-purple]="!isInputReadonly()" [readonly]="isInputReadonly()" [placeholder]="inputValue()" />
+    <input class="border-light-purple" [readonly]="isInputReadonly()" [placeholder]="inputValue()" />
   </div>
 
   <div>

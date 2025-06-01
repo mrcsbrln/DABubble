@@ -63,20 +63,14 @@
     }
   }
 
-  input {
-    border: none;
-  }
-
   .channel-name-container {
-    padding: 20px;
-    border-radius: 30px;
-    
     span {
       font-size: 18px;
       font-weight: 700;
     }
 
     input {
+      border: none;
       border-radius: 40px;
       padding: 18px 20px;
       width: 100%;
@@ -85,13 +79,13 @@
         outline: none;
       }
 
-
+      .border-light-purple {
+        border: 1px solid $light-purple;
+      }
     }
   }
 
-  .border-light-purple {
-    border: 1px solid $light-purple;
-  }
+
 
 
 }
