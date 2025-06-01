@@ -41,6 +41,10 @@ button {
   justify-content: space-between;
   align-items: center;
 
+  >img {
+    max-width: 200px;
+  }
+
   button:hover {
     background-color: $bg-color;
     border-radius: 50%;
@@ -50,10 +54,8 @@ button {
     align-items: center;
     justify-content: center;
 
-
     img {
       content: url("/img/new-message-channel-hover.svg");
-      max-width: 200px;
     }
   }
 }
