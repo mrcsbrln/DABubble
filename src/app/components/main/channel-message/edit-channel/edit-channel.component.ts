@@ -21,6 +21,7 @@ export class EditChannelComponent {
   channelDescription = input<string>();
   creatorName = input<string>();
   updateChannelName = output<string>();
+  updateChannelDescription = output<string>();
 
 
   isHovering = signal(false);
@@ -69,10 +70,14 @@ export class EditChannelComponent {
     }
   }
 
-  // Beim Speichern:
   onSaveChannelName() {
     this.updateChannelName.emit(this.inputNameValue());
     this.confirmChannelNameEdit();
+  }
+
+  onSaveChannelDescription() {
+    this.updateChannelDescription.emit(this.inputDescriptionValue());
+    this.confirmChannelDescriptionEdit();
   }
 
   isInputDescriptionReadonly = signal(true);

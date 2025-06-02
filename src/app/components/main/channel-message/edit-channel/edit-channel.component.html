@@ -10,13 +10,9 @@
       <span># {{ channelName() }}</span>
       <img
         (click)="onCloseDialog()"
-        (keydown)="onCloseDialog()"
-        tabindex="0"
-        (mouseover)="isHovering.set(true)"
-        (mouseout)="isHovering.set(false)"
-        (focus)="isHovering.set(true)"
-        (blur)="isHovering.set(false)"
         [src]="isHovering() ? closeIconHoverSrc : closeIconSrc"
+        tabindex="0"
+        (keydown)="onCloseDialog()"
         alt=""
       />
     </div>
@@ -74,7 +70,7 @@
           Bearbeiten
         </button>
         <button
-          (click)="confirmChannelDescriptionEdit()"
+          (click)="onSaveChannelDescription()"
           [style.display]="
             isInputDescriptionReadonly() ? 'none' : 'inline-block'
           "

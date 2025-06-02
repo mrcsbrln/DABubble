@@ -86,6 +86,8 @@ button {
   text-align: center;
   min-width: 100px;
   border: none;
+  transition: font-weight 0.2s;
+
 
   &:hover {
     font-weight: 600;
