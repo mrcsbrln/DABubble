@@ -261,7 +261,7 @@ export class ChannelMessageComponent implements OnInit, OnDestroy {
     this.isAddMembersDialogOpen.update((value) => !value);
   }
 
-  toogleEditChannelDialog() {
+  toggleEditChannelDialog() {
     this.isEditChannelDialogOpen.update((value) => !value);
   }
 
