@@ -48,6 +48,7 @@
       </div>
     </div>
     <input
+      #channelNameInput
       [class.border-light-purple]="!isInputNameReadonly()"
       [readonly]="isInputNameReadonly()"
       [value]="inputNameValue()"
@@ -84,6 +85,7 @@
       </div>
     </div>
     <textarea
+      #channelDescriptionTextarea
       [class.border-light-purple]="!isInputDescriptionReadonly()"
       [readonly]="isInputDescriptionReadonly()"
       [value]="inputDescriptionValue()"
