@@ -28,7 +28,10 @@
     [class.border-light-purple]="isInputNameReadonly()"
   >
     <div>
-      <div class="channel-group" [class.reduce-padding]="!isInputNameReadonly()">
+      <div
+        class="channel-group"
+        [class.reduce-padding]="!isInputNameReadonly()"
+      >
         <span>Channel-Name</span>
         <button
           (click)="confirmChannelNameEdit()"
@@ -52,45 +55,48 @@
     />
   </div>
 
-
-
   <div
     class="channel-group-container"
     [class.border-light-purple]="isInputDescriptionReadonly()"
   >
     <div>
-      <div class="channel-group" [class.reduce-padding]="!isInputDescriptionReadonly()">
+      <div
+        class="channel-group"
+        [class.reduce-padding]="!isInputDescriptionReadonly()"
+      >
         <span>Beschreibung</span>
         <button
           (click)="confirmChannelDescriptionEdit()"
-          [style.display]="!isInputDescriptionReadonly() ? 'none' : 'inline-block'"
+          [style.display]="
+            !isInputDescriptionReadonly() ? 'none' : 'inline-block'
+          "
         >
           Bearbeiten
         </button>
         <button
           (click)="confirmChannelDescriptionEdit()"
-          [style.display]="isInputDescriptionReadonly() ? 'none' : 'inline-block'"
+          [style.display]="
+            isInputDescriptionReadonly() ? 'none' : 'inline-block'
+          "
         >
           Speichern
         </button>
       </div>
     </div>
-    <input
+    <textarea
       [class.border-light-purple]="!isInputDescriptionReadonly()"
       [readonly]="isInputDescriptionReadonly()"
       [value]="inputNameValue()"
       (input)="onInput($event)"
-    />
+      rows="1"
+    ></textarea>
     <div class="separatorX"></div>
-    <div class="created-by-container">
+    <div
+      class="created-by-container"
+      [class.created-padding-animation]="!isInputDescriptionReadonly()"
+    >
       <span>Erstellt von</span>
       <span class="created-by"> Username </span>
     </div>
   </div>
-
-
-
-
-
-
 </div>
