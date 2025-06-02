@@ -3,5 +3,5 @@ export interface UserProfile {
   displayName: string;
   email: string;
   avatarUrl?: string;
-  status?: 'online' | 'offline';
+  isOnline: boolean;
 }

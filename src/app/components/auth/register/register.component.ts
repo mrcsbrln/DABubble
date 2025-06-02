@@ -70,7 +70,7 @@ export class RegisterComponent {
         displayName: rawForm.username,
         email: rawForm.email,
         avatarUrl: this.avatarUrl(),
-        status: 'offline',
+        isOnline: true,
       };
       this.newUserPassword = rawForm.password;
 
@@ -103,7 +103,7 @@ export class RegisterComponent {
                 displayName,
                 email,
                 avatarUrl: this.newUser.avatarUrl ?? '',
-                status: this.newUser.status ?? 'offline',
+                isOnline: this.newUser.isOnline ?? false,
               };
 
               await this.userService.addUser(completedUser);

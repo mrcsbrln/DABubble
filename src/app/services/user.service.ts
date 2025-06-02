@@ -76,7 +76,7 @@ export class UserService implements OnDestroy {
       displayName: obj.displayName || '',
       email: obj.email || '',
       avatarUrl: obj.avatarUrl || '',
-      status: obj.status || 'offline',
+      isOnline: obj.isOnline || false,
     };
   }
 

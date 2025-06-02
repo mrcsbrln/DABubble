@@ -69,7 +69,7 @@
         <img [src]="getCurrentUserData()?.avatarUrl" alt="Avatar" />
         <span
           class="status-dot"
-          [ngClass]="{ online: getCurrentUserData()?.status === 'online' }"
+          [ngClass]="{ online: getCurrentUserData()?.isOnline === true }"
         ></span>
       </div>
       <span>{{ getCurrentUserData()?.displayName }} (Du)</span>
@@ -81,7 +81,7 @@
         <img [src]="user.avatarUrl" alt="Avatar" />
         <span
           class="status-dot"
-          [ngClass]="{ online: user.status === 'online' }"
+          [ngClass]="{ online: user.isOnline === true }"
         ></span>
       </div>
       <span>{{ user.displayName }}</span>
