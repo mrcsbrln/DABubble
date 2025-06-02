@@ -20,22 +20,27 @@ export class EditChannelComponent {
     this.closeDialogEditChannel.emit();
   }
 
-  inputValue = signal('');
+  inputNameValue = signal('');
 
   constructor() {
     effect(() => {
-        this.inputValue.set('# ' + (this.channelName() ?? ''));
+        this.inputNameValue.set('# ' + (this.channelName() ?? ''));
     });
   }
 
   onInput(event: Event) {
     const newValue = (event.target as HTMLInputElement).value;
-    this.inputValue.set(newValue);
+    this.inputNameValue.set(newValue);
   }
 
-  isInputReadonly = signal(true);
+  isInputNameReadonly = signal(true);
   confirmChannelNameEdit() {
-    this.isInputReadonly.update((currentValue) => !currentValue);
+    this.isInputNameReadonly.update((currentValue) => !currentValue);
+  }
+
+  isInputDescriptionReadonly = signal(true);
+  confirmChannelDescriptionEdit() {
+    this.isInputDescriptionReadonly.update((currentValue) => !currentValue);
   }
 
 }

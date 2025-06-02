@@ -24,33 +24,73 @@
   </div>
 
   <div
-    class="channel-name-container"
-    [class.border-light-purple]="isInputReadonly()"
+    class="channel-group-container"
+    [class.border-light-purple]="isInputNameReadonly()"
   >
     <div>
-
-      <div class="channel-name-group" [class.reduce-padding]="!isInputReadonly()">
+      <div class="channel-group" [class.reduce-padding]="!isInputNameReadonly()">
         <span>Channel-Name</span>
-        <button (click)="confirmChannelNameEdit()" [style.display]="!isInputReadonly() ? 'none' : 'inline-block'">Bearbeiten</button>
-        <button (click)="confirmChannelNameEdit()" [style.display]="isInputReadonly() ? 'none' : 'inline-block'">Speichern</button>
+        <button
+          (click)="confirmChannelNameEdit()"
+          [style.display]="!isInputNameReadonly() ? 'none' : 'inline-block'"
+        >
+          Bearbeiten
+        </button>
+        <button
+          (click)="confirmChannelNameEdit()"
+          [style.display]="isInputNameReadonly() ? 'none' : 'inline-block'"
+        >
+          Speichern
+        </button>
       </div>
     </div>
     <input
-      [class.border-light-purple]="!isInputReadonly()"
-      [readonly]="isInputReadonly()"
-      [value]="inputValue()"
+      [class.border-light-purple]="!isInputNameReadonly()"
+      [readonly]="isInputNameReadonly()"
+      [value]="inputNameValue()"
       (input)="onInput($event)"
     />
   </div>
 
-  <div>
+
+
+  <div
+    class="channel-group-container"
+    [class.border-light-purple]="isInputDescriptionReadonly()"
+  >
     <div>
-      <span>Beschreibung</span>
-      <button>Bearbeiten</button>
+      <div class="channel-group" [class.reduce-padding]="!isInputDescriptionReadonly()">
+        <span>Beschreibung</span>
+        <button
+          (click)="confirmChannelDescriptionEdit()"
+          [style.display]="!isInputDescriptionReadonly() ? 'none' : 'inline-block'"
+        >
+          Bearbeiten
+        </button>
+        <button
+          (click)="confirmChannelDescriptionEdit()"
+          [style.display]="isInputDescriptionReadonly() ? 'none' : 'inline-block'"
+        >
+          Speichern
+        </button>
+      </div>
     </div>
-    <input type="text" />
+    <input
+      [class.border-light-purple]="!isInputDescriptionReadonly()"
+      [readonly]="isInputDescriptionReadonly()"
+      [value]="inputNameValue()"
+      (input)="onInput($event)"
+    />
     <div class="separatorX"></div>
-    <span>Erstellt von</span>
-    <span class="created-by"> Username </span>
+    <div class="created-by-container">
+      <span>Erstellt von</span>
+      <span class="created-by"> Username </span>
+    </div>
   </div>
+
+
+
+
+
+
 </div>

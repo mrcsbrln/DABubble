@@ -11,112 +11,104 @@
   background-color: #fff;
   border-radius: 0 30px 30px 30px;
   box-shadow: $box-shadow-overlay;
-  padding: 44px;
+  padding: 48px;
   display: flex;
   flex-direction: column;
   gap: 16px;
   min-width: 500px;
+}
 
-  .card-header {
+.card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  span {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  img {
+    cursor: pointer;
+    width: 32px;
+    padding: 8px;
+    border-radius: 100%;
+
+    &:hover {
+      background-color: $bg-color;
+    }
+  }
+
+  >div {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    span {
-      font-size: 24px;
-      font-weight: 700;
-    }
-
-    img {
-      cursor: pointer;
-      width: 32px;
-      padding: 8px;
-      border-radius: 100%;
-
-      &:hover {
-        background-color: $bg-color;
-      }
-    }
+    width: 100%;
   }
 
-  .card-header {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+  >span {
+    font-size: 18px;
+    font-weight: 400;
+    margin: 24px 0 10px 0;
+  }
+}
 
-    >div {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-    }
+input {
+  border: none;
+  border-radius: 40px;
+  padding: 18px 20px 18px 20px;
+  width: 100%;
+  font-size: 16px;
 
-    span {
-      font-size: 24px;
-      font-weight: 700;
-    }
+  &:focus {
+    outline: none;
+  }
+}
 
-    >span {
-      font-size: 18px;
-      font-weight: 400;
-      margin: 24px 0 10px 0;
-    }
+button {
+  background-color: transparent;
+  color: $purple-3;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+  min-width: 100px;
+  border: none;
+
+  &:hover {
+    font-weight: 600;
+  }
+}
+
+.channel-group-container {
+  border-radius: 30px;
+
+  span {
+    font-size: 18px;
+    font-weight: 700;
   }
 
-  input {
-    border: none;
-  }
-
-  .channel-name-container {
-    // padding: 24px;
-    border-radius: 30px;
-
-    .channel-name-group {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 24px 24px 0px 24px;
-      transition: padding 0.2s;
-    }
-    .reduce-padding {
+  .reduce-padding {
     padding: 0px 0px 24px 0px;
   }
+}
 
-    span {
-      font-size: 18px;
-      font-weight: 700;
-    }
+.border-light-purple {
+  border: 1px solid $light-purple;
+}
 
-    button {
-      background-color: transparent;
-      color: $purple-3;
-      font-size: 18px;
-      font-weight: 500;
-      cursor: pointer;
-      text-align: center;
-      min-width: 100px;
-      border: none;
+.channel-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 24px 0px 24px;
+  transition: padding 0.2s;
+}
 
-      &:hover {
-        font-weight: 600;
-      }
-    }
-
-    input {
-      border-radius: 40px;
-      padding: 18px 20px 18px 20px;
-      width: 100%;
-      font-size: 16px;
-
-      &:focus {
-        outline: none;
-      }
-    }
-  }
-
-  .border-light-purple {
-    border: 1px solid $light-purple;
-  }
-
-
+.separatorX {
+  width: 90%;
+  height: 1px;
+  background: $light-purple;
+  margin: 24px auto;
+  border: none;
 }
