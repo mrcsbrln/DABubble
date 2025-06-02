@@ -20,7 +20,7 @@
         alt=""
       />
     </div>
-    <span>Beschreibungstext hier einfügen</span>
+
   </div>
 
   <div
@@ -86,8 +86,8 @@
     <textarea
       [class.border-light-purple]="!isInputDescriptionReadonly()"
       [readonly]="isInputDescriptionReadonly()"
-      [value]="inputNameValue()"
-      (input)="onInput($event)"
+      [value]="inputDescriptionValue()"
+      (input)="onInputDescription($event)"
       rows="1"
     ></textarea>
     <div class="separatorX"></div>
@@ -96,7 +96,7 @@
       [class.created-padding-animation]="!isInputDescriptionReadonly()"
     >
       <span>Erstellt von</span>
-      <span class="created-by"> Username </span>
+      <span class="created-by"> --Username einfügen-- </span>
     </div>
   </div>
 </div>
