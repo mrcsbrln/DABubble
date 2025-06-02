@@ -1,5 +1,5 @@
 import { FieldValue } from '@angular/fire/firestore';
-// import { Reaction } from './reaction.interface';
+import { Reaction } from './reaction.interface';
 
 export interface ChannelMessage {
   id: string; // Eindeutige ID der Nachricht (Firestore Document ID)
@@ -8,9 +8,8 @@ export interface ChannelMessage {
   timestamp: FieldValue; // Zeitstempel, wann die Nachricht gesendet wurde
   channelId?: string; // ID des Channels, zu dem die Nachricht gehört (wenn es eine Channel-Nachricht ist)
   parentMessageId?: string; // ID der Ursprungsnachricht, wenn diese Nachricht Teil eines Threads ist (optional)
+  reactions?: Reaction[]; // Array der Reaktionen auf diese Nachricht (optional)
 
-  // directMessageId?: string; // ID der Direktnachrichten-Konversation (wenn es eine DM ist)
-  // reactions?: Reaction[]; // Array der Reaktionen auf diese Nachricht (optional)
   // // Optional: Felder für @-Mentions oder #-Tags, falls diese speziell gespeichert werden sollen
   // mentionedUserIds?: string[]; // UIDs der erwähnten Benutzer
   // mentionedChannelId?: string; // ID des erwähnten Channels
