@@ -99,4 +99,14 @@ export class ChannelService implements OnDestroy {
       createdAt: obj.createdAt || serverTimestamp(),
     };
   }
+  
+// TODO added
+  async updateChannelName(channelId: string, newName: string) {
+    const channelDocRef = this.getChannelDocRef(channelId);
+    try {
+      await updateDoc(channelDocRef, { name: newName });
+    } catch (error) {
+      console.error('Fehler beim Aktualisieren des Channel-Namens:', error);
+    }
+  }
 }

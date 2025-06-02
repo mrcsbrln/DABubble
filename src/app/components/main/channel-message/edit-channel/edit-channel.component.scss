@@ -53,6 +53,7 @@ input {
   padding: 18px 20px 18px 20px;
   width: 100%;
   font-size: 16px;
+  cursor: default;
 
   &:focus {
     outline: none;
@@ -66,6 +67,7 @@ textarea {
   width: 100%;
   font-size: 16px;
   resize: vertical;
+  cursor: default;
 
   max-height: 100px;
   field-sizing: content;
@@ -128,6 +130,7 @@ button {
   padding: 0 0 20px 20px;
   transition: padding 0.2s;
   font-weight: 700;
+  font-size: 18px;
 }
 
 .created-padding-animation {

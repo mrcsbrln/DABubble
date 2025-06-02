@@ -133,15 +133,25 @@ export class ChannelMessageComponent implements OnInit, OnDestroy {
     return this.channelService.getCurrentChannel()?.name;
   }
 
-// TODO added for childcomponent
+  // TODO added for childcomponent
   getChannelDescription() {
     return this.channelService.getCurrentChannel()?.description ?? undefined;
   }
-// TODO added for childcomponent
+  // TODO added for childcomponent
   getCreatorName() {
-  const creatorId = this.channelService.getCurrentChannel()?.creatorId;
-  return creatorId ? this.getUserBySenderId(creatorId)?.displayName : undefined;
-}
+    const creatorId = this.channelService.getCurrentChannel()?.creatorId;
+    return creatorId
+      ? this.getUserBySenderId(creatorId)?.displayName
+      : undefined;
+  }
+
+  // TODO added for childcomponent
+  setChannelName(newName: string) {
+    const channelId = this.channelService.getCurrentChannel()?.id;
+    if (channelId) {
+      this.channelService.updateChannelName(channelId, newName);
+    }
+  }
 
   getUserBySenderId(senderId: string) {
     return this.userService.users.find((user) => user.uid === senderId);
