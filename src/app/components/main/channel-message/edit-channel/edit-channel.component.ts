@@ -11,6 +11,7 @@ export class EditChannelComponent {
   closeDialogEditChannel = output<void>();
   channelName = input<string>();
   channelDescription = input<string>();
+  creatorName = input<string>();
 
   isHovering = signal(false);
 

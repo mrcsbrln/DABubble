@@ -20,7 +20,6 @@
         alt=""
       />
     </div>
-
   </div>
 
   <div
@@ -98,7 +97,7 @@
       [class.created-padding-animation]="!isInputDescriptionReadonly()"
     >
       <span>Erstellt von</span>
-      <span class="created-by"> --Username einfügen-- </span>
+      <span class="created-by"> {{ creatorName() }} </span>
     </div>
   </div>
 </div>
