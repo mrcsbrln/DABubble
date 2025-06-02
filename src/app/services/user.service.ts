@@ -15,6 +15,7 @@ import {
   Unsubscribe,
   docData,
   updateDoc,
+  serverTimestamp,
 } from '@angular/fire/firestore';
 import { AuthService } from './auth/auth.service';
 import { Observable, of, switchMap } from 'rxjs';
@@ -77,6 +78,7 @@ export class UserService implements OnDestroy {
       email: obj.email || '',
       avatarUrl: obj.avatarUrl || '',
       isOnline: obj.isOnline || false,
+      heartbeat: obj.heartbeat || serverTimestamp(),
     };
   }
 

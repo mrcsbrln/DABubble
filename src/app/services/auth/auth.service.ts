@@ -20,7 +20,12 @@ import {
 } from '@angular/fire/auth';
 import { Observable, from } from 'rxjs';
 import { UserProfile } from '../../interfaces/user-profile.interface';
-import { doc, setDoc, Firestore } from '@angular/fire/firestore';
+import {
+  doc,
+  setDoc,
+  Firestore,
+  serverTimestamp,
+} from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -59,6 +64,7 @@ export class AuthService {
             email,
             avatarUrl: '',
             isOnline: true,
+            heartbeat: serverTimestamp(),
           };
           return setDoc(doc(this.firestore, 'users', uid), userData);
         }
@@ -116,6 +122,7 @@ export class AuthService {
       email: email ?? '',
       avatarUrl: photoURL ?? '',
       isOnline: true,
+      heartbeat: serverTimestamp(),
     };
     return newProfile;
   }

@@ -9,6 +9,7 @@ import {
   slideOutRight,
 } from '../../../services/site-animations.service';
 import { UserProfile } from '../../../interfaces/user-profile.interface';
+import { serverTimestamp } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-register',
@@ -71,6 +72,7 @@ export class RegisterComponent {
         email: rawForm.email,
         avatarUrl: this.avatarUrl(),
         isOnline: true,
+        heartbeat: serverTimestamp(),
       };
       this.newUserPassword = rawForm.password;
 
@@ -104,6 +106,7 @@ export class RegisterComponent {
                 email,
                 avatarUrl: this.newUser.avatarUrl ?? '',
                 isOnline: this.newUser.isOnline ?? false,
+                heartbeat: this.newUser.heartbeat ?? serverTimestamp(),
               };
 
               await this.userService.addUser(completedUser);
