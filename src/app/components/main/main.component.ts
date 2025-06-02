@@ -20,9 +20,8 @@ import { RouterOutlet } from '@angular/router';
 })
 export class MainComponent {
   authService = inject(AuthService);
-  isWorkspaceHidden = signal(true);
+  isWorkspaceHidden = signal(false);
   isThreadHidden = signal(true);
-  // TODO
 
   toggleWorkspaceVisibility(): void {
     this.isWorkspaceHidden.update((value) => !value);
