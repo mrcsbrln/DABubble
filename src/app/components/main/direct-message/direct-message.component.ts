@@ -1,4 +1,5 @@
 import { Component, inject, signal, OnInit, LOCALE_ID } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { UserService } from '../../../services/user.service';
 import { AuthService } from '../../../services/auth/auth.service';
@@ -21,7 +22,7 @@ registerLocaleData(localeDe);
 
 @Component({
   selector: 'app-direct-message',
-  imports: [DatePipe, ReactiveFormsModule, UserProfileComponent],
+  imports: [CommonModule, DatePipe, ReactiveFormsModule, UserProfileComponent],
   templateUrl: './direct-message.component.html',
   styleUrl: './direct-message.component.scss',
   providers: [{ provide: LOCALE_ID, useValue: 'de' }],

@@ -5,6 +5,11 @@
   overflow-y: scroll;
 }
 
+.online {
+  //demo
+  color: $online-green;
+}
+
 .dialog-backdrop {
   position: fixed;
   top: 0;
