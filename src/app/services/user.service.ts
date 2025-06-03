@@ -91,6 +91,10 @@ export class UserService implements OnDestroy {
     return this.users.find((user) => user.uid === id);
   }
 
+  sendHeartbeat() {
+    //
+  }
+
   updateUserFields(userId: string, data: Partial<UserProfile>): Promise<void> {
     const userRef = this.userDocRef('users', userId);
     return updateDoc(userRef, data);

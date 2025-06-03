@@ -1,5 +1,9 @@
 <div class="main-chat">
-  <div class="channel-info-container">{{ getSelectedUser()?.displayName }}</div>
+  <div class="user-info-container">
+    <span>{{ getSelectedUser()?.displayName }} </span>
+    @if(getSelectedUser()?.isOnline) { <span>Aktiv</span> } @else
+    {<span>Inaktiv</span>}
+  </div>
 
   <div>
     @for(dm of getDirectMessagesOfSelectedUser(); track dm.id){
