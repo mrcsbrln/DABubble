@@ -1,6 +1,5 @@
 import {
   Component,
-  input,
   output,
   signal,
   effect,
@@ -14,7 +13,7 @@ import { UserService } from '../../../../services/user.service';
 
 @Component({
   selector: 'app-edit-channel',
-  imports: [FormsModule ],
+  imports: [FormsModule],
   templateUrl: './edit-channel.component.html',
   styleUrl: './edit-channel.component.scss',
 })
@@ -24,12 +23,8 @@ export class EditChannelComponent {
 
   closeDialogEditChannel = output<void>();
 
-  channelName = input<string>();
-  channelDescription = input<string>();
-  creatorName = input<string>();
-  updateChannelName = output<string>();
-  updateChannelDescription = output<string>();
-
+  channelName = signal(this.getChannelName());
+  creatorName = signal(this.getCreatorName());
   isHovering = signal(false);
 
   closeIconSrc = 'img/close.svg';
@@ -44,10 +39,10 @@ export class EditChannelComponent {
 
   constructor() {
     effect(() => {
-      this.inputNameValue.set(this.channelName() ?? '');
+      this.inputNameValue.set(this.getChannelName() ?? '');
     });
     effect(() => {
-      this.inputDescriptionValue.set(this.channelDescription() ?? '');
+      this.inputDescriptionValue.set(this.getChannelDescription() ?? '');
     });
   }
 
@@ -77,12 +72,13 @@ export class EditChannelComponent {
   }
 
   onSaveChannelName() {
-    this.updateChannelName.emit(this.inputNameValue());
+    this.setChannelName(this.inputNameValue());
+    this.channelName.set(this.inputNameValue());
     this.confirmChannelNameEdit();
   }
 
   onSaveChannelDescription() {
-    this.updateChannelDescription.emit(this.inputDescriptionValue());
+    this.setChannelDescription(this.inputDescriptionValue());
     this.confirmChannelDescriptionEdit();
   }
 
@@ -104,35 +100,36 @@ export class EditChannelComponent {
     }
   }
 
-  // TODO added for childcomponent
-    getChannelDescription() {
-      return this.channelService.getCurrentChannel()?.description ?? undefined;
-    }
-    // TODO added for childcomponent
-    getCreatorName() {
-      const creatorId = this.channelService.getCurrentChannel()?.creatorId;
-      return creatorId
-        ? this.getUserBySenderId(creatorId)?.displayName
-        : undefined;
-    }
+  getChannelDescription() {
+    return this.channelService.getCurrentChannel()?.description ?? undefined;
+  }
 
-    // TODO added for childcomponent
-    setChannelName(newName: string) {
-      const channelId = this.channelService.getCurrentChannel()?.id;
-      if (channelId) {
-        this.channelService.updateChannelName(channelId, newName);
-      }
-    }
+  getCreatorName() {
+    const creatorId = this.channelService.getCurrentChannel()?.creatorId;
+    return creatorId
+      ? this.getUserBySenderId(creatorId)?.displayName
+      : undefined;
+  }
 
-    // TODO added for childcomponent
-    setChannelDescription(newDescription: string) {
-      const channelId = this.channelService.getCurrentChannel()?.id;
-      if (channelId) {
-        this.channelService.updateChannelDescription(channelId, newDescription);
-      }
+  setChannelName(newName: string) {
+    const channelId = this.channelService.getCurrentChannel()?.id;
+    if (channelId) {
+      this.channelService.updateChannelName(channelId, newName);
     }
+  }
 
-    getUserBySenderId(senderId: string) {
+  setChannelDescription(newDescription: string) {
+    const channelId = this.channelService.getCurrentChannel()?.id;
+    if (channelId) {
+      this.channelService.updateChannelDescription(channelId, newDescription);
+    }
+  }
+
+  getChannelName() {
+    return this.channelService.getCurrentChannel()?.name;
+  }
+
+  getUserBySenderId(senderId: string) {
     return this.userService.users.find((user) => user.uid === senderId);
   }
 }
