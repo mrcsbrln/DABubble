@@ -20,9 +20,9 @@ export class UserProfileComponent {
   closeIconHoverSrc = 'img/close-hover.svg';
 
   getSelectedChannelMember() {
-    return this.userService.users.find(
-      (user) => user.uid === this.selectedMemberId()
-    );
+    return this.userService
+      .users()
+      .find((user) => user.uid === this.selectedMemberId());
   }
 
   onCloseDialog() {

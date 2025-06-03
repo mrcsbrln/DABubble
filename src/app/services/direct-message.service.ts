@@ -80,9 +80,9 @@ export class DirectMessageService implements OnDestroy {
 
   getUserDataOfOtherParcipitants() {
     const otherParticipantIds = this.getAllOtherParcipitantsIds();
-    return this.userService.users.filter((user) =>
-      otherParticipantIds.includes(user.uid)
-    );
+    return this.userService
+      .users()
+      .filter((user) => otherParticipantIds.includes(user.uid));
   }
 
   getDirectMessagesOfSelectedUser() {

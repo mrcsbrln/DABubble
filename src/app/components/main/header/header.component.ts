@@ -17,9 +17,9 @@ export class HeaderComponent {
   userProfileDialogOpen = signal(false);
 
   getCurrentUser() {
-    return this.userService.users.find(
-      (user) => user.uid === this.authService.currentUser()?.uid
-    );
+    return this.userService
+      .users()
+      .find((user) => user.uid === this.authService.currentUser()?.uid);
   }
 
   toogleArrowDown() {

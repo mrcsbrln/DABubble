@@ -4,6 +4,7 @@ import {
   OnDestroy,
   EnvironmentInjector,
   runInInjectionContext,
+  signal,
 } from '@angular/core';
 import { UserProfile } from '../interfaces/user-profile.interface';
 import {
@@ -26,7 +27,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
   providedIn: 'root',
 })
 export class UserService implements OnDestroy {
-  users: UserProfile[] = [];
+  users = signal<UserProfile[]>([]);
   private firestore: Firestore = inject(Firestore);
   private authService = inject(AuthService);
   private injector = inject(EnvironmentInjector);
@@ -71,11 +72,11 @@ export class UserService implements OnDestroy {
   }
 
   subUserCollection() {
-    return onSnapshot(this.usersCollectionRef(), (users) => {
-      this.users = [];
-      users.forEach((user) => {
-        this.users.push(this.setUserObject(user.data(), user.id));
-      });
+    return onSnapshot(this.usersCollectionRef(), (snapshot) => {
+      const updatedUsers = snapshot.docs.map((doc) =>
+        this.setUserObject(doc.data(), doc.id)
+      );
+      this.users.set(updatedUsers);
     });
   }
 
@@ -96,7 +97,7 @@ export class UserService implements OnDestroy {
   }
 
   getUserById(id: string) {
-    return this.users.find((user) => user.uid === id);
+    return this.users().find((user) => user.uid === id);
   }
 
   sendHeartbeat() {

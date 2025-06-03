@@ -69,7 +69,9 @@ export class DirectMessageComponent implements OnInit {
   getSelectedUser() {
     const selecetedUserId = this.directMessageService.selectedUserId();
     if (!selecetedUserId) return;
-    return this.userService.users.find((user) => user.uid === selecetedUserId);
+    return this.userService
+      .users()
+      .find((user) => user.uid === selecetedUserId);
   }
 
   getDirectMessagesOfSelectedUser() {

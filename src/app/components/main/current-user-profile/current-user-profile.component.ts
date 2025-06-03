@@ -23,9 +23,9 @@ export class CurrentUserProfileComponent {
   newDisplayedName = signal('');
 
   getCurrentUserInUserCollection() {
-    return this.userService.users.find(
-      (user) => user.uid === this.authService.currentUser()?.uid
-    );
+    return this.userService
+      .users()
+      .find((user) => user.uid === this.authService.currentUser()?.uid);
   }
 
   async updateDisplayedName() {

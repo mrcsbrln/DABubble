@@ -38,7 +38,7 @@ export class AddMembersComponent {
   filteredUsers = computed(() => {
     const userInput = this.userInput().toLowerCase().trim();
     if (!userInput) return [];
-    return this.getUsers().filter((user) =>
+    return this.getUsers()().filter((user) =>
       user.displayName.toLowerCase().includes(this.userInput().toLowerCase())
     );
   });
@@ -55,7 +55,7 @@ export class AddMembersComponent {
   }
 
   pushSelectedUser(userId: string) {
-    const user = this.userService.users.find((user) => user.uid === userId);
+    const user = this.userService.users().find((user) => user.uid === userId);
     if (user) {
       this.selectedUsers.update((current) => [...current, user]);
       this.userInput.set('');
