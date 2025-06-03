@@ -100,7 +100,6 @@ export class ChannelService implements OnDestroy {
     };
   }
 
-// TODO added
   async updateChannelName(channelId: string, newName: string) {
     const channelDocRef = this.getChannelDocRef(channelId);
     try {

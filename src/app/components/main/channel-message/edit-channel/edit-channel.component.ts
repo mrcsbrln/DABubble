@@ -26,16 +26,18 @@ export class EditChannelComponent {
   channelName = signal(this.getChannelName());
   creatorName = signal(this.getCreatorName());
   isHovering = signal(false);
+  inputNameValue = signal('');
+  inputDescriptionValue = signal('');
+  isInputNameReadonly = signal(true);
+  isInputDescriptionReadonly = signal(true);
+
+  @ViewChild('channelNameInput')
+  channelNameInputRef!: ElementRef<HTMLInputElement>;
+  @ViewChild('channelDescriptionTextarea')
+  channelDescriptionTextareaRef!: ElementRef<HTMLTextAreaElement>;
 
   closeIconSrc = 'img/close.svg';
   closeIconHoverSrc = 'img/close-hover.svg';
-
-  onCloseDialog() {
-    this.closeDialogEditChannel.emit();
-  }
-
-  inputNameValue = signal('');
-  inputDescriptionValue = signal('');
 
   constructor() {
     effect(() => {
@@ -44,6 +46,10 @@ export class EditChannelComponent {
     effect(() => {
       this.inputDescriptionValue.set(this.getChannelDescription() ?? '');
     });
+  }
+
+  onCloseDialog() {
+    this.closeDialogEditChannel.emit();
   }
 
   onInput(event: Event) {
@@ -56,9 +62,6 @@ export class EditChannelComponent {
     this.inputDescriptionValue.set(newValue);
   }
 
-  isInputNameReadonly = signal(true);
-  @ViewChild('channelNameInput')
-  channelNameInputRef!: ElementRef<HTMLInputElement>;
   confirmChannelNameEdit() {
     this.isInputNameReadonly.update((currentValue) => !currentValue);
     if (!this.isInputNameReadonly() && this.channelNameInputRef) {
@@ -77,14 +80,6 @@ export class EditChannelComponent {
     this.confirmChannelNameEdit();
   }
 
-  onSaveChannelDescription() {
-    this.setChannelDescription(this.inputDescriptionValue());
-    this.confirmChannelDescriptionEdit();
-  }
-
-  isInputDescriptionReadonly = signal(true);
-  @ViewChild('channelDescriptionTextarea')
-  channelDescriptionTextareaRef!: ElementRef<HTMLTextAreaElement>;
   confirmChannelDescriptionEdit() {
     this.isInputDescriptionReadonly.update((currentValue) => !currentValue);
     if (
@@ -98,6 +93,15 @@ export class EditChannelComponent {
     } else if (this.channelDescriptionTextareaRef) {
       this.channelDescriptionTextareaRef.nativeElement.style.cursor = '';
     }
+  }
+
+  onSaveChannelDescription() {
+    this.setChannelDescription(this.inputDescriptionValue());
+    this.confirmChannelDescriptionEdit();
+  }
+
+  getChannelName() {
+    return this.channelService.getCurrentChannel()?.name;
   }
 
   getChannelDescription() {
@@ -123,10 +127,6 @@ export class EditChannelComponent {
     if (channelId) {
       this.channelService.updateChannelDescription(channelId, newDescription);
     }
-  }
-
-  getChannelName() {
-    return this.channelService.getCurrentChannel()?.name;
   }
 
   getUserBySenderId(senderId: string) {
