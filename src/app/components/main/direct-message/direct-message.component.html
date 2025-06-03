@@ -2,9 +2,12 @@
   <div class="channel-info-container">{{ getSelectedUser()?.displayName }}</div>
 
   <div>
-    @for(dm of getDirectMessageOfSelectedUser(); track dm.id){
+    @for(dm of getDirectMessagesOfSelectedUser(); track dm.id){
     <div>{{ dm.content }}</div>
-    <div>{{ dm.timestamp }}</div>
+    <div>
+      {{ getDateOfMessageById(dm.id) | date : "EEEE, d. MMMM" : "No Date" }}
+      {{ getDateOfMessageById(dm.id) | date : "HH:mm 'Uhr'" : "No Date" }}
+    </div>
     }
   </div>
 

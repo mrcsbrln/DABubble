@@ -1,8 +1,10 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
+import { Component, inject, signal, OnInit, LOCALE_ID } from '@angular/core';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { UserService } from '../../../services/user.service';
 import { AuthService } from '../../../services/auth/auth.service';
 import { DirectMessageService } from '../../../services/direct-message.service';
+import { DatePipe, registerLocaleData } from '@angular/common';
+import localeDe from '@angular/common/locales/de';
 import {
   FormControl,
   FormGroup,
@@ -10,16 +12,19 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { serverTimestamp } from '@angular/fire/firestore';
+import { serverTimestamp, Timestamp } from '@angular/fire/firestore';
 import { DirectMessage } from '../../../interfaces/direct-message.interface';
 
 type DirectMessageData = Omit<DirectMessage, 'id'>;
 
+registerLocaleData(localeDe);
+
 @Component({
   selector: 'app-direct-message',
-  imports: [ReactiveFormsModule, UserProfileComponent],
+  imports: [DatePipe, ReactiveFormsModule, UserProfileComponent],
   templateUrl: './direct-message.component.html',
   styleUrl: './direct-message.component.scss',
+  providers: [{ provide: LOCALE_ID, useValue: 'de' }],
 })
 export class DirectMessageComponent implements OnInit {
   authService = inject(AuthService);
@@ -66,8 +71,15 @@ export class DirectMessageComponent implements OnInit {
     return this.userService.users.find((user) => user.uid === selecetedUserId);
   }
 
-  getDirectMessageOfSelectedUser() {
+  getDirectMessagesOfSelectedUser() {
     return this.directMessageService.getDirectMessagesOfSelectedUser();
+  }
+
+  getDateOfMessageById(messageId: string) {
+    const timestamp = this.directMessageService.directMessages.find(
+      (message) => message.id === messageId
+    )?.timestamp as Timestamp;
+    return timestamp.toDate();
   }
 
   subRouteParams() {
