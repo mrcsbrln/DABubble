@@ -6,23 +6,29 @@ import {
   effect,
   ViewChild,
   ElementRef,
+  inject,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ChannelService } from '../../../../services/channel.service';
+import { UserService } from '../../../../services/user.service';
 
 @Component({
   selector: 'app-edit-channel',
-  imports: [FormsModule],
+  imports: [FormsModule ],
   templateUrl: './edit-channel.component.html',
   styleUrl: './edit-channel.component.scss',
 })
 export class EditChannelComponent {
+  private channelService = inject(ChannelService);
+  private userService = inject(UserService);
+
   closeDialogEditChannel = output<void>();
+
   channelName = input<string>();
   channelDescription = input<string>();
   creatorName = input<string>();
   updateChannelName = output<string>();
   updateChannelDescription = output<string>();
-
 
   isHovering = signal(false);
 
@@ -96,5 +102,37 @@ export class EditChannelComponent {
     } else if (this.channelDescriptionTextareaRef) {
       this.channelDescriptionTextareaRef.nativeElement.style.cursor = '';
     }
+  }
+
+  // TODO added for childcomponent
+    getChannelDescription() {
+      return this.channelService.getCurrentChannel()?.description ?? undefined;
+    }
+    // TODO added for childcomponent
+    getCreatorName() {
+      const creatorId = this.channelService.getCurrentChannel()?.creatorId;
+      return creatorId
+        ? this.getUserBySenderId(creatorId)?.displayName
+        : undefined;
+    }
+
+    // TODO added for childcomponent
+    setChannelName(newName: string) {
+      const channelId = this.channelService.getCurrentChannel()?.id;
+      if (channelId) {
+        this.channelService.updateChannelName(channelId, newName);
+      }
+    }
+
+    // TODO added for childcomponent
+    setChannelDescription(newDescription: string) {
+      const channelId = this.channelService.getCurrentChannel()?.id;
+      if (channelId) {
+        this.channelService.updateChannelDescription(channelId, newDescription);
+      }
+    }
+
+    getUserBySenderId(senderId: string) {
+    return this.userService.users.find((user) => user.uid === senderId);
   }
 }
