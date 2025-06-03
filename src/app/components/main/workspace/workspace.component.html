@@ -69,10 +69,13 @@
         <img [src]="getCurrentUserData()?.avatarUrl" alt="Avatar" />
         <span
           class="status-dot"
-          [ngClass]="{ online: getCurrentUserData()?.isOnline === true }"
+          [ngClass]="{ online: getCurrentUserData()?.isOnline }"
         ></span>
       </div>
-      <span>{{ getCurrentUserData()?.displayName }} (Du)</span>
+      <span
+        >{{ getCurrentUserData()?.displayName }} (Du)
+        {{ getCurrentUserData()?.heartbeat }}</span
+      >
     </a>
     @for (user of getUserDataOfOtherParcipitants(); track user.uid) {
     @if(user.uid !== getCurrentUserData()?.uid) {

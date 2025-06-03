@@ -16,6 +16,7 @@ import {
   docData,
   updateDoc,
   serverTimestamp,
+  Timestamp,
 } from '@angular/fire/firestore';
 import { AuthService } from './auth/auth.service';
 import { Observable, of, switchMap } from 'rxjs';
@@ -49,6 +50,7 @@ export class UserService implements OnDestroy {
 
   constructor() {
     this.unsubUsersCollection = this.subUserCollection();
+    this.sendHeartbeat();
     this.heartbeatTimer = setInterval(
       () => this.sendHeartbeat(),
       2 * 1000 * 60
@@ -103,6 +105,18 @@ export class UserService implements OnDestroy {
     if (currentUserId && data) {
       this.updateUserFields(currentUserId, data);
     }
+  }
+
+  checkIfUserIsOnline(id: string) {
+    const user = this.getUserById(id);
+    const heartbeat = user?.heartbeat;
+    if (heartbeat instanceof Timestamp) {
+      const heartbeatDate = heartbeat.toDate();
+      const now = new Date();
+      const delta = now.getTime() - heartbeatDate.getTime();
+      return delta <= 2 * 1000 * 60;
+    }
+    return false;
   }
 
   updateUserFields(userId: string, data: Partial<UserProfile>): Promise<void> {
