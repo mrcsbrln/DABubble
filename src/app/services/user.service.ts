@@ -26,9 +26,10 @@ import { toSignal } from '@angular/core/rxjs-interop';
 })
 export class UserService implements OnDestroy {
   users: UserProfile[] = [];
-  firestore: Firestore = inject(Firestore);
-  authService = inject(AuthService);
-  injector = inject(EnvironmentInjector);
+  private firestore: Firestore = inject(Firestore);
+  private authService = inject(AuthService);
+  private injector = inject(EnvironmentInjector);
+  heartbeatTimer!: ReturnType<typeof setInterval>;
   private currentUserData$ = this.authService.currentUser$.pipe(
     switchMap((user) => {
       if (!user) {
@@ -48,10 +49,15 @@ export class UserService implements OnDestroy {
 
   constructor() {
     this.unsubUsersCollection = this.subUserCollection();
+    this.heartbeatTimer = setInterval(
+      () => this.sendHeartbeat(),
+      2 * 1000 * 60
+    );
   }
 
   ngOnDestroy() {
     this.unsubUsersCollection();
+    clearInterval(this.heartbeatTimer);
   }
 
   usersCollectionRef() {
@@ -92,7 +98,11 @@ export class UserService implements OnDestroy {
   }
 
   sendHeartbeat() {
-    //
+    const currentUserId = this.authService.currentUser()?.uid;
+    const data = { heartbeat: serverTimestamp() };
+    if (currentUserId && data) {
+      this.updateUserFields(currentUserId, data);
+    }
   }
 
   updateUserFields(userId: string, data: Partial<UserProfile>): Promise<void> {

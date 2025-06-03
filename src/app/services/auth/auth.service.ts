@@ -2,7 +2,6 @@ import { inject, Injectable, computed, Signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import {
   Auth,
-  getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
@@ -32,11 +31,10 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  firebaseAuth = inject(Auth);
-  auth = getAuth();
-  firestore = inject(Firestore);
-  router = inject(Router);
-  googleAuthProvider = new GoogleAuthProvider();
+  private firebaseAuth = inject(Auth);
+  private firestore = inject(Firestore);
+  private router = inject(Router);
+  private googleAuthProvider = new GoogleAuthProvider();
 
   private authState$: Observable<User | null> = authState(this.firebaseAuth);
 
