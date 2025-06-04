@@ -28,10 +28,12 @@ import { toSignal } from '@angular/core/rxjs-interop';
 })
 export class UserService implements OnDestroy {
   users = signal<UserProfile[]>([]);
+  onlineUsers = signal<UserProfile[]>([]);
   private firestore: Firestore = inject(Firestore);
   private authService = inject(AuthService);
   private injector = inject(EnvironmentInjector);
   heartbeatTimer!: ReturnType<typeof setInterval>;
+  getOnlineUsersTimer!: ReturnType<typeof setInterval>;
   private currentUserData$ = this.authService.currentUser$.pipe(
     switchMap((user) => {
       if (!user) {
@@ -56,11 +58,17 @@ export class UserService implements OnDestroy {
       () => this.sendHeartbeat(),
       2 * 1000 * 60
     );
+    this.getOnlineUsersTimer = setInterval(
+      () => this.getOnlineUsers(),
+      5 * 60 * 1000
+    );
+    setInterval(() => console.log(this.onlineUsers()), 10000);
   }
 
   ngOnDestroy() {
     this.unsubUsersCollection();
     clearInterval(this.heartbeatTimer);
+    clearInterval(this.getOnlineUsersTimer);
   }
 
   usersCollectionRef() {
@@ -87,7 +95,7 @@ export class UserService implements OnDestroy {
       email: obj.email || '',
       avatarUrl: obj.avatarUrl || '',
       isOnline: obj.isOnline || false,
-      heartbeat: obj.heartbeat || serverTimestamp(),
+      heartbeat: obj.heartbeat ?? null,
     };
   }
 
@@ -108,32 +116,17 @@ export class UserService implements OnDestroy {
     }
   }
 
-  checkIfUserIsOnline(id: string) {
-    const user = this.getUserById(id);
-    const heartbeat = user?.heartbeat;
-    if (heartbeat instanceof Timestamp) {
-      const heartbeatDate = heartbeat.toDate();
-      const now = new Date();
-      const delta = now.getTime() - heartbeatDate.getTime();
-      return delta <= 2 * 1000 * 60;
-    }
-    return false;
-  }
+  getOnlineUsers() {
+    const now = Date.now();
+    const online = this.users().filter((user) => {
+      if (user.heartbeat instanceof Timestamp) {
+        return now - user.heartbeat.toDate().getTime() <= 5 * 60 * 1000;
+      }
+      return false;
+    });
 
-  // updateIsOnline() {
-  //   const currentUserId = this.authService.currentUser()?.uid;
-  //   if (!currentUserId) return;
-  //   const user = this.getUserById(currentUserId);
-  //   const heartbeat = user?.heartbeat;
-  //   if (heartbeat instanceof Timestamp) {
-  //     const heartbeatDate = heartbeat.toDate();
-  //     const now = new Date();
-  //     const delta = now.getTime() - heartbeatDate.getTime();
-  //     if (delta <= 2 * 1000 * 60) {
-  //       this.updateUserFields(currentUserId, { isOnline: false });
-  //     }
-  //   }
-  // }
+    this.onlineUsers.set(online);
+  }
 
   updateUserFields(userId: string, data: Partial<UserProfile>): Promise<void> {
     const userRef = this.userDocRef('users', userId);
