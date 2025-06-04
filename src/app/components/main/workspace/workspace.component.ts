@@ -39,6 +39,10 @@ export class WorkspaceComponent {
     return this.userService.users;
   }
 
+  isUserOnline(id: string) {
+    return this.userService.onlineUsers().some((user) => user.uid === id);
+  }
+
   getUserDataOfOtherParcipitants() {
     return this.directMessageService.getUserDataOfOtherParcipitants();
   }

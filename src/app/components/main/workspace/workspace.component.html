@@ -69,20 +69,20 @@
         <img [src]="getCurrentUserData()?.avatarUrl" alt="Avatar" />
         <span
           class="status-dot"
-          [ngClass]="{ online: getCurrentUserData()?.isOnline }"
+          [ngClass]="{ online: isUserOnline(getCurrentUserData()?.uid || '') }"
         ></span>
       </div>
-      <span
-        >{{ getCurrentUserData()?.displayName }} (Du)
-        {{ getCurrentUserData()?.heartbeat }}</span
-      >
+      <span>{{ getCurrentUserData()?.displayName }} (Du)</span>
     </a>
     @for (user of getUserDataOfOtherParcipitants(); track user.uid) {
     @if(user.uid !== getCurrentUserData()?.uid) {
     <a class="user-entry" [routerLink]="['/user', user.uid]">
       <div class="avatar-wrapper">
         <img [src]="user.avatarUrl" alt="Avatar" />
-        <span class="status-dot" [ngClass]="{ online: user.isOnline }"></span>
+        <span
+          class="status-dot"
+          [ngClass]="{ online: isUserOnline(user.uid) }"
+        ></span>
       </div>
       <span>{{ user.displayName }}</span>
     </a>

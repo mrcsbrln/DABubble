@@ -1,4 +1,4 @@
-import { FieldValue } from '@angular/fire/firestore';
+import { FieldValue, Timestamp } from '@angular/fire/firestore';
 
 export interface UserProfile {
   uid: string;
@@ -6,5 +6,5 @@ export interface UserProfile {
   email: string;
   avatarUrl?: string;
   isOnline: boolean;
-  heartbeat: FieldValue;
+  heartbeat: Timestamp | FieldValue | null;
 }
