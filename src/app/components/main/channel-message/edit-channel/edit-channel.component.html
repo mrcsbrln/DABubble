@@ -38,7 +38,6 @@
     <div class="channel-name-readonly">{{ inputNameValue() }}</div>
     } @else {
     <input
-      #channelNameInput
       [readonly]="isInputNameReadonly()"
       [value]="inputNameValue()"
       (input)="onInputName($event)"
@@ -57,6 +56,7 @@
       >
         <span>Beschreibung</span>
         @if (isInputDescriptionReadonly()) {
+
         <button (click)="confirmChannelDescriptionEdit()">Bearbeiten</button>
         }@else {
         <button (click)="onSaveChannelDescription()">Speichern</button>
@@ -64,10 +64,11 @@
       </div>
     </div>
     @if (isInputDescriptionReadonly()) {
-    <div class="channel-description-readonly"> {{ inputDescriptionValue() }}</div>
+    <div class="channel-description-readonly">
+      {{ inputDescriptionValue() }}
+    </div>
     } @else {
     <textarea
-      #channelDescriptionTextarea
       [readonly]="isInputDescriptionReadonly()"
       [value]="inputDescriptionValue()"
       (input)="onInputDescription($event)"
