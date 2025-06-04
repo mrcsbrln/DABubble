@@ -96,6 +96,10 @@ export class DirectMessageComponent implements OnInit {
     });
   }
 
+  isOnline(id: string) {
+    return this.userService.checkIfUserIsOnline(id);
+  }
+
   toggleUserProfileDialog() {
     this.isUserProfileDialogOpen.update((value) => !value);
   }

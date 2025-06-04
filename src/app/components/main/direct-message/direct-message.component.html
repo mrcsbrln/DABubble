@@ -1,11 +1,9 @@
 <div class="main-chat">
   <div class="user-info-container">
     <span>{{ getSelectedUser()?.displayName }} </span>
-    @if(getSelectedUser()?.isOnline) {
-    <span [ngClass]="{ online: getSelectedUser()?.isOnline === true }"
-      >Aktiv</span
-    >
-    } @else {<span>Inaktiv</span>}
+    <!-- <span [ngClass]="{ online: isOnline(getSelectedUser()?.uid) }"
+      >OnlineStatus</span
+    > -->
   </div>
 
   <div>

@@ -58,11 +58,7 @@ export class UserService implements OnDestroy {
       () => this.sendHeartbeat(),
       2 * 1000 * 60
     );
-    this.getOnlineUsersTimer = setInterval(
-      () => this.getOnlineUsers(),
-      5 * 60 * 1000
-    );
-    setInterval(() => console.log(this.onlineUsers()), 10000);
+    this.getOnlineUsersTimer = setInterval(() => this.getOnlineUsers(), 10000);
   }
 
   ngOnDestroy() {
@@ -94,7 +90,6 @@ export class UserService implements OnDestroy {
       displayName: obj.displayName || '',
       email: obj.email || '',
       avatarUrl: obj.avatarUrl || '',
-      isOnline: obj.isOnline || false,
       heartbeat: obj.heartbeat ?? null,
     };
   }
@@ -116,16 +111,23 @@ export class UserService implements OnDestroy {
     }
   }
 
-  getOnlineUsers() {
-    const now = Date.now();
-    const online = this.users().filter((user) => {
-      if (user.heartbeat instanceof Timestamp) {
-        return now - user.heartbeat.toDate().getTime() <= 5 * 60 * 1000;
-      }
-      return false;
-    });
+  checkIfUserIsOnline(id: string) {
+    const user = this.getUserById(id);
+    const heartbeat = user?.heartbeat;
+    if (heartbeat instanceof Timestamp) {
+      const heartbeatDate = heartbeat.toDate();
+      const now = new Date();
+      const delta = now.getTime() - heartbeatDate.getTime();
+      return delta <= 2 * 1000 * 60;
+    }
+    return false;
+  }
 
-    this.onlineUsers.set(online);
+  getOnlineUsers() {
+    const onlineUsers = this.users().filter((user) =>
+      this.checkIfUserIsOnline(user.uid)
+    );
+    this.onlineUsers.set(onlineUsers);
   }
 
   updateUserFields(userId: string, data: Partial<UserProfile>): Promise<void> {

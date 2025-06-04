@@ -71,7 +71,6 @@ export class RegisterComponent {
         displayName: rawForm.username,
         email: rawForm.email,
         avatarUrl: this.avatarUrl(),
-        isOnline: true,
         heartbeat: serverTimestamp(),
       };
       this.newUserPassword = rawForm.password;
@@ -105,7 +104,6 @@ export class RegisterComponent {
                 displayName,
                 email,
                 avatarUrl: this.newUser.avatarUrl ?? '',
-                isOnline: this.newUser.isOnline ?? false,
                 heartbeat: this.newUser.heartbeat ?? serverTimestamp(),
               };
 

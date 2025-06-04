@@ -5,6 +5,5 @@ export interface UserProfile {
   displayName: string;
   email: string;
   avatarUrl?: string;
-  isOnline: boolean;
   heartbeat: Timestamp | FieldValue | null;
 }

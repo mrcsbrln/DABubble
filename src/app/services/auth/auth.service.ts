@@ -61,7 +61,6 @@ export class AuthService {
             displayName,
             email,
             avatarUrl: '',
-            isOnline: true,
             heartbeat: serverTimestamp(),
           };
           return setDoc(doc(this.firestore, 'users', uid), userData);
@@ -119,7 +118,6 @@ export class AuthService {
       uid,
       email: email ?? '',
       avatarUrl: photoURL ?? '',
-      isOnline: true,
       heartbeat: serverTimestamp(),
     };
     return newProfile;
