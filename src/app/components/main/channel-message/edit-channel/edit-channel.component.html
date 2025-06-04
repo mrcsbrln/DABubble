@@ -28,11 +28,9 @@
         [class.reduce-padding]="!isInputNameReadonly()"
       >
         <span>Channel-Name</span>
-
         @if (isInputNameReadonly()) {<button (click)="confirmChannelNameEdit()">
           Bearbeiten</button
         >} @else {
-
         <button (click)="onSaveChannelName()">Speichern</button>
         }
       </div>
@@ -56,22 +54,15 @@
         [class.reduce-padding]="!isInputDescriptionReadonly()"
       >
         <span>Beschreibung</span>
-        <button
-          (click)="confirmChannelDescriptionEdit()"
-          [style.display]="
-            !isInputDescriptionReadonly() ? 'none' : 'inline-block'
-          "
-        >
-          Bearbeiten
-        </button>
+        @if (isInputDescriptionReadonly()) {
+        <button (click)="confirmChannelDescriptionEdit()">Bearbeiten</button>
+        }@else {
         <button
           (click)="onSaveChannelDescription()"
-          [style.display]="
-            isInputDescriptionReadonly() ? 'none' : 'inline-block'
-          "
         >
           Speichern
         </button>
+        }
       </div>
     </div>
     <textarea
