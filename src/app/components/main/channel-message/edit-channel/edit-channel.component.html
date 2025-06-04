@@ -28,18 +28,13 @@
         [class.reduce-padding]="!isInputNameReadonly()"
       >
         <span>Channel-Name</span>
-        <button
-          (click)="confirmChannelNameEdit()"
-          [style.display]="!isInputNameReadonly() ? 'none' : 'inline-block'"
-        >
-          Bearbeiten
-        </button>
-        <button
-          (click)="onSaveChannelName()"
-          [style.display]="isInputNameReadonly() ? 'none' : 'inline-block'"
-        >
-          Speichern
-        </button>
+
+        @if (isInputNameReadonly()) {<button (click)="confirmChannelNameEdit()">
+          Bearbeiten</button
+        >} @else {
+
+        <button (click)="onSaveChannelName()">Speichern</button>
+        }
       </div>
     </div>
     <input
