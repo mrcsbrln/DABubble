@@ -3,8 +3,6 @@ import {
   output,
   signal,
   effect,
-  ViewChild,
-  ElementRef,
   inject,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -30,11 +28,6 @@ export class EditChannelComponent {
   inputDescriptionValue = signal('');
   isInputNameReadonly = signal(true);
   isInputDescriptionReadonly = signal(true);
-
-  @ViewChild('channelNameInput')
-  channelNameInputRef!: ElementRef<HTMLInputElement>;
-  @ViewChild('channelDescriptionTextarea')
-  channelDescriptionTextareaRef!: ElementRef<HTMLTextAreaElement>;
 
   closeIconSrc = 'img/close.svg';
   closeIconHoverSrc = 'img/close-hover.svg';
@@ -64,11 +57,6 @@ export class EditChannelComponent {
 
   confirmChannelNameEdit() {
     this.isInputNameReadonly.update((currentValue) => !currentValue);
-    if (!this.isInputNameReadonly() && this.channelNameInputRef) {
-      const input = this.channelNameInputRef.nativeElement;
-      input.focus();
-      input.setSelectionRange(input.value.length, input.value.length);
-    }
   }
 
   onSaveChannelName() {
@@ -79,14 +67,6 @@ export class EditChannelComponent {
 
   confirmChannelDescriptionEdit() {
     this.isInputDescriptionReadonly.update((currentValue) => !currentValue);
-    if (
-      !this.isInputDescriptionReadonly() &&
-      this.channelDescriptionTextareaRef
-    ) {
-      const textarea = this.channelDescriptionTextareaRef.nativeElement;
-      textarea.focus();
-      textarea.setSelectionRange(textarea.value.length, textarea.value.length);
-    }
   }
 
   onSaveChannelDescription() {

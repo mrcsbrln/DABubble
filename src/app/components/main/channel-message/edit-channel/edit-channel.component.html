@@ -28,15 +28,14 @@
         [class.reduce-padding]="!isInputNameReadonly()"
       >
         <span>Channel-Name</span>
-        @if (isInputNameReadonly()) {<button (click)="confirmChannelNameEdit()">
-          Bearbeiten</button
-        >} @else {
+        @if (isInputNameReadonly()) {
+        <button (click)="confirmChannelNameEdit()">Bearbeiten</button>} @else {
         <button (click)="onSaveChannelName()">Speichern</button>
         }
       </div>
     </div>
     @if (isInputNameReadonly()) {
-    <span> {{ inputNameValue() }}</span>
+    <div class="channel-name-readonly">{{ inputNameValue() }}</div>
     } @else {
     <input
       #channelNameInput
@@ -65,7 +64,7 @@
       </div>
     </div>
     @if (isInputDescriptionReadonly()) {
-    <span> {{ inputDescriptionValue() }}</span>
+    <div class="channel-description-readonly"> {{ inputDescriptionValue() }}</div>
     } @else {
     <textarea
       #channelDescriptionTextarea

@@ -55,6 +55,7 @@ input {
   font-size: 16px;
   border: 1px solid $light-purple;
 
+
   &:focus {
     outline: none;
   }
@@ -107,10 +108,27 @@ button {
   align-items: center;
   padding: 20px 20px 0 20px;
   transition: padding 0.2s;
+
   span {
     font-size: 18px;
     font-weight: 700;
   }
+}
+
+.channel-name-readonly {
+  min-height: 57px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 18px 20px 18px 20px;
+  font-size: 16px;
+}
+
+.channel-description-readonly {
+  padding: 18px 20px 18px 20px;
+  font-size: 16px;
+  max-height: 100px;
+  overflow-y: auto;
 }
 
 .separatorX {
