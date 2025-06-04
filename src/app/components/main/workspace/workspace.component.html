@@ -82,10 +82,7 @@
     <a class="user-entry" [routerLink]="['/user', user.uid]">
       <div class="avatar-wrapper">
         <img [src]="user.avatarUrl" alt="Avatar" />
-        <span
-          class="status-dot"
-          [ngClass]="{ online: user.isOnline === true }"
-        ></span>
+        <span class="status-dot" [ngClass]="{ online: user.isOnline }"></span>
       </div>
       <span>{{ user.displayName }}</span>
     </a>

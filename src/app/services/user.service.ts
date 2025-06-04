@@ -120,6 +120,21 @@ export class UserService implements OnDestroy {
     return false;
   }
 
+  // updateIsOnline() {
+  //   const currentUserId = this.authService.currentUser()?.uid;
+  //   if (!currentUserId) return;
+  //   const user = this.getUserById(currentUserId);
+  //   const heartbeat = user?.heartbeat;
+  //   if (heartbeat instanceof Timestamp) {
+  //     const heartbeatDate = heartbeat.toDate();
+  //     const now = new Date();
+  //     const delta = now.getTime() - heartbeatDate.getTime();
+  //     if (delta <= 2 * 1000 * 60) {
+  //       this.updateUserFields(currentUserId, { isOnline: false });
+  //     }
+  //   }
+  // }
+
   updateUserFields(userId: string, data: Partial<UserProfile>): Promise<void> {
     const userRef = this.userDocRef('users', userId);
     return updateDoc(userRef, data);
