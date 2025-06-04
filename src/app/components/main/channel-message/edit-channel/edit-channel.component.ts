@@ -52,7 +52,7 @@ export class EditChannelComponent {
     this.closeDialogEditChannel.emit();
   }
 
-  onInput(event: Event) {
+  onInputName(event: Event) {
     const newValue = (event.target as HTMLInputElement).value;
     this.inputNameValue.set(newValue);
   }
@@ -68,7 +68,6 @@ export class EditChannelComponent {
       const input = this.channelNameInputRef.nativeElement;
       input.focus();
       input.setSelectionRange(input.value.length, input.value.length);
-      input.style.cursor = 'text';
     } else if (this.channelNameInputRef) {
       this.channelNameInputRef.nativeElement.style.cursor = '';
     }
@@ -89,7 +88,6 @@ export class EditChannelComponent {
       const textarea = this.channelDescriptionTextareaRef.nativeElement;
       textarea.focus();
       textarea.setSelectionRange(textarea.value.length, textarea.value.length);
-      textarea.style.cursor = 'text';
     } else if (this.channelDescriptionTextareaRef) {
       this.channelDescriptionTextareaRef.nativeElement.style.cursor = '';
     }

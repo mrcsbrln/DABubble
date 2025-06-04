@@ -35,13 +35,19 @@
         }
       </div>
     </div>
+    @if (isInputDescriptionReadonly()) {
+
+    <span> {{ inputNameValue() }}</span>
+    } @else {
+
     <input
       #channelNameInput
       [class.border-light-purple]="!isInputNameReadonly()"
       [readonly]="isInputNameReadonly()"
       [value]="inputNameValue()"
-      (input)="onInput($event)"
+      (input)="onInputName($event)"
     />
+    }
   </div>
 
   <div
@@ -57,14 +63,13 @@
         @if (isInputDescriptionReadonly()) {
         <button (click)="confirmChannelDescriptionEdit()">Bearbeiten</button>
         }@else {
-        <button
-          (click)="onSaveChannelDescription()"
-        >
-          Speichern
-        </button>
+        <button (click)="onSaveChannelDescription()">Speichern</button>
         }
       </div>
     </div>
+    @if (isInputDescriptionReadonly()) {
+    <span> {{ inputDescriptionValue() }}</span>
+    } @else {
     <textarea
       #channelDescriptionTextarea
       [class.border-light-purple]="!isInputDescriptionReadonly()"
@@ -73,6 +78,7 @@
       (input)="onInputDescription($event)"
       rows="1"
     ></textarea>
+    }
     <div class="separatorX"></div>
     <div
       class="created-by-container"
