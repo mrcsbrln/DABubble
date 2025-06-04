@@ -1,10 +1,4 @@
-import {
-  Component,
-  output,
-  signal,
-  effect,
-  inject,
-} from '@angular/core';
+import { Component, output, signal, effect, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ChannelService } from '../../../../services/channel.service';
 import { UserService } from '../../../../services/user.service';
@@ -35,8 +29,6 @@ export class EditChannelComponent {
   constructor() {
     effect(() => {
       this.inputNameValue.set(this.getChannelName() ?? '');
-    });
-    effect(() => {
       this.inputDescriptionValue.set(this.getChannelDescription() ?? '');
     });
   }
