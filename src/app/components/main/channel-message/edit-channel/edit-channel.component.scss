@@ -53,6 +53,7 @@ input {
   padding: 18px 20px 18px 20px;
   width: 100%;
   font-size: 16px;
+  border: 1px solid $light-purple;
 
   &:focus {
     outline: none;
@@ -68,6 +69,7 @@ textarea {
   resize: vertical;
   max-height: 100px;
   field-sizing: content;
+  border: 1px solid $light-purple;
 
   &:focus {
     outline: none;
@@ -97,10 +99,6 @@ button {
   .reduce-padding {
     padding: 0 0 20px 0;
   }
-}
-
-.border-light-purple {
-  border: 1px solid $light-purple;
 }
 
 .channel-group {

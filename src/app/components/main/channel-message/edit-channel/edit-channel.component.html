@@ -35,14 +35,11 @@
         }
       </div>
     </div>
-    @if (isInputDescriptionReadonly()) {
-
+    @if (isInputNameReadonly()) {
     <span> {{ inputNameValue() }}</span>
     } @else {
-
     <input
       #channelNameInput
-      [class.border-light-purple]="!isInputNameReadonly()"
       [readonly]="isInputNameReadonly()"
       [value]="inputNameValue()"
       (input)="onInputName($event)"
@@ -72,7 +69,6 @@
     } @else {
     <textarea
       #channelDescriptionTextarea
-      [class.border-light-purple]="!isInputDescriptionReadonly()"
       [readonly]="isInputDescriptionReadonly()"
       [value]="inputDescriptionValue()"
       (input)="onInputDescription($event)"

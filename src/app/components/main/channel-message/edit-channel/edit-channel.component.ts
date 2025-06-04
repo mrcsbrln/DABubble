@@ -68,8 +68,6 @@ export class EditChannelComponent {
       const input = this.channelNameInputRef.nativeElement;
       input.focus();
       input.setSelectionRange(input.value.length, input.value.length);
-    } else if (this.channelNameInputRef) {
-      this.channelNameInputRef.nativeElement.style.cursor = '';
     }
   }
 
@@ -88,8 +86,6 @@ export class EditChannelComponent {
       const textarea = this.channelDescriptionTextareaRef.nativeElement;
       textarea.focus();
       textarea.setSelectionRange(textarea.value.length, textarea.value.length);
-    } else if (this.channelDescriptionTextareaRef) {
-      this.channelDescriptionTextareaRef.nativeElement.style.cursor = '';
     }
   }
 
