@@ -28,7 +28,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 })
 export class UserService implements OnDestroy {
   users = signal<UserProfile[]>([]);
-  onlineUsers = signal<UserProfile[]>([]);
+  onlineUsersIds = signal<string[]>([]);
   private firestore: Firestore = inject(Firestore);
   private authService = inject(AuthService);
   private injector = inject(EnvironmentInjector);
@@ -54,13 +54,13 @@ export class UserService implements OnDestroy {
   constructor() {
     this.unsubUsersCollection = this.subUserCollection();
     this.sendHeartbeat();
-    this.getOnlineUsers();
+    this.getOnlineUsersIds();
     this.heartbeatTimer = setInterval(
       () => this.sendHeartbeat(),
       2 * 60 * 1000
     );
     this.getOnlineUsersTimer = setInterval(
-      () => this.getOnlineUsers(),
+      () => this.getOnlineUsersIds(),
       2 * 60 * 1000
     );
   }
@@ -127,11 +127,12 @@ export class UserService implements OnDestroy {
     return false;
   }
 
-  getOnlineUsers() {
-    const onlineUsers = this.users().filter((user) =>
-      this.checkIfUserIsOnline(user.uid)
-    );
-    this.onlineUsers.set(onlineUsers);
+  getOnlineUsersIds() {
+    const onlineIds = this.users()
+      .filter((user) => this.checkIfUserIsOnline(user.uid))
+      .map((user) => user.uid);
+    this.onlineUsersIds.set(onlineIds);
+    return onlineIds;
   }
 
   updateUserFields(userId: string, data: Partial<UserProfile>): Promise<void> {

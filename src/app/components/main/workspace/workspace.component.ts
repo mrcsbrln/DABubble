@@ -40,7 +40,7 @@ export class WorkspaceComponent {
   }
 
   isUserOnline(id: string) {
-    return this.userService.onlineUsers().some((user) => user.uid === id);
+    return this.userService.onlineUsersIds().includes(id);
   }
 
   getUserDataOfOtherParcipitants() {
