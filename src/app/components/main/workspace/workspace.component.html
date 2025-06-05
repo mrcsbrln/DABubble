@@ -1,9 +1,9 @@
 <div class="wrapper">
   <div class="devspace-container">
     <img src="img/devspace.svg" alt="devspace-image" />
-    <button>
-      <img src="img/new-message-channel.svg" alt="new-message-channel" />
-    </button>
+    <a [routerLink]="['/']">
+      <img src="img/new-message-channel.svg" alt="new-message-channel"
+    /></a>
   </div>
 
   <div class="channel-container">
@@ -24,10 +24,6 @@
 
   @if(channelListOpen()) {
   <div class="channels-list">
-    <div class="channel-entry">
-      <img src="img/tag-black.svg" alt="tag" />
-      <a [routerLink]="['/']">Neue Nachricht</a>
-    </div>
     @for(channel of getChannels(); track channel.id) {
     @if(checkIfUserIsMemberOfChannel(channel.id)) {
     <div class="channel-entry">
