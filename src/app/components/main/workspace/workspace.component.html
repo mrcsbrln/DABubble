@@ -67,10 +67,7 @@
     <a class="user-entry" [routerLink]="['/user', getCurrentUserData()?.uid]">
       <div class="avatar-wrapper">
         <img [src]="getCurrentUserData()?.avatarUrl" alt="Avatar" />
-        <span
-          class="status-dot"
-          [ngClass]="{ online: isUserOnline(getCurrentUserData()?.uid || '') }"
-        ></span>
+        <span class="status-dot" [ngClass]="{ online: true }"></span>
       </div>
       <span>{{ getCurrentUserData()?.displayName }} (Du)</span>
     </a>

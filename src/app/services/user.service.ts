@@ -60,18 +60,10 @@ export class UserService implements OnDestroy {
 
   constructor() {
     this.unsubUsersCollection = this.subUserCollection();
-    this.sendHeartbeat();
     this.heartbeatTimer = setInterval(
       () => this.sendHeartbeat(),
       2 * 60 * 1000
     );
-  }
-
-  private isOnline(heartbeat: Timestamp | FieldValue | null) {
-    if (heartbeat instanceof Timestamp) {
-      return Date.now() - heartbeat.toDate().getTime() <= 2 * 60 * 1000;
-    }
-    return false;
   }
 
   ngOnDestroy() {
@@ -121,6 +113,13 @@ export class UserService implements OnDestroy {
     if (currentUserId && data) {
       this.updateUserFields(currentUserId, data);
     }
+  }
+
+  private isOnline(heartbeat: Timestamp | FieldValue | null) {
+    if (heartbeat instanceof Timestamp) {
+      return Date.now() - heartbeat.toDate().getTime() <= 2 * 60 * 1000;
+    }
+    return false;
   }
 
   updateUserFields(userId: string, data: Partial<UserProfile>): Promise<void> {
