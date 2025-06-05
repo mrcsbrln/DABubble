@@ -21,7 +21,10 @@
   </div>
   <img [src]="getSelectedChannelMember()?.avatarUrl" alt="" />
   <span>{{ getSelectedChannelMember()?.displayName }}</span>
-  <span>{{ getSelectedChannelMember()?.isOnline }}</span>
+  @if(isOnline(getSelectedChannelMember()?.uid ?? '')) {
+  <span>Aktiv</span>
+  } @else { <span>Inaktiv</span>}
+
   <span>{{ getSelectedChannelMember()?.email }}</span>
   <a
     class="user-entry"

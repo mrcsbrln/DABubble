@@ -54,11 +54,15 @@ export class UserService implements OnDestroy {
   constructor() {
     this.unsubUsersCollection = this.subUserCollection();
     this.sendHeartbeat();
+    this.getOnlineUsers();
     this.heartbeatTimer = setInterval(
       () => this.sendHeartbeat(),
-      2 * 1000 * 60
+      2 * 60 * 1000
     );
-    this.getOnlineUsersTimer = setInterval(() => this.getOnlineUsers(), 10000);
+    this.getOnlineUsersTimer = setInterval(
+      () => this.getOnlineUsers(),
+      2 * 60 * 1000
+    );
   }
 
   ngOnDestroy() {

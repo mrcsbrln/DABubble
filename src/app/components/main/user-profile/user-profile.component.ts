@@ -25,6 +25,10 @@ export class UserProfileComponent {
       .find((user) => user.uid === this.selectedMemberId());
   }
 
+  isOnline(id: string) {
+    return this.userService.checkIfUserIsOnline(id);
+  }
+
   onCloseDialog() {
     this.closeDialogUserProfile.emit();
   }

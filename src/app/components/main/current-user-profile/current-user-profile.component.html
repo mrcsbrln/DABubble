@@ -36,16 +36,10 @@
       }}</span>
       <button (click)="toggleEditMode()">Bearbeiten</button>
     </div>
-    @if(getCurrentUserInUserCollection()?.isOnline === true) {
     <div class="status-wrapper">
       <span class="status online"></span>
       <span class="status-text online">Aktiv </span>
     </div>
-    } @else {
-    <div class="status-wrapper">
-      <span class="status"></span> <span class="status-text">Inaktiv</span>
-    </div>
-    }
     <div class="row">
       <img src="img/mail-icon.svg" alt="" />
       <span>E-Mail-Adresse</span>
