@@ -108,6 +108,10 @@ export class LoginComponent {
     }
   }
 
+  loginGuest() {
+    this.authService.login('guest@dabubble403.de', 'dabubble403');
+  }
+
   handleConfiramtionOverlay() {
     this.showConfirmation.set(true);
     setTimeout(() => {
