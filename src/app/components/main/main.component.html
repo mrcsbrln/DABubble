@@ -7,7 +7,7 @@
   <router-outlet (activate)="onActivate($event)" />
 
   @if (!isThreadHidden()) {
-  <app-thread />
+  <app-thread (closeThread)="isThreadHidden.set(true)" />
   }
   <button class="workspace-button" (click)="toggleWorkspaceVisibility()">
     <div>
