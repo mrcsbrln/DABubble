@@ -8,6 +8,7 @@ import {
   LOCALE_ID,
   signal,
   ViewChild,
+  output,
 } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { ChannelMessageService } from '../../../services/channel-message.service';
@@ -75,6 +76,8 @@ export class ChannelMessageComponent implements OnInit, OnDestroy {
 
   isHovering = signal(false);
   isEmojiPickerOpen = signal(false);
+
+  openThread = output<void>();
 
   closeIconSrc = 'img/close.svg';
   closeIconHoverSrc = 'img/close-hover.svg';
@@ -150,6 +153,10 @@ export class ChannelMessageComponent implements OnInit, OnDestroy {
       (message) => message.id === messageId
     );
     return message?.senderId === currentUserId;
+  }
+
+  onOpenThread() {
+    this.openThread.emit();
   }
 
   onSubmit() {

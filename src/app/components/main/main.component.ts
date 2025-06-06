@@ -1,10 +1,10 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../services/auth/auth.service';
 import { HeaderComponent } from './header/header.component';
 import { ThreadComponent } from './thread/thread.component';
 import { WorkspaceComponent } from './workspace/workspace.component';
 import { RouterOutlet } from '@angular/router';
+import { ChannelMessageComponent } from './channel-message/channel-message.component';
 
 @Component({
   selector: 'app-main',
@@ -19,7 +19,6 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './main.component.scss',
 })
 export class MainComponent {
-  authService = inject(AuthService);
   isWorkspaceHidden = signal(false);
   isThreadHidden = signal(true);
 
@@ -29,6 +28,12 @@ export class MainComponent {
 
   toggleThreadVisibility(): void {
     this.isThreadHidden.update((value) => !value);
+  }
+
+  onActivate(component: unknown) {
+    if (component instanceof ChannelMessageComponent) {
+      component.openThread.subscribe(() => this.isThreadHidden.set(false));
+    }
   }
 
   get gridClasses() {
