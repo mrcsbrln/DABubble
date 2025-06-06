@@ -28,9 +28,9 @@ registerLocaleData(localeDe);
   providers: [{ provide: LOCALE_ID, useValue: 'de' }],
 })
 export class DirectMessageComponent implements OnInit {
-  authService = inject(AuthService);
-  userService = inject(UserService);
-  directMessageService = inject(DirectMessageService);
+  private authService = inject(AuthService);
+  private userService = inject(UserService);
+  private directMessageService = inject(DirectMessageService);
 
   route = inject(ActivatedRoute);
 
@@ -85,6 +85,10 @@ export class DirectMessageComponent implements OnInit {
     return timestamp.toDate();
   }
 
+  getCurrentUserId() {
+    return this.authService.currentUser()?.uid;
+  }
+
   subRouteParams() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       const userId = params.get('userId');
@@ -96,8 +100,8 @@ export class DirectMessageComponent implements OnInit {
     });
   }
 
-  isOnline() {
-    //
+  isOnline(id: string) {
+    this.userService.onlineUsersIds().includes(id);
   }
 
   toggleUserProfileDialog() {

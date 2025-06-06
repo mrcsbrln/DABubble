@@ -1,9 +1,16 @@
 <div class="main-chat">
   <div class="user-info-container">
+    @if(getSelectedUser()?.uid !== getCurrentUserId()){
     <span>{{ getSelectedUser()?.displayName }} </span>
-    <!-- <span [ngClass]="{ online: isOnline(getSelectedUser()?.uid) }"
-      >OnlineStatus</span
-    > -->
+    } @else {
+    <span>{{ getSelectedUser()?.displayName }} (Du) </span>
+    <span [ngClass]="{ online: true }">Aktiv</span>
+    } @if(getSelectedUser()?.uid !== getCurrentUserId() &&
+    isOnline(getSelectedUser()?.uid || '')) {
+    <span [ngClass]="{ online: true }">Aktiv</span>
+    } @else if(getSelectedUser()?.uid !== getCurrentUserId()) {
+    <span>Inaktiv</span>
+    }
   </div>
 
   <div>
