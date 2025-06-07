@@ -409,6 +409,21 @@
         transform: scale(1.15);
       }
     }
+
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      width: 39px;
+      height: 45px;
+      cursor: pointer;
+      transition: transform 0.1s;
+
+      &:hover {
+        transform: scale(1.15);
+      }
+    }
   }
 
   &.outgoing {

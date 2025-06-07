@@ -72,6 +72,7 @@ export class ThreadComponent {
       senderId &&
       currentChannelId
     ) {
+      // TODO 
       // const messageDataToSend: Thread = {
       //   senderId: senderId,
       //   content: messageText,
