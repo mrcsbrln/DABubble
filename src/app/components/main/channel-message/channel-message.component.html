@@ -166,11 +166,13 @@
           <img src="img/chat/answer.svg" alt="answer" />
         </button>
         <button type="button" aria-label="more">
-          <img
+          @if (!isCurrentUserSenderOfMessage(message.id)) {
+            <img
             src="img/chat/dots.svg"
             alt="more"
-            [class.d-none]="!isCurrentUserSenderOfMessage(message.id)"
           />
+          }
+
         </button>
       </div>
     </button>
