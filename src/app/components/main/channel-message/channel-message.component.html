@@ -7,9 +7,9 @@
         tabindex="0"
         class="channel-info"
       >
-        <img src="img/chat/tag.svg" alt="tag" />
+        <img src="img/tag-black2.svg" alt="tag" />
         <span class="channel-name">{{ getChannelName() }}</span>
-        <img src="img/chat/channel-info-arrow-down.svg" alt="arrow" />
+        <img src="img/channel-info-arrow-down.svg" alt="arrow" />
       </div>
       @if(isEditChannelDialogOpen()){
       <!-- TODO  -->
@@ -42,7 +42,7 @@
         (click)="toogleAddMemebersDialog()"
         (keydown)="toogleAddMemebersDialog()"
         tabindex="0"
-        src="img/chat/add-member.svg"
+        src="img/add-member.svg"
         alt="add-members"
         class="add-new-member"
       />
@@ -95,7 +95,7 @@
           (click)="toogleAddMemebersDialog()"
           (click)="toggleShowMembersDialog()"
         >
-          <img src="img/chat/add-member.svg" alt="" />Mitglieder hinzufügen
+          <img src="img/add-member.svg" alt="" />Mitglieder hinzufügen
         </button>
       </div>
       }
@@ -143,7 +143,7 @@
       <div class="set-reaction">
         <!-- @for (reaction of message.reactions ?? []; track reaction.type) { -->
         <span class="reaction-wrapper">
-          <img src="img/chat/add-reaction.svg" alt="add reaction" />
+          <img src="img/add-reaction.svg" alt="add reaction" />
           <span class="reaction-count">1</span>
         </span>
         <!-- } -->
@@ -160,15 +160,15 @@
            <span>👍</span>
         </button>
         <button type="button" aria-label="reaction">
-          <img src="img/chat/add-reaction-comment.svg" alt="reaction" />
+          <img src="img/add-reaction-comment.svg" alt="reaction" />
         </button>
         <button type="button" (click)="onOpenThread()">
-          <img src="img/chat/answer.svg" alt="answer" />
+          <img src="img/answer.svg" alt="answer" />
         </button>
         @if (isCurrentUserSenderOfMessage(message.id)) {
         <button class="edit-message" type="button" aria-label="more">
             <img
-            src="img/chat/dots.svg"
+            src="img/dots.svg"
             alt="more"
           />
           <button class="edit-action">Nachricht bearbeiten</button>
@@ -208,7 +208,7 @@
             >
               <img
                 class="add-reaction-textarea"
-                src="img/chat/add-reaction.svg"
+                src="img/add-reaction.svg"
                 alt="add-reaction"
               />
             </button>
@@ -226,7 +226,7 @@
             </div>
             }
             <button class="at-icon-button" type="button">
-              <img src="img/chat/at-icon.svg" alt="at-icon" />
+              <img src="img/at-icon.svg" alt="at-icon" />
             </button>
           </div>
           <button
@@ -234,7 +234,7 @@
             class="send-button"
             [disabled]="form.controls.content.invalid"
           >
-            <img src="img/chat/send.svg" alt="send-message" />
+            <img src="img/send.svg" alt="send-message" />
           </button>
         </div>
       </div>
