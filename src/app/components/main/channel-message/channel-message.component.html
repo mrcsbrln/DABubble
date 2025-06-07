@@ -178,8 +178,8 @@
           <img src="img/answer.svg" alt="answer" />
         </button>
         @if (isCurrentUserSenderOfMessage(message.id)) {
-        <div class="edit-message"  aria-label="more">
-          <img src="img/dots.svg" alt="more" />
+        <div class="edit-message" aria-label="more">
+          <img tabindex="0" src="img/dots.svg" alt="more" />
           <button (click)="setEditMode(message.id)" class="edit-action">
             Nachricht bearbeiten
           </button>

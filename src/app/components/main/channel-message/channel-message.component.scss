@@ -387,9 +387,17 @@ button {
     opacity: 0;
     transition: opacity 0.2s, right 0.3s, left 0.3s;
 
+    button,
+    >div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+
     img {
-      width: 39px;
-      height: 39px;
+      width: 35px;
+      height: 35px;
       cursor: pointer;
       transition: transform 0.1s;
 
@@ -404,7 +412,7 @@ button {
       align-items: center;
       font-size: 20px;
       width: 39px;
-      height: 45px;
+      height: 39px;
       cursor: pointer;
       transition: transform 0.1s;
 
@@ -431,41 +439,35 @@ button {
     position: relative;
 
     .edit-action {
+      white-space: nowrap;
+      display: none;
+      transition: color 150ms;
       position: absolute;
       top: 30px;
       left: 45px;
       font-size: 20px;
       background-color: white;
       padding: 16px 24px;
-      border-top-right-radius: 30px;
-      border-top-left-radius: 0px;
-      border-bottom-right-radius: 30px;
-      border-bottom-left-radius: 30px;
+      border-radius: 0 30px 30px 30px;
       box-shadow: -3px 3px 14px 0px rgba(0, 0, 0, 0.2);
+
+      &:hover {
+        cursor: pointer;
+        color: $purple-3;
+      }
     }
 
-    &:hover img, &:focus img {
+    img:focus,
+    img:hover {
       content: url('/img/dots-hover.svg');
-      width: 39px;
-      height: 32px;
+      width: 35px;
+      height: 35px;
       transform: scale(1);
     }
-  }
 
-  .edit-action {
-    white-space: nowrap;
-    display: none;
-    transition: color 150ms;
-    &:hover {
-      cursor: pointer;
-      color: $purple-3;
-      border-radius: 30px;
+    &:focus-within .edit-action {
+      display: block;
     }
-
-  }
-
-  .edit-message:focus .edit-action {
-    display: block;
   }
 }
 
