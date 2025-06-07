@@ -131,12 +131,23 @@
                 | date : "HH:mm 'Uhr'" : "No Date"
             }}</span>
           </div>
+          @if (editMessageId() !== message.id) {
           <div
             class="message-content"
             [class.outgoing]="isCurrentUserSenderOfMessage(message.id)"
           >
             {{ message.content }}
           </div>
+          } @else {
+          <input
+            class="message-content"
+            type="text"
+            [class.outgoing]="isCurrentUserSenderOfMessage(message.id)"
+            [value]="message.content"
+          />
+          @if (editMessageId() === message.id) {
+          <button (click)="editMessageId.set(null)">Abbrechen</button>
+          } }
         </div>
       </div>
 
@@ -154,10 +165,10 @@
         [class.outgoing]="isCurrentUserSenderOfMessage(message.id)"
       >
         <button type="button" aria-label="check">
-           <span>✅</span>
+          <span>✅</span>
         </button>
         <button type="button" aria-label="like">
-           <span>👍</span>
+          <span>👍</span>
         </button>
         <button type="button" aria-label="reaction">
           <img src="img/add-reaction-comment.svg" alt="reaction" />
@@ -167,14 +178,12 @@
         </button>
         @if (isCurrentUserSenderOfMessage(message.id)) {
         <button class="edit-message" type="button" aria-label="more">
-            <img
-            src="img/dots.svg"
-            alt="more"
-          />
-          <button class="edit-action">Nachricht bearbeiten</button>
+          <img src="img/dots.svg" alt="more" />
+          <button (click)="setEditMode(message.id)" class="edit-action">
+            Nachricht bearbeiten
+          </button>
         </button>
-          }
-
+        }
       </div>
     </button>
 

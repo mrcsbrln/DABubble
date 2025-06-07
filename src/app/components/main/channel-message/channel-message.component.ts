@@ -72,6 +72,12 @@ export class ChannelMessageComponent implements OnInit, OnDestroy {
   isShowMembersDialogOpen = signal(false);
   isUserProfileDialogOpen = signal(false);
 
+  editMessageId = signal<string | null>(null);
+
+  setEditMode(messageId: string) {
+    this.editMessageId.set(messageId);
+  }
+
   selectedMemberId = signal('');
 
   isHovering = signal(false);
