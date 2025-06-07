@@ -76,6 +76,8 @@ export class ChannelMessageComponent implements OnInit, OnDestroy {
 
   setEditMode(messageId: string) {
     this.editMessageId.set(messageId);
+    console.log('test');
+    
   }
 
   selectedMemberId = signal('');

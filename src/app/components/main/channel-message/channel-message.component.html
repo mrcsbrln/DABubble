@@ -160,6 +160,7 @@
         <!-- } -->
       </div>
 
+      @if (editMessageId() === null) {
       <div
         class="reaction-bar"
         [class.outgoing]="isCurrentUserSenderOfMessage(message.id)"
@@ -177,14 +178,15 @@
           <img src="img/answer.svg" alt="answer" />
         </button>
         @if (isCurrentUserSenderOfMessage(message.id)) {
-        <button class="edit-message" type="button" aria-label="more">
+        <div class="edit-message"  aria-label="more">
           <img src="img/dots.svg" alt="more" />
           <button (click)="setEditMode(message.id)" class="edit-action">
             Nachricht bearbeiten
           </button>
-        </button>
+        </div>
         }
       </div>
+      }
     </button>
 
     @if(isNewDay(i)) {
