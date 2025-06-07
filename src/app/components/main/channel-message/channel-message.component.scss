@@ -384,8 +384,7 @@ button {
     border: 1px solid $light-purple;
     border-radius: 25px 25px 0px 25px;
     pointer-events: none;
-    // TODO
-    opacity: 1;
+    opacity: 0;
     transition: opacity 0.2s, right 0.3s, left 0.3s;
 
     img {
@@ -417,7 +416,6 @@ button {
 
   &.outgoing {
     flex-direction: column;
-    // justify-content: flex-start;
     align-items: flex-end;
   }
 
@@ -456,9 +454,7 @@ button {
 
   .edit-action {
     white-space: nowrap;
-    // TODO
     display: none;
-    display: block;
     transition: color 150ms;
     &:hover {
       cursor: pointer;
