@@ -388,7 +388,8 @@
     border: 1px solid $light-purple;
     border-radius: 25px 25px 0px 25px;
     pointer-events: none;
-    opacity: 0;
+    // TODO
+    opacity: 1;
     transition: opacity 0.2s, right 0.3s, left 0.3s;
 
     button {
@@ -451,7 +452,24 @@
     right: auto;
     left: 5%;
   }
+  .edit-message{
+    position: relative;
+    button {
+      position: absolute;
+      top: 50px;
+      left: 50px;
+      cursor: pointer;
+      font-size: 20px;
+      background-color: white;
+      padding: 10px 20px;
+      border-top-right-radius: 30px;
+      border-bottom-right-radius: 30px;
+      border-bottom-left-radius: 30px;
+      // display: none;
+    }
+  }
 }
+
 
 .time-separator {
   display: flex;

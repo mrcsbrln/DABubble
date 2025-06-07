@@ -154,11 +154,9 @@
         [class.outgoing]="isCurrentUserSenderOfMessage(message.id)"
       >
         <button type="button" aria-label="check">
-          <!-- <img src="img/chat/check-mark.svg" alt="check" /> -->
            <span>✅</span>
         </button>
         <button type="button" aria-label="like">
-          <!-- <img src="img/chat/thumps-up.svg" alt="like" /> -->
            <span>👍</span>
         </button>
         <button type="button" aria-label="reaction">
@@ -167,15 +165,16 @@
         <button type="button" (click)="onOpenThread()">
           <img src="img/chat/answer.svg" alt="answer" />
         </button>
-        <button type="button" aria-label="more">
-          @if (!isCurrentUserSenderOfMessage(message.id)) {
+        @if (isCurrentUserSenderOfMessage(message.id)) {
+        <button class="edit-message" type="button" aria-label="more">
             <img
             src="img/chat/dots.svg"
             alt="more"
           />
+          <button>Nachricht bearbeiten</button>
+        </button>
           }
 
-        </button>
       </div>
     </button>
 
