@@ -1,10 +1,22 @@
-import { Component, ElementRef, HostListener, output, signal, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  inject,
+  output,
+  signal,
+  ViewChild,
+} from '@angular/core';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { AuthService } from '../../../services/auth/auth.service';
+// import { Thread } from '../../../interfaces/thread.interface';
+import { ChannelMessageService } from '../../../services/channel-message.service';
+import { ChannelService } from '../../../services/channel.service';
 
 @Component({
   selector: 'app-thread',
@@ -13,6 +25,10 @@ import {
   styleUrl: './thread.component.scss',
 })
 export class ThreadComponent {
+  private authService = inject(AuthService);
+  private channelMessageService = inject(ChannelMessageService);
+  private channelService = inject(ChannelService);
+
   @ViewChild('emojiPickerThread') emojiPickerRef!: ElementRef;
   @ViewChild('emojiToggleBtnThread') emojiToggleBtnRef!: ElementRef;
 
@@ -47,8 +63,26 @@ export class ThreadComponent {
   }
 
   onSubmit() {
-    console.log();
-    // TODO
+    const messageText = this.form.controls.content.value?.trim();
+    const senderId = this.authService.currentUser()?.uid;
+    const currentChannelId = this.channelMessageService.currentChannelId();
+    if (
+      this.form.controls.content.valid &&
+      messageText &&
+      senderId &&
+      currentChannelId
+    ) {
+      // const messageDataToSend: Thread = {
+      //   senderId: senderId,
+      //   content: messageText,
+      //   timestamp: serverTimestamp(),
+      //   channelId: currentChannelId,
+      // };
+      // this.channelMessageService.addMessage(messageDataToSend);
+      this.form.controls.content.reset();
+    } else if (!senderId) {
+      console.error('User not found');
+    }
   }
 
   toggleEmojiPicker(event: MouseEvent) {
@@ -63,8 +97,7 @@ export class ThreadComponent {
   }
 
   getChannelName() {
-    // TODO:
-    return '';
+    return this.channelService.getCurrentChannel()?.name;
   }
 
   @HostListener('document:mousedown', ['$event'])
