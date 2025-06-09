@@ -23,10 +23,10 @@ import {
   ],
 })
 export class LoginComponent {
-  fb = inject(FormBuilder);
-  router = inject(Router);
-  authService = inject(AuthService);
-  userService = inject(UserService);
+  private fb = inject(FormBuilder);
+  private router = inject(Router);
+  private authService = inject(AuthService);
+  private userService = inject(UserService);
 
   form = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
@@ -112,7 +112,7 @@ export class LoginComponent {
     this.authService.login('guest@dabubble403.de', 'dabubble403');
   }
 
-  handleConfiramtionOverlay() {
+  private handleConfiramtionOverlay() {
     this.showConfirmation.set(true);
     setTimeout(() => {
       this.showConfirmation.set(false);

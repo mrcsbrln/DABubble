@@ -24,10 +24,10 @@ import { serverTimestamp } from '@angular/fire/firestore';
   ],
 })
 export class RegisterComponent {
-  authService = inject(AuthService);
-  userService = inject(UserService);
-  fb = inject(FormBuilder);
-  router = inject(Router);
+  private authService = inject(AuthService);
+  private userService = inject(UserService);
+  private fb = inject(FormBuilder);
+  private router = inject(Router);
 
   errorMessage: string | null = null;
 
@@ -144,7 +144,7 @@ export class RegisterComponent {
     this.avatarUrl.set(this.avatarUrls[index]);
   }
 
-  handleConfiramtionOverlay() {
+  private handleConfiramtionOverlay() {
     this.showConfirmation.set(true);
     setTimeout(() => {
       this.showConfirmation.set(false);
