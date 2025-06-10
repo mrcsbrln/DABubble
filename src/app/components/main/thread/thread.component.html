@@ -1,10 +1,8 @@
 <div class="wrapper">
+  <span>Thread</span>
   <button (click)="onCloseThread()">
     <img src="img/close.svg" alt="" />
   </button>
-
-
-
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()" (keydown.enter)="onSubmit()">
     <div class="message-input-container">
@@ -12,8 +10,8 @@
         <textarea
           [formControl]="form.controls.content"
           [placeholder]="getChannelName()"
-          >
-      </textarea>
+        >
+        </textarea>
         <div class="textarea-button-container">
           <div class="textarea-button-group">
             <button
@@ -22,10 +20,7 @@
               (click)="toggleEmojiPicker($event)"
               #emojiToggleBtnThread
             >
-              <img
-                src="img/add-reaction.svg"
-                alt="add-reaction"
-              />
+              <img src="img/add-reaction.svg" alt="add-reaction" />
             </button>
             @if(isEmojiPickerOpen()) {
             <div class="emoji-picker" #emojiPickerThread>
@@ -55,6 +50,4 @@
       </div>
     </div>
   </form>
-
-
 </div>

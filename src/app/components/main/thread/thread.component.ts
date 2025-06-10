@@ -14,9 +14,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../../../services/auth/auth.service';
-// import { Thread } from '../../../interfaces/thread.interface';
 import { ChannelMessageService } from '../../../services/channel-message.service';
 import { ChannelService } from '../../../services/channel.service';
+import { serverTimestamp } from '@angular/fire/firestore';
+import { ChannelMessage } from '../../../interfaces/channel-message.interface';
 
 @Component({
   selector: 'app-thread',
@@ -72,14 +73,13 @@ export class ThreadComponent {
       senderId &&
       currentChannelId
     ) {
-      // TODO 
-      // const messageDataToSend: Thread = {
-      //   senderId: senderId,
-      //   content: messageText,
-      //   timestamp: serverTimestamp(),
-      //   channelId: currentChannelId,
-      // };
-      // this.channelMessageService.addMessage(messageDataToSend);
+      const messageDataToSend: Omit<ChannelMessage, 'id'> = {
+        senderId: senderId,
+        content: messageText,
+        timestamp: serverTimestamp(),
+        channelId: currentChannelId,
+      };
+      this.channelMessageService.addMessage(messageDataToSend);
       this.form.controls.content.reset();
     } else if (!senderId) {
       console.error('User not found');

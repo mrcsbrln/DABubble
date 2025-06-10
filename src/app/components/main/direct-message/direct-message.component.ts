@@ -1,4 +1,11 @@
-import { Component, inject, signal, OnInit, LOCALE_ID } from '@angular/core';
+import {
+  Component,
+  inject,
+  signal,
+  OnInit,
+  LOCALE_ID,
+  DestroyRef,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { UserService } from '../../../services/user.service';
@@ -15,6 +22,7 @@ import {
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { serverTimestamp, Timestamp } from '@angular/fire/firestore';
 import { DirectMessage } from '../../../interfaces/direct-message.interface';
+import { Subscription } from 'rxjs';
 
 type DirectMessageData = Omit<DirectMessage, 'id'>;
 
@@ -31,8 +39,10 @@ export class DirectMessageComponent implements OnInit {
   private authService = inject(AuthService);
   private userService = inject(UserService);
   private directMessageService = inject(DirectMessageService);
+  private destroyRef = inject(DestroyRef);
 
-  route = inject(ActivatedRoute);
+  private route = inject(ActivatedRoute);
+  private routeSubscription!: Subscription;
 
   form = new FormGroup({
     content: new FormControl('', [
@@ -63,7 +73,10 @@ export class DirectMessageComponent implements OnInit {
   ];
 
   ngOnInit() {
-    this.subRouteParams();
+    this.routeSubscription = this.subRouteParams();
+    this.destroyRef.onDestroy(() => {
+      this.routeSubscription.unsubscribe();
+    });
   }
 
   isSelectedUserCurrentUser() {
@@ -94,12 +107,12 @@ export class DirectMessageComponent implements OnInit {
   }
 
   subRouteParams() {
-    this.route.paramMap.subscribe((params: ParamMap) => {
+    return this.route.paramMap.subscribe((params: ParamMap) => {
       const userId = params.get('userId');
       if (userId) {
         this.directMessageService.selectedUserId.set(userId);
       } else {
-        console.log('No user');
+        console.error('No user');
       }
     });
   }

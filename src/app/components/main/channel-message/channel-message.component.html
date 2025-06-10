@@ -174,7 +174,11 @@
         <button type="button" aria-label="reaction">
           <img src="img/add-reaction-comment.svg" alt="reaction" />
         </button>
-        <button type="button" (click)="onOpenThread()">
+        <button
+          type="button"
+          (click)="onOpenThread()"
+          (click)="setCurrentParentChannelMessageId(message.id)"
+        >
           <img src="img/answer.svg" alt="answer" />
         </button>
         @if (isCurrentUserSenderOfMessage(message.id)) {

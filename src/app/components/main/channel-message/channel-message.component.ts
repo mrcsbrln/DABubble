@@ -74,12 +74,6 @@ export class ChannelMessageComponent implements OnInit, OnDestroy {
 
   editMessageId = signal<string | null>(null);
 
-  setEditMode(messageId: string) {
-    this.editMessageId.set(messageId);
-    console.log('test');
-    
-  }
-
   selectedMemberId = signal('');
 
   isHovering = signal(false);
@@ -155,6 +149,10 @@ export class ChannelMessageComponent implements OnInit, OnDestroy {
     return timestamp.toDate();
   }
 
+  getParentChannelMessageId() {
+    return this.channelMessageService.parentChannelMessageId();
+  }
+
   isCurrentUserSenderOfMessage(messageId: string): boolean {
     const currentUserId = this.authService.currentUser()?.uid;
     const message = this.getMessagesByChannelId().find(
@@ -188,6 +186,15 @@ export class ChannelMessageComponent implements OnInit, OnDestroy {
     } else if (!senderId) {
       console.error('User not found');
     }
+  }
+
+  setEditMode(messageId: string) {
+    this.editMessageId.set(messageId);
+    console.log('test');
+  }
+
+  setCurrentParentChannelMessageId(id: string) {
+    this.channelMessageService.parentChannelMessageId.set(id);
   }
 
   subRouteParams() {

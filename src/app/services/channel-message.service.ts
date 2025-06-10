@@ -33,6 +33,8 @@ export class ChannelMessageService implements OnDestroy {
 
   currentChannelId = signal('');
 
+  parentChannelMessageId = signal('');
+
   unsubMessages!: Unsubscribe;
   unsubMessagesByChannelId!: Unsubscribe;
 
