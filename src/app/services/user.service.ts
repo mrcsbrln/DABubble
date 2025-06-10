@@ -1,11 +1,11 @@
 import {
   Injectable,
   inject,
-  OnDestroy,
   EnvironmentInjector,
   runInInjectionContext,
   signal,
   computed,
+  DestroyRef,
 } from '@angular/core';
 import { UserProfile } from '../interfaces/user-profile.interface';
 import {
@@ -28,11 +28,12 @@ import { toSignal } from '@angular/core/rxjs-interop';
 @Injectable({
   providedIn: 'root',
 })
-export class UserService implements OnDestroy {
+export class UserService {
   users = signal<UserProfile[]>([]);
   private firestore: Firestore = inject(Firestore);
   private authService = inject(AuthService);
   private injector = inject(EnvironmentInjector);
+  private destroyRef = inject(DestroyRef);
   heartbeatTimer!: ReturnType<typeof setInterval>;
 
   onlineUsersIds = computed(() =>
@@ -64,11 +65,10 @@ export class UserService implements OnDestroy {
       () => this.sendHeartbeat(),
       2 * 60 * 1000
     );
-  }
 
-  ngOnDestroy() {
-    this.unsubUsersCollection();
-    clearInterval(this.heartbeatTimer);
+    this.destroyRef.onDestroy(() => {
+      clearInterval(this.heartbeatTimer);
+    });
   }
 
   private usersCollectionRef() {

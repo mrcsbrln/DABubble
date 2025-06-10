@@ -66,6 +66,10 @@ export class DirectMessageComponent implements OnInit {
     this.subRouteParams();
   }
 
+  isSelectedUserCurrentUser() {
+    return this.getSelectedUser()?.uid === this.getCurrentUserId();
+  }
+
   getSelectedUser() {
     const selecetedUserId = this.directMessageService.selectedUserId();
     if (!selecetedUserId) return;
@@ -101,7 +105,7 @@ export class DirectMessageComponent implements OnInit {
   }
 
   isOnline(id: string) {
-    this.userService.onlineUsersIds().includes(id);
+    return this.userService.onlineUsersIds().includes(id);
   }
 
   toggleUserProfileDialog() {
