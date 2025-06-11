@@ -284,10 +284,29 @@ button {
   &:hover {
     cursor: pointer;
     background-color: $bg-color;
+  }
 
-    .message-content {
-      background-color: white;
+  @media (hover: none) and (pointer: coarse) {
+    &:hover {
+      cursor: default;
+      background-color: unset;
     }
+
+    &:focus {
+      background-color: $bg-color;
+    }
+
+    &:focus .reaction-bar {
+      opacity: 1;
+      pointer-events: auto;
+      right: 5%;
+    }
+  }
+
+
+
+  .message-content {
+    background-color: white;
   }
 
   @media (hover: none) and (pointer: coarse) {

@@ -277,6 +277,10 @@ export class ChannelMessageComponent implements OnInit, OnDestroy {
     this.form.controls.content.setValue(current + emoji);
     this.isEmojiPickerOpen.set(false);
   }
+  onUpdateMessage() {
+    console.log('Update message:');
+
+  }
 
   @HostListener('document:mousedown', ['$event'])
   onDocumentClick(event: MouseEvent) {
