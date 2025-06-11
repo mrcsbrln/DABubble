@@ -146,7 +146,7 @@
             [value]="message.content"
           />
           @if (editMessageId() === message.id) {
-          <!-- <button (click)="onUpdateMessage()"></button> -->
+          <button (click)="onUpdateMessage()">Speichern</button>
           <button (click)="editMessageId.set(null)">Abbrechen</button>
           } }
         </div>

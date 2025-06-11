@@ -281,16 +281,15 @@ button {
     justify-content: flex-end;
   }
 
-  &:hover {
-    cursor: pointer;
-    background-color: $bg-color;
+  @media (hover: hover) and (pointer: fine) {
+
+    &:hover {
+      cursor: pointer;
+      background-color: $bg-color;
+    }
   }
 
   @media (hover: none) and (pointer: coarse) {
-    &:hover {
-      cursor: default;
-      background-color: unset;
-    }
 
     &:focus {
       background-color: $bg-color;

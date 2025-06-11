@@ -189,8 +189,8 @@ export class ChannelMessageComponent implements OnInit, OnDestroy {
   }
 
   setEditMode(messageId: string) {
+    console.log(messageId);
     this.editMessageId.set(messageId);
-    console.log('test');
   }
 
   setCurrentParentChannelMessageId(id: string) {
@@ -277,9 +277,9 @@ export class ChannelMessageComponent implements OnInit, OnDestroy {
     this.form.controls.content.setValue(current + emoji);
     this.isEmojiPickerOpen.set(false);
   }
-  onUpdateMessage() {
-    console.log('Update message:');
 
+  onUpdateMessage() {
+    console.log('test');
   }
 
   @HostListener('document:mousedown', ['$event'])
