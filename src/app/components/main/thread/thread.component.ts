@@ -67,6 +67,8 @@ export class ThreadComponent {
     const messageText = this.form.controls.content.value?.trim();
     const senderId = this.authService.currentUser()?.uid;
     const currentChannelId = this.channelMessageService.currentChannelId();
+    const parentChannelMessageId =
+      this.channelMessageService.parentChannelMessageId();
     if (
       this.form.controls.content.valid &&
       messageText &&
@@ -78,6 +80,7 @@ export class ThreadComponent {
         content: messageText,
         timestamp: serverTimestamp(),
         channelId: currentChannelId,
+        parentMessageId: parentChannelMessageId,
       };
       this.channelMessageService.addMessage(messageDataToSend);
       this.form.controls.content.reset();
