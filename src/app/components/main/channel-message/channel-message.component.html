@@ -143,11 +143,13 @@
             class="message-content"
             type="text"
             [class.outgoing]="isCurrentUserSenderOfMessage(message.id)"
-            [value]="message.content"
+            [value]="messageContent()"
           />
           @if (editMessageId() === message.id) {
           <button (click)="onUpdateMessage()">Speichern</button>
-          <button (click)="editMessageId.set(null)">Abbrechen</button>
+          <!-- TODO  -->
+          <!-- <button (click)="editMessageId.set(null)">Abbrechen</button> -->
+          <button (click)="getMessageContent()">Abbrechen</button>
           } }
         </div>
       </div>
