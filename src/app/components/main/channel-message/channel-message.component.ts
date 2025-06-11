@@ -295,8 +295,22 @@ export class ChannelMessageComponent implements OnInit, OnDestroy {
     this.isEmojiPickerOpen.set(false);
   }
 
-  onUpdateMessage() {
-    console.log('test');
+  async onUpdateMessage() {
+    const messageId = this.editMessageId();
+    const newContent = this.messageContent();
+    if (messageId && newContent.trim()) {
+      await this.channelMessageService.updateMessage(
+        messageId,
+        newContent.trim()
+      );
+      this.editMessageId.set(null);
+      this.messageContent.set('');
+      this.saveMessageContentTemporarily.set('');
+    } else {
+      this.editMessageId.set(null);
+      this.messageContent.set('');
+      this.saveMessageContentTemporarily.set('');
+    }
   }
 
   @HostListener('document:mousedown', ['$event'])

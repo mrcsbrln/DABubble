@@ -11,11 +11,13 @@ import { ChannelMessage } from '../interfaces/channel-message.interface';
 import {
   addDoc,
   collection,
+  doc,
   Firestore,
   onSnapshot,
   query,
   serverTimestamp,
   Unsubscribe,
+  updateDoc,
   where,
 } from '@angular/fire/firestore';
 
@@ -106,5 +108,15 @@ export class ChannelMessageService implements OnDestroy {
         });
       });
     });
+  }
+
+  async updateMessage(messageId: string, newContent: string) {
+    const messageDocRef = doc(this.firestore, 'channel-messages', messageId);
+    try {
+      await updateDoc(messageDocRef, { content: newContent });
+      console.log('Message updated successfully:', messageId);
+    } catch (error) {
+      console.error('Error updating message:', messageId, error);
+    }
   }
 }
