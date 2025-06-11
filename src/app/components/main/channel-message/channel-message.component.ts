@@ -72,6 +72,7 @@ export class ChannelMessageComponent implements OnInit, OnDestroy {
   isShowMembersDialogOpen = signal(false);
   isUserProfileDialogOpen = signal(false);
   messageContent = signal('');
+  saveMessageContentTemporarily = signal('');
 
   editMessageId = signal<string | null>(null);
 
@@ -136,7 +137,7 @@ export class ChannelMessageComponent implements OnInit, OnDestroy {
   }
 
   getMessageContent() {
-    console.log('this.getMessagesReversed()', this.getMessagesReversed());
+    this.messageContent.set(this.saveMessageContentTemporarily());
   }
 
   getChannelName() {
@@ -200,7 +201,13 @@ export class ChannelMessageComponent implements OnInit, OnDestroy {
     );
     if (messageToEdit) {
       this.messageContent.set(messageToEdit.content);
+      this.saveMessageContentTemporarily.set(messageToEdit.content);
     }
+  }
+
+  onInputName(event: Event) {
+    const newValue = (event.target as HTMLInputElement).value;
+    this.messageContent.set(newValue);
   }
 
   setCurrentParentChannelMessageId(id: string) {

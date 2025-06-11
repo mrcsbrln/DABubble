@@ -144,12 +144,14 @@
             type="text"
             [class.outgoing]="isCurrentUserSenderOfMessage(message.id)"
             [value]="messageContent()"
+            (input)="onInputName($event)"
           />
           @if (editMessageId() === message.id) {
-          <button (click)="onUpdateMessage()">Speichern</button>
-          <!-- TODO  -->
-          <!-- <button (click)="editMessageId.set(null)">Abbrechen</button> -->
-          <button (click)="getMessageContent()">Abbrechen</button>
+          <div class="button-edit-container">
+            <button (click)="onUpdateMessage()">Speichern</button>
+            <!-- TODO  -->
+            <button (click)="getMessageContent()">Abbrechen</button>
+          </div>
           } }
         </div>
       </div>
