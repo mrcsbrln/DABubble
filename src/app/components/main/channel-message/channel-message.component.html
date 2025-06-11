@@ -103,7 +103,7 @@
   </div>
   <div class="messages-container">
     @for(message of getMessagesReversed(); track message.id; let i = $index) {
-
+    @if(!message.parentMessageId) {
     <button
       class="message"
       [class.outgoing]="isCurrentUserSenderOfMessage(message.id)"
@@ -146,13 +146,12 @@
             [value]="messageContent()"
             (input)="onInputName($event)"
           ></textarea>
-          }
-          @if (editMessageId() === message.id) {
+          } @if (editMessageId() === message.id) {
           <div class="button-edit-container">
             <button (click)="onUpdateMessage()">Speichern</button>
             <button (click)="getMessageContent()">Abbrechen</button>
           </div>
-          } 
+          }
         </div>
       </div>
 
@@ -209,7 +208,7 @@
         }}
       </span>
     </div>
-    } }
+    } } }
   </div>
   <form [formGroup]="form" (ngSubmit)="onSubmit()" (keydown.enter)="onSubmit()">
     <div class="message-input-container">

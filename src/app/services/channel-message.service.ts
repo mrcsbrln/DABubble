@@ -15,7 +15,7 @@ import {
   Firestore,
   onSnapshot,
   query,
-  serverTimestamp,
+  Timestamp,
   Unsubscribe,
   updateDoc,
   where,
@@ -87,7 +87,10 @@ export class ChannelMessageService implements OnDestroy {
       id: id,
       senderId: obj.senderId || '',
       content: obj.content || '',
-      timestamp: obj.timestamp || serverTimestamp(),
+      timestamp:
+        obj.timestamp instanceof Timestamp
+          ? obj.timestamp
+          : new Timestamp(0, 0), // fallback, wenn nicht Timestamp
       channelId: obj.channelId,
       parentMessageId: obj.parentMessageId,
     };

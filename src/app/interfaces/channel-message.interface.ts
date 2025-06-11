@@ -9,8 +9,4 @@ export interface ChannelMessage {
   channelId?: string; // ID des Channels, zu dem die Nachricht gehört (wenn es eine Channel-Nachricht ist)
   parentMessageId?: string; // ID der Ursprungsnachricht, wenn diese Nachricht Teil eines Threads ist (optional)
   reactions?: Reaction[]; // Array der Reaktionen auf diese Nachricht (optional)
-
-  // // Optional: Felder für @-Mentions oder #-Tags, falls diese speziell gespeichert werden sollen
-  // mentionedUserIds?: string[]; // UIDs der erwähnten Benutzer
-  // mentionedChannelId?: string; // ID des erwähnten Channels
 }
