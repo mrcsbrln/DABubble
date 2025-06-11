@@ -104,6 +104,14 @@ export class ThreadComponent {
     return this.channelService.getCurrentChannel()?.name;
   }
 
+  getParentMessage() {
+    return this.channelMessageService.getParentChannelMessage();
+  }
+
+  getThreadMessages() {
+    return this.channelMessageService.getThreadMessagesByParentMessageId();
+  }
+
   @HostListener('document:mousedown', ['$event'])
   onDocumentClick(event: MouseEvent) {
     const picker = this.emojiPickerRef?.nativeElement;

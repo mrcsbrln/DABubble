@@ -82,6 +82,18 @@ export class ChannelMessageService implements OnDestroy {
     });
   }
 
+  getParentChannelMessage() {
+    return this.messagesByChannelId.find(
+      (message) => message.id === this.parentChannelMessageId()
+    );
+  }
+
+  getThreadMessagesByParentMessageId() {
+    return this.messagesByChannelId.filter(
+      (message) => message.parentMessageId === this.parentChannelMessageId()
+    );
+  }
+
   setMessageObject(obj: Partial<ChannelMessage>, id: string): ChannelMessage {
     return {
       id: id,

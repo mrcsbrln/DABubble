@@ -4,6 +4,13 @@
     <img src="img/close.svg" alt="" />
   </button>
 
+  <div class="test-div">
+    <span>{{ getParentMessage()?.content }}</span>
+    @for(message of getThreadMessages(); track message.id) {
+    <span>{{ message.content }}</span>
+    }
+  </div>
+
   <form [formGroup]="form" (ngSubmit)="onSubmit()" (keydown.enter)="onSubmit()">
     <div class="message-input-container">
       <div class="message-input-box">

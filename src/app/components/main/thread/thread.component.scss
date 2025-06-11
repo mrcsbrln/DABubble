@@ -10,6 +10,10 @@
     border: unset;
     cursor: pointer;
   }
+  .test-div {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .message-input-container {
@@ -51,7 +55,7 @@
     right: 0;
     left: 0;
 
-    >div {
+    > div {
       display: flex;
     }
   }
@@ -95,19 +99,19 @@
   cursor: pointer;
   background-color: transparent;
 
-  >img {
+  > img {
     width: 48px;
     height: 48px;
   }
 
-  &:hover>img {
-    content: url('/img/add-reaction-hover.svg');
+  &:hover > img {
+    content: url("/img/add-reaction-hover.svg");
     width: 24px;
     height: 48px;
   }
 
-  &:focus>img {
-    content: url('/img/add-reaction-hover.svg');
+  &:focus > img {
+    content: url("/img/add-reaction-hover.svg");
     width: 24px;
     height: 48px;
   }
@@ -168,7 +172,7 @@
     height: 48px;
 
     img {
-      content: url('/img/at-icon-hover.svg');
+      content: url("/img/at-icon-hover.svg");
     }
   }
 }
