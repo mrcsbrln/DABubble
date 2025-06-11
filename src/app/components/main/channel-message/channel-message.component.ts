@@ -138,6 +138,7 @@ export class ChannelMessageComponent implements OnInit, OnDestroy {
 
   getMessageContent() {
     this.messageContent.set(this.saveMessageContentTemporarily());
+    this.editMessageId.set(null);
   }
 
   getChannelName() {
@@ -299,11 +300,11 @@ export class ChannelMessageComponent implements OnInit, OnDestroy {
     const messageId = this.editMessageId();
     const newContent = this.messageContent();
     if (messageId && newContent.trim()) {
+      this.editMessageId.set(null);
       await this.channelMessageService.updateMessage(
         messageId,
         newContent.trim()
       );
-      this.editMessageId.set(null);
       this.messageContent.set('');
       this.saveMessageContentTemporarily.set('');
     } else {

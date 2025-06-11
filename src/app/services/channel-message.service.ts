@@ -114,7 +114,6 @@ export class ChannelMessageService implements OnDestroy {
     const messageDocRef = doc(this.firestore, 'channel-messages', messageId);
     try {
       await updateDoc(messageDocRef, { content: newContent });
-      console.log('Message updated successfully:', messageId);
     } catch (error) {
       console.error('Error updating message:', messageId, error);
     }

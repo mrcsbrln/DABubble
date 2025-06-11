@@ -318,6 +318,7 @@ button {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    width: 100%;
   }
 
   .message-header {
@@ -362,6 +363,16 @@ button {
     }
   }
 
+  textarea.message-content {
+    background-color: gray !important;
+    resize: none;
+    padding: 15px;
+    border-radius: 0px 30px 30px 30px;
+    font-size: 16px;
+    outline: none;
+    border: none;
+  }
+
   .message-container {
     display: flex;
     flex-direction: column;
@@ -381,6 +392,19 @@ button {
       color: $text-gray;
       font-size: 14px;
     }
+  }
+}
+
+.button-edit-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  transition: color 150ms;
+  padding: 0 16px;
+
+  button:hover {
+    color: $purple-3;
   }
 }
 

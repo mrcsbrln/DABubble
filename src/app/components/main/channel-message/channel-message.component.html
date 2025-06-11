@@ -139,20 +139,20 @@
             {{ message.content }}
           </div>
           } @else {
-          <input
+          <textarea
             class="message-content"
             type="text"
             [class.outgoing]="isCurrentUserSenderOfMessage(message.id)"
             [value]="messageContent()"
             (input)="onInputName($event)"
-          />
+          ></textarea>
+          }
           @if (editMessageId() === message.id) {
           <div class="button-edit-container">
             <button (click)="onUpdateMessage()">Speichern</button>
-            <!-- TODO  -->
             <button (click)="getMessageContent()">Abbrechen</button>
           </div>
-          } }
+          } 
         </div>
       </div>
 
