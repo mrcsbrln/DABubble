@@ -13,6 +13,7 @@ import {
   collection,
   doc,
   Firestore,
+  getCountFromServer,
   onSnapshot,
   query,
   Timestamp,
@@ -131,6 +132,21 @@ export class ChannelMessageService implements OnDestroy {
       await updateDoc(messageDocRef, { content: newContent });
     } catch (error) {
       console.error('Error updating message:', messageId, error);
+    }
+  }
+
+  async getThreadMessageCount(parentMessageId: string): Promise<number> {
+    try {
+      const messagesRef = collection(this.firestore, 'channel-messages');
+      const threadQuery = query(
+        messagesRef,
+        where('parentMessageId', '==', parentMessageId)
+      );
+      const snapshot = await getCountFromServer(threadQuery);
+      return snapshot.data().count;
+    } catch (error) {
+      console.error(error);
+      return 0;
     }
   }
 }

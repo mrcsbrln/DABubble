@@ -5,9 +5,9 @@
   </button>
 
   <div class="test-div">
-    <span>{{ getParentMessage()?.content }}</span>
+    <span>ParentMessage: {{ getParentMessage()?.content }}</span>
     @for(message of getThreadMessages(); track message.id) {
-    <span>{{ message.content }}</span>
+    <span>ThreadMessage: {{ message.content }}</span>
     }
   </div>
 
