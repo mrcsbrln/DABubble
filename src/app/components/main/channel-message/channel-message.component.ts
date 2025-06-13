@@ -10,7 +10,6 @@ import {
   ViewChild,
   output,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../services/auth/auth.service';
 import { ChannelMessageService } from '../../../services/channel-message.service';
 import { serverTimestamp } from '@angular/fire/firestore';
@@ -24,7 +23,7 @@ import {
 } from '@angular/forms';
 import { ChannelMessage } from '../../../interfaces/channel-message.interface';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Subscription, from } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { ChannelService } from '../../../services/channel.service';
 import { UserService } from '../../../services/user.service';
 import localeDe from '@angular/common/locales/de';
@@ -40,7 +39,6 @@ registerLocaleData(localeDe);
   selector: 'app-channel-message',
   imports: [
     AddMembersComponent,
-    CommonModule,
     ReactiveFormsModule,
     DatePipe,
     EditChannelComponent,
@@ -258,7 +256,7 @@ export class ChannelMessageComponent implements OnInit, OnDestroy {
   }
 
   getAmountOfThreadMessages(parentId: string) {
-    return from(this.channelMessageService.getThreadMessageCount(parentId));
+    return parentId;
   }
 
   isToday(date: Date): boolean {
