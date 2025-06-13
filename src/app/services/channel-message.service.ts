@@ -6,6 +6,7 @@ import {
   signal,
   Injector,
   runInInjectionContext,
+  computed,
 } from '@angular/core';
 import { ChannelMessage } from '../interfaces/channel-message.interface';
 import {
@@ -30,12 +31,24 @@ export class ChannelMessageService implements OnDestroy {
   private firestore = inject(Firestore);
   private injector = inject(Injector);
 
-  messages: ChannelMessage[] = [];
-  messagesByChannelId: ChannelMessage[] = [];
+  messages = signal<ChannelMessage[]>([]);
+  messagesByChannelId = signal<ChannelMessage[]>([]);
 
   currentChannelId = signal('');
 
   parentChannelMessageId = signal('');
+
+  parentMessage = computed(() => {
+    const id = this.parentChannelMessageId();
+    return this.messagesByChannelId().find((m) => m.id === id);
+  });
+
+  threadMessages = computed(() => {
+    const parentId = this.parentChannelMessageId();
+    return this.messagesByChannelId().filter(
+      (m) => m.parentMessageId === parentId
+    );
+  });
 
   unsubMessages!: Unsubscribe;
   unsubMessagesByChannelId!: Unsubscribe;
@@ -72,25 +85,12 @@ export class ChannelMessageService implements OnDestroy {
   }
 
   subMessageCollection() {
-    return runInInjectionContext(this.injector, () => {
-      return onSnapshot(this.messagesCollectionRef(), (messages) => {
-        this.messages = [];
-        messages.forEach((message) => {
-          this.messages.push(this.setMessageObject(message.data(), message.id));
-        });
-      });
-    });
-  }
-
-  getParentChannelMessage() {
-    return this.messagesByChannelId.find(
-      (message) => message.id === this.parentChannelMessageId()
-    );
-  }
-
-  getThreadMessagesByParentMessageId() {
-    return this.messagesByChannelId.filter(
-      (message) => message.parentMessageId === this.parentChannelMessageId()
+    return runInInjectionContext(this.injector, () =>
+      onSnapshot(this.messagesCollectionRef(), (snap) => {
+        this.messages.set(
+          snap.docs.map((d) => this.setMessageObject(d.data(), d.id))
+        );
+      })
     );
   }
 
@@ -102,7 +102,7 @@ export class ChannelMessageService implements OnDestroy {
       timestamp:
         obj.timestamp instanceof Timestamp
           ? obj.timestamp
-          : new Timestamp(0, 0), // fallback, wenn nicht Timestamp
+          : new Timestamp(0, 0),
       channelId: obj.channelId,
       parentMessageId: obj.parentMessageId,
     };
@@ -114,13 +114,11 @@ export class ChannelMessageService implements OnDestroy {
       where('channelId', '==', channelId)
     );
     return runInInjectionContext(this.injector, () => {
-      return onSnapshot(q, (messages) => {
-        this.messagesByChannelId = [];
-        messages.forEach((message) => {
-          this.messagesByChannelId.push(
-            this.setMessageObject(message.data(), message.id)
-          );
-        });
+      return onSnapshot(q, (snap) => {
+        const newMessages = snap.docs.map((doc) =>
+          this.setMessageObject(doc.data(), doc.id)
+        );
+        this.messagesByChannelId.set(newMessages);
       });
     });
   }

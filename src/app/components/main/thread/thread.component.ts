@@ -105,11 +105,11 @@ export class ThreadComponent {
   }
 
   getParentMessage() {
-    return this.channelMessageService.getParentChannelMessage();
+    return this.channelMessageService.parentMessage();
   }
 
   getThreadMessages() {
-    return this.channelMessageService.getThreadMessagesByParentMessageId();
+    return this.channelMessageService.threadMessages();
   }
 
   @HostListener('document:mousedown', ['$event'])

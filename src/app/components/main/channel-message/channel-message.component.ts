@@ -112,7 +112,7 @@ export class ChannelMessageComponent implements OnInit, OnDestroy {
   }
 
   getMessagesByChannelId() {
-    return this.channelMessageService.messagesByChannelId;
+    return this.channelMessageService.messagesByChannelId();
   }
 
   getMembersOfCurrentChannel() {
@@ -150,9 +150,9 @@ export class ChannelMessageComponent implements OnInit, OnDestroy {
   }
 
   getDateOfMessageById(messageId: string) {
-    const timestamp = this.channelMessageService.messages.find(
-      (message) => message.id === messageId
-    )?.timestamp as Timestamp;
+    const timestamp = this.channelMessageService
+      .messages()
+      .find((message) => message.id === messageId)?.timestamp as Timestamp;
     return timestamp.toDate();
   }
 
