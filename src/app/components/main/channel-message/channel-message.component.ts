@@ -256,7 +256,9 @@ export class ChannelMessageComponent implements OnInit, OnDestroy {
   }
 
   getAmountOfThreadMessages(parentId: string) {
-    return parentId;
+    return this.channelMessageService
+      .messages()
+      .filter((message) => message.parentMessageId === parentId).length;
   }
 
   isToday(date: Date): boolean {
