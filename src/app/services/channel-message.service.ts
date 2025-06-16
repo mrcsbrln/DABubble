@@ -1,12 +1,12 @@
 import {
   Injectable,
-  OnDestroy,
   effect,
   inject,
   signal,
   Injector,
   runInInjectionContext,
   computed,
+  DestroyRef,
 } from '@angular/core';
 import { ChannelMessage } from '../interfaces/channel-message.interface';
 import {
@@ -27,9 +27,10 @@ type MessageData = Omit<ChannelMessage, 'id'>;
 @Injectable({
   providedIn: 'root',
 })
-export class ChannelMessageService implements OnDestroy {
+export class ChannelMessageService {
   private firestore = inject(Firestore);
   private injector = inject(Injector);
+  private destroyRef = inject(DestroyRef);
 
   messages = signal<ChannelMessage[]>([]);
   messagesByChannelId = signal<ChannelMessage[]>([]);
@@ -61,15 +62,12 @@ export class ChannelMessageService implements OnDestroy {
         this.currentChannelId()
       );
     });
-  }
-
-  ngOnDestroy() {
-    if (this.unsubMessages) {
-      this.unsubMessages();
-    }
-    if (this.unsubMessagesByChannelId) {
-      this.unsubMessagesByChannelId();
-    }
+    this.destroyRef.onDestroy(() => {
+      this.unsubMessages?.();
+    });
+    this.destroyRef.onDestroy(() => {
+      this.unsubMessagesByChannelId?.();
+    });
   }
 
   messagesCollectionRef() {

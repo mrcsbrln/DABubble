@@ -105,7 +105,7 @@ export class ChannelMessageComponent implements OnInit {
   ngOnInit() {
     this.subRouteParams();
     this.destroyRef.onDestroy(() => {
-      this.subRoute.unsubscribe();
+      this.subRoute?.unsubscribe();
     });
   }
 
