@@ -3,12 +3,12 @@ import {
   ElementRef,
   HostListener,
   inject,
-  OnDestroy,
   OnInit,
   LOCALE_ID,
   signal,
   ViewChild,
   output,
+  DestroyRef,
 } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { ChannelMessageService } from '../../../services/channel-message.service';
@@ -48,12 +48,13 @@ registerLocaleData(localeDe);
   styleUrl: './channel-message.component.scss',
   providers: [{ provide: LOCALE_ID, useValue: 'de' }],
 })
-export class ChannelMessageComponent implements OnInit, OnDestroy {
+export class ChannelMessageComponent implements OnInit {
   private authService = inject(AuthService);
   private channelMessageService = inject(ChannelMessageService);
   private route = inject(ActivatedRoute);
   private channelService = inject(ChannelService);
   private userService = inject(UserService);
+  private destroyRef = inject(DestroyRef);
 
   @ViewChild('emojiPicker') emojiPickerRef!: ElementRef;
   @ViewChild('emojiToggleBtn') emojiToggleBtnRef!: ElementRef;
@@ -103,12 +104,9 @@ export class ChannelMessageComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subRouteParams();
-  }
-
-  ngOnDestroy() {
-    if (this.subRoute) {
+    this.destroyRef.onDestroy(() => {
       this.subRoute.unsubscribe();
-    }
+    });
   }
 
   getMessagesByChannelId() {
