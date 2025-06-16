@@ -1,4 +1,4 @@
-import { Injectable, inject, OnDestroy } from '@angular/core';
+import { Injectable, inject, DestroyRef } from '@angular/core';
 import { Channel } from '../interfaces/channel.interface';
 import { ChannelMessageService } from './channel-message.service';
 import {
@@ -18,9 +18,10 @@ type channelData = Omit<Channel, 'id'>;
 @Injectable({
   providedIn: 'root',
 })
-export class ChannelService implements OnDestroy {
+export class ChannelService {
   private firestore = inject(Firestore);
   private channelMessageServive = inject(ChannelMessageService);
+  private destroyRef = inject(DestroyRef);
 
   channels: Channel[] = [];
 
@@ -28,10 +29,9 @@ export class ChannelService implements OnDestroy {
 
   constructor() {
     this.unsubChannels = this.subChannelsCollection();
-  }
-
-  ngOnDestroy() {
-    this.unsubChannels();
+    this.destroyRef.onDestroy(() => {
+      this.unsubChannels();
+    });
   }
 
   async addUserToChannel(userId: string, docId: string) {

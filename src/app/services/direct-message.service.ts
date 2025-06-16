@@ -4,7 +4,7 @@ import {
   Injector,
   runInInjectionContext,
   signal,
-  OnDestroy,
+  DestroyRef,
 } from '@angular/core';
 import { Unsubscribe } from '@angular/fire/auth';
 import {
@@ -23,11 +23,12 @@ type DirectMessageData = Omit<DirectMessage, 'id'>;
 @Injectable({
   providedIn: 'root',
 })
-export class DirectMessageService implements OnDestroy {
+export class DirectMessageService {
   private firestore = inject(Firestore);
   private injector = inject(Injector);
   private authService = inject(AuthService);
   private userService = inject(UserService);
+  private destroyRef = inject(DestroyRef);
 
   directMessages: DirectMessage[] = [];
   messagesByChannelId: DirectMessage[] = [];
@@ -40,15 +41,12 @@ export class DirectMessageService implements OnDestroy {
 
   constructor() {
     this.unsubMessages = this.subMessageCollection();
-  }
-
-  ngOnDestroy() {
-    if (this.unsubMessages) {
-      this.unsubMessages();
-    }
-    if (this.unsubMessagesByChannelId) {
-      this.unsubMessagesByChannelId();
-    }
+    this.destroyRef.onDestroy(() => {
+      if (this.unsubMessages) this.unsubMessages();
+    });
+    this.destroyRef.onDestroy(() => {
+      if (this.unsubMessagesByChannelId) this.unsubMessagesByChannelId();
+    });
   }
 
   directMessagesCollectionRef() {
