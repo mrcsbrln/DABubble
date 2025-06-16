@@ -4,8 +4,20 @@
     <span>DABubble</span>
   </div>
   <div class="input-wrapper">
-    <input type="text" placeholder="Devspace durchsuchen" />
+    <input
+      [formControl]="searchBarInput"
+      (input)="checkForAt()"
+      type="text"
+      placeholder="Devspace durchsuchen"
+    />
     <img src="img/search.svg" alt="" />
+    @if(isSearchDialogOpen()) {
+    <div class="searchbar-dialog">
+      @for(user of getUsers(); track user.uid) {
+      <span>{{ user.displayName }}</span>
+      }
+    </div>
+    }
   </div>
   <div
     (click)="toogleArrowDown()"
