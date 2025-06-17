@@ -6,12 +6,18 @@
   <div class="input-wrapper">
     <input
       [formControl]="searchBarInput"
-      (input)="checkForAt()"
+      (input)="checkForAtOrHash()"
       type="text"
       placeholder="Devspace durchsuchen"
     />
     <img src="img/search.svg" alt="" />
-    @if(isSearchDialogOpen()) {
+    @if(isAtInInput()) {
+    <div class="searchbar-dialog">
+      @for(user of getFilteredUsers(); track user.uid) {
+      <span>{{ user.displayName }}</span>
+      }
+    </div>
+    } @else if (isHashInInput()) {
     <div class="searchbar-dialog">
       @for(user of getFilteredUsers(); track user.uid) {
       <span>{{ user.displayName }}</span>

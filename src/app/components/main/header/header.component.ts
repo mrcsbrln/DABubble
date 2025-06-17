@@ -1,6 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserService } from '../../../services/user.service';
+import { ChannelService } from '../../../services/channel.service';
 import { CurrentUserProfileComponent } from '../current-user-profile/current-user-profile.component';
 import { FormControl } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -14,16 +15,19 @@ import { ReactiveFormsModule } from '@angular/forms';
 export class HeaderComponent {
   private authService = inject(AuthService);
   private userService = inject(UserService);
+  private channelService = inject(ChannelService);
 
   arrowDownOpen = signal(false);
   userProfileDialogOpen = signal(false);
-  isSearchDialogOpen = signal(false);
+  isAtInInput = signal(false);
+  isHashInInput = signal(false);
 
   searchBarInput = new FormControl('');
 
-  checkForAt() {
+  checkForAtOrHash() {
     const searchBarValue = this.searchBarInput.value || '';
-    this.isSearchDialogOpen.set(searchBarValue?.includes('@'));
+    this.isAtInInput.set(searchBarValue?.includes('@'));
+    this.isHashInInput.set(searchBarValue?.includes('#'));
   }
 
   getCurrentUser() {
@@ -32,7 +36,7 @@ export class HeaderComponent {
       .find((user) => user.uid === this.authService.currentUser()?.uid);
   }
 
-  extractMention(input: string): string | null {
+  extractMention(input: string) {
     const match = input.match(/@(\w+)$/);
     return match ? match[1] : null;
   }
