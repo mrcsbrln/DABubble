@@ -37,7 +37,12 @@ export class HeaderComponent {
   }
 
   extractMention(input: string) {
-    const match = input.match(/([@#])(\w+)$/);
+    const match = input.match(/@(\w+)/);
+    return match ? match[1] : null;
+  }
+
+  extractChannelFromHash(input: string) {
+    const match = input.match(/#(\w+)/);
     return match ? match[1] : null;
   }
 
@@ -59,7 +64,7 @@ export class HeaderComponent {
 
   getFilteredChannels() {
     const input = this.searchBarInput.value || '';
-    const channel = this.extractMention(input);
+    const channel = this.extractChannelFromHash(input);
     if (input.endsWith('#')) {
       return this.channelService.channels();
     }
