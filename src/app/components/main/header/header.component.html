@@ -13,7 +13,7 @@
     <img src="img/search.svg" alt="" />
     @if(isSearchDialogOpen()) {
     <div class="searchbar-dialog">
-      @for(user of getUsers(); track user.uid) {
+      @for(user of getFilteredUsers(); track user.uid) {
       <span>{{ user.displayName }}</span>
       }
     </div>

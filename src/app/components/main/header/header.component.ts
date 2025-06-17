@@ -17,9 +17,9 @@ export class HeaderComponent {
 
   arrowDownOpen = signal(false);
   userProfileDialogOpen = signal(false);
+  isSearchDialogOpen = signal(false);
 
   searchBarInput = new FormControl('');
-  isSearchDialogOpen = signal(false);
 
   checkForAt() {
     const searchBarValue = this.searchBarInput.value || '';
@@ -32,8 +32,25 @@ export class HeaderComponent {
       .find((user) => user.uid === this.authService.currentUser()?.uid);
   }
 
-  getUsers() {
-    return this.userService.users();
+  extractMention(input: string): string | null {
+    const match = input.match(/@(\w+)$/);
+    return match ? match[1] : null;
+  }
+
+  getFilteredUsers() {
+    const input = this.searchBarInput.value || '';
+    const mention = this.extractMention(input);
+    if (input.endsWith('@')) {
+      return this.userService.users();
+    }
+    if (!mention) {
+      return [];
+    }
+    return this.userService
+      .users()
+      .filter((user) =>
+        user.displayName.toLowerCase().startsWith(mention.toLowerCase())
+      );
   }
 
   toogleArrowDown() {
