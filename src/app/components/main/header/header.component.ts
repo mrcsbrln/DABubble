@@ -57,13 +57,21 @@ export class HeaderComponent {
       );
   }
 
-  // getFilteredChannels() {
-  //   const input = this.searchBarInput.value || '';
-  //   const channel = this.extractMention(input);
-  //   if (input.endsWith('#')) {
-  //     return this.channelService.channels;
-  //   }
-  // }
+  getFilteredChannels() {
+    const input = this.searchBarInput.value || '';
+    const channel = this.extractMention(input);
+    if (input.endsWith('#')) {
+      return this.channelService.channels();
+    }
+    if (!channel) {
+      return [];
+    }
+    return this.channelService
+      .channels()
+      .filter((channel) =>
+        channel.name.toLowerCase().startsWith(channel.name.toLowerCase())
+      );
+  }
 
   toogleArrowDown() {
     this.arrowDownOpen.update((value) => !value);

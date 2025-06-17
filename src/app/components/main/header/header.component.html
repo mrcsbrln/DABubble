@@ -19,8 +19,8 @@
     </div>
     } @else if (isHashInInput()) {
     <div class="searchbar-dialog">
-      @for(user of getFilteredUsers(); track user.uid) {
-      <span>{{ user.displayName }}</span>
+      @for(channel of getFilteredChannels(); track channel.id) {
+      <span>{{ channel.name }}</span>
       }
     </div>
     }
