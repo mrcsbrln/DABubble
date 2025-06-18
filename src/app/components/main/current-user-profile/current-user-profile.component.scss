@@ -9,17 +9,21 @@ button {
   cursor: pointer;
   border-radius: 50px;
   padding: 15px 20px;
+
   &.cancel {
     border: 1px solid $purple-1;
+
     &:hover {
       background-color: $purple-1;
       color: #fff;
       transition: $hover-transition;
     }
   }
+
   &.save {
     background-color: $purple-1;
     color: #fff;
+
     &:hover {
       background-color: $purple-2;
       transition: $hover-transition;
@@ -46,14 +50,17 @@ button {
 
 .email {
   color: $email-color;
+  padding-left: 32px;
 }
 
 .input-wrapper {
   border: 1px solid $light-purple;
   border-radius: 30px;
   padding: 15px 20px;
+
   input {
     border-style: none;
+
     &:focus {
       outline: none;
     }
@@ -64,10 +71,24 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 8px;
+
   .username {
     font-size: 32px;
     font-weight: 700;
+    line-height: 32px;
+  }
+}
+
+.email-address-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+
+  > :first-child {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 }
 
@@ -75,18 +96,22 @@ button {
   display: flex;
   align-items: center;
   gap: 8px;
+
   .status {
     display: block;
     width: 16px;
     height: 16px;
     background-color: $text-gray;
     border-radius: 100%;
+
     &.online {
       background-color: $online-green;
     }
   }
+
   .status-text {
     color: $text-gray;
+
     &.online {
       color: $online-green;
     }
@@ -94,34 +119,41 @@ button {
 }
 
 .user-profile {
-  padding: 48px;
+  padding: 44px;
   background-color: #fff;
   border-radius: 30px 0 30px 30px;
-  box-shadow: $box-shadow-overlay;
+  box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   gap: 16px;
-  max-width: 500px;
+  max-width: 440px;
+  width: 100%;
+
   .avatar {
     border-radius: 100%;
+    width: 100%;
     max-width: 200px;
     align-self: center;
   }
+
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
+
     img {
       width: 32px;
       cursor: pointer;
       padding: 8px;
       border-radius: 100%;
+
       &:hover {
         background-color: $bg-color;
         transition: $hover-transition;
       }
     }
+
     span {
       font-size: 24px;
       font-weight: 600;

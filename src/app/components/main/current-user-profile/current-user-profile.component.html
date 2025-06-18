@@ -31,18 +31,20 @@
     />
     @if (!isEditMode()) {
     <div class="row">
-      <span class="username">{{
-        getCurrentUserInUserCollection()?.displayName
-      }}</span>
+      <span class="username"
+        >{{ getCurrentUserInUserCollection()?.displayName }}
+      </span>
       <button (click)="toggleEditMode()">Bearbeiten</button>
     </div>
     <div class="status-wrapper">
       <span class="status online"></span>
       <span class="status-text online">Aktiv </span>
     </div>
-    <div class="row">
-      <img src="img/mail-icon.svg" alt="" />
-      <span>E-Mail-Adresse</span>
+    <div class="email-address-container">
+      <div>
+        <img src="img/mail-icon.svg" alt="mail-image" />
+        <span>E-Mail-Adresse</span>
+      </div>
       <span class="email">{{ getCurrentUserInUserCollection()?.email }}</span>
     </div>
     } @else if (isEditMode()) {
