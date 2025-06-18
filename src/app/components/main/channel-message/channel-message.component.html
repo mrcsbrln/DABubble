@@ -96,7 +96,7 @@
           </button>
 
           @for(member of getMembersOfCurrentChannel(); track member?.uid) {
-
+          @if(member?.uid !== getCurrentUserData()?.uid) {
           <button
             class="user-entry"
             (click)="toggleUserProfileDialog()"
@@ -109,7 +109,7 @@
             </div>
             <span>{{ member?.displayName }}</span>
           </button>
-          }
+          }}
         </div>
 
         <button
