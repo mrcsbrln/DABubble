@@ -80,7 +80,22 @@
             alt=""
           />
         </div>
+
         <div class="members-list">
+
+          <button
+            class="user-entry"
+            (click)="toggleUserProfileDialog()"
+            (click)="toggleShowMembersDialog()"
+            (click)="setSelectedMemeberId(getCurrentUserData()?.uid!)"
+          >
+            <div class="avatar-wrapper">
+              <img [src]="getCurrentUserData()?.avatarUrl" alt="Avatar" />
+              <span class="status-dot" [ngClass]="{ online: true }"></span>
+            </div>
+            <span>{{ getCurrentUserData()?.displayName }} (Du)</span>
+          </button>
+
           @for(member of getMembersOfCurrentChannel(); track member?.uid) {
           <button
             (click)="toggleUserProfileDialog()"
@@ -91,6 +106,7 @@
           </button>
           }
         </div>
+
         <button
           (click)="toogleAddMemebersDialog()"
           (click)="toggleShowMembersDialog()"

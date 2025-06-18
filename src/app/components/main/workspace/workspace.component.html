@@ -67,6 +67,7 @@
       </div>
       <span>{{ getCurrentUserData()?.displayName }} (Du)</span>
     </a>
+    
     @for (user of getUserDataOfOtherParcipitants(); track user.uid) {
     @if(user.uid !== getCurrentUserData()?.uid) {
     <a class="user-entry" [routerLink]="['/user', user.uid]">

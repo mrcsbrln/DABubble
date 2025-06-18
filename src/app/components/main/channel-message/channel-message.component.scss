@@ -28,7 +28,7 @@ button {
   background-color: #fff;
   border-radius: 30px 0 30px 30px;
   box-shadow: $box-shadow-overlay;
-  padding: 64px;
+  padding: 44px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -636,4 +636,53 @@ button {
       outline: 2px solid $text-gray;
     }
   }
+}
+
+
+.user-entry {
+  border-radius: 30px;
+  padding: 4px 16px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  width: fit-content;
+
+  .avatar-wrapper {
+    position: relative;
+    width: 44px;
+    height: 44px;
+
+    img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .status-dot {
+      position: absolute;
+      right: -1px;
+      bottom: 1px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      background-color: $text-gray;
+
+      &.online {
+        background-color: $online-green;
+      }
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      cursor: pointer;
+      background-color: $bg-color;
+      color: $purple-3;
+    }
+  }
+
 }

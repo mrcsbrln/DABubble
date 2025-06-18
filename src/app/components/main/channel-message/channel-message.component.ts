@@ -14,7 +14,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { ChannelMessageService } from '../../../services/channel-message.service';
 import { serverTimestamp } from '@angular/fire/firestore';
 import { Timestamp, FieldValue } from '@angular/fire/firestore';
-import { DatePipe, registerLocaleData } from '@angular/common';
+import { CommonModule, DatePipe, registerLocaleData } from '@angular/common';
 import {
   FormControl,
   FormGroup,
@@ -43,6 +43,7 @@ registerLocaleData(localeDe);
     DatePipe,
     EditChannelComponent,
     UserProfileComponent,
+    CommonModule
   ],
   templateUrl: './channel-message.component.html',
   styleUrl: './channel-message.component.scss',
@@ -316,6 +317,14 @@ export class ChannelMessageComponent implements OnInit {
       this.messageContent.set('');
       this.saveMessageContentTemporarily.set('');
     }
+  }
+
+  getCurrentUserData() {
+    const currentUserId = this.userService.currentUserData()?.uid;
+    if (!currentUserId) {
+      return null;
+    }
+    return this.userService.getUserById(currentUserId);
   }
 
   @HostListener('document:mousedown', ['$event'])
