@@ -63,19 +63,21 @@ export class HeaderComponent {
   }
 
   getFilteredChannels() {
-    const input = this.searchBarInput.value || '';
-    const channel = this.extractChannelFromHash(input);
-    if (input.endsWith('#')) {
-      return this.channelService.channels();
-    }
-    if (!channel) {
-      return [];
-    }
-    return this.channelService
+    const input = (this.searchBarInput.value ?? '').trim();
+    const searchTerm = this.extractChannelFromHash(input)?.toLowerCase(); // #dev → "dev"
+    const currentUserId = this.authService.currentUser()?.uid;
+
+    if (!currentUserId) return [];
+
+    const currentUserChannels = this.channelService
       .channels()
-      .filter((channel) =>
-        channel.name.toLowerCase().startsWith(channel.name.toLowerCase())
-      );
+      .filter((channel) => channel.memberIds.includes(currentUserId));
+
+    if (input.endsWith('#') || !searchTerm) return currentUserChannels;
+
+    return currentUserChannels.filter((channel) =>
+      channel.name.toLowerCase().startsWith(searchTerm)
+    );
   }
 
   toogleArrowDown() {

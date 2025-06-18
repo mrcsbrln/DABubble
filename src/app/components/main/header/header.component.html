@@ -15,12 +15,16 @@
     <div class="searchbar-dialog">
       @for(user of getFilteredUsers(); track user.uid) {
       <span>{{ user.displayName }}</span>
+      } @empty {
+      <span>Keine Benutzer gefunden</span>
       }
     </div>
     } @else if (isHashInInput()) {
     <div class="searchbar-dialog">
       @for(channel of getFilteredChannels(); track channel.id) {
       <span>{{ channel.name }}</span>
+      } @empty {
+      <span>Keine Channels gefunden</span>
       }
     </div>
     }
