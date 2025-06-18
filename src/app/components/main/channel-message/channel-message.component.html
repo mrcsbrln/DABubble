@@ -82,7 +82,6 @@
         </div>
 
         <div class="members-list">
-
           <button
             class="user-entry"
             (click)="toggleUserProfileDialog()"
@@ -97,12 +96,18 @@
           </button>
 
           @for(member of getMembersOfCurrentChannel(); track member?.uid) {
+
           <button
+            class="user-entry"
             (click)="toggleUserProfileDialog()"
             (click)="toggleShowMembersDialog()"
             (click)="setSelectedMemeberId(member?.uid!)"
           >
-            {{ member?.displayName }}
+            <div class="avatar-wrapper">
+              <img [src]="getCurrentUserData()?.avatarUrl" alt="Avatar" />
+              <span class="status-dot" [ngClass]="{ online: true }"></span>
+            </div>
+            <span>{{ member?.displayName }}</span>
           </button>
           }
         </div>
