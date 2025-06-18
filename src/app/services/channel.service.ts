@@ -1,4 +1,4 @@
-import { Injectable, inject, DestroyRef } from '@angular/core';
+import { Injectable, inject, DestroyRef, signal } from '@angular/core';
 import { Channel } from '../interfaces/channel.interface';
 import { ChannelMessageService } from './channel-message.service';
 import {
@@ -23,7 +23,7 @@ export class ChannelService {
   private channelMessageServive = inject(ChannelMessageService);
   private destroyRef = inject(DestroyRef);
 
-  channels: Channel[] = [];
+  channels = signal<Channel[]>([]);
 
   unsubChannels!: Unsubscribe;
 
@@ -54,23 +54,19 @@ export class ChannelService {
   }
 
   getCurrentChannel() {
-    return this.channels.find(
+    return this.channels().find(
       (channel) => channel.id === this.channelMessageServive.currentChannelId()
     );
   }
 
   getChannelById(channelId: string) {
-    return this.channels.find((channel) => channel.id === channelId);
+    return this.channels().find((channel) => channel.id === channelId);
   }
 
   getMembersOfChannel(channelId: string) {
-    const channel = this.channels.find((channel) => channel.id === channelId);
+    const channel = this.channels().find((channel) => channel.id === channelId);
     return channel?.memberIds;
   }
-
-  // getChannelSubCollectionMessagesRef() {
-  //   return collection(this.getChannelDocRef(), 'messages');
-  // }
 
   async addChannel(channelData: channelData) {
     try {
@@ -81,11 +77,12 @@ export class ChannelService {
   }
 
   subChannelsCollection() {
-    return onSnapshot(this.getChannelsCollectionRef(), (channels) => {
-      this.channels = [];
-      channels.forEach((channel) => {
-        this.channels.push(this.setChannelObject(channel.data(), channel.id));
+    return onSnapshot(this.getChannelsCollectionRef(), (channelsSnapshot) => {
+      const channels: Channel[] = [];
+      channelsSnapshot.forEach((channelDoc) => {
+        channels.push(this.setChannelObject(channelDoc.data(), channelDoc.id));
       });
+      this.channels.set(channels);
     });
   }
 

@@ -24,7 +24,7 @@ export class WorkspaceComponent {
   addChannelDialogOpen = signal(false);
 
   getChannels() {
-    return this.channelService.channels;
+    return this.channelService.channels();
   }
 
   getCurrentUserData() {
