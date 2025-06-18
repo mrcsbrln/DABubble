@@ -110,14 +110,15 @@
             <span>{{ member?.displayName }}</span>
           </button>
           }}
+          <button
+            class="user-entry"
+            (click)="toogleAddMemebersDialog()"
+            (click)="toggleShowMembersDialog()"
+          >
+            <img class="member-image" src="img/add-member.svg" alt="add-member" />Mitglieder hinzufügen
+          </button>
         </div>
 
-        <button
-          (click)="toogleAddMemebersDialog()"
-          (click)="toggleShowMembersDialog()"
-        >
-          <img src="img/add-member.svg" alt="" />Mitglieder hinzufügen
-        </button>
       </div>
       }
     </div>

@@ -682,12 +682,23 @@ button {
     }
   }
 
+  .member-image {
+    width: 32px;
+    height: 32px;
+  }
+
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       cursor: pointer;
       background-color: $bg-color;
       color: $purple-3;
     }
-  }
 
+    &:hover .member-image {
+      content: url('/img/person-add-hover.svg');
+      width: 32px;
+      height: 32px;
+      padding: 2px;
+    }
+  }
 }
