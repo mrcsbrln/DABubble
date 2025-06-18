@@ -3,7 +3,6 @@
   (click)="$event.stopPropagation()"
   (keydown)="$event.stopPropagation()"
   tabindex="0"
-  class="dialog"
 >
   <div class="card-header">
     <span>Profil</span>
@@ -16,14 +15,26 @@
       (focus)="isHovering.set(true)"
       (blur)="isHovering.set(false)"
       [src]="isHovering() ? closeIconHoverSrc : closeIconSrc"
-      alt=""
+      alt="close-icon"
     />
   </div>
-  <img [src]="getSelectedChannelMember()?.avatarUrl" alt="" />
-  <span>{{ getSelectedChannelMember()?.displayName }}</span>
-  @if(true) {
-  <span>Aktiv</span>
-  } @else { <span>Inaktiv</span>}
+
+  <img
+    class="avatar"
+    [src]="getSelectedChannelMember()?.avatarUrl"
+    alt="avatar-image"
+  />
+  <span class="username">{{ getSelectedChannelMember()?.displayName }} </span>
+
+  <div class="status-wrapper">
+    @if(true) {
+    <span class="status online"></span>
+    <span class="status-text online">Aktiv</span>
+    } @else {
+    <span class="status"></span>
+    <span class="status-text">Inaktiv</span>
+    }
+  </div>
 
   <span>{{ getSelectedChannelMember()?.email }}</span>
   <a

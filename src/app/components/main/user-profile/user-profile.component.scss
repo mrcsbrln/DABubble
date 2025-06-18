@@ -12,27 +12,74 @@
   background-color: #fff;
   border-radius: 0 30px 30px 30px;
   box-shadow: $box-shadow-overlay;
-  padding: 64px;
+  padding: 44px;
   display: flex;
   flex-direction: column;
   gap: 16px;
   min-width: 500px;
+
   .card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     span {
       font-size: 24px;
       font-weight: 700;
     }
+
     img {
       cursor: pointer;
       width: 32px;
       padding: 8px;
       border-radius: 100%;
+
       &:hover {
         background-color: $bg-color;
       }
+    }
+  }
+}
+
+.avatar {
+  border-radius: 100%;
+  width: 100%;
+  max-width: 200px;
+  align-self: center;
+}
+
+.username {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.status-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  .status {
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-color: $text-gray;
+    border-radius: 100%;
+
+    &.online {
+      background-color: $online-green;
+    }
+
+    // &.offline {
+    //   background-color: #686868;
+    // }
+  }
+
+  .status-text {
+    color: $text-gray;
+
+    &.online {
+      color: $online-green;
     }
   }
 }
