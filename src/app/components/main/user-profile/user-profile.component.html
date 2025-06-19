@@ -44,9 +44,12 @@
     <span class="email">{{ getSelectedChannelMember()?.email }}</span>
   </div>
 
-  <a
-    class="user-entry"
-    [routerLink]="['/user', getSelectedChannelMember()?.uid]"
-    >Nachricht schreiben</a
-  >
+  <span>
+    &gt;&gt;
+    <a
+      class="user-entry"
+      [routerLink]="['/user', getSelectedChannelMember()?.uid]"
+      >Nachricht an &#64;{{ getSelectedChannelMember()?.displayName }} schreiben</a
+    >&lt;&lt;
+  </span>
 </div>

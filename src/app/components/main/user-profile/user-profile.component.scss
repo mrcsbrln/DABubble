@@ -8,6 +8,15 @@
   z-index: 1001;
 }
 
+a {
+  color: black;
+  font-weight: 600;
+  font-size: 18px;
+  &:hover {
+    color: $purple-3
+  }
+}
+
 .dialog {
   background-color: #fff;
   border-radius: 0 30px 30px 30px;
@@ -95,7 +104,7 @@
     align-items: center;
     gap: 8px;
   }
-  
+
   .email {
     color: $email-color;
     padding-left: 32px;
