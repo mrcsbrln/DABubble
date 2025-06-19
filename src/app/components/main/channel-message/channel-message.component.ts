@@ -30,6 +30,7 @@ import localeDe from '@angular/common/locales/de';
 import { AddMembersComponent } from '../add-members/add-members.component';
 import { EditChannelComponent } from './edit-channel/edit-channel.component';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
+import { MessageBoxComponent } from '../shared/message-box/message-box.component';
 
 type ChannelMessageData = Omit<ChannelMessage, 'id'>;
 
@@ -44,6 +45,7 @@ registerLocaleData(localeDe);
     EditChannelComponent,
     UserProfileComponent,
     CommonModule,
+    MessageBoxComponent,
   ],
   templateUrl: './channel-message.component.html',
   styleUrl: './channel-message.component.scss',
@@ -352,5 +354,21 @@ export class ChannelMessageComponent implements OnInit {
       this.emojiToggleBtnRef.nativeElement.querySelector('img').src =
         '/img/add-reaction.svg';
     }
+  }
+
+  handleSend(text: string) {
+    const currentChannelId = this.channelMessageService.currentChannelId();
+    const senderId = this.authService.currentUser()?.uid;
+
+    if (!currentChannelId || !senderId) return;
+
+    const msg: ChannelMessageData = {
+      senderId,
+      content: text,
+      timestamp: serverTimestamp(),
+      channelId: currentChannelId,
+    };
+
+    this.channelMessageService.addMessage(msg);
   }
 }

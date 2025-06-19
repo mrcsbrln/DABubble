@@ -1,1 +1,57 @@
-<p>message-box works!</p>
+<!-- <form [formGroup]="form" (ngSubmit)="onSubmit()" class="msg-box">
+  <textarea formControlName="content" [placeholder]="placeholder()"></textarea>
+
+  <button type="submit" [disabled]="form.invalid">
+    <img src="assets/img/send.svg" alt="Senden" />
+  </button>
+</form> -->
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" (keydown.enter)="onSubmit()">
+  <div class="message-input-container">
+    <div class="message-input-box">
+      <textarea
+        [formControl]="form.controls.content"
+        [placeholder]="'Nachricht an ' + channelName()"
+      ></textarea>
+      <div class="textarea-button-container">
+        <div class="textarea-button-group">
+          <button
+            type="button"
+            class="emoji-container"
+            (click)="toggleEmojiPicker($event)"
+            #emojiToggleBtn
+          >
+            <img
+              class="add-reaction-textarea"
+              src="img/add-reaction.svg"
+              alt="add-reaction"
+            />
+          </button>
+          @if(isEmojiPickerOpen()) {
+          <div class="emoji-picker" #emojiPicker>
+            @for (emoji of emojis; track $index) {
+            <button
+              type="button"
+              class="emoji-btn"
+              (click)="addEmojiToInput(emoji)"
+            >
+              {{ emoji }}
+            </button>
+            }
+          </div>
+          }
+          <button class="at-icon-button" type="button">
+            <img src="img/at-icon.svg" alt="at-icon" />
+          </button>
+        </div>
+        <button
+          type="submit"
+          class="send-button"
+          [disabled]="form.controls.content.invalid"
+        >
+          <img src="img/send.svg" alt="send-message" />
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
