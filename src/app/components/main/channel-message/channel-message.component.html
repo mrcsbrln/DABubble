@@ -104,7 +104,7 @@
             (click)="setSelectedMemeberId(member?.uid!)"
           >
             <div class="avatar-wrapper">
-              <img [src]="getCurrentUserData()?.avatarUrl" alt="Avatar" />
+              <img [src]="member?.avatarUrl" alt="Avatar" />
               <span class="status-dot" [ngClass]="{ online: true }"></span>
             </div>
             <span>{{ member?.displayName }}</span>

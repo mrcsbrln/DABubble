@@ -30,6 +30,7 @@ import localeDe from '@angular/common/locales/de';
 import { AddMembersComponent } from '../add-members/add-members.component';
 import { EditChannelComponent } from './edit-channel/edit-channel.component';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
+import { DirectMessageService } from '../../../services/direct-message.service';
 
 type ChannelMessageData = Omit<ChannelMessage, 'id'>;
 
@@ -43,7 +44,7 @@ registerLocaleData(localeDe);
     DatePipe,
     EditChannelComponent,
     UserProfileComponent,
-    CommonModule
+    CommonModule,
   ],
   templateUrl: './channel-message.component.html',
   styleUrl: './channel-message.component.scss',
@@ -56,6 +57,7 @@ export class ChannelMessageComponent implements OnInit {
   private channelService = inject(ChannelService);
   private userService = inject(UserService);
   private destroyRef = inject(DestroyRef);
+  private directMessageService = inject(DirectMessageService);
 
   @ViewChild('emojiPicker') emojiPickerRef!: ElementRef;
   @ViewChild('emojiToggleBtn') emojiToggleBtnRef!: ElementRef;
