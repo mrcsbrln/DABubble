@@ -63,7 +63,7 @@ export class UserService {
     this.unsubUsersCollection = this.subUserCollection();
     this.heartbeatTimer = setInterval(
       () => this.sendHeartbeat(),
-      5 * 60 * 1000
+      2 * 60 * 1000
     );
 
     this.destroyRef.onDestroy(() => {

@@ -327,6 +327,10 @@ export class ChannelMessageComponent implements OnInit {
     return this.userService.getUserById(currentUserId);
   }
 
+  isUserOnline(id: string) {
+    return this.userService.onlineUsersIds().includes(id);
+  }
+
   @HostListener('document:mousedown', ['$event'])
   onDocumentClick(event: MouseEvent) {
     const picker = this.emojiPickerRef?.nativeElement;

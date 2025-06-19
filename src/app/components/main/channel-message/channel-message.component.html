@@ -101,11 +101,14 @@
             class="user-entry"
             (click)="toggleUserProfileDialog()"
             (click)="toggleShowMembersDialog()"
-            (click)="setSelectedMemeberId(member?.uid!)"
+            (click)="setSelectedMemeberId(member?.uid || '')"
           >
             <div class="avatar-wrapper">
               <img [src]="member?.avatarUrl" alt="Avatar" />
-              <span class="status-dot" [ngClass]="{ online: true }"></span>
+              <span
+                class="status-dot"
+                [ngClass]="{ online: isUserOnline(member?.uid || '') }"
+              ></span>
             </div>
             <span>{{ member?.displayName }}</span>
           </button>
@@ -115,10 +118,13 @@
             (click)="toogleAddMemebersDialog()"
             (click)="toggleShowMembersDialog()"
           >
-            <img class="member-image" src="img/add-member.svg" alt="add-member" />Mitglieder hinzufügen
+            <img
+              class="member-image"
+              src="img/add-member.svg"
+              alt="add-member"
+            />Mitglieder hinzufügen
           </button>
         </div>
-
       </div>
       }
     </div>
