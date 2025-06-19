@@ -36,10 +36,17 @@
     }
   </div>
 
-  <span>{{ getSelectedChannelMember()?.email }}</span>
+  <div class="email-address-container">
+    <div>
+      <img src="img/mail-icon.svg" alt="mail-image" />
+      <span>E-Mail-Adresse</span>
+    </div>
+    <span class="email">{{ getSelectedChannelMember()?.email }}</span>
+  </div>
+
   <a
     class="user-entry"
     [routerLink]="['/user', getSelectedChannelMember()?.uid]"
-    >Nachricht</a
+    >Nachricht schreiben</a
   >
 </div>
