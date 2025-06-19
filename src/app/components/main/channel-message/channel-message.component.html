@@ -107,7 +107,7 @@
               <img [src]="member?.avatarUrl" alt="Avatar" />
               <span
                 class="status-dot"
-                [ngClass]="{ online: isUserOnline(member?.uid || '') }"
+                [ngClass]="{ online: isUserOnline(member?.uid!) }"
               ></span>
             </div>
             <span>{{ member?.displayName }}</span>

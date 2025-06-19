@@ -27,12 +27,9 @@
   <span class="username">{{ getSelectedChannelMember()?.displayName }} </span>
 
   <div class="status-wrapper">
-    @if(true) {
+    @if(isUserOnline(getSelectedChannelMember()?.uid!)) {
     <span class="status online"></span>
-    <span class="status-text"
-      >Aktiv
-      <!-- [ngClass]="{ online: isUserOnline(getSelectedChannelMember().uid) }" -->
-    </span>
+    <span class="status-text online">Aktiv </span>
     } @else {
     <span class="status"></span>
     <span class="status-text">Inaktiv</span>
