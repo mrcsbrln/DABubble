@@ -1,11 +1,3 @@
-<!-- <form [formGroup]="form" (ngSubmit)="onSubmit()" class="msg-box">
-  <textarea formControlName="content" [placeholder]="placeholder()"></textarea>
-
-  <button type="submit" [disabled]="form.invalid">
-    <img src="assets/img/send.svg" alt="Senden" />
-  </button>
-</form> -->
-
 <form [formGroup]="form" (ngSubmit)="onSubmit()" (keydown.enter)="onSubmit()">
   <div class="message-input-container">
     <div class="message-input-box">
