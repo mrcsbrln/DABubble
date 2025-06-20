@@ -186,14 +186,13 @@ button {
     right: 0;
     left: 0;
 
-    >div {
+    > div {
       display: flex;
     }
   }
 
   .textarea-button-group {
     button {
-
       @media (hover: none) and (pointer: coarse) {
         &:hover {
           cursor: default;
@@ -235,7 +234,7 @@ button {
     height: 48px;
 
     img {
-      content: url('/img/at-icon-hover.svg');
+      content: url("/img/at-icon-hover.svg");
     }
   }
 }
@@ -277,7 +276,6 @@ button {
   }
 
   @media (hover: hover) and (pointer: fine) {
-
     &:hover {
       cursor: pointer;
       background-color: $bg-color;
@@ -285,7 +283,6 @@ button {
   }
 
   @media (hover: none) and (pointer: coarse) {
-
     &:focus {
       background-color: $bg-color;
     }
@@ -296,8 +293,6 @@ button {
       right: 5%;
     }
   }
-
-
 
   .message-content {
     background-color: white;
@@ -326,7 +321,7 @@ button {
       flex-direction: row-reverse;
     }
 
-    >span {
+    > span {
       color: rgba(104, 104, 104, 1);
       font-size: 14px;
     }
@@ -378,12 +373,12 @@ button {
     align-items: center;
     gap: 16px;
 
-    >button {
+    > button {
       color: $purple-3;
       font-size: 18px;
     }
 
-    >span {
+    > span {
       color: $text-gray;
       font-size: 14px;
     }
@@ -425,12 +420,11 @@ button {
     transition: opacity 0.2s, right 0.3s, left 0.3s;
 
     button,
-    >div {
+    > div {
       display: flex;
       justify-content: center;
       align-items: center;
     }
-
 
     img {
       width: 35px;
@@ -470,8 +464,6 @@ button {
     right: 5%;
   }
 
-
-
   .edit-message {
     position: relative;
 
@@ -496,7 +488,7 @@ button {
 
     img:focus,
     img:hover {
-      content: url('/img/dots-hover.svg');
+      content: url("/img/dots-hover.svg");
       width: 35px;
       height: 35px;
       transform: scale(1);
@@ -521,8 +513,6 @@ button {
     left: 5%;
   }
 }
-
-
 
 .time-separator {
   display: flex;
@@ -574,19 +564,19 @@ button {
   cursor: pointer;
   background-color: transparent;
 
-  >img {
+  > img {
     width: 48px;
     height: 48px;
   }
 
-  &:hover>img {
-    content: url('/img/add-reaction-hover.svg');
+  &:hover > img {
+    content: url("/img/add-reaction-hover.svg");
     width: 24px;
     height: 48px;
   }
 
-  &:focus>img {
-    content: url('/img/add-reaction-hover.svg');
+  &:focus > img {
+    content: url("/img/add-reaction-hover.svg");
     width: 24px;
     height: 48px;
   }
@@ -695,7 +685,7 @@ button {
     }
 
     &:hover .member-image {
-      content: url('/img/person-add-hover.svg');
+      content: url("/img/person-add-hover.svg");
       width: 32px;
       height: 32px;
       padding: 4px;
