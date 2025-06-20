@@ -28,7 +28,7 @@
 
   <div class="status-wrapper">
     @if(isUserOnline(getSelectedChannelMember()?.uid!)) {
-    <span class="status online"></span>
+    <span class="status git online"></span>
     <span class="status-text online">Aktiv </span>
     } @else {
     <span class="status"></span>
@@ -44,15 +44,13 @@
     <span class="email">{{ getSelectedChannelMember()?.email }}</span>
   </div>
 
-  <span>
-    &gt;&gt;
+  <div class="msg-button">
     <a
       class="user-entry"
       [routerLink]="['/user', getSelectedChannelMember()?.uid]"
-      >Nachricht an &#64;{{
-        getSelectedChannelMember()?.displayName
-      }}
-      schreiben</a
-    >&lt;&lt;
-  </span>
+    >
+      <img src="img/message-icon.svg" alt="message"/>
+      <span>Nachricht</span>
+    </a>
+  </div>
 </div>
