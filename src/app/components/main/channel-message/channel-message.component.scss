@@ -454,6 +454,16 @@ button {
     font-size: 16px;
     padding: 0;
   }
+
+  button {
+    color: $purple-3;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 20px;
+    &:hover {
+      color: $purple-2;
+    }
+  }
 }
 
 .emoji-container {
