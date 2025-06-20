@@ -189,12 +189,14 @@
           <img src="img/add-reaction.svg" alt="add reaction" />
           <span class="reaction-count">1</span>
         </span>
-        <button
-          (click)="onOpenThread()"
-          (click)="setCurrentParentChannelMessageId(message.id)"
-        >
-          {{ getAmountOfThreadMessages(message.id) }} Antworten
-        </button>
+        @if (getAmountOfThreadMessages(message.id) !== 0) {
+          <button
+            (click)="onOpenThread()"
+            (click)="setCurrentParentChannelMessageId(message.id)"
+          >
+            {{ getAmountOfThreadMessages(message.id) }} Antworten
+          </button>
+        }
         <!-- } -->
       </div>
 
