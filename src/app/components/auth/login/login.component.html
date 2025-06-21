@@ -1,23 +1,22 @@
 <div class="login-wrapper">
-  <div class="logo-container" [@logoContainerMove]="logoPosition()">
+
+
+  <div class="logo-container" [class.move-to-corner]="moveLogoContainer()">
     <div class="logo-img-wrapper">
       <img
         src="img/dabubble-logo.svg"
         alt=""
         @logoImgSlide
-        (@logoImgSlide.done)="showAnimatedText.set(true)"
       />
     </div>
     <div class="logo-text-mask">
-      @if (showAnimatedText()) {
-        <span
-          @revealText
-          (@revealText.done)="onTextAnimationComplete()"
-        >DABubble</span>
-      }
+      <span
+        @revealText
+        (@revealText.done)="onTextAnimationComplete()"
+        [class.move-to-corner]="moveLogoContainer()"
+      >DABubble</span>
     </div>
   </div>
-
 
   <div class="register-div">
     <span>Neu bei DABubble?</span>

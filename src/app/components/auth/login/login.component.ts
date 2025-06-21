@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserService } from '../../../services/user.service';
 import { RouterLink } from '@angular/router';
-import { transition, trigger, useAnimation, state } from '@angular/animations';
+import { transition, trigger, useAnimation } from '@angular/animations';
 import {
   slideInRight,
   slideOutRight,
@@ -21,46 +21,25 @@ import { style, animate } from '@angular/animations';
       transition(':enter', [useAnimation(slideInRight)]),
       transition(':leave', [useAnimation(slideOutRight)]),
     ]),
+
     trigger('logoImgSlide', [
       transition(':enter', [
-        style({ transform: 'translateX(117px)' }),
+        style({ transform: 'translateX(325px)' }),
         animate(
-          '600ms cubic-bezier(.35,0,.25,1)',
-          style({ transform: 'translateX(0)' })
+          '600ms linear',
+          style({ transform: 'translateX(0)' }),
         ),
       ]),
     ]),
     trigger('revealText', [
       transition(':enter', [
-        style({ transform: 'translateX(-152px)' }),
+        style({
+          transform: 'translateX(-418px)',
+        }),
         animate(
-          '800ms cubic-bezier(.35,0,.25,1)',
+          '800ms 600ms linear',
           style({ transform: 'translateX(0)' })
         ),
-      ]),
-    ]),
-    trigger('logoContainerMove', [
-      state(
-        'center',
-        style({
-          position: 'fixed',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          zIndex: 1000,
-        })
-      ),
-      state(
-        'original',
-        style({
-          position: 'absolute',
-          top: '75px',
-          left: '75px',
-          transform: 'translate(0, 0)',
-        })
-      ),
-      transition('center => original', [
-        animate('800ms cubic-bezier(.35,0,.25,1)'),
       ]),
     ]),
   ],
@@ -82,8 +61,8 @@ export class LoginComponent {
 
   resetPassword = signal(false);
   showConfirmation = signal(false);
-  showAnimatedText = signal(false);
-  logoPosition = signal<'center' | 'original'>('center');
+
+  moveLogoContainer = signal(false);
 
   onSubmit(): void {
     if (this.form.invalid) {
@@ -166,6 +145,6 @@ export class LoginComponent {
   }
 
   onTextAnimationComplete() {
-    this.logoPosition.set('original');
+    this.moveLogoContainer.set(true);
   }
 }
