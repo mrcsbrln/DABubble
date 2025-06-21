@@ -24,22 +24,16 @@ import { style, animate } from '@angular/animations';
 
     trigger('logoImgSlide', [
       transition(':enter', [
-        style({ transform: 'translateX(325px)' }),
-        animate(
-          '600ms linear',
-          style({ transform: 'translateX(0)' }),
-        ),
+        style({ transform: 'translateX(100%)' }),
+        animate('250ms 500ms linear', style({ transform: 'translateX(0)' })),
       ]),
     ]),
     trigger('revealText', [
       transition(':enter', [
         style({
-          transform: 'translateX(-418px)',
+          transform: 'translateX(-422px)',
         }),
-        animate(
-          '800ms 600ms linear',
-          style({ transform: 'translateX(0)' })
-        ),
+        animate('500ms 750ms linear', style({ transform: 'translateX(0)' })),
       ]),
     ]),
   ],
@@ -145,6 +139,8 @@ export class LoginComponent {
   }
 
   onTextAnimationComplete() {
-    this.moveLogoContainer.set(true);
+    setTimeout(() => {
+      this.moveLogoContainer.set(true);
+    }, 1200);
   }
 }

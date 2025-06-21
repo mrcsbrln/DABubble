@@ -298,7 +298,7 @@ input {
 .logo-container {
   display: flex;
   align-items: center;
-  width: 650px;
+  width: 660px;
 
   .logo-img-wrapper {
     // background-color: red;
@@ -310,7 +310,7 @@ input {
       width: 100%;
       height: auto;
       width: 200px;
-      transition: width 4.8s cubic-bezier(.35, 0, .25, 1);
+      transition: width 500ms linear;
     }
   }
 
@@ -321,20 +321,19 @@ input {
   .logo-text-mask {
     position: relative;
     overflow: hidden;
-    height: 70px;
     z-index: 1;
     display: flex;
     align-items: center;
+    flex:1;
 
     span {
-      // background-color: $bg-color;
       background-color: transparent;
       display: inline-block;
       color: white;
       font-weight: 700;
       font-size: 88px;
       white-space: nowrap;
-      transition: color 9.8s cubic-bezier(.35, 0, .25, 1), font-size 2.8s cubic-bezier(.35, 0, .25, 1);
+      transition: color 500ms linear, font-size 500ms linear;
 
 
       &.move-to-corner {
@@ -373,10 +372,28 @@ input {
   gap: 32px;
   display: flex;
   align-items: center;
-  width: 650px;
+  width: 655px;
 
 
   &.move-to-corner {
-    animation: moveLogoContainer 4.8s cubic-bezier(.35, 0, .25, 1) forwards;
+    animation: moveLogoContainer 500ms linear forwards;
   }
+}
+
+.background-overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(to bottom, #797ef3 0%, #444df2 100%);
+  opacity: 1;
+  z-index: 2;
+  transition: opacity 1500ms cubic-bezier(.35, 0, .25, 1);
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+}
+
+.background-overlay.shrink {
+  opacity: 0;
 }
