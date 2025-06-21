@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserService } from '../../../services/user.service';
 import { RouterLink } from '@angular/router';
-import { transition, trigger, useAnimation } from '@angular/animations';
+import { transition, trigger, useAnimation, state } from '@angular/animations';
 import {
   slideInRight,
   slideOutRight,
@@ -39,6 +39,30 @@ import { style, animate } from '@angular/animations';
         ),
       ]),
     ]),
+    trigger('logoContainerMove', [
+      state(
+        'center',
+        style({
+          position: 'fixed',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          zIndex: 1000,
+        })
+      ),
+      state(
+        'original',
+        style({
+          position: 'absolute',
+          top: '75px',
+          left: '75px',
+          transform: 'translate(0, 0)',
+        })
+      ),
+      transition('center => original', [
+        animate('800ms cubic-bezier(.35,0,.25,1)'),
+      ]),
+    ]),
   ],
 })
 export class LoginComponent {
@@ -59,6 +83,7 @@ export class LoginComponent {
   resetPassword = signal(false);
   showConfirmation = signal(false);
   showAnimatedText = signal(false);
+  logoPosition = signal<'center' | 'original'>('center');
 
   onSubmit(): void {
     if (this.form.invalid) {
@@ -138,5 +163,9 @@ export class LoginComponent {
       this.showConfirmation.set(false);
       this.resetPassword.set(false);
     }, 1000);
+  }
+
+  onTextAnimationComplete() {
+    this.logoPosition.set('original');
   }
 }
