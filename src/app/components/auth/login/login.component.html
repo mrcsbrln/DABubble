@@ -1,8 +1,15 @@
 <div class="login-wrapper">
+
   <div class="logo-div">
-    <img src="img/dabubble-logo.svg" alt="" />
-    <span>DABubble</span>
+    <div class="logo-img-wrapper">
+      <img src="img/dabubble-logo.svg" alt="" />
+    </div>
+    <div class="logo-text-mask">
+      <span @revealText>DABubble</span>
+    </div>
   </div>
+
+  
   <div class="register-div">
     <span>Neu bei DABubble?</span>
     <a routerLink="/register">Konto erstellen</a>

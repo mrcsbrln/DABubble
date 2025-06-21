@@ -9,6 +9,7 @@ import {
   slideInRight,
   slideOutRight,
 } from '../../../services/site-animations.service';
+import { style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,15 @@ import {
     trigger('slideInFromRight', [
       transition(':enter', [useAnimation(slideInRight)]),
       transition(':leave', [useAnimation(slideOutRight)]),
+    ]),
+    trigger('revealText', [
+      transition(':enter', [
+        style({ transform: 'translateX(-152px)' }),
+        animate(
+          '800ms cubic-bezier(.35,0,.25,1)',
+          style({ transform: 'translateX(0)' })
+        ),
+      ]),
     ]),
   ],
 })
