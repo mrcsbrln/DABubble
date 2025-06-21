@@ -2,14 +2,21 @@
 
   <div class="logo-div">
     <div class="logo-img-wrapper">
-      <img src="img/dabubble-logo.svg" alt="" />
+      <img
+        src="img/dabubble-logo.svg"
+        alt=""
+        @logoImgSlide
+        (@logoImgSlide.done)="showAnimatedText.set(true)"
+      />
     </div>
     <div class="logo-text-mask">
-      <span @revealText>DABubble</span>
+      @if (showAnimatedText()) {
+        <span @revealText>DABubble</span>
+      }
     </div>
   </div>
 
-  
+
   <div class="register-div">
     <span>Neu bei DABubble?</span>
     <a routerLink="/register">Konto erstellen</a>

@@ -21,6 +21,15 @@ import { style, animate } from '@angular/animations';
       transition(':enter', [useAnimation(slideInRight)]),
       transition(':leave', [useAnimation(slideOutRight)]),
     ]),
+    trigger('logoImgSlide', [
+      transition(':enter', [
+        style({ transform: 'translateX(117px)' }),
+        animate(
+          '600ms cubic-bezier(.35,0,.25,1)',
+          style({ transform: 'translateX(0)' })
+        ),
+      ]),
+    ]),
     trigger('revealText', [
       transition(':enter', [
         style({ transform: 'translateX(-152px)' }),
@@ -49,6 +58,7 @@ export class LoginComponent {
 
   resetPassword = signal(false);
   showConfirmation = signal(false);
+  showAnimatedText = signal(false);
 
   onSubmit(): void {
     if (this.form.invalid) {
