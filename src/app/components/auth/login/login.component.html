@@ -1,21 +1,16 @@
-<div class="background-overlay" [class.shrink]="moveLogoContainer()"></div>
+<div class="background-overlay" [@overlayFadeOut]="'final'"></div>
 <div class="login-wrapper">
-
-
   <div class="logo-container" [class.move-to-corner]="moveLogoContainer()">
     <div class="logo-img-wrapper">
-      <img
-        src="img/dabubble-logo.svg"
-        alt=""
-        @logoImgSlide
-      />
+      <img src="img/dabubble-logo.svg" alt="" @logoImgSlide />
     </div>
     <div class="logo-text-mask">
       <span
         @revealText
         (@revealText.done)="onTextAnimationComplete()"
         [class.move-to-corner]="moveLogoContainer()"
-      >DABubble</span>
+        >DABubble</span
+      >
     </div>
   </div>
 
