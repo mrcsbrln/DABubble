@@ -102,11 +102,16 @@ export class DirectMessageComponent implements OnInit {
     return this.directMessageService.getDirectMessagesOfSelectedUser();
   }
 
-  getDateOfMessageById(messageId: string) {
+  getDateOfMessageById(messageId: string): Date {
     const timestamp = this.directMessageService.directMessages.find(
       (message) => message.id === messageId
-    )?.timestamp as Timestamp;
-    return timestamp.toDate();
+    )?.timestamp;
+
+    if (timestamp instanceof Timestamp) {
+      return timestamp.toDate();
+    }
+
+    return new Date(0);
   }
 
   getCurrentUserId() {
@@ -169,12 +174,12 @@ export class DirectMessageComponent implements OnInit {
 
     if (!senderId || !selectedMemberId) return;
 
-    const msg: DirectMessageData = {
+    const message: DirectMessageData = {
       content: text,
       participantIds: [senderId, selectedMemberId],
       timestamp: serverTimestamp(),
     };
 
-    this.directMessageService.addMessage(msg);
+    this.directMessageService.addMessage(message);
   }
 }

@@ -20,56 +20,6 @@
     </div>
     }
   </div>
-
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" (keydown.enter)="onSubmit()">
-    <div class="message-input-container">
-      <div class="message-input-box">
-        <textarea
-          [formControl]="form.controls.content"
-          [placeholder]="'Nachricht an ' + getSelectedUser()?.displayName"
-        ></textarea>
-        <div class="textarea-button-container">
-          <div class="textarea-button-group">
-            <button
-              type="button"
-              class="emoji-container"
-              (click)="toggleEmojiPicker($event)"
-              #emojiToggleBtn
-            >
-              <img
-                class="add-reaction-textarea"
-                src="img/add-reaction.svg"
-                alt="add-reaction"
-              />
-            </button>
-            @if(isEmojiPickerOpen()) {
-            <div class="emoji-picker" #emojiPicker>
-              @for (emoji of emojis; track $index) {
-              <button
-                type="button"
-                class="emoji-btn"
-                (click)="addEmojiToInput(emoji)"
-              >
-                {{ emoji }}
-              </button>
-              }
-            </div>
-            }
-            <button type="button">
-              <img src="img/at-icon.svg" alt="add-icon" />
-            </button>
-          </div>
-          <button
-            type="submit"
-            class="send-button"
-            [disabled]="form.controls.content.invalid"
-          >
-            <img src="img/send.svg" alt="send-message" />
-          </button>
-        </div>
-      </div>
-    </div>
-  </form>
   <app-message-box
     [recipient]="getSelectedUser()?.displayName"
     (send)="handleSend($event)"

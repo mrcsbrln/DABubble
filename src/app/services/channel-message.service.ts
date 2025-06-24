@@ -16,7 +16,7 @@ import {
   Firestore,
   onSnapshot,
   query,
-  Timestamp,
+  serverTimestamp,
   Unsubscribe,
   updateDoc,
   where,
@@ -97,10 +97,7 @@ export class ChannelMessageService {
       id: id,
       senderId: obj.senderId || '',
       content: obj.content || '',
-      timestamp:
-        obj.timestamp instanceof Timestamp
-          ? obj.timestamp
-          : new Timestamp(0, 0),
+      timestamp: obj.timestamp || serverTimestamp(),
       channelId: obj.channelId,
       parentMessageId: obj.parentMessageId,
     };

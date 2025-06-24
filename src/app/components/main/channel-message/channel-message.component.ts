@@ -150,11 +150,16 @@ export class ChannelMessageComponent implements OnInit {
     return this.userService.users().find((user) => user.uid === senderId);
   }
 
-  getDateOfMessageById(messageId: string) {
+  getDateOfMessageById(messageId: string): Date {
     const timestamp = this.channelMessageService
       .messages()
-      .find((message) => message.id === messageId)?.timestamp as Timestamp;
-    return timestamp.toDate();
+      .find((message) => message.id === messageId)?.timestamp;
+
+    if (timestamp instanceof Timestamp) {
+      return timestamp.toDate();
+    }
+
+    return new Date(0);
   }
 
   getParentChannelMessageId() {
@@ -362,13 +367,13 @@ export class ChannelMessageComponent implements OnInit {
 
     if (!currentChannelId || !senderId) return;
 
-    const msg: ChannelMessageData = {
+    const message: ChannelMessageData = {
       senderId,
       content: text,
       timestamp: serverTimestamp(),
       channelId: currentChannelId,
     };
 
-    this.channelMessageService.addMessage(msg);
+    this.channelMessageService.addMessage(message);
   }
 }
