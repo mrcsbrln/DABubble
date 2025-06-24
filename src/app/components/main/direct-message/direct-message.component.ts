@@ -23,6 +23,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { serverTimestamp, Timestamp } from '@angular/fire/firestore';
 import { DirectMessage } from '../../../interfaces/direct-message.interface';
 import { Subscription } from 'rxjs';
+import { MessageBoxComponent } from '../shared/message-box/message-box.component';
 
 type DirectMessageData = Omit<DirectMessage, 'id'>;
 
@@ -30,7 +31,13 @@ registerLocaleData(localeDe);
 
 @Component({
   selector: 'app-direct-message',
-  imports: [CommonModule, DatePipe, ReactiveFormsModule, UserProfileComponent],
+  imports: [
+    CommonModule,
+    DatePipe,
+    ReactiveFormsModule,
+    UserProfileComponent,
+    MessageBoxComponent,
+  ],
   templateUrl: './direct-message.component.html',
   styleUrl: './direct-message.component.scss',
   providers: [{ provide: LOCALE_ID, useValue: 'de' }],
@@ -154,5 +161,20 @@ export class DirectMessageComponent implements OnInit {
       this.directMessageService.addMessage(directMessageDataToSend);
       this.form.controls.content.reset();
     }
+  }
+
+  handleSend(text: string) {
+    const senderId = this.authService.currentUser()?.uid;
+    const selectedMemberId = this.getSelectedUser()?.uid;
+
+    if (!senderId || !selectedMemberId) return;
+
+    const msg: DirectMessageData = {
+      content: text,
+      participantIds: [senderId, selectedMemberId],
+      timestamp: serverTimestamp(),
+    };
+
+    this.directMessageService.addMessage(msg);
   }
 }

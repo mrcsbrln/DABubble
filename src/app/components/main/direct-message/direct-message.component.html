@@ -70,6 +70,10 @@
       </div>
     </div>
   </form>
+  <app-message-box
+    [recipient]="getSelectedUser()?.displayName"
+    (send)="handleSend($event)"
+  />
 </div>
 @if(isUserProfileDialogOpen()) {
 <div class="dialog-backdrop"></div>

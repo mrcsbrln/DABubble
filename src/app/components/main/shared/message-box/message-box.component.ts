@@ -23,8 +23,8 @@ import {
 export class MessageBoxComponent implements OnInit {
   destroyRef = inject(DestroyRef);
 
-  placeholder = input.required<string>();
-  channelName = input<string>();
+  placeholder = input<string>();
+  recipient = input<string>();
 
   send = output<string>();
   contentControlReady = output<FormControl<string>>();

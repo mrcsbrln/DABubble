@@ -190,12 +190,12 @@
           <span class="reaction-count">1</span>
         </span>
         @if (getAmountOfThreadMessages(message.id) !== 0) {
-          <button
-            (click)="onOpenThread()"
-            (click)="setCurrentParentChannelMessageId(message.id)"
-          >
-            {{ getAmountOfThreadMessages(message.id) }} Antworten
-          </button>
+        <button
+          (click)="onOpenThread()"
+          (click)="setCurrentParentChannelMessageId(message.id)"
+        >
+          {{ getAmountOfThreadMessages(message.id) }} Antworten
+        </button>
         }
         <!-- } -->
       </div>
@@ -246,11 +246,7 @@
     </div>
     } } }
   </div>
-  <app-message-box
-    [placeholder]="'Nachricht eingeben …'"
-    [channelName]="getChannelName()"
-    (send)="handleSend($event)"
-  />
+  <app-message-box [recipient]="getChannelName()" (send)="handleSend($event)" />
 </div>
 @if(isUserProfileDialogOpen()) {
 <div class="dialog-backdrop"></div>
