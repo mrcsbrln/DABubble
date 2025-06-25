@@ -21,7 +21,7 @@
     }
   </div>
   <app-message-box
-    [recipient]="getSelectedUser()?.displayName"
+    [placeholder]="'Nachricht an ' + getSelectedUser()?.displayName"
     (send)="handleSend($event)"
   />
 </div>

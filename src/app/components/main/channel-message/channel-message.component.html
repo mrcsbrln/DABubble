@@ -246,7 +246,10 @@
     </div>
     } } }
   </div>
-  <app-message-box [recipient]="getChannelName()" (send)="handleSend($event)" />
+  <app-message-box
+    [placeholder]="'Nachricht an ' + getChannelName()"
+    (send)="handleSend($event)"
+  />
 </div>
 @if(isUserProfileDialogOpen()) {
 <div class="dialog-backdrop"></div>

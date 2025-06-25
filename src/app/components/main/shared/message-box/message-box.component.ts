@@ -24,7 +24,6 @@ export class MessageBoxComponent implements OnInit {
   destroyRef = inject(DestroyRef);
 
   placeholder = input<string>();
-  recipient = input<string>();
 
   send = output<string>();
   contentControlReady = output<FormControl<string>>();

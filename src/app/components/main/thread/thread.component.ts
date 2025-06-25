@@ -18,10 +18,11 @@ import { ChannelMessageService } from '../../../services/channel-message.service
 import { ChannelService } from '../../../services/channel.service';
 import { serverTimestamp } from '@angular/fire/firestore';
 import { ChannelMessage } from '../../../interfaces/channel-message.interface';
+import { MessageBoxComponent } from '../shared/message-box/message-box.component';
 
 @Component({
   selector: 'app-thread',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, MessageBoxComponent],
   templateUrl: './thread.component.html',
   styleUrl: './thread.component.scss',
 })
