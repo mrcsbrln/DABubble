@@ -3,6 +3,7 @@ import { Channel } from '../interfaces/channel.interface';
 import { ChannelMessageService } from './channel-message.service';
 import {
   addDoc,
+  arrayRemove,
   arrayUnion,
   collection,
   doc,
@@ -110,6 +111,16 @@ export class ChannelService {
     const channelDocRef = this.getChannelDocRef(channelId);
     try {
       await updateDoc(channelDocRef, { description: newDescription });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async deleteUserFromChannel(channelId: string, UserId: string) {
+    try {
+      await updateDoc(this.getChannelDocRef(channelId), {
+        memberIds: arrayRemove(UserId),
+      });
     } catch (error) {
       console.error(error);
     }

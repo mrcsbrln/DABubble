@@ -2,6 +2,8 @@ import { Component, output, signal, effect, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ChannelService } from '../../../../services/channel.service';
 import { UserService } from '../../../../services/user.service';
+import { AuthService } from '../../../../services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-channel',
@@ -12,6 +14,9 @@ import { UserService } from '../../../../services/user.service';
 export class EditChannelComponent {
   private channelService = inject(ChannelService);
   private userService = inject(UserService);
+  private authService = inject(AuthService);
+
+  router = inject(Router);
 
   closeDialogEditChannel = output<void>();
 
@@ -100,6 +105,10 @@ export class EditChannelComponent {
   }
 
   leaveChannel() {
-    //
+    const channelId = this.channelService.getCurrentChannel()?.id;
+    const currentUserId = this.authService.currentUser()?.uid;
+    if (!channelId || !currentUserId) return;
+    this.channelService.deleteUserFromChannel(channelId, currentUserId);
+    this.router.navigateByUrl('/');
   }
 }
