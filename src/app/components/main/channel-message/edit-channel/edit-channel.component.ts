@@ -98,4 +98,8 @@ export class EditChannelComponent {
   getUserBySenderId(senderId: string) {
     return this.userService.users().find((user) => user.uid === senderId);
   }
+
+  leaveChannel() {
+    //
+  }
 }

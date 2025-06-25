@@ -6,7 +6,6 @@
 }
 
 .online {
-  //demo
   color: $online-green;
 }
 
@@ -492,38 +491,5 @@
     content: url("/img/add-reaction-hover.svg");
     width: 24px;
     height: 48px;
-  }
-}
-
-.emoji-picker {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  position: absolute;
-  bottom: 50px;
-  left: 25px;
-  background-color: rgba(255, 255, 255);
-  border: 1px solid #ccc;
-  border-radius: 25px;
-  padding: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  z-index: 10;
-  width: 153px;
-}
-
-.emoji-btn {
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  padding: 4px;
-  border-radius: 6px;
-  transition: background 0.2s;
-
-  @media (hover: hover) and (pointer: fine) {
-    &:hover {
-      outline: 2px solid $text-gray;
-    }
   }
 }
