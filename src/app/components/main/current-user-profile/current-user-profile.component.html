@@ -25,8 +25,6 @@
       />
     </div>
 
-    
-
     <img
       class="avatar"
       [src]="getCurrentUserInUserCollection()?.avatarUrl"
@@ -37,7 +35,10 @@
       <span class="username"
         >{{ getCurrentUserInUserCollection()?.displayName }}
       </span>
+      @if(getCurrentUserInUserCollection()?.uid !==
+      '5PZvnr5y76hp4ekDsdcnxwumN0F2') {
       <button (click)="toggleEditMode()">Bearbeiten</button>
+      }
     </div>
     <div class="status-wrapper">
       <span class="status online"></span>
