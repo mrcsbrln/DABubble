@@ -90,6 +90,10 @@ export class DirectMessageComponent implements OnInit {
     return this.getSelectedUser()?.uid === this.getCurrentUserId();
   }
 
+  isMessageFromCurrentUser(senderId: string) {
+    return this.authService.currentUser()?.uid === senderId;
+  }
+
   getSelectedUser() {
     const selecetedUserId = this.directMessageService.selectedUserId();
     if (!selecetedUserId) return;
@@ -103,9 +107,9 @@ export class DirectMessageComponent implements OnInit {
   }
 
   getDateOfMessageById(messageId: string): Date {
-    const timestamp = this.directMessageService.directMessages.find(
-      (message) => message.id === messageId
-    )?.timestamp;
+    const timestamp = this.directMessageService
+      .directMessages()
+      .find((message) => message.id === messageId)?.timestamp;
 
     if (timestamp instanceof Timestamp) {
       return timestamp.toDate();
@@ -116,6 +120,10 @@ export class DirectMessageComponent implements OnInit {
 
   getCurrentUserId() {
     return this.authService.currentUser()?.uid;
+  }
+
+  getSenderById(id: string) {
+    return this.userService.users().find((user) => user.uid === id);
   }
 
   subRouteParams() {

@@ -11,12 +11,22 @@
     >
     }
   </div>
-  <div>
+  <div class="messages-container">
     @for(dm of getDirectMessagesOfSelectedUser(); track dm.id){
-    <div>{{ dm.content }}</div>
-    <div>
-      {{ getDateOfMessageById(dm.id) | date : "EEEE, d. MMMM" : "No Date" }}
-      {{ getDateOfMessageById(dm.id) | date : "HH:mm 'Uhr'" : "No Date" }}
+    <div class="message-wrapper">
+      <div class="seperator-wrapper">
+        <div class="seperator"></div>
+        <div class="message-date">
+          {{ getDateOfMessageById(dm.id) | date : "EEEE, d. MMMM" : "No Date" }}
+        </div>
+        <div class="seperator"></div>
+      </div>
+
+      <span>{{ getSenderById(dm.participantIds[0])?.displayName }}</span>
+      <div>{{ dm.content }}</div>
+      <div>
+        {{ getDateOfMessageById(dm.id) | date : "HH:mm 'Uhr'" : "No Date" }}
+      </div>
     </div>
     }
   </div>

@@ -84,9 +84,9 @@ export class ChannelMessageService {
 
   subMessageCollection() {
     return runInInjectionContext(this.injector, () =>
-      onSnapshot(this.messagesCollectionRef(), (snap) => {
+      onSnapshot(this.messagesCollectionRef(), (snapshot) => {
         this.messages.set(
-          snap.docs.map((d) => this.setMessageObject(d.data(), d.id))
+          snapshot.docs.map((doc) => this.setMessageObject(doc.data(), doc.id))
         );
       })
     );

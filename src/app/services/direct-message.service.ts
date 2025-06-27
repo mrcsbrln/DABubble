@@ -30,8 +30,8 @@ export class DirectMessageService {
   private userService = inject(UserService);
   private destroyRef = inject(DestroyRef);
 
-  directMessages: DirectMessage[] = [];
-  messagesByChannelId: DirectMessage[] = [];
+  directMessages = signal<DirectMessage[]>([]);
+  messagesByChannelId = signal<DirectMessage[]>([]);
 
   currentChannelId = signal('');
   selectedUserId = signal('');
@@ -63,7 +63,7 @@ export class DirectMessageService {
 
   getDirectMessagesOfCurrentUser() {
     const currentUserId = this.authService.currentUser()?.uid;
-    return this.directMessages.filter((message) =>
+    return this.directMessages().filter((message) =>
       message.participantIds.find((id) => id === currentUserId)
     );
   }
@@ -90,7 +90,7 @@ export class DirectMessageService {
     if (!currentUserId || !selectedUserId) return [];
     if (currentUserId === selectedUserId) return [];
 
-    return this.directMessages.filter(
+    return this.directMessages().filter(
       (dm) =>
         dm.participantIds.includes(currentUserId) &&
         dm.participantIds.includes(selectedUserId)
@@ -98,16 +98,13 @@ export class DirectMessageService {
   }
 
   subMessageCollection() {
-    return runInInjectionContext(this.injector, () => {
-      return onSnapshot(this.directMessagesCollectionRef(), (messages) => {
-        this.directMessages = [];
-        messages.forEach((message) => {
-          this.directMessages.push(
-            this.setMessageObject(message.data(), message.id)
-          );
-        });
-      });
-    });
+    return runInInjectionContext(this.injector, () =>
+      onSnapshot(this.directMessagesCollectionRef(), (snapshot) => {
+        this.directMessages.set(
+          snapshot.docs.map((doc) => this.setMessageObject(doc.data(), doc.id))
+        );
+      })
+    );
   }
 
   setMessageObject(obj: Partial<DirectMessage>, id: string): DirectMessage {
