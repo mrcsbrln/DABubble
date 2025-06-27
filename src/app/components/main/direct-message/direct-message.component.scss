@@ -32,12 +32,27 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  padding: 32px;
 }
 
 .message-date {
   border: 1px solid $light-purple;
   border-radius: 24px;
   padding: 4px 12px;
+}
+
+.message-data-container {
+  display: flex;
+  padding: 32px;
+  gap: 32px;
+  img {
+    border-radius: 100%;
+  }
+}
+
+.message-data {
+  display: flex;
+  flex-direction: column;
 }
 
 .seperator-wrapper {
