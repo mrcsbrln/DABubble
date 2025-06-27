@@ -38,7 +38,7 @@ import { style, animate } from '@angular/animations';
     trigger('overlayFadeOut', [
       state('final', style({ opacity: '0', display: 'none' })),
       transition('* => final', [
-        style({ opacity: '1'}),
+        style({ opacity: '1' }),
         animate('750ms 2450ms cubic-bezier(0.4, 0, 0.9, 0.6)'),
       ]),
     ]),
@@ -133,7 +133,7 @@ export class LoginComponent {
   }
 
   loginGuest() {
-    this.authService.login('guest@dabubble403.de', 'dabubble403');
+    this.authService.login('guest@dabubble.de', 'dabubble');
   }
 
   private handleConfiramtionOverlay() {

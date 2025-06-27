@@ -15,11 +15,11 @@ export const appConfig: ApplicationConfig = {
     provideFirebaseApp(() =>
       initializeApp({
         apiKey: environment.FIREBASE_API_KEY,
-        authDomain: 'dabubble403-6a0f1.firebaseapp.com',
-        projectId: 'dabubble403-6a0f1',
-        storageBucket: 'dabubble403-6a0f1.firebasestorage.app',
-        messagingSenderId: '910988035013',
-        appId: '1:910988035013:web:5db939cbade02842d601ac',
+        authDomain: 'dabubble-ac06b.firebaseapp.com',
+        projectId: 'dabubble-ac06b',
+        storageBucket: 'dabubble-ac06b.firebasestorage.app',
+        messagingSenderId: '1081959828935',
+        appId: '1:1081959828935:web:387ed7aa3a98e94755dde2',
       })
     ),
     provideAuth(() => getAuth()),
