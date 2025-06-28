@@ -24,11 +24,15 @@
       <div class="message-data-container">
         <img [src]="getSenderById(dm.participantIds[0])?.avatarUrl" alt="" />
         <div class="message-data">
-          <span>{{ getSenderById(dm.participantIds[0])?.displayName }}</span>
-          <div>{{ dm.content }}</div>
-          <span>
-            {{ getDateOfMessageById(dm.id) | date : "HH:mm 'Uhr'" : "No Date" }}
-          </span>
+          <div class="first-row">
+            <span>{{ getSenderById(dm.participantIds[0])?.displayName }}</span>
+            <span>
+              {{
+                getDateOfMessageById(dm.id) | date : "HH:mm 'Uhr'" : "No Date"
+              }}
+            </span>
+          </div>
+          <div class="message-content">{{ dm.content }}</div>
         </div>
       </div>
     </div>

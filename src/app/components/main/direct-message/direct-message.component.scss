@@ -35,6 +35,13 @@
   padding: 32px;
 }
 
+.message-content {
+  padding: 16px;
+  background-color: $purple-2;
+  color: #fff;
+  border-radius: 0 30px 30px 30px;
+}
+
 .message-date {
   border: 1px solid $light-purple;
   border-radius: 24px;
@@ -47,12 +54,18 @@
   gap: 32px;
   img {
     border-radius: 100%;
+    width: 70px;
+    height: 70px;
   }
 }
 
 .message-data {
   display: flex;
   flex-direction: column;
+  .first-row {
+    display: flex;
+    gap: 8px;
+  }
 }
 
 .seperator-wrapper {
