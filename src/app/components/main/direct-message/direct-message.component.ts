@@ -86,12 +86,31 @@ export class DirectMessageComponent implements OnInit {
     });
   }
 
-  isSelectedUserCurrentUser() {
+  isSelectedUserCurrentUser(): boolean {
     return this.getSelectedUser()?.uid === this.getCurrentUserId();
   }
 
   isMessageFromCurrentUser(senderId: string) {
     return this.authService.currentUser()?.uid === senderId;
+  }
+
+  isToday(messageId: string): boolean {
+    const message = this.directMessageService
+      .directMessages()
+      .find((message) => message.id === messageId);
+
+    if (!message?.timestamp || !(message?.timestamp instanceof Timestamp)) {
+      return false;
+    }
+
+    const messageDate = message.timestamp.toDate();
+    const today = new Date();
+
+    return (
+      messageDate.getDate() === today.getDate() &&
+      messageDate.getMonth() === today.getMonth() &&
+      messageDate.getFullYear() === today.getFullYear()
+    );
   }
 
   getSelectedUser() {
@@ -103,7 +122,15 @@ export class DirectMessageComponent implements OnInit {
   }
 
   getDirectMessagesOfSelectedUser() {
-    return this.directMessageService.getDirectMessagesOfSelectedUser();
+    return this.directMessageService
+      .getDirectMessagesOfSelectedUser()
+      .sort((a, b) => {
+        const aTime =
+          a.timestamp instanceof Timestamp ? a.timestamp.toDate().getTime() : 0;
+        const bTime =
+          b.timestamp instanceof Timestamp ? b.timestamp.toDate().getTime() : 0;
+        return aTime - bTime;
+      });
   }
 
   getDateOfMessageById(messageId: string): Date {
@@ -137,7 +164,7 @@ export class DirectMessageComponent implements OnInit {
     });
   }
 
-  isUserOnline(id: string) {
+  isUserOnline(id: string): boolean {
     return this.userService.onlineUsersIds().includes(id);
   }
 

@@ -23,22 +23,22 @@
       <div class="seperator-wrapper">
         <div class="seperator"></div>
         <div class="message-date">
+          @if(isToday(dm.id)) { heute } @else {
           {{ getDateOfMessageById(dm.id) | date : "EEEE, d. MMMM" : "No Date" }}
+          }
         </div>
         <div class="seperator"></div>
       </div>
       <div
         class="message-data-container"
         [ngClass]="{
-          'reverse-message-data-container': isMessageFromCurrentUser(
-            dm.participantIds[0]
-          )
+          'current-user': isMessageFromCurrentUser(dm.participantIds[0])
         }"
       >
         <img
           [src]="getSenderById(dm.participantIds[0])?.avatarUrl"
           [ngClass]="{
-            'reverse-avatar': isMessageFromCurrentUser(dm.participantIds[0])
+            'current-user': isMessageFromCurrentUser(dm.participantIds[0])
           }"
           alt=""
         />
@@ -53,7 +53,14 @@
               }}
             </span>
           </div>
-          <div class="message-content">{{ dm.content }}</div>
+          <div
+            class="message-content"
+            [ngClass]="{
+              'current-user': isMessageFromCurrentUser(dm.participantIds[0])
+            }"
+          >
+            {{ dm.content }}
+          </div>
         </div>
       </div>
     </div>
