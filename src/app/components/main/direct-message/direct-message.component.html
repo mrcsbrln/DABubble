@@ -1,14 +1,20 @@
 <div class="main-chat">
   <div class="user-info-container">
     @if(isSelectedUserCurrentUser()) {
+    <div class="avatar-wrapper">
+      <img [src]="getSelectedUser()?.avatarUrl" alt="" />
+      <span class="status-dot online"></span>
+    </div>
     <span>{{ getSelectedUser()?.displayName }} (Du) </span>
-    <span class="online">Status</span>
-
     } @else {
+    <div class="avatar-wrapper">
+      <img [src]="getSelectedUser()?.avatarUrl" alt="" />
+      <span
+        class="status-dot"
+        [ngClass]="{ online: isUserOnline(getSelectedUser()?.uid!) }"
+      ></span>
+    </div>
     <span>{{ getSelectedUser()?.displayName }} </span>
-    <span [ngClass]="{ online: isOnline(getSelectedUser()?.uid || '') }"
-      >Status</span
-    >
     }
   </div>
   <div class="messages-container">

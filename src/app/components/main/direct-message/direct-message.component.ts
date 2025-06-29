@@ -137,7 +137,7 @@ export class DirectMessageComponent implements OnInit {
     });
   }
 
-  isOnline(id: string) {
+  isUserOnline(id: string) {
     return this.userService.onlineUsersIds().includes(id);
   }
 
