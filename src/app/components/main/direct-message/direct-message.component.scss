@@ -57,15 +57,26 @@
     width: 70px;
     height: 70px;
   }
+  .message-data {
+    display: flex;
+    flex-direction: column;
+    .first-row {
+      display: flex;
+      gap: 8px;
+      .display-name {
+        font-size: 18px;
+        font-weight: 700;
+      }
+    }
+  }
 }
 
-.message-data {
-  display: flex;
-  flex-direction: column;
-  .first-row {
-    display: flex;
-    gap: 8px;
-  }
+.reverse-avatar {
+  order: 2;
+}
+
+.reverse-message-data-container {
+  justify-content: flex-end;
 }
 
 .seperator-wrapper {
@@ -110,6 +121,10 @@
         background-color: $online-green;
       }
     }
+  }
+  .display-name {
+    font-weight: 700;
+    font-size: 24px;
   }
 
   .channel-info-group {

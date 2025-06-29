@@ -5,7 +5,7 @@
       <img [src]="getSelectedUser()?.avatarUrl" alt="" />
       <span class="status-dot online"></span>
     </div>
-    <span>{{ getSelectedUser()?.displayName }} (Du) </span>
+    <span class="display-name">{{ getSelectedUser()?.displayName }} (Du) </span>
     } @else {
     <div class="avatar-wrapper">
       <img [src]="getSelectedUser()?.avatarUrl" alt="" />
@@ -14,7 +14,7 @@
         [ngClass]="{ online: isUserOnline(getSelectedUser()?.uid!) }"
       ></span>
     </div>
-    <span>{{ getSelectedUser()?.displayName }} </span>
+    <span class="display-name">{{ getSelectedUser()?.displayName }} </span>
     }
   </div>
   <div class="messages-container">
@@ -27,11 +27,26 @@
         </div>
         <div class="seperator"></div>
       </div>
-      <div class="message-data-container">
-        <img [src]="getSenderById(dm.participantIds[0])?.avatarUrl" alt="" />
+      <div
+        class="message-data-container"
+        [ngClass]="{
+          'reverse-message-data-container': isMessageFromCurrentUser(
+            dm.participantIds[0]
+          )
+        }"
+      >
+        <img
+          [src]="getSenderById(dm.participantIds[0])?.avatarUrl"
+          [ngClass]="{
+            'reverse-avatar': isMessageFromCurrentUser(dm.participantIds[0])
+          }"
+          alt=""
+        />
         <div class="message-data">
           <div class="first-row">
-            <span>{{ getSenderById(dm.participantIds[0])?.displayName }}</span>
+            <span class="display-name">{{
+              getSenderById(dm.participantIds[0])?.displayName
+            }}</span>
             <span>
               {{
                 getDateOfMessageById(dm.id) | date : "HH:mm 'Uhr'" : "No Date"
