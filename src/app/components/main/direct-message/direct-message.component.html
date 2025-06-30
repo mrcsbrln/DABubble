@@ -46,6 +46,15 @@
         >
           <button type="button" aria-label="check">✅</button>
           <button type="button" aria-label="like">👍</button>
+          <button type="button" aria-label="reaction">
+            <img src="img/add-reaction-comment.svg" alt="reaction" />
+          </button>
+          <button type="button">
+            <img src="img/answer.svg" alt="answer" />
+          </button>
+          <button type="button">
+            <img src="img/dots.svg" alt="edit" />
+          </button>
         </div>
         } @else {
         <div
@@ -61,6 +70,7 @@
 
         <img
           [src]="getSenderById(dm.participantIds[0])?.avatarUrl"
+          class="avatar"
           [ngClass]="{
             'current-user': isMessageFromCurrentUser(dm.participantIds[0])
           }"
