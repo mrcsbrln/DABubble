@@ -5,6 +5,7 @@ import {
   OnInit,
   LOCALE_ID,
   DestroyRef,
+  output,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
@@ -66,10 +67,13 @@ export class DirectMessageComponent implements OnInit {
   isUserProfileDialogOpen = signal(false);
   selectedMemberId = signal('');
 
-  isHovering = signal(false);
+  isReactionHovered = signal(false);
+  isAnswerHovered = signal(false);
+  isDotsHovered = signal(false);
   isEmojiPickerOpen = signal(false);
 
   reactionVisibleId = signal<string | null>(null);
+  openThread = output<void>();
 
   emojis: string[] = [
     '😀',
@@ -196,6 +200,10 @@ export class DirectMessageComponent implements OnInit {
 
   onMouseLeaveMessage() {
     this.reactionVisibleId.set(null);
+  }
+
+  onOpenThread() {
+    this.openThread.emit();
   }
 
   onSubmit() {

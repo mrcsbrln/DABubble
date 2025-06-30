@@ -5,6 +5,7 @@ import { ThreadComponent } from './thread/thread.component';
 import { WorkspaceComponent } from './workspace/workspace.component';
 import { RouterOutlet } from '@angular/router';
 import { ChannelMessageComponent } from './channel-message/channel-message.component';
+import { DirectMessageComponent } from './direct-message/direct-message.component';
 
 @Component({
   selector: 'app-main',
@@ -30,10 +31,12 @@ export class MainComponent {
     this.isThreadHidden.update((value) => !value);
   }
 
-  onActivate(component: unknown) {
+  onActivate(component: ChannelMessageComponent | DirectMessageComponent) {
     if (component instanceof ChannelMessageComponent) {
       component.openThread.subscribe(() => this.isThreadHidden.set(false));
-    }
+    } else if (component instanceof DirectMessageComponent) {
+      component.openThread.subscribe(() => this.isThreadHidden.set(false));
+    } else return;
   }
 
   get gridClasses() {
