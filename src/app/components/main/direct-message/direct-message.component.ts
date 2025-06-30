@@ -24,6 +24,10 @@ import { serverTimestamp, Timestamp } from '@angular/fire/firestore';
 import { DirectMessage } from '../../../interfaces/direct-message.interface';
 import { Subscription } from 'rxjs';
 import { MessageBoxComponent } from '../shared/message-box/message-box.component';
+import {
+  reactionBarSlideCurrentUser,
+  reactionBarSlideOtherUser,
+} from '../../../services/site-animations.service';
 
 type DirectMessageData = Omit<DirectMessage, 'id'>;
 
@@ -31,6 +35,7 @@ registerLocaleData(localeDe);
 
 @Component({
   selector: 'app-direct-message',
+  animations: [reactionBarSlideCurrentUser, reactionBarSlideOtherUser],
   imports: [
     CommonModule,
     DatePipe,
@@ -63,6 +68,8 @@ export class DirectMessageComponent implements OnInit {
 
   isHovering = signal(false);
   isEmojiPickerOpen = signal(false);
+
+  reactionVisibleId = signal<string | null>(null);
 
   emojis: string[] = [
     '😀',
@@ -129,7 +136,7 @@ export class DirectMessageComponent implements OnInit {
           a.timestamp instanceof Timestamp ? a.timestamp.toDate().getTime() : 0;
         const bTime =
           b.timestamp instanceof Timestamp ? b.timestamp.toDate().getTime() : 0;
-        return aTime - bTime;
+        return bTime - aTime;
       });
   }
 
@@ -181,6 +188,14 @@ export class DirectMessageComponent implements OnInit {
     const current = this.form.controls.content.value || '';
     this.form.controls.content.setValue(current + emoji);
     this.isEmojiPickerOpen.set(false);
+  }
+
+  onMouseEnterMessage(id: string) {
+    this.reactionVisibleId.set(id);
+  }
+
+  onMouseLeaveMessage() {
+    this.reactionVisibleId.set(null);
   }
 
   onSubmit() {

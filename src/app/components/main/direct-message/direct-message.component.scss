@@ -58,6 +58,8 @@
   display: flex;
   padding: 32px;
   gap: 32px;
+  cursor: pointer;
+  position: relative;
   &.current-user {
     justify-content: flex-end;
   }
@@ -79,6 +81,7 @@
   .message-data {
     display: flex;
     flex-direction: column;
+    gap: 8px;
     .first-row {
       display: flex;
       gap: 8px;
@@ -87,6 +90,34 @@
         font-weight: 700;
       }
     }
+    .last-row {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      .answer-amount {
+        font-size: 18px;
+        color: $purple-3;
+      }
+      .last-answer-time {
+        font-size: 14px;
+        color: $text-gray;
+      }
+    }
+  }
+}
+
+.reaction-bar {
+  position: absolute;
+  top: 0;
+  background-color: #fff;
+  border-radius: 24px 24px 0 24px;
+  border: 1px solid $light-purple;
+  padding: 4px 16px;
+  gap: 8px;
+  button {
+    border: unset;
+    background: unset;
+    cursor: pointer;
   }
 }
 

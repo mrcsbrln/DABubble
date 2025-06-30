@@ -34,7 +34,31 @@
         [ngClass]="{
           'current-user': isMessageFromCurrentUser(dm.participantIds[0])
         }"
+        (mouseenter)="onMouseEnterMessage(dm.id)"
+        (mouseleave)="onMouseLeaveMessage()"
       >
+        @if(isMessageFromCurrentUser(dm.participantIds[0])) {
+        <div
+          class="reaction-bar"
+          [@reactionBarSlideCurrentUser]="
+            reactionVisibleId() === dm.id ? 'visible' : 'hidden'
+          "
+        >
+          <button type="button" aria-label="check">✅</button>
+          <button type="button" aria-label="like">👍</button>
+        </div>
+        } @else {
+        <div
+          class="reaction-bar"
+          [@reactionBarSlideOtherUser]="
+            reactionVisibleId() === dm.id ? 'visible' : 'hidden'
+          "
+        >
+          <button type="button" aria-label="check">✅</button>
+          <button type="button" aria-label="like">👍</button>
+        </div>
+        }
+
         <img
           [src]="getSenderById(dm.participantIds[0])?.avatarUrl"
           [ngClass]="{
@@ -60,6 +84,10 @@
             }"
           >
             {{ dm.content }}
+          </div>
+          <div class="last-row">
+            <span class="answer-amount">2 Antworten</span>
+            <span class="last-answer-time">letzte Antwort 14:56</span>
           </div>
         </div>
       </div>
