@@ -19,6 +19,7 @@ import { ChannelService } from '../../../services/channel.service';
 import { serverTimestamp } from '@angular/fire/firestore';
 import { ChannelMessage } from '../../../interfaces/channel-message.interface';
 import { MessageBoxComponent } from '../shared/message-box/message-box.component';
+import { DirectMessageService } from '../../../services/direct-message.service';
 
 @Component({
   selector: 'app-thread',
@@ -30,6 +31,7 @@ export class ThreadComponent {
   private authService = inject(AuthService);
   private channelMessageService = inject(ChannelMessageService);
   private channelService = inject(ChannelService);
+  private directMessageService = inject(DirectMessageService);
 
   @ViewChild('emojiPickerThread') emojiPickerRef!: ElementRef;
   @ViewChild('emojiToggleBtnThread') emojiToggleBtnRef!: ElementRef;
