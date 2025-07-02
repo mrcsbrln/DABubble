@@ -1,7 +1,7 @@
 <div class="header">
   <span class="thread-info">
     <span class="title">Thread</span>
-    @if(getChannelName()) {
+    @if(type === 'channel') {
     <span class="channel-name"> # {{ getChannelName() }} </span>
     }
   </span>
@@ -11,10 +11,15 @@
 </div>
 
 <div class="thread-main">
-  <span>ParentMessage: {{ getParentMessage()?.content }}</span>
-  @for(message of getThreadMessages(); track message.id) {
+  @if(type === 'channel') {
+  <span>ParentMessage: {{ getParentChannelMessage()?.content }}</span>
+  @for(message of getChannelThreadMessages(); track message.id) {
   <span>ThreadMessage: {{ message.content }}</span>
-  }
+  } } @else if (type === 'user') {
+  <span>ParentMessage: {{ getParentDirectMessage()?.content }}</span>
+  @for(message of getDirectThreadMessages(); track message.id) {
+  <span>ThreadMessage: {{ message.content }}</span>
+  } }
 </div>
 
 <!-- <form [formGroup]="form" (ngSubmit)="onSubmit()" (keydown.enter)="onSubmit()">
@@ -64,5 +69,15 @@
   </div>
 </form> -->
 <div class="message-box-wrapper">
-  <app-message-box [placeholder]="'Antworten...'" />
+  @if(type === 'user') {
+  <app-message-box
+    [placeholder]="'Antworten...'"
+    (send)="handleSendForDirectMessage($event)"
+  />
+  } @else if (type === 'channel') {
+  <app-message-box
+    [placeholder]="'Antworten...'"
+    (send)="handleSendForChannelMessage($event)"
+  />
+  }
 </div>

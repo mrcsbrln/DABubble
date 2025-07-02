@@ -41,13 +41,13 @@ export class ChannelMessageService {
 
   parentMessage = computed(() => {
     const id = this.parentChannelMessageId();
-    return this.messagesByChannelId().find((m) => m.id === id);
+    return this.messagesByChannelId().find((message) => message.id === id);
   });
 
   threadMessages = computed(() => {
     const parentId = this.parentChannelMessageId();
     return this.messagesByChannelId().filter(
-      (m) => m.parentMessageId === parentId
+      (message) => message.parentMessageId === parentId
     );
   });
 
