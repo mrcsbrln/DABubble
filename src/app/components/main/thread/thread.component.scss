@@ -4,30 +4,46 @@
   background-color: #fff;
   height: 100%;
   border-radius: 30px;
-
-  button {
-    background: unset;
-    border: unset;
-    cursor: pointer;
-  }
-  .test-div {
-    display: flex;
-    flex-direction: column;
-  }
+  display: flex;
+  flex-direction: column;
 }
 
-app-message-box,
-.message-input-box {
-  padding: 0;
-  margin: 0;
+button {
+  background: unset;
+  border: unset;
+  cursor: pointer;
+}
+
+.channel-name {
+  font-size: 14px;
+  color: $purple-2;
+}
+
+.thread-main {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  flex-grow: 1;
 }
 
 .header {
   display: flex;
+  justify-content: space-between;
+  box-shadow: $box-shadow;
+  padding: 16px;
   .title {
     font-size: 24px;
     font-weight: 700;
   }
+  .thread-info {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+}
+
+.message-box-wrapper {
+  padding: 16px;
 }
 
 .message-input-container {

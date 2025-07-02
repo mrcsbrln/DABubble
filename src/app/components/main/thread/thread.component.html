@@ -1,14 +1,16 @@
 <div class="header">
-  <span>
+  <span class="thread-info">
     <span class="title">Thread</span>
-    <span> #{{ getChannelName() }} </span></span
-  >
+    @if(getChannelName()) {
+    <span class="channel-name"> # {{ getChannelName() }} </span>
+    }
+  </span>
   <button (click)="onCloseThread()">
     <img src="img/close.svg" alt="" />
   </button>
 </div>
 
-<div class="test-div">
+<div class="thread-main">
   <span>ParentMessage: {{ getParentMessage()?.content }}</span>
   @for(message of getThreadMessages(); track message.id) {
   <span>ThreadMessage: {{ message.content }}</span>
@@ -61,4 +63,6 @@
     </div>
   </div>
 </form> -->
-<app-message-box [placeholder]="'Antworten...'" />
+<div class="message-box-wrapper">
+  <app-message-box [placeholder]="'Antworten...'" />
+</div>

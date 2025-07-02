@@ -31,10 +31,10 @@ button {
   }
 
   .textarea-button-container {
-    height: 68px;
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     position: absolute;
     bottom: 0;
     right: 0;
