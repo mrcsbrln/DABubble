@@ -5,7 +5,6 @@ import {
   runInInjectionContext,
   signal,
   DestroyRef,
-  computed,
 } from '@angular/core';
 import { Unsubscribe } from '@angular/fire/auth';
 import {
@@ -34,22 +33,9 @@ export class DirectMessageService {
   directMessages = signal<DirectMessage[]>([]);
   messagesByChannelId = signal<DirectMessage[]>([]);
 
-  currentChannelId = signal('');
   selectedUserId = signal('');
 
-  parentChannelMessageId = signal('');
-
-  parentMessage = computed(() => {
-    const id = this.parentChannelMessageId();
-    return this.messagesByChannelId().find((message) => message.id === id);
-  });
-
-  threadMessages = computed(() => {
-    const parentId = this.parentChannelMessageId();
-    return this.messagesByChannelId().filter(
-      (message) => message.parentMessageId === parentId
-    );
-  });
+  parentDirectMessageId = signal('');
 
   unsubMessages!: Unsubscribe;
   unsubMessagesByChannelId!: Unsubscribe;
@@ -128,7 +114,7 @@ export class DirectMessageService {
       participantIds: obj.participantIds || ['', ''],
       content: obj.content || '',
       timestamp: obj.timestamp || serverTimestamp(),
-      parentMessageId: obj.parentMessageId,
+      parentMessageId: obj.parentMessageId || null,
     };
   }
 }

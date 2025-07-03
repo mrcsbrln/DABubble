@@ -6,6 +6,6 @@ export interface DirectMessage {
   participantIds: [string, string]; // Array mit genau zwei UIDs der Teilnehmer (Referenz zu UserProfile.uid)
   content: string;
   timestamp: FieldValue | Timestamp; // Optional: Zeitstempel der letzten Nachricht für Sortierungen in der UI
-  parentMessageId?: string;
+  parentMessageId: string | null;
   reactions?: Reaction[]; // Array der Reaktionen auf diese Nachricht (optional)
 }

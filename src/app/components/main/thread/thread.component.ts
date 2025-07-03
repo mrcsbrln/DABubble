@@ -128,11 +128,15 @@ export class ThreadComponent implements OnInit {
   }
 
   getParentDirectMessage() {
-    return this.directMessageService.parentMessage();
+    const parentDirectMessageId =
+      this.directMessageService.parentDirectMessageId();
+    return this.directMessageService
+      .directMessages()
+      .find((dm) => dm.id === parentDirectMessageId);
   }
 
   getDirectThreadMessages() {
-    return this.directMessageService.threadMessages();
+    return;
   }
 
   getChannelThreadMessages() {
@@ -173,17 +177,16 @@ export class ThreadComponent implements OnInit {
   handleSendForDirectMessage(text: string) {
     const senderId = this.authService.currentUser()?.uid;
     const selectedMemberId = this.getSelectedUser()?.uid;
-    const parentMessageId = this.getParentDirectMessage()?.id;
 
-    console.log('1', senderId, '2', selectedMemberId, '3', parentMessageId);
+    console.log('1', senderId, '2', selectedMemberId);
 
-    if (!senderId || !selectedMemberId || !parentMessageId) return;
+    if (!senderId || !selectedMemberId) return;
 
     const message: DirectMessageData = {
       content: text,
       participantIds: [senderId, selectedMemberId],
       timestamp: serverTimestamp(),
-      parentMessageId: parentMessageId || undefined,
+      parentMessageId: null,
     };
 
     this.directMessageService.addMessage(message);

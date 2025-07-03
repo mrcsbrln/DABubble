@@ -220,6 +220,7 @@ export class DirectMessageComponent implements OnInit {
         participantIds: [currentUserId, selectedUserId],
         content: messageText,
         timestamp: serverTimestamp(),
+        parentMessageId: null,
       };
       this.directMessageService.addMessage(directMessageDataToSend);
       this.form.controls.content.reset();
@@ -236,8 +237,13 @@ export class DirectMessageComponent implements OnInit {
       content: text,
       participantIds: [senderId, selectedMemberId],
       timestamp: serverTimestamp(),
+      parentMessageId: null,
     };
 
     this.directMessageService.addMessage(message);
+  }
+
+  setParentDirectMessageId(id: string) {
+    this.directMessageService.parentDirectMessageId.set(id);
   }
 }

@@ -99,7 +99,7 @@ export class ChannelMessageService {
       content: obj.content || '',
       timestamp: obj.timestamp || serverTimestamp(),
       channelId: obj.channelId,
-      parentMessageId: obj.parentMessageId,
+      parentMessageId: obj.parentMessageId || null,
     };
   }
 

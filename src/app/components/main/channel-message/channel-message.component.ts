@@ -193,6 +193,7 @@ export class ChannelMessageComponent implements OnInit {
         content: messageText,
         timestamp: serverTimestamp(),
         channelId: currentChannelId,
+        parentMessageId: null,
       };
       this.channelMessageService.addMessage(messageDataToSend);
       this.form.controls.content.reset();
@@ -372,6 +373,7 @@ export class ChannelMessageComponent implements OnInit {
       content: text,
       timestamp: serverTimestamp(),
       channelId: currentChannelId,
+      parentMessageId: null,
     };
 
     this.channelMessageService.addMessage(message);
