@@ -19,6 +19,7 @@
   </div>
   <div class="messages-container">
     @for(dm of getDirectMessagesOfSelectedUser(); track dm.id){
+    @if(dm.parentMessageId === null) {
     <div class="message-wrapper">
       <div class="seperator-wrapper">
         <div class="seperator"></div>
@@ -137,7 +138,7 @@
         </div>
       </div>
     </div>
-    }
+    } }
   </div>
   <app-message-box
     [placeholder]="'Nachricht an ' + getSelectedUser()?.displayName"

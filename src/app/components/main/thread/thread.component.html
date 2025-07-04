@@ -17,7 +17,9 @@
   <span>ThreadMessage: {{ message.content }}</span>
   } } @else if (type === 'user') {
   <span>ParentMessage: {{ getParentDirectMessage()?.content }}</span>
-  }
+  @for(message of getDirectThreadMessagesByParentId(); track message.id) {
+  <span>{{ message.content }}</span>
+  } }
 </div>
 
 <div class="message-box-wrapper">
