@@ -31,6 +31,10 @@ import { AddMembersComponent } from '../add-members/add-members.component';
 import { EditChannelComponent } from './edit-channel/edit-channel.component';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { MessageBoxComponent } from '../shared/message-box/message-box.component';
+import {
+  reactionBarSlideCurrentUser,
+  reactionBarSlideOtherUser,
+} from '../../../services/site-animations.service';
 
 type ChannelMessageData = Omit<ChannelMessage, 'id'>;
 
@@ -38,6 +42,7 @@ registerLocaleData(localeDe);
 
 @Component({
   selector: 'app-channel-message',
+  animations: [reactionBarSlideCurrentUser, reactionBarSlideOtherUser],
   imports: [
     AddMembersComponent,
     ReactiveFormsModule,
@@ -84,6 +89,11 @@ export class ChannelMessageComponent implements OnInit {
 
   isHovering = signal(false);
   isEmojiPickerOpen = signal(false);
+  isReactionHovered = signal(false);
+  isAnswerHovered = signal(false);
+  isDotsHovered = signal(false);
+
+  reactionVisibleId = signal<string | null>(null);
 
   openThread = output<void>();
 
@@ -337,6 +347,14 @@ export class ChannelMessageComponent implements OnInit {
 
   isUserOnline(id: string) {
     return this.userService.onlineUsersIds().includes(id);
+  }
+
+  isMessageFromCurrentUser(senderId: string) {
+    return this.authService.currentUser()?.uid === senderId;
+  }
+
+  setParentDirectMessageId(id: string) {
+    this.channelMessageService.parentChannelMessageId.set(id);
   }
 
   @HostListener('document:mousedown', ['$event'])

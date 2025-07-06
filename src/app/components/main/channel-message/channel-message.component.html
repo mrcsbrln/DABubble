@@ -199,7 +199,7 @@
         <!-- } -->
       </div>
 
-      @if (editMessageId() === null) {
+      <!-- @if (editMessageId() === null) {
       <div
         class="reaction-bar"
         [class.outgoing]="isCurrentUserSenderOfMessage(message.id)"
@@ -228,6 +228,71 @@
           </button>
         </div>
         }
+      </div>
+      } -->
+      @if(isMessageFromCurrentUser(message.senderId)) {
+      <div
+        class="reaction-bar"
+        [@reactionBarSlideCurrentUser]="
+          reactionVisibleId() === message.id ? 'visible' : 'hidden'
+        "
+      >
+        <button type="button" aria-label="check">✅</button>
+        <button type="button" aria-label="like">👍</button>
+        <!-- Reaction-Button -->
+        <button
+          type="button"
+          aria-label="reaction"
+          (mouseenter)="isReactionHovered.set(true)"
+          (mouseleave)="isReactionHovered.set(false)"
+        >
+          <img
+            [src]="
+              isReactionHovered()
+                ? 'img/add-reaction-comment-hover.svg'
+                : 'img/add-reaction-comment.svg'
+            "
+            alt="reaction"
+          />
+        </button>
+
+        <!-- Answer-Button -->
+        <button
+          type="button"
+          (click)="onOpenThread()"
+          (click)="setParentDirectMessageId(message.id)"
+          (mouseenter)="isAnswerHovered.set(true)"
+          (mouseleave)="isAnswerHovered.set(false)"
+        >
+          <img
+            [src]="
+              isAnswerHovered() ? 'img/answer-hover.svg' : 'img/answer.svg'
+            "
+            alt="answer"
+          />
+        </button>
+
+        <!-- Dots-Button -->
+        <button
+          type="button"
+          (mouseenter)="isDotsHovered.set(true)"
+          (mouseleave)="isDotsHovered.set(false)"
+        >
+          <img
+            [src]="isDotsHovered() ? 'img/dots-hover.svg' : 'img/dots.svg'"
+            alt="edit"
+          />
+        </button>
+      </div>
+      } @else {
+      <div
+        class="reaction-bar"
+        [@reactionBarSlideOtherUser]="
+          reactionVisibleId() === message.id ? 'visible' : 'hidden'
+        "
+      >
+        <button type="button" aria-label="check">✅</button>
+        <button type="button" aria-label="like">👍</button>
       </div>
       }
     </button>

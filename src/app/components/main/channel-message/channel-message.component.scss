@@ -5,6 +5,10 @@
   overflow-y: scroll;
 }
 
+app-message-box {
+  margin: 24px;
+}
+
 button {
   border: unset;
   background-color: transparent;
@@ -314,8 +318,6 @@ button {
     border: 1px solid $light-purple;
     border-radius: 25px 25px 0px 25px;
     pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.2s, right 0.3s, left 0.3s;
 
     button,
     > div {
@@ -329,10 +331,6 @@ button {
       height: 35px;
       cursor: pointer;
       transition: transform 0.1s;
-
-      &:hover {
-        transform: scale(1.15);
-      }
     }
 
     span {
@@ -344,22 +342,7 @@ button {
       height: 39px;
       cursor: pointer;
       transition: transform 0.1s;
-
-      &:hover {
-        transform: scale(1.15);
-      }
     }
-  }
-
-  &.outgoing {
-    flex-direction: column;
-    align-items: flex-end;
-  }
-
-  &:hover .reaction-bar {
-    opacity: 1;
-    pointer-events: auto;
-    right: 5%;
   }
 
   .edit-message {
