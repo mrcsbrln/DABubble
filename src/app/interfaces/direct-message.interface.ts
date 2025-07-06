@@ -2,10 +2,10 @@ import { FieldValue, Timestamp } from '@angular/fire/firestore';
 import { Reaction } from './reaction.interface';
 
 export interface DirectMessage {
-  id: string; // Eindeutige ID der Konversation (Firestore Document ID)
-  participantIds: [string, string]; // Array mit genau zwei UIDs der Teilnehmer (Referenz zu UserProfile.uid)
+  id: string;
+  participantIds: [string, string];
   content: string;
-  timestamp: FieldValue | Timestamp; // Optional: Zeitstempel der letzten Nachricht für Sortierungen in der UI
+  timestamp: FieldValue | Timestamp;
   parentMessageId: string | null;
-  reactions?: Reaction[]; // Array der Reaktionen auf diese Nachricht (optional)
+  reactions?: Reaction[];
 }

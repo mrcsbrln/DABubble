@@ -278,12 +278,22 @@ export class ChannelMessageComponent implements OnInit {
       .filter((message) => message.parentMessageId === parentId).length;
   }
 
-  isToday(date: Date): boolean {
+  isToday(messageId: string): boolean {
+    const message = this.channelMessageService
+      .messages()
+      .find((message) => message.id === messageId);
+
+    if (!message?.timestamp || !(message?.timestamp instanceof Timestamp)) {
+      return false;
+    }
+
+    const messageDate = message.timestamp.toDate();
     const today = new Date();
+
     return (
-      date.getDate() === today.getDate() &&
-      date.getMonth() === today.getMonth() &&
-      date.getFullYear() === today.getFullYear()
+      messageDate.getDate() === today.getDate() &&
+      messageDate.getMonth() === today.getMonth() &&
+      messageDate.getFullYear() === today.getFullYear()
     );
   }
 
