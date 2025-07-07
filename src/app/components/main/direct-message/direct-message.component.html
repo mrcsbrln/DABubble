@@ -20,7 +20,7 @@
   <div class="messages-container">
     @for(dm of getDirectMessagesOfSelectedUser(); track dm.id){
     @if(dm.parentMessageId === null) {
-    <app-message-item [message]="dm" />
+    <app-message-item [message]="dm" (openThread)="openThread.emit()" />
     } }
   </div>
   <app-message-box

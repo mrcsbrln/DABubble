@@ -46,6 +46,7 @@ app-message-box {
   padding: 24px 20px;
   box-shadow: $box-shadow;
   border-radius: 30px 30px 0 0;
+  z-index: 2;
   .avatar-wrapper {
     display: flex;
     position: relative;

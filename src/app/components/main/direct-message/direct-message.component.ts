@@ -64,13 +64,10 @@ export class DirectMessageComponent implements OnInit {
   isUserProfileDialogOpen = signal(false);
   selectedMemberId = signal('');
 
-  isReactionHovered = signal(false);
-  isAnswerHovered = signal(false);
-  isDotsHovered = signal(false);
   isEmojiPickerOpen = signal(false);
 
   reactionVisibleId = signal<string | null>(null);
-  openThread = output<void>();
+  openThread = output();
 
   emojis: string[] = [
     '😀',
@@ -98,29 +95,6 @@ export class DirectMessageComponent implements OnInit {
     return this.getSelectedUser()?.uid === this.getCurrentUserId();
   }
 
-  isMessageFromCurrentUser(senderId: string) {
-    return this.authService.currentUser()?.uid === senderId;
-  }
-
-  isToday(messageId: string): boolean {
-    const message = this.directMessageService
-      .directMessages()
-      .find((message) => message.id === messageId);
-
-    if (!message?.timestamp || !(message?.timestamp instanceof Timestamp)) {
-      return false;
-    }
-
-    const messageDate = message.timestamp.toDate();
-    const today = new Date();
-
-    return (
-      messageDate.getDate() === today.getDate() &&
-      messageDate.getMonth() === today.getMonth() &&
-      messageDate.getFullYear() === today.getFullYear()
-    );
-  }
-
   getSelectedUser() {
     const selecetedUserId = this.directMessageService.selectedUserId();
     if (!selecetedUserId) return;
@@ -141,24 +115,8 @@ export class DirectMessageComponent implements OnInit {
       });
   }
 
-  getDateOfMessageById(messageId: string): Date {
-    const timestamp = this.directMessageService
-      .directMessages()
-      .find((message) => message.id === messageId)?.timestamp;
-
-    if (timestamp instanceof Timestamp) {
-      return timestamp.toDate();
-    }
-
-    return new Date(0);
-  }
-
   getCurrentUserId() {
     return this.authService.currentUser()?.uid;
-  }
-
-  getSenderById(id: string) {
-    return this.userService.users().find((user) => user.uid === id);
   }
 
   subRouteParams() {
@@ -197,10 +155,6 @@ export class DirectMessageComponent implements OnInit {
 
   onMouseLeaveMessage() {
     this.reactionVisibleId.set(null);
-  }
-
-  onOpenThread() {
-    this.openThread.emit();
   }
 
   onSubmit() {
