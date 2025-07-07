@@ -116,15 +116,15 @@ export class MessageItemComponent {
     this.openThread.emit();
   }
 
-  setParentDirectMessageId(id: string) {
+  setParentDirectMessageId() {
     const message = this.message();
 
     if (!message) return;
 
     if ('senderId' in message) {
-      this.directMessageService.parentDirectMessageId.set(id);
+      this.directMessageService.parentDirectMessageId.set(message.id);
     } else if ('participantIds' in message) {
-      return this.channelMessageService.parentChannelMessageId.set(id);
+      return this.channelMessageService.parentChannelMessageId.set(message.id);
     }
   }
 }
