@@ -12,8 +12,6 @@ import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { UserService } from '../../../services/user.service';
 import { AuthService } from '../../../services/auth/auth.service';
 import { DirectMessageService } from '../../../services/direct-message.service';
-import { DatePipe, registerLocaleData } from '@angular/common';
-import localeDe from '@angular/common/locales/de';
 import {
   FormControl,
   FormGroup,
@@ -25,6 +23,7 @@ import { serverTimestamp, Timestamp } from '@angular/fire/firestore';
 import { DirectMessage } from '../../../interfaces/direct-message.interface';
 import { Subscription } from 'rxjs';
 import { MessageBoxComponent } from '../shared/message-box/message-box.component';
+import { MessageItemComponent } from '../shared/message-item/message-item.component';
 import {
   reactionBarSlideCurrentUser,
   reactionBarSlideOtherUser,
@@ -32,17 +31,15 @@ import {
 
 type DirectMessageData = Omit<DirectMessage, 'id'>;
 
-registerLocaleData(localeDe);
-
 @Component({
   selector: 'app-direct-message',
   animations: [reactionBarSlideCurrentUser, reactionBarSlideOtherUser],
   imports: [
     CommonModule,
-    DatePipe,
     ReactiveFormsModule,
     UserProfileComponent,
     MessageBoxComponent,
+    MessageItemComponent,
   ],
   templateUrl: './direct-message.component.html',
   styleUrl: './direct-message.component.scss',

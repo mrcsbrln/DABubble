@@ -72,12 +72,8 @@ export class MessageItemComponent {
     if (!message || !currentUserId) return false;
 
     if ('senderId' in message) {
-      // DirectMessage
       return message.senderId === currentUserId;
-    }
-
-    if ('participantIds' in message) {
-      // ChannelMessage
+    } else if ('participantIds' in message) {
       return message.participantIds[0] === currentUserId;
     }
 
