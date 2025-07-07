@@ -16,11 +16,16 @@ import { ChannelMessageService } from '../../../../services/channel-message.serv
 import { DirectMessageService } from '../../../../services/direct-message.service';
 import { UserService } from '../../../../services/user.service';
 import localeDe from '@angular/common/locales/de';
+import {
+  reactionBarSlideCurrentUser,
+  reactionBarSlideOtherUser,
+} from '../../../../services/site-animations.service';
 
 registerLocaleData(localeDe);
 
 @Component({
   selector: 'app-message-item',
+  animations: [reactionBarSlideCurrentUser, reactionBarSlideOtherUser],
   imports: [CommonModule, DatePipe],
   templateUrl: './message-item.component.html',
   styleUrl: './message-item.component.scss',
