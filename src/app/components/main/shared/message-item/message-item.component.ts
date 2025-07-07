@@ -124,7 +124,7 @@ export class MessageItemComponent {
     if ('senderId' in message) {
       this.directMessageService.parentDirectMessageId.set(message.id);
     } else if ('participantIds' in message) {
-      return this.channelMessageService.parentChannelMessageId.set(message.id);
+      this.channelMessageService.parentChannelMessageId.set(message.id);
     }
   }
 }

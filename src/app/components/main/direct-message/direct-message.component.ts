@@ -3,7 +3,6 @@ import {
   inject,
   signal,
   OnInit,
-  LOCALE_ID,
   DestroyRef,
   output,
 } from '@angular/core';
@@ -43,7 +42,6 @@ type DirectMessageData = Omit<DirectMessage, 'id'>;
   ],
   templateUrl: './direct-message.component.html',
   styleUrl: './direct-message.component.scss',
-  providers: [{ provide: LOCALE_ID, useValue: 'de' }],
 })
 export class DirectMessageComponent implements OnInit {
   private authService = inject(AuthService);
@@ -66,23 +64,7 @@ export class DirectMessageComponent implements OnInit {
 
   isEmojiPickerOpen = signal(false);
 
-  reactionVisibleId = signal<string | null>(null);
   openThread = output();
-
-  emojis: string[] = [
-    '😀',
-    '😂',
-    '😢',
-    '🤓',
-    '😱',
-    '👍',
-    '👌',
-    '👋',
-    '🎉',
-    '🚀',
-    '🙏',
-    '✅',
-  ];
 
   ngOnInit() {
     this.routeSubscription = this.subRouteParams();
@@ -136,25 +118,6 @@ export class DirectMessageComponent implements OnInit {
 
   toggleUserProfileDialog() {
     this.isUserProfileDialogOpen.update((value) => !value);
-  }
-
-  toggleEmojiPicker(event: MouseEvent) {
-    event.stopPropagation();
-    this.isEmojiPickerOpen.update((open) => !open);
-  }
-
-  addEmojiToInput(emoji: string) {
-    const current = this.form.controls.content.value || '';
-    this.form.controls.content.setValue(current + emoji);
-    this.isEmojiPickerOpen.set(false);
-  }
-
-  onMouseEnterMessage(id: string) {
-    this.reactionVisibleId.set(id);
-  }
-
-  onMouseLeaveMessage() {
-    this.reactionVisibleId.set(null);
   }
 
   onSubmit() {
