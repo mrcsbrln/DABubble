@@ -21,8 +21,8 @@ export class WorkspaceComponent {
   private directMessageService = inject(DirectMessageService);
   private channelMessageService = inject(ChannelMessageService);
 
-  channelListOpen = signal(false);
-  directMessageUserListOpen = signal(false);
+  channelListOpen = signal(true);
+  directMessageUserListOpen = signal(true);
   addChannelDialogOpen = signal(false);
 
   getChannels() {
@@ -78,5 +78,13 @@ export class WorkspaceComponent {
 
   onCloseAddChannel() {
     this.addChannelDialogOpen.set(false);
+  }
+
+  resetCurrentChannelId() {
+    this.channelMessageService.currentChannelId.set('');
+  }
+
+  resetSelectedUserId() {
+    this.directMessageService.selectedUserId.set('');
   }
 }

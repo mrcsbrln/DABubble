@@ -111,6 +111,7 @@ export class ChannelMessageComponent implements OnInit {
 
   getMembersOfCurrentChannel() {
     const currentChannelId = this.channelMessageService.currentChannelId();
+    if (currentChannelId === null) return;
     const memberIdsOfChannel =
       this.channelService.getMembersOfChannel(currentChannelId);
     return memberIdsOfChannel?.map((id) => this.userService.getUserById(id));

@@ -31,6 +31,9 @@
       [ngClass]="{
         'selected-channel': isChannelSelected(channel.id)
       }"
+      (click)="resetSelectedUserId()"
+      (keyup.enter)="resetSelectedUserId()"
+      tabindex="0"
     >
       <img src="img/tag-black.svg" alt="tag" />
       <a [routerLink]="['/channels', channel.id]">
@@ -71,6 +74,7 @@
         'selected-user': isUserSelected(getCurrentUserData()?.uid || '')
       }"
       [routerLink]="['/user', getCurrentUserData()?.uid]"
+      (click)="resetCurrentChannelId()"
     >
       <div class="avatar-wrapper">
         <img [src]="getCurrentUserData()?.avatarUrl" alt="Avatar" />
@@ -89,6 +93,7 @@
         'selected-user': isUserSelected(user.uid)
       }"
       [routerLink]="['/user', user.uid]"
+      (click)="resetCurrentChannelId()"
     >
       <div class="avatar-wrapper">
         <img [src]="user.avatarUrl" alt="Avatar" />
