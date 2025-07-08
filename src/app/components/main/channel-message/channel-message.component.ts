@@ -14,7 +14,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { ChannelMessageService } from '../../../services/channel-message.service';
 import { serverTimestamp } from '@angular/fire/firestore';
 import { Timestamp, FieldValue } from '@angular/fire/firestore';
-import { CommonModule, DatePipe, registerLocaleData } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
   FormControl,
   FormGroup,
@@ -26,7 +26,6 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ChannelService } from '../../../services/channel.service';
 import { UserService } from '../../../services/user.service';
-import localeDe from '@angular/common/locales/de';
 import { AddMembersComponent } from '../add-members/add-members.component';
 import { EditChannelComponent } from './edit-channel/edit-channel.component';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
@@ -35,10 +34,9 @@ import {
   reactionBarSlideCurrentUser,
   reactionBarSlideOtherUser,
 } from '../../../services/site-animations.service';
+import { MessageItemComponent } from '../shared/message-item/message-item.component';
 
 type ChannelMessageData = Omit<ChannelMessage, 'id'>;
-
-registerLocaleData(localeDe);
 
 @Component({
   selector: 'app-channel-message',
@@ -46,11 +44,11 @@ registerLocaleData(localeDe);
   imports: [
     AddMembersComponent,
     ReactiveFormsModule,
-    DatePipe,
     EditChannelComponent,
     UserProfileComponent,
     CommonModule,
     MessageBoxComponent,
+    MessageItemComponent,
   ],
   templateUrl: './channel-message.component.html',
   styleUrl: './channel-message.component.scss',
@@ -99,21 +97,6 @@ export class ChannelMessageComponent implements OnInit {
 
   closeIconSrc = 'img/close.svg';
   closeIconHoverSrc = 'img/close-hover.svg';
-
-  emojis: string[] = [
-    '😀',
-    '😂',
-    '😢',
-    '🤓',
-    '😱',
-    '👍',
-    '👌',
-    '👋',
-    '🎉',
-    '🚀',
-    '🙏',
-    '✅',
-  ];
 
   ngOnInit() {
     this.subRouteParams();

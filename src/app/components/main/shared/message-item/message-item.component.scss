@@ -64,6 +64,12 @@
   }
 }
 
+.message-date {
+  border: 1px solid $light-purple;
+  border-radius: 30px;
+  padding: 5px 15px;
+}
+
 .reaction-bar {
   position: absolute;
   top: 0;
@@ -106,5 +112,5 @@
 .seperator-wrapper {
   display: flex;
   align-items: center;
-  padding: 32px;
+  padding: 16px 32px;
 }
