@@ -26,7 +26,12 @@
   <div class="channels-list">
     @for(channel of getChannels(); track channel.id) {
     @if(checkIfUserIsMemberOfChannel(channel.id)) {
-    <div class="channel-entry">
+    <div
+      class="channel-entry"
+      [ngClass]="{
+        'selected-channel': isChannelSelected(channel.id)
+      }"
+    >
       <img src="img/tag-black.svg" alt="tag" />
       <a [routerLink]="['/channels', channel.id]">
         {{ channel.name }}

@@ -6,6 +6,7 @@ import { UserService } from '../../../services/user.service';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
 import { DirectMessageService } from '../../../services/direct-message.service';
+import { ChannelMessageService } from '../../../services/channel-message.service';
 
 @Component({
   selector: 'app-workspace',
@@ -18,6 +19,7 @@ export class WorkspaceComponent {
   private channelService = inject(ChannelService);
   private authService = inject(AuthService);
   private directMessageService = inject(DirectMessageService);
+  private channelMessageService = inject(ChannelMessageService);
 
   channelListOpen = signal(false);
   directMessageUserListOpen = signal(false);
@@ -43,6 +45,10 @@ export class WorkspaceComponent {
 
   isUserSelected(id: string) {
     return this.directMessageService.selectedUserId() === id;
+  }
+
+  isChannelSelected(id: string) {
+    return this.channelMessageService.currentChannelId() === id;
   }
 
   getUserDataOfOtherParcipitants() {
