@@ -1,49 +1,64 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" (keydown.enter)="onSubmit()">
-  <div class="message-input-container">
-    <div class="message-input-box">
-      <textarea
-        [formControl]="form.controls.content"
-        [placeholder]="placeholder()"
-      ></textarea>
-      <div class="textarea-button-container">
-        <div class="textarea-button-group">
-          <button
-            type="button"
-            class="emoji-container"
-            (click)="toggleEmojiPicker($event)"
-            #emojiToggleBtn
-          >
-            <img
-              class="add-reaction-textarea"
-              src="img/add-reaction.svg"
-              alt="add-reaction"
-            />
-          </button>
-          @if(isEmojiPickerOpen()) {
-          <div class="emoji-picker" #emojiPicker>
-            @for (emoji of emojis; track $index) {
-            <button
-              type="button"
-              class="emoji-btn"
-              (click)="addEmojiToInput(emoji)"
-            >
-              {{ emoji }}
-            </button>
-            }
-          </div>
-          }
-          <button class="at-icon-button" type="button">
-            <img src="img/at-icon.svg" alt="at-icon" />
-          </button>
-        </div>
+  <textarea
+    [formControl]="form.controls.content"
+    [placeholder]="placeholder()"
+  ></textarea>
+  <div class="textarea-button-container">
+    <div class="textarea-button-group">
+      <button
+        type="button"
+        class="picker-btn"
+        (click)="toggleEmojiPicker($event)"
+        (mouseenter)="isEmojiBtnHovered.set(true)"
+        (mouseleave)="isEmojiBtnHovered.set(false)"
+        #emojiToggleBtn
+      >
+        <img
+          class="add-reaction-textarea"
+          [src]="
+            isEmojiBtnHovered()
+              ? 'img/add-reaction-hover.svg'
+              : 'img/add-reaction.svg'
+          "
+          alt="add-reaction"
+        />
+      </button>
+      @if(isEmojiPickerOpen()) {
+      <div class="emoji-picker" #emojiPicker>
+        @for (emoji of emojis; track $index) {
         <button
-          type="submit"
-          class="send-button"
-          [disabled]="form.controls.content.invalid"
+          type="button"
+          class="emoji-btns"
+          (click)="addEmojiToInput(emoji)"
         >
-          <img src="img/send.svg" alt="send-message" />
+          {{ emoji }}
         </button>
+        }
       </div>
+      }
+      <button
+        (mouseenter)="isAtBtnHovered.set(true)"
+        (mouseleave)="isAtBtnHovered.set(false)"
+        class="picker-btn"
+        type="button"
+      >
+        <img
+          [src]="isAtBtnHovered() ? 'img/at-icon-hover.svg' : 'img/at-icon.svg'"
+          alt="at-icon"
+        />
+      </button>
     </div>
+    <button
+      (mouseenter)="isSendBtnHovered.set(true)"
+      (mouseleave)="isSendBtnHovered.set(false)"
+      type="submit"
+      class="send-button"
+      [disabled]="form.controls.content.invalid"
+    >
+      <img
+        [src]="isSendBtnHovered() ? 'img/send-hover.svg' : 'img/send.svg'"
+        alt="send-message"
+      />
+    </button>
   </div>
 </form>

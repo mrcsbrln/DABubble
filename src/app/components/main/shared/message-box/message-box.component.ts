@@ -21,7 +21,7 @@ import {
   styleUrl: './message-box.component.scss',
 })
 export class MessageBoxComponent implements OnInit {
-  destroyRef = inject(DestroyRef);
+  private destroyRef = inject(DestroyRef);
 
   placeholder = input<string>();
 
@@ -29,6 +29,10 @@ export class MessageBoxComponent implements OnInit {
   contentControlReady = output<FormControl<string>>();
 
   isEmojiPickerOpen = signal(false);
+
+  isEmojiBtnHovered = signal(false);
+  isAtBtnHovered = signal(false);
+  isSendBtnHovered = signal(false);
 
   emojis: string[] = [
     '😀',
