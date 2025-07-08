@@ -29,9 +29,7 @@ export class WorkspaceComponent {
 
   getCurrentUserData() {
     const currentUserId = this.userService.currentUserData()?.uid;
-    if (!currentUserId) {
-      return null;
-    }
+    if (!currentUserId) return;
     return this.userService.getUserById(currentUserId);
   }
 
@@ -41,6 +39,10 @@ export class WorkspaceComponent {
 
   isUserOnline(id: string) {
     return this.userService.onlineUsersIds().includes(id);
+  }
+
+  isUserSelected(id: string) {
+    return this.directMessageService.selectedUserId() === id;
   }
 
   getUserDataOfOtherParcipitants() {

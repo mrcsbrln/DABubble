@@ -60,17 +60,31 @@
 
   @if(directMessageUserListOpen()) {
   <div class="users-list">
-    <a class="user-entry" [routerLink]="['/user', getCurrentUserData()?.uid]">
+    <a
+      class="user-entry"
+      [ngClass]="{
+        'selected-user': isUserSelected(getCurrentUserData()?.uid || '')
+      }"
+      [routerLink]="['/user', getCurrentUserData()?.uid]"
+    >
       <div class="avatar-wrapper">
         <img [src]="getCurrentUserData()?.avatarUrl" alt="Avatar" />
         <span class="status-dot" [ngClass]="{ online: true }"></span>
       </div>
-      <span>{{ getCurrentUserData()?.displayName }} (Du)</span>
+      <span class="display-name"
+        >{{ getCurrentUserData()?.displayName }} (Du)</span
+      >
     </a>
-    
+
     @for (user of getUserDataOfOtherParcipitants(); track user.uid) {
     @if(user.uid !== getCurrentUserData()?.uid) {
-    <a class="user-entry" [routerLink]="['/user', user.uid]">
+    <a
+      class="user-entry"
+      [ngClass]="{
+        'selected-user': isUserSelected(user.uid)
+      }"
+      [routerLink]="['/user', user.uid]"
+    >
       <div class="avatar-wrapper">
         <img [src]="user.avatarUrl" alt="Avatar" />
         <span
@@ -78,7 +92,7 @@
           [ngClass]="{ online: isUserOnline(user.uid) }"
         ></span>
       </div>
-      <span>{{ user.displayName }}</span>
+      <span class="display-name">{{ user.displayName }}</span>
     </a>
     } } @empty {
     <span>Keine Benutzer geladen...</span>

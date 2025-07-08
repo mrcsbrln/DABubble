@@ -41,7 +41,7 @@ button {
   justify-content: space-between;
   align-items: center;
 
-  >img {
+  > img {
     max-width: 200px;
   }
 
@@ -110,7 +110,7 @@ button .arrow-drop-down {
   max-height: 500px; //TODO
   overflow-y: auto;
 
-  >div {
+  > div {
     border-radius: 30px;
     padding: 4px 12px;
     display: flex;
@@ -123,12 +123,6 @@ button .arrow-drop-down {
 
   a {
     text-decoration: none;
-    // color: black;
-
-    // &:active {
-    //   color: inherit; /* Oder eine andere Farbe deiner Wahl */
-    //   outline: none; /* Entfernt den Fokus-Rahmen */
-    // }
   }
 
   .channel-entry {
@@ -142,7 +136,7 @@ button .arrow-drop-down {
         }
       }
 
-      &:hover>img {
+      &:hover > img {
         content: url("/img/tag-hover.svg");
       }
     }
@@ -151,9 +145,8 @@ button .arrow-drop-down {
 
 .add-channel-container {
   gap: 8px;
-  // flex: 1;
   padding-left: 24px;
-  max-height: 500px; //TODO später anpassen
+  max-height: 500px;
   overflow-y: auto;
 
   button {
@@ -192,7 +185,7 @@ button .arrow-drop-down {
   flex: 1;
   padding: 8px;
   padding-left: 24px;
-  max-height: 500px; //TODO später anpassen
+  max-height: 500px;
   overflow-y: auto;
 
   a {
@@ -210,6 +203,14 @@ button .arrow-drop-down {
   gap: 10px;
   font-size: 16px;
   width: fit-content;
+
+  &.selected-user {
+    background-color: $bg-color;
+    .display-name {
+      font-weight: 700;
+      color: $purple-3;
+    }
+  }
 
   .avatar-wrapper {
     position: relative;
