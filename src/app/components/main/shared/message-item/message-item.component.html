@@ -112,6 +112,16 @@
         {{ getTimeOfLastThreadMessage()?.toDate() | date : "HH:mm" }}</span
       >
     </div>
-    } @else if( getThreadMessages().length > 1) {}
+    } @else if( getThreadMessages().length > 1) {
+    <div class="last-row">
+      <span class="answer-amount"
+        >{{ getThreadMessages().length }} Antworten</span
+      >
+      <span class="last-answer-time"
+        >letzte Antwort
+        {{ getTimeOfLastThreadMessage()?.toDate() | date : "HH:mm" }}</span
+      >
+    </div>
+    }
   </div>
 </div>
