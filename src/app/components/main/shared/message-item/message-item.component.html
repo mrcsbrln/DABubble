@@ -102,9 +102,16 @@
     >
       {{ message()?.content }}
     </div>
+    @if(getThreadMessages().length === 1) {
     <div class="last-row">
-      <span class="answer-amount">2 Antworten</span>
-      <span class="last-answer-time">letzte Antwort 14:56</span>
+      <span class="answer-amount"
+        >{{ getThreadMessages().length }} Antwort</span
+      >
+      <span class="last-answer-time"
+        >letzte Antwort
+        {{ getTimeOfLastThreadMessage()?.toDate() | date : "HH:mm" }}</span
+      >
     </div>
+    } @else if( getThreadMessages().length > 1) {}
   </div>
 </div>

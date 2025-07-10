@@ -70,6 +70,22 @@ export class MessageItemComponent {
     } else return;
   }
 
+  getThreadMessages() {
+    return this.directMessageService
+      .directMessages()
+      .filter((dm) => dm.parentMessageId === this.message()?.id);
+  }
+
+  getTimeOfLastThreadMessage() {
+    const timestamps = this.getThreadMessages()
+      .map((m) => m.timestamp)
+      .filter((ts): ts is Timestamp => ts instanceof Timestamp);
+
+    if (timestamps.length === 0) return null;
+
+    return timestamps.reduce((a, b) => (a.toMillis() > b.toMillis() ? a : b));
+  }
+
   isMessageFromCurrentUser(): boolean {
     const message = this.message();
     const currentUserId = this.authService.currentUser()?.uid;
