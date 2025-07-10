@@ -57,6 +57,7 @@ button {
 
       &:hover {
         background-color: $bg-color;
+        transition: $hover-transition;
       }
     }
   }
@@ -115,6 +116,12 @@ button {
     .add-new-member {
       cursor: pointer;
       width: 40px;
+      height: 40px;
+      border-radius: 100%;
+      &:hover {
+        background-color: $bg-color;
+        transition: $hover-transition;
+      }
     }
 
     .channel-members-info {
@@ -165,42 +172,6 @@ button {
   gap: 16px;
   transition: color 150ms;
   padding: 0 16px;
-
-  button:hover {
-    color: $purple-3;
-  }
-}
-
-.emoji-container {
-  position: relative;
-  width: 48px;
-  cursor: pointer;
-  background-color: transparent;
-
-  > img {
-    width: 48px;
-    height: 48px;
-  }
-
-  &:hover > img {
-    content: url("/img/add-reaction-hover.svg");
-    width: 24px;
-    height: 48px;
-  }
-
-  &:focus > img {
-    content: url("/img/add-reaction-hover.svg");
-    width: 24px;
-    height: 48px;
-  }
-
-  &:hover {
-    background-color: $bg-color;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
 }
 
 .members-list {
@@ -223,6 +194,21 @@ button {
   gap: 10px;
   font-size: 16px;
   width: fit-content;
+  &:hover {
+    background-color: $bg-color;
+    color: $purple-3;
+    transition: $hover-transition;
+  }
+
+  .add-member-box {
+    width: 40px;
+    height: 40px;
+    background-color: $bg-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+  }
 
   .avatar-wrapper {
     position: relative;
@@ -249,26 +235,6 @@ button {
       &.online {
         background-color: $online-green;
       }
-    }
-  }
-
-  .member-image {
-    width: 32px;
-    height: 32px;
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    &:hover {
-      cursor: pointer;
-      background-color: $bg-color;
-      color: $purple-3;
-    }
-
-    &:hover .member-image {
-      content: url("/img/person-add-hover.svg");
-      width: 32px;
-      height: 32px;
-      padding: 4px;
     }
   }
 }

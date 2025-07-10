@@ -90,6 +90,8 @@ export class ChannelMessageComponent implements OnInit {
   isReactionHovered = signal(false);
   isAnswerHovered = signal(false);
   isDotsHovered = signal(false);
+  isAddMemeberBtnHovered = signal(false);
+  isAddMemeberBtnDialogHovered = signal(false);
 
   reactionVisibleId = signal<string | null>(null);
 

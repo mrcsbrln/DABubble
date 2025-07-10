@@ -37,14 +37,22 @@
           getMembersOfCurrentChannel()?.length
         }}</span>
       </div>
-      <img
+      <button
         (click)="toogleAddMemebersDialog()"
-        (keydown)="toogleAddMemebersDialog()"
-        tabindex="0"
-        src="img/add-member.svg"
-        alt="add-members"
         class="add-new-member"
-      />
+        (mouseenter)="isAddMemeberBtnHovered.set(true)"
+        (mouseleave)="isAddMemeberBtnHovered.set(false)"
+      >
+        <img
+          [src]="
+            isAddMemeberBtnHovered()
+              ? 'img/add-member-hover.svg'
+              : 'img/add-member.svg'
+          "
+          alt="add-members"
+        />
+      </button>
+
       @if(isAddMembersDialogOpen()){
       <div
         (click)="toogleAddMemebersDialog()"
@@ -116,12 +124,21 @@
             class="user-entry"
             (click)="toogleAddMemebersDialog()"
             (click)="toggleShowMembersDialog()"
+            (mouseenter)="isAddMemeberBtnDialogHovered.set(true)"
+            (mouseleave)="isAddMemeberBtnDialogHovered.set(false)"
           >
-            <img
-              class="member-image"
-              src="img/add-member.svg"
-              alt="add-member"
-            />Mitglieder hinzufügen
+            <span class="add-member-box">
+              <img
+                class="member-image"
+                [src]="
+                  isAddMemeberBtnDialogHovered()
+                    ? 'img/add-member-hover.svg'
+                    : 'img/add-member.svg'
+                "
+                alt="add-member"
+              />
+            </span>
+            Mitglieder hinzufügen
           </button>
         </div>
       </div>
