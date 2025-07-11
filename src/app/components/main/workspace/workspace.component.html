@@ -35,9 +35,8 @@
       (keyup.enter)="resetSelectedUserId()"
       tabindex="0"
     >
-      <img src="img/tag-black.svg" alt="tag" />
       <a [routerLink]="['/channels', channel.id]">
-        {{ channel.name }}
+        <span class="hash">#</span> {{ channel.name }}
       </a>
     </div>
     } }
