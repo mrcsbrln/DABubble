@@ -24,12 +24,13 @@ import { DirectMessageService } from '../../../services/direct-message.service';
 import { DirectMessage } from '../../../interfaces/direct-message.interface';
 import { UserService } from '../../../services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MessageItemComponent } from '../shared/message-item/message-item.component';
 
 type DirectMessageData = Omit<DirectMessage, 'id'>;
 
 @Component({
   selector: 'app-thread',
-  imports: [ReactiveFormsModule, MessageBoxComponent],
+  imports: [ReactiveFormsModule, MessageBoxComponent, MessageItemComponent],
   templateUrl: './thread.component.html',
   styleUrl: './thread.component.scss',
 })
