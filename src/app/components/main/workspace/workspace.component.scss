@@ -41,21 +41,24 @@ button {
   justify-content: space-between;
   align-items: center;
 
-  > img {
+  img {
     max-width: 200px;
   }
 
-  button:hover {
-    background-color: $bg-color;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
+  a {
     display: flex;
     align-items: center;
     justify-content: center;
-
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+    &:hover {
+      background-color: $bg-color;
+      transition: $hover-transition;
+    }
     img {
-      content: url("/img/new-message-channel-hover.svg");
+      width: 21px;
+      height: 21px;
     }
   }
 }
@@ -87,7 +90,17 @@ button .arrow-drop-down {
   }
 }
 
-.add-btn-container {
+.add-btn {
+  border-radius: 100%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    background-color: $bg-color;
+    transition: $hover-transition;
+  }
   img {
     width: 16px;
     height: 16px;

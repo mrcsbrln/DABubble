@@ -1,8 +1,18 @@
 <div class="wrapper">
   <div class="devspace-container">
     <img src="img/devspace.svg" alt="devspace-image" />
-    <a [routerLink]="['/']">
-      <img src="img/new-message-channel.svg" alt="new-message-channel"
+    <a
+      [routerLink]="['/']"
+      (mouseenter)="isNewMessageBtnHovered.set(true)"
+      (mouseleave)="isNewMessageBtnHovered.set(false)"
+    >
+      <img
+        [src]="
+          isNewMessageBtnHovered()
+            ? 'img/new-message-channel-hover.svg'
+            : 'img/new-message-channel.svg'
+        "
+        alt="new-message-channel"
     /></a>
   </div>
 
@@ -17,7 +27,7 @@
       <img src="img/workspaces.svg" alt="account-circle" />
       Channels
     </button>
-    <button class="add-btn-container" (click)="onOpenChannelDialog()">
+    <button class="add-btn" (click)="onOpenChannelDialog()">
       <img src="img/add.svg" alt="add" />
     </button>
   </div>

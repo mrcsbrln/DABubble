@@ -24,6 +24,7 @@ export class WorkspaceComponent {
   channelListOpen = signal(true);
   directMessageUserListOpen = signal(true);
   addChannelDialogOpen = signal(false);
+  isNewMessageBtnHovered = signal(false);
 
   getChannels() {
     return this.channelService.channels();
