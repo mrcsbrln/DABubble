@@ -25,6 +25,7 @@
 }
 
 .current-user-wrapper {
+  grid-area: current-user;
   position: relative;
   display: flex;
   justify-content: flex-end;
@@ -67,6 +68,7 @@
 }
 
 .input-wrapper {
+  grid-area: search-bar;
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -103,6 +105,7 @@
 }
 
 .logo-wrapper {
+  grid-area: logo;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -129,6 +132,7 @@
 
 .wrapper {
   display: grid;
+  grid-template-areas: "logo search-bar current-user";
   grid-template-columns: 1fr 3fr 1fr;
   column-gap: 16px;
 }

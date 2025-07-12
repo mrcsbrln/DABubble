@@ -2,7 +2,7 @@
   <app-header />
 
   @if (!isWorkspaceHidden()) {
-  <app-workspace />
+  <app-workspace (closeThread)="isThreadHidden.set(true)" />
   }
   <router-outlet (activate)="onActivate($event)" />
 

@@ -42,6 +42,7 @@
         'selected-channel': isChannelSelected(channel.id)
       }"
       (click)="resetSelectedUserId()"
+      (click)="onCloseThread()"
       (keyup.enter)="resetSelectedUserId()"
       tabindex="0"
     >
@@ -84,6 +85,7 @@
       }"
       [routerLink]="['/user', getCurrentUserData()?.uid]"
       (click)="resetCurrentChannelId()"
+      (click)="onCloseThread()"
     >
       <div class="avatar-wrapper">
         <img [src]="getCurrentUserData()?.avatarUrl" alt="Avatar" />
@@ -103,6 +105,7 @@
       }"
       [routerLink]="['/user', user.uid]"
       (click)="resetCurrentChannelId()"
+      (click)="onCloseThread()"
     >
       <div class="avatar-wrapper">
         <img [src]="user.avatarUrl" alt="Avatar" />

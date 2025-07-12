@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChannelService } from '../../../services/channel.service';
 import { AddChannelComponent } from './add-channel/add-channel.component';
@@ -25,6 +25,7 @@ export class WorkspaceComponent {
   directMessageUserListOpen = signal(true);
   addChannelDialogOpen = signal(false);
   isNewMessageBtnHovered = signal(false);
+  closeThread = output<void>();
 
   getChannels() {
     return this.channelService.channels();
@@ -79,6 +80,10 @@ export class WorkspaceComponent {
 
   onCloseAddChannel() {
     this.addChannelDialogOpen.set(false);
+  }
+
+  onCloseThread() {
+    this.closeThread.emit();
   }
 
   resetCurrentChannelId() {
