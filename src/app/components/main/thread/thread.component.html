@@ -12,15 +12,13 @@
 
 <div class="thread-main">
   @if(type === 'channel') {
-  <span>ParentMessage: {{ getParentChannelMessage()?.content }}</span>
+  <app-message-item [message]="getParentChannelMessage()" />
   @for(message of getChannelThreadMessages(); track message.id) {
   <app-message-item [message]="message" />
-  <!-- <span>ThreadMessage: {{ message.content }}</span> -->
   } } @else if (type === 'user') {
-  <span>ParentMessage: {{ getParentDirectMessage()?.content }}</span>
+  <app-message-item [message]="getParentDirectMessage()" />
   @for(message of getDirectThreadMessagesByParentId(); track message.id) {
   <app-message-item [message]="message" />
-  <!-- <span>{{ message.content }}</span> -->
   } }
 </div>
 
