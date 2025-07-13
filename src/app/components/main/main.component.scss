@@ -13,6 +13,7 @@
   height: 100vh;
   column-gap: 16px;
   padding: 16px;
+  overflow-y: hidden;
 
   &.workspace-hidden {
     grid-template-columns: 0 4fr 1fr;
@@ -77,7 +78,7 @@ app-thread {
       color: $purple-3;
 
       img {
-        content: url('/img/workspace-open-hover.svg');
+        content: url("/img/workspace-open-hover.svg");
       }
     }
   }
