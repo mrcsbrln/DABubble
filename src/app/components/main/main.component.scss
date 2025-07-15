@@ -1,7 +1,6 @@
 @use "../../../styles.scss" as *;
 
 .grid-container {
-  max-width: 1920px;
   display: grid;
   position: relative;
   grid-template-areas:
