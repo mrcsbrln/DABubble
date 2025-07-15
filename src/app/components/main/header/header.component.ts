@@ -1,4 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserService } from '../../../services/user.service';
 import { ChannelService } from '../../../services/channel.service';
@@ -8,7 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-header',
-  imports: [CurrentUserProfileComponent, ReactiveFormsModule],
+  imports: [CommonModule, CurrentUserProfileComponent, ReactiveFormsModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })

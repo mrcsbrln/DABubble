@@ -14,7 +14,13 @@
     @if(isAtInInput()) {
     <div class="searchbar-dialog">
       @for(user of getFilteredUsers(); track user.uid) {
-      <span>{{ user.displayName }}</span>
+      <button>
+        <div class="avatar-wrapper">
+          <img [src]="user.avatarUrl" alt="Avatar" />
+          <span class="status-dot" [ngClass]="{ online: true }"></span>
+        </div>
+        {{ user.displayName }}
+      </button>
       } @empty {
       <span>Keine Benutzer gefunden</span>
       }
@@ -22,7 +28,7 @@
     } @else if (isHashInInput()) {
     <div class="searchbar-dialog">
       @for(channel of getFilteredChannels(); track channel.id) {
-      <span>{{ channel.name }}</span>
+      <button># {{ channel.name }}</button>
       } @empty {
       <span>Keine Channels gefunden</span>
       }
@@ -36,7 +42,7 @@
     class="current-user-wrapper"
   >
     <span>{{ getCurrentUser()?.displayName }}</span>
-    <span class="avatar">
+    <span class="current-user-avatar">
       <img [src]="getCurrentUser()?.avatarUrl" alt="" />
       <span class="status"></span>
     </span>

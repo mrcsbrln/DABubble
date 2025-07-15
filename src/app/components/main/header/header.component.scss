@@ -4,7 +4,7 @@
   padding-bottom: 16px;
 }
 
-.avatar {
+.current-user-avatar {
   position: relative;
   width: 70px;
   height: 70px;
@@ -96,11 +96,52 @@
     background-color: #fff;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 8px;
     padding: 32px;
     z-index: 1000;
     border: 1px solid $light-purple;
     border-radius: 0 20px 20px 20px;
+    box-shadow: $box-shadow-overlay;
+    button {
+      background: unset;
+      border: unset;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 20px;
+      font-size: 18px;
+      cursor: pointer;
+      &:hover {
+        background-color: $bg-color;
+        transition: $hover-transition;
+      }
+    }
+    .avatar-wrapper {
+      position: relative;
+      width: 44px;
+      height: 44px;
+      img {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: block;
+      }
+      .status-dot {
+        position: absolute;
+        right: -1px;
+        bottom: 1px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        background-color: $text-gray;
+
+        &.online {
+          background-color: $online-green;
+        }
+      }
+    }
   }
 }
 
