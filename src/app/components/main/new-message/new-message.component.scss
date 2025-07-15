@@ -6,6 +6,13 @@
   background-color: #fff;
   border-radius: 30px;
   min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+app-message-box {
+  margin: 12px 24px 24px 24px;
 }
 
 .header {
@@ -23,6 +30,7 @@
     border-radius: 30px;
     border: 1px solid $light-purple;
     padding: 15px 20px;
+    font-size: 18px;
     &:hover {
       border-color: $purple-2;
     }

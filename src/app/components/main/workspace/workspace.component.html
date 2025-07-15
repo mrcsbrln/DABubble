@@ -5,6 +5,8 @@
       [routerLink]="['/']"
       (mouseenter)="isNewMessageBtnHovered.set(true)"
       (mouseleave)="isNewMessageBtnHovered.set(false)"
+      (click)="resetSelectedUserId()"
+      (click)="resetCurrentChannelId()"
     >
       <img
         [src]="
