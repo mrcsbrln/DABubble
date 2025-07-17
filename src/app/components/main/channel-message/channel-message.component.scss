@@ -118,8 +118,11 @@ button {
       width: 40px;
       height: 40px;
       border-radius: 100%;
+      background-color: $bg-color;
+      img {
+        width: 22px;
+      }
       &:hover {
-        background-color: $bg-color;
         transition: $hover-transition;
       }
     }
