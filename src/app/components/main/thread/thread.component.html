@@ -16,9 +16,11 @@
     [message]="getParentChannelMessage()"
     [isThreadItem]="true"
     [isParentMessage]="true"
+    style="margin-top: 24px"
   />
-  <div class="parent-seperator">
+  <div class="parent-seperator-wrapper">
     {{ getChannelThreadMessages().length }} Antworten
+    <span class="parent-seperator"></span>
   </div>
   @for(message of getChannelThreadMessages(); track message.id) {
   <app-message-item [message]="message" [isThreadItem]="true" />
@@ -26,6 +28,8 @@
   <app-message-item
     [message]="getParentDirectMessage()"
     [isThreadItem]="true"
+    [isParentMessage]="true"
+    style="margin-top: 24px"
   />
   <div class="parent-seperator-wrapper">
     {{ getDirectThreadMessagesByParentId().length }} Antworten
