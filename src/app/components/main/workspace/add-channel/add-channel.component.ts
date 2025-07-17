@@ -1,4 +1,4 @@
-import { Component, inject, output } from '@angular/core';
+import { Component, inject, output, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -23,6 +23,8 @@ export class AddChannelComponent {
 
   private channelService = inject(ChannelService);
   private authService = inject(AuthService);
+
+  isCloseBtnHovered = signal(false);
 
   form = new FormGroup({
     channelName: new FormControl('', [

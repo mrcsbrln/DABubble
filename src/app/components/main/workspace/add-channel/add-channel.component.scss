@@ -53,14 +53,10 @@ button {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    transition: background-color 150ms;
     padding: 10px;
-  }
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .add-channel-header button:hover {
-    background: #e5e5e5;
+    &:hover {
+      background-color: $bg-color;
+    }
   }
 }
 
@@ -94,7 +90,7 @@ form textarea {
 }
 
 form textarea {
-  resize: vertical;
+  resize: none;
 }
 
 form input[type="text"] {

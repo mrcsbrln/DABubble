@@ -38,6 +38,8 @@ export class MessageItemComponent {
   private userService = inject(UserService);
 
   message = input<ChannelMessage | DirectMessage>();
+  isThreadItem = input<boolean>(false);
+  isParentMessage = input<boolean>(false);
   openThread = output<void>();
 
   isReactionHovered = signal(false);

@@ -12,8 +12,16 @@
   >
     <div class="add-channel-header">
       <h2>Channel erstellen</h2>
-      <button type="button" (click)="onCloseDialog()">
-        <img src="img/close.svg" alt="close" />
+      <button
+        type="button"
+        (click)="onCloseDialog()"
+        (mouseenter)="isCloseBtnHovered.set(true)"
+        (mouseleave)="isCloseBtnHovered.set(false)"
+      >
+        <img
+          [src]="isCloseBtnHovered() ? 'img/close-hover.svg' : 'img/close.svg'"
+          alt="close"
+        />
       </button>
     </div>
     <p>

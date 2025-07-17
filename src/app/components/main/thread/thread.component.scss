@@ -211,3 +211,22 @@ button {
     }
   }
 }
+
+.parent-seperator-wrapper {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  text-wrap: unset;
+  color: $light-purple;
+  font-size: 18px;
+  padding: 8px 16px;
+  .parent-seperator {
+    display: flex;
+    flex-grow: 1;
+    height: 0px;
+    border: 1px solid $light-purple;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+  }
+}

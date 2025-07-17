@@ -1,3 +1,4 @@
+@if(!isThreadItem()) {
 <div class="seperator-wrapper">
   <div class="seperator"></div>
   <div class="message-date">
@@ -7,6 +8,7 @@
   </div>
   <div class="seperator"></div>
 </div>
+}
 <div
   class="message-data-container"
   [ngClass]="{
@@ -76,6 +78,36 @@
   >
     <button type="button" aria-label="check">✅</button>
     <button type="button" aria-label="like">👍</button>
+    <!-- Reaction-Button -->
+    <button
+      type="button"
+      aria-label="reaction"
+      (mouseenter)="isReactionHovered.set(true)"
+      (mouseleave)="isReactionHovered.set(false)"
+    >
+      <img
+        [src]="
+          isReactionHovered()
+            ? 'img/add-reaction-comment-hover.svg'
+            : 'img/add-reaction-comment.svg'
+        "
+        alt="reaction"
+      />
+    </button>
+
+    <!-- Answer-Button -->
+    <button
+      type="button"
+      (click)="onOpenThread()"
+      (click)="setParentDirectMessageId()"
+      (mouseenter)="isAnswerHovered.set(true)"
+      (mouseleave)="isAnswerHovered.set(false)"
+    >
+      <img
+        [src]="isAnswerHovered() ? 'img/answer-hover.svg' : 'img/answer.svg'"
+        alt="answer"
+      />
+    </button>
   </div>
   }
 
