@@ -14,13 +14,13 @@
     @if(isAtInInput()) {
     <div class="searchbar-dialog">
       @for(user of getFilteredUsers(); track user.uid) {
-      <button>
+      <a [routerLink]="['/user', user.uid]">
         <div class="avatar-wrapper">
           <img [src]="user.avatarUrl" alt="Avatar" />
           <span class="status-dot" [ngClass]="{ online: true }"></span>
         </div>
         {{ user.displayName }}
-      </button>
+      </a>
       } @empty {
       <span>Keine Benutzer gefunden</span>
       }
@@ -28,7 +28,7 @@
     } @else if (isHashInInput()) {
     <div class="searchbar-dialog">
       @for(channel of getFilteredChannels(); track channel.id) {
-      <button># {{ channel.name }}</button>
+      <a [routerLink]="['/channel', channel.id]"># {{ channel.name }}</a>
       } @empty {
       <span>Keine Channels gefunden</span>
       }

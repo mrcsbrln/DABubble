@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MessageBoxComponent } from '../shared/message-box/message-box.component';
+import { ChannelService } from '../../../services/channel.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-new-message',
@@ -7,4 +9,7 @@ import { MessageBoxComponent } from '../shared/message-box/message-box.component
   templateUrl: './new-message.component.html',
   styleUrl: './new-message.component.scss',
 })
-export class NewMessageComponent {}
+export class NewMessageComponent {
+  private channelService = inject(ChannelService);
+  private userService = inject(UserService);
+}

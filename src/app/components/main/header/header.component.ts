@@ -6,10 +6,16 @@ import { ChannelService } from '../../../services/channel.service';
 import { CurrentUserProfileComponent } from '../current-user-profile/current-user-profile.component';
 import { FormControl } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
-  imports: [CommonModule, CurrentUserProfileComponent, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    CurrentUserProfileComponent,
+    ReactiveFormsModule,
+    RouterLink,
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
@@ -81,10 +87,6 @@ export class HeaderComponent {
     );
   }
 
-  toogleArrowDown() {
-    this.arrowDownOpen.update((value) => !value);
-  }
-
   onOpenDialog() {
     this.userProfileDialogOpen.set(true);
   }
@@ -96,5 +98,9 @@ export class HeaderComponent {
 
   onLogout() {
     this.authService.logout();
+  }
+
+  toogleArrowDown() {
+    this.arrowDownOpen.update((value) => !value);
   }
 }

@@ -102,7 +102,8 @@
     border: 1px solid $light-purple;
     border-radius: 0 20px 20px 20px;
     box-shadow: $box-shadow-overlay;
-    button {
+    a {
+      text-decoration: none;
       background: unset;
       border: unset;
       border-radius: 30px;
