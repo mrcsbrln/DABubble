@@ -87,6 +87,10 @@ export class HeaderComponent {
     );
   }
 
+  isUserOnline(id: string) {
+    return this.userService.onlineUsersIds().includes(id);
+  }
+
   onOpenDialog() {
     this.userProfileDialogOpen.set(true);
   }

@@ -13,15 +13,19 @@
     <img src="img/search.svg" alt="" />
     @if(isAtInInput()) {
     <div class="searchbar-dialog">
-      @for(user of getFilteredUsers(); track user.uid) {
+      @for(user of getFilteredUsers(); track user.uid) { @if(user.uid !==
+      getCurrentUser()?.uid) {
       <a [routerLink]="['/user', user.uid]">
         <div class="avatar-wrapper">
           <img [src]="user.avatarUrl" alt="Avatar" />
-          <span class="status-dot" [ngClass]="{ online: true }"></span>
+          <span
+            class="status-dot"
+            [ngClass]="{ online: isUserOnline(user.uid) }"
+          ></span>
         </div>
         {{ user.displayName }}
       </a>
-      } @empty {
+      } } @empty {
       <span>Keine Benutzer gefunden</span>
       }
     </div>
