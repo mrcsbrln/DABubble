@@ -28,7 +28,7 @@
     } @else if (isHashInInput()) {
     <div class="searchbar-dialog">
       @for(channel of getFilteredChannels(); track channel.id) {
-      <a [routerLink]="['/channel', channel.id]"># {{ channel.name }}</a>
+      <a [routerLink]="['/channels', channel.id]"># {{ channel.name }}</a>
       } @empty {
       <span>Keine Channels gefunden</span>
       }
