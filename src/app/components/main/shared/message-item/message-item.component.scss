@@ -1,5 +1,12 @@
 @use "../../../../../styles.scss" as *;
 
+.emoji-box {
+  background-color: #fff;
+  padding: 5px 10px;
+  border-radius: 20px;
+  border: 1px solid $light-purple;
+}
+
 .message-content {
   padding: 16px;
   background-color: $bg-color;
@@ -50,15 +57,20 @@
     }
     .last-row {
       display: flex;
-      gap: 16px;
-      align-items: center;
-      .answer-amount {
-        font-size: 18px;
-        color: $purple-3;
-      }
-      .last-answer-time {
-        font-size: 14px;
-        color: $text-gray;
+      flex-direction: column;
+      gap: 8px;
+      .thread-wrapper {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        .answer-amount {
+          font-size: 18px;
+          color: $purple-3;
+        }
+        .last-answer-time {
+          font-size: 14px;
+          color: $text-gray;
+        }
       }
     }
   }
@@ -98,6 +110,10 @@
       height: 18px;
     }
   }
+}
+
+.reactions-wrapper {
+  display: flex;
 }
 
 .seperator {

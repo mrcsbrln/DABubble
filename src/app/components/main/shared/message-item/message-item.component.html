@@ -146,23 +146,29 @@
     </div>
     @if(getThreadMessages().length === 1) {
     <div class="last-row">
-      <span class="answer-amount"
-        >{{ getThreadMessages().length }} Antwort</span
-      >
-      <span class="last-answer-time"
-        >letzte Antwort
-        {{ getTimeOfLastThreadMessage()?.toDate() | date : "HH:mm" }}</span
-      >
+      <div class="reactions-wrapper"><span class="emoji-box">✅ 1</span></div>
+      <div class="thread-wrapper">
+        <span class="answer-amount"
+          >{{ getThreadMessages().length }} Antwort</span
+        >
+        <span class="last-answer-time"
+          >letzte Antwort
+          {{ getTimeOfLastThreadMessage()?.toDate() | date : "HH:mm" }}</span
+        >
+      </div>
     </div>
     } @else if( getThreadMessages().length > 1) {
     <div class="last-row">
-      <span class="answer-amount"
-        >{{ getThreadMessages().length }} Antworten</span
-      >
-      <span class="last-answer-time"
-        >letzte Antwort
-        {{ getTimeOfLastThreadMessage()?.toDate() | date : "HH:mm" }}</span
-      >
+      <div class="reactions-wrapper"></div>
+      <div class="thread-wrapper">
+        <span class="answer-amount"
+          >{{ getThreadMessages().length }} Antworten</span
+        >
+        <span class="last-answer-time"
+          >letzte Antwort
+          {{ getTimeOfLastThreadMessage()?.toDate() | date : "HH:mm" }}</span
+        >
+      </div>
     </div>
     }
   </div>
