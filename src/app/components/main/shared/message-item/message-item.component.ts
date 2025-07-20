@@ -43,6 +43,7 @@ export class MessageItemComponent {
   openThread = output<void>();
 
   isReactionHovered = signal(false);
+  isReaction2Hovered = signal(false);
   isAnswerHovered = signal(false);
   isDotsHovered = signal(false);
   reactionVisibleId = signal<string | null>(null);

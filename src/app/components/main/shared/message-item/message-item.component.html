@@ -69,6 +69,7 @@
       (mouseleave)="isDotsHovered.set(false)"
     >
       <img
+        class="dots"
         [src]="isDotsHovered() ? 'img/dots-hover.svg' : 'img/dots.svg'"
         alt="edit"
       />
@@ -146,7 +147,23 @@
     </div>
     @if(getThreadMessages().length === 1) {
     <div class="last-row">
-      <div class="reactions-wrapper"><span class="emoji-box">✅ 1</span></div>
+      <div class="reactions-wrapper">
+        <span class="emoji-box">✅ 1</span>
+        <span
+          class="add-reaction-emoji"
+          (mouseenter)="isReaction2Hovered.set(true)"
+          (mouseleave)="isReaction2Hovered.set(false)"
+        >
+          <img
+            [src]="
+              isReaction2Hovered()
+                ? 'img/add-reaction-comment-hover.svg'
+                : 'img/add-reaction-comment.svg'
+            "
+            alt=""
+          />
+        </span>
+      </div>
       <div class="thread-wrapper">
         <span class="answer-amount"
           >{{ getThreadMessages().length }} Antwort</span

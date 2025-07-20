@@ -1,5 +1,24 @@
 @use "../../../../../styles.scss" as *;
 
+.add-reaction-emoji {
+  display: flex;
+  padding: 5px;
+  background-color: #fff;
+  border-radius: 20px;
+  &:hover {
+    background-color: $bg-color;
+    transition: $hover-transition;
+  }
+  img {
+    width: 22px;
+  }
+}
+
+.dots {
+  width: 4px;
+  height: 16px;
+}
+
 .emoji-box {
   background-color: #fff;
   padding: 5px 10px;
@@ -106,14 +125,15 @@
       background-color: $bg-color;
     }
     img {
-      width: 18px;
-      height: 18px;
+      width: 22px;
     }
   }
 }
 
 .reactions-wrapper {
   display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .seperator {
