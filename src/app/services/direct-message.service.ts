@@ -115,6 +115,7 @@ export class DirectMessageService {
       content: obj.content || '',
       timestamp: obj.timestamp || serverTimestamp(),
       parentMessageId: obj.parentMessageId || null,
+      reactions: obj.reactions || null,
     };
   }
 }
