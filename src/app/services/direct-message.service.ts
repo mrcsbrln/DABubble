@@ -50,16 +50,42 @@ export class DirectMessageService {
     });
   }
 
-  directMessagesCollectionRef() {
-    return collection(this.firestore, 'direct-messages');
-  }
-
   async addMessage(directMessageData: DirectMessageData) {
     try {
       await addDoc(this.directMessagesCollectionRef(), directMessageData);
     } catch (error) {
       console.error(error);
     }
+  }
+
+  addReactionToMessage(emoji: string, messageId: string) {
+    const currentUser = this.authService.currentUser();
+    if (!currentUser) return;
+
+    const message = this.directMessages().find((dm) => dm.id === messageId);
+    if (!message) return;
+
+    if (!message.reactions) {
+      message.reactions = [];
+    }
+
+    let reaction = message?.reactions?.find(
+      (reaction) => reaction.emoji === emoji
+    );
+
+    if (!reaction) {
+      reaction = { emoji, userIds: [] };
+    }
+
+    if (!reaction.userIds.includes(currentUser.uid)) {
+      reaction.userIds.push(currentUser.uid);
+    }
+
+    return message;
+  }
+
+  directMessagesCollectionRef() {
+    return collection(this.firestore, 'direct-messages');
   }
 
   getDirectMessagesOfCurrentUser() {
