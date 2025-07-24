@@ -154,7 +154,11 @@
     @if(getThreadMessages().length === 1) {
     <div class="last-row">
       <div class="reactions-wrapper">
-        <span class="emoji-box">✅ 1</span>
+        @for (reaction of message()?.reactions; track $index) { @if
+        (reaction.userIds.length) {
+        <span class="emoji-box"
+          >{{ reaction.emoji }} {{ reaction.userIds.length }}</span
+        >
         <span
           class="add-reaction-emoji"
           (mouseenter)="isReaction2Hovered.set(true)"
@@ -169,6 +173,7 @@
             alt=""
           />
         </span>
+        } }
       </div>
       <div class="thread-wrapper">
         <span class="answer-amount"
