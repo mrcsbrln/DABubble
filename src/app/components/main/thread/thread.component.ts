@@ -194,6 +194,7 @@ export class ThreadComponent implements OnInit {
       participantIds: [senderId, selectedMemberId],
       timestamp: serverTimestamp(),
       parentMessageId: parentDirectMessageId,
+      reactions: [],
     };
 
     this.directMessageService.addMessage(message);

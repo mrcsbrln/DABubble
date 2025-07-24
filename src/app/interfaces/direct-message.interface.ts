@@ -7,5 +7,5 @@ export interface DirectMessage {
   content: string;
   timestamp: FieldValue | Timestamp;
   parentMessageId: string | null;
-  reactions?: Reaction[] | null;
+  reactions: Reaction[];
 }

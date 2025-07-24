@@ -89,6 +89,10 @@ export class MessageItemComponent {
     return timestamps.reduce((a, b) => (a.toMillis() > b.toMillis() ? a : b));
   }
 
+  handleReaction(emoji: string, userId: string) {
+    this.directMessageService.addReactionToMessage(emoji, userId);
+  }
+
   isMessageFromCurrentUser(): boolean {
     const message = this.message();
     const currentUserId = this.authService.currentUser()?.uid;

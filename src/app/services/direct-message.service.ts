@@ -13,6 +13,8 @@ import {
   addDoc,
   onSnapshot,
   serverTimestamp,
+  updateDoc,
+  doc,
 } from '@angular/fire/firestore';
 import { DirectMessage } from '../interfaces/direct-message.interface';
 import { AuthService } from './auth/auth.service';
@@ -60,28 +62,29 @@ export class DirectMessageService {
 
   addReactionToMessage(emoji: string, messageId: string) {
     const currentUser = this.authService.currentUser();
-    if (!currentUser) return;
-
     const message = this.directMessages().find((dm) => dm.id === messageId);
-    if (!message) return;
 
-    if (!message.reactions) {
-      message.reactions = [];
+    if (!message || !currentUser) {
+      return;
     }
 
-    let reaction = message?.reactions?.find(
+    const reaction = message.reactions.find(
       (reaction) => reaction.emoji === emoji
     );
 
-    if (!reaction) {
-      reaction = { emoji, userIds: [] };
+    if (reaction) {
+      if (!reaction.userIds.includes(currentUser.uid)) {
+        reaction.userIds.push(currentUser.uid);
+      } else {
+        reaction.userIds = reaction.userIds.filter(
+          (uid) => uid !== currentUser.uid
+        );
+      }
+    } else {
+      message.reactions.push({ emoji: emoji, userIds: [currentUser.uid] });
     }
 
-    if (!reaction.userIds.includes(currentUser.uid)) {
-      reaction.userIds.push(currentUser.uid);
-    }
-
-    return message;
+    this.updateReactions(message);
   }
 
   directMessagesCollectionRef() {
@@ -141,7 +144,16 @@ export class DirectMessageService {
       content: obj.content || '',
       timestamp: obj.timestamp || serverTimestamp(),
       parentMessageId: obj.parentMessageId || null,
-      reactions: obj.reactions || null,
+      reactions: obj.reactions || [],
     };
+  }
+
+  async updateReactions(message: DirectMessage) {
+    const messageRef = doc(this.firestore, 'direct-messages', message.id);
+    try {
+      await updateDoc(messageRef, { reactions: message.reactions });
+    } catch (error) {
+      console.error(error);
+    }
   }
 }
