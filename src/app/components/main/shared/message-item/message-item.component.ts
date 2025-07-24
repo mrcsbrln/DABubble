@@ -48,6 +48,10 @@ export class MessageItemComponent {
   isDotsHovered = signal(false);
   reactionVisibleId = signal<string | null>(null);
 
+  getCurrentUser() {
+    return this.authService.currentUser();
+  }
+
   getDateOfMessage(): Date {
     const timestamp = this.message()?.timestamp;
 

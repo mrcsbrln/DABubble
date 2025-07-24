@@ -25,7 +25,13 @@
     "
   >
     @if(!isThreadItem()) {
-    <button type="button" aria-label="check">✅</button>
+    <button
+      (click)="handleReaction('✅', getCurrentUser()?.uid ?? '')"
+      type="button"
+      aria-label="check"
+    >
+      ✅
+    </button>
     <button type="button" aria-label="like">👍</button>
     }
 
