@@ -32,7 +32,13 @@
     >
       ✅
     </button>
-    <button type="button" aria-label="like">👍</button>
+    <button
+      (click)="handleReaction('👍', message()?.id ?? '')"
+      type="button"
+      aria-label="like"
+    >
+      👍
+    </button>
     }
 
     <!-- Reaction-Button -->
@@ -155,10 +161,12 @@
     <div class="last-row">
       <div class="reactions-wrapper">
         @for (reaction of message()?.reactions; track $index) { @if
-        (reaction.userIds.length) {
+        (reaction.userIds.length > 0) {
         <span class="emoji-box"
           >{{ reaction.emoji }} {{ reaction.userIds.length }}</span
         >
+
+        } } @if(message()!.reactions!.length > 0){
         <span
           class="add-reaction-emoji"
           (mouseenter)="isReaction2Hovered.set(true)"
@@ -173,7 +181,7 @@
             alt=""
           />
         </span>
-        } }
+        }
       </div>
       <div class="thread-wrapper">
         <span class="answer-amount"

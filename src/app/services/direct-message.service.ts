@@ -68,17 +68,23 @@ export class DirectMessageService {
       return;
     }
 
-    const reaction = message.reactions.find(
+    const reactionIndex = message.reactions.findIndex(
       (reaction) => reaction.emoji === emoji
     );
 
-    if (reaction) {
+    if (reactionIndex > -1) {
+      const reaction = message.reactions[reactionIndex];
+
       if (!reaction.userIds.includes(currentUser.uid)) {
         reaction.userIds.push(currentUser.uid);
       } else {
         reaction.userIds = reaction.userIds.filter(
           (uid) => uid !== currentUser.uid
         );
+
+        if (reaction.userIds.length === 0) {
+          message.reactions.splice(reactionIndex, 1);
+        }
       }
     } else {
       message.reactions.push({ emoji: emoji, userIds: [currentUser.uid] });
