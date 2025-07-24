@@ -48,10 +48,6 @@ export class MessageItemComponent {
   isDotsHovered = signal(false);
   reactionVisibleId = signal<string | null>(null);
 
-  getCurrentUser() {
-    return this.authService.currentUser();
-  }
-
   getDateOfMessage(): Date {
     const timestamp = this.message()?.timestamp;
 
@@ -93,8 +89,8 @@ export class MessageItemComponent {
     return timestamps.reduce((a, b) => (a.toMillis() > b.toMillis() ? a : b));
   }
 
-  handleReaction(emoji: string, userId: string) {
-    this.directMessageService.addReactionToMessage(emoji, userId);
+  handleReaction(emoji: string, messageId: string) {
+    this.directMessageService.addReactionToMessage(emoji, messageId);
   }
 
   isMessageFromCurrentUser(): boolean {
