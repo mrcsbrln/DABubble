@@ -178,7 +178,8 @@
         @for (reaction of message()?.reactions; track $index) { @if
         (reaction.userIds.length > 0) {
         <span class="emoji-box"
-          >{{ reaction.emoji }} {{ reaction.userIds.length }}</span
+          >{{ reaction.emoji }} {{ reaction.userIds.length
+          }}<span class="reaction-dialog">{{ reaction.emoji }}</span></span
         >
 
         } } @if(message()!.reactions!.length > 0){
