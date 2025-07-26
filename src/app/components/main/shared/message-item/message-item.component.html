@@ -1,3 +1,4 @@
+<!--date-seperator for non-thread-messages-->
 @if(!isThreadItem()) {
 <div class="seperator-wrapper">
   <div class="seperator"></div>
@@ -9,6 +10,7 @@
   <div class="seperator"></div>
 </div>
 }
+
 <div
   class="message-data-container"
   [ngClass]="{
@@ -88,6 +90,7 @@
     </button>
   </div>
   } @else {
+  <!--message from other users-->
   <div
     class="reaction-bar"
     [@reactionBarSlideOtherUser]="
@@ -95,8 +98,20 @@
     "
   >
     @if(!isThreadItem()) {
-    <button type="button" aria-label="check">✅</button>
-    <button type="button" aria-label="like">👍</button>
+    <button
+      (click)="handleReaction('✅', message()?.id ?? '')"
+      type="button"
+      aria-label="check"
+    >
+      ✅
+    </button>
+    <button
+      (click)="handleReaction('👍', message()?.id ?? '')"
+      type="button"
+      aria-label="like"
+    >
+      👍
+    </button>
     }
 
     <!-- Reaction-Button -->
@@ -157,7 +172,7 @@
     >
       {{ message()?.content }}
     </div>
-    @if(getThreadMessages().length === 1) {
+
     <div class="last-row">
       <div class="reactions-wrapper">
         @for (reaction of message()?.reactions; track $index) { @if
@@ -183,6 +198,7 @@
         </span>
         }
       </div>
+      @if(getThreadMessages().length === 1) {
       <div class="thread-wrapper">
         <span class="answer-amount"
           >{{ getThreadMessages().length }} Antwort</span
@@ -192,10 +208,12 @@
           {{ getTimeOfLastThreadMessage()?.toDate() | date : "HH:mm" }}</span
         >
       </div>
+      }
     </div>
-    } @else if( getThreadMessages().length > 1) {
+
+    @if( getThreadMessages().length > 1 ) {
     <div class="last-row">
-      <div class="reactions-wrapper"></div>
+      <div class="reactions-wrapper">Test1</div>
       <div class="thread-wrapper">
         <span class="answer-amount"
           >{{ getThreadMessages().length }} Antworten</span
