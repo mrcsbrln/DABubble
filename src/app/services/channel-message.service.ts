@@ -21,6 +21,7 @@ import {
   updateDoc,
   where,
 } from '@angular/fire/firestore';
+import { AuthService } from './auth/auth.service';
 
 type MessageData = Omit<ChannelMessage, 'id'>;
 
@@ -31,6 +32,7 @@ export class ChannelMessageService {
   private firestore = inject(Firestore);
   private injector = inject(Injector);
   private destroyRef = inject(DestroyRef);
+  private authService = inject(AuthService);
 
   messages = signal<ChannelMessage[]>([]);
   messagesByChannelId = signal<ChannelMessage[]>([]);
@@ -70,6 +72,39 @@ export class ChannelMessageService {
     });
   }
 
+  addReactionToMessage(emoji: string, messageId: string) {
+    const currentUser = this.authService.currentUser();
+    const message = this.messages().find((dm) => dm.id === messageId);
+
+    if (!message || !currentUser) {
+      return;
+    }
+
+    const reactionIndex = message.reactions.findIndex(
+      (reaction) => reaction.emoji === emoji
+    );
+
+    if (reactionIndex > -1) {
+      const reaction = message.reactions[reactionIndex];
+
+      if (!reaction.userIds.includes(currentUser.uid)) {
+        reaction.userIds.push(currentUser.uid);
+      } else {
+        reaction.userIds = reaction.userIds.filter(
+          (uid) => uid !== currentUser.uid
+        );
+
+        if (reaction.userIds.length === 0) {
+          message.reactions.splice(reactionIndex, 1);
+        }
+      }
+    } else {
+      message.reactions.push({ emoji: emoji, userIds: [currentUser.uid] });
+    }
+
+    this.updateReactions(message);
+  }
+
   messagesCollectionRef() {
     return collection(this.firestore, 'channel-messages');
   }
@@ -100,6 +135,7 @@ export class ChannelMessageService {
       timestamp: obj.timestamp || serverTimestamp(),
       channelId: obj.channelId,
       parentMessageId: obj.parentMessageId || null,
+      reactions: obj.reactions || [],
     };
   }
 
@@ -124,6 +160,15 @@ export class ChannelMessageService {
       await updateDoc(messageDocRef, { content: newContent });
     } catch (error) {
       console.error('Error updating message:', messageId, error);
+    }
+  }
+
+  async updateReactions(message: ChannelMessage) {
+    const messageRef = doc(this.firestore, 'channel-messages', message.id);
+    try {
+      await updateDoc(messageRef, { reactions: message.reactions });
+    } catch (error) {
+      console.error(error);
     }
   }
 }

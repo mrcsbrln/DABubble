@@ -111,7 +111,15 @@ export class MessageItemComponent {
   }
 
   handleReaction(emoji: string, messageId: string) {
-    this.directMessageService.addReactionToMessage(emoji, messageId);
+    const message = this.message();
+    if (!message) return;
+
+    // Use property checks to distinguish message types
+    if ('senderId' in message) {
+      this.channelMessageService.addReactionToMessage(emoji, messageId);
+    } else if ('participantIds' in message) {
+      this.directMessageService.addReactionToMessage(emoji, messageId);
+    }
   }
 
   isMessageFromCurrentUser(): boolean {

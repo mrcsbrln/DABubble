@@ -101,6 +101,7 @@ export class ThreadComponent implements OnInit {
         timestamp: serverTimestamp(),
         channelId: currentChannelId,
         parentMessageId: parentChannelMessageId,
+        reactions: [],
       };
       this.channelMessageService.addMessage(messageDataToSend);
       this.form.controls.content.reset();
