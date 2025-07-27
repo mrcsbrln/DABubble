@@ -19,13 +19,18 @@ import localeDe from '@angular/common/locales/de';
 import {
   reactionBarSlideCurrentUser,
   reactionBarSlideOtherUser,
+  fadeInOut,
 } from '../../../../services/site-animations.service';
 
 registerLocaleData(localeDe);
 
 @Component({
   selector: 'app-message-item',
-  animations: [reactionBarSlideCurrentUser, reactionBarSlideOtherUser],
+  animations: [
+    reactionBarSlideCurrentUser,
+    reactionBarSlideOtherUser,
+    fadeInOut,
+  ],
   imports: [CommonModule, DatePipe],
   templateUrl: './message-item.component.html',
   styleUrl: './message-item.component.scss',
@@ -46,7 +51,23 @@ export class MessageItemComponent {
   isReaction2Hovered = signal(false);
   isAnswerHovered = signal(false);
   isDotsHovered = signal(false);
+  isEmojiBoxHovered = signal(false);
   reactionVisibleId = signal<string | null>(null);
+
+  checkForReactions(): boolean {
+    const message = this.message();
+    if (!message) {
+      return false;
+    }
+
+    const reactions = message.reactions;
+
+    if (!reactions) {
+      return false;
+    }
+
+    return reactions.length > 0;
+  }
 
   getDateOfMessage(): Date {
     const timestamp = this.message()?.timestamp;

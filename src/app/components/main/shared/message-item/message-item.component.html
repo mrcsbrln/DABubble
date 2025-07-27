@@ -177,12 +177,21 @@
       <div class="reactions-wrapper">
         @for (reaction of message()?.reactions; track $index) { @if
         (reaction.userIds.length > 0) {
-        <span class="emoji-box"
-          >{{ reaction.emoji }} {{ reaction.userIds.length
-          }}<span class="reaction-dialog">{{ reaction.emoji }}</span></span
+        <span
+          class="emoji-box"
+          (mouseenter)="isEmojiBoxHovered.set(true)"
+          (mouseleave)="isEmojiBoxHovered.set(false)"
+          >{{ reaction.emoji }}
+          {{ reaction.userIds.length }} @if(isEmojiBoxHovered()){
+          <span
+            [@fadeInOut]="isEmojiBoxHovered() ? 'visible' : 'hidden'"
+            class="reaction-dialog"
+            >{{ reaction.emoji }}</span
+          >
+          }</span
         >
 
-        } } @if(message()!.reactions!.length > 0){
+        } } @if(checkForReactions()){
         <span
           class="add-reaction-emoji"
           (mouseenter)="isReaction2Hovered.set(true)"

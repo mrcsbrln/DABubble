@@ -27,6 +27,27 @@ export const slideInRight: AnimationReferenceMetadata = animation(
   }
 );
 
+export const fadeInOut = trigger('fadeInOut', [
+  state(
+    'hidden',
+    style({
+      opacity: 0,
+      visibility: 'hidden',
+      pointerEvents: 'none',
+    })
+  ),
+  state(
+    'visible',
+    style({
+      opacity: 1,
+      visibility: 'visible',
+      pointerEvents: 'auto',
+    })
+  ),
+  transition('hidden => visible', [animate('300ms ease-out')]),
+  transition('visible => hidden', [animate('200ms ease-in')]),
+]);
+
 export const slideOutRight = animation(
   [
     animate(
