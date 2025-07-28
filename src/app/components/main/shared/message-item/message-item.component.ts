@@ -51,7 +51,7 @@ export class MessageItemComponent {
   isReaction2Hovered = signal(false);
   isAnswerHovered = signal(false);
   isDotsHovered = signal(false);
-  isEmojiBoxHovered = signal(false);
+  hoveredReactionIndex = signal<number | null>(null);
   reactionVisibleId = signal<string | null>(null);
 
   checkForReactions(): boolean {

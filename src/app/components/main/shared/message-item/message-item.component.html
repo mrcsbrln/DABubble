@@ -179,12 +179,14 @@
         (reaction.userIds.length > 0) {
         <span
           class="emoji-box"
-          (mouseenter)="isEmojiBoxHovered.set(true)"
-          (mouseleave)="isEmojiBoxHovered.set(false)"
+          (mouseenter)="hoveredReactionIndex.set($index)"
+          (mouseleave)="hoveredReactionIndex.set(null)"
           >{{ reaction.emoji }}
-          {{ reaction.userIds.length }} @if(isEmojiBoxHovered()){
+          {{ reaction.userIds.length }} @if(hoveredReactionIndex() === $index){
           <span
-            [@fadeInOut]="isEmojiBoxHovered() ? 'visible' : 'hidden'"
+            [@fadeInOut]="
+              hoveredReactionIndex() === $index ? 'visible' : 'hidden'
+            "
             class="reaction-dialog"
             >{{ reaction.emoji }}</span
           >
