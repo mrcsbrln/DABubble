@@ -7,6 +7,8 @@ import { CurrentUserProfileComponent } from '../current-user-profile/current-use
 import { FormControl } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { ChannelMessageService } from '../../../services/channel-message.service';
+import { DirectMessageService } from '../../../services/direct-message.service';
 
 @Component({
   selector: 'app-header',
@@ -22,7 +24,9 @@ import { RouterLink } from '@angular/router';
 export class HeaderComponent {
   private authService = inject(AuthService);
   private userService = inject(UserService);
+  private directMessageService = inject(DirectMessageService);
   private channelService = inject(ChannelService);
+  private channelMessageService = inject(ChannelMessageService);
 
   arrowDownOpen = signal(false);
   userProfileDialogOpen = signal(false);
@@ -71,7 +75,7 @@ export class HeaderComponent {
 
   getFilteredChannels() {
     const input = (this.searchBarInput.value ?? '').trim();
-    const searchTerm = this.extractChannelFromHash(input)?.toLowerCase(); // #dev → "dev"
+    const searchTerm = this.extractChannelFromHash(input)?.toLowerCase();
     const currentUserId = this.authService.currentUser()?.uid;
 
     if (!currentUserId) return [];
@@ -85,6 +89,38 @@ export class HeaderComponent {
     return currentUserChannels.filter((channel) =>
       channel.name.toLowerCase().startsWith(searchTerm)
     );
+  }
+
+  getFilteredItems() {
+    const input = (this.searchBarInput.value ?? '').trim().toLowerCase();
+    if (!input || input.startsWith('@') || input.startsWith('#')) {
+      return null;
+    }
+
+    const users = this.userService
+      .users()
+      .filter((user) => user.displayName.toLowerCase().startsWith(input));
+
+    const channels = this.channelService
+      .channels()
+      .filter((channel) => channel.name.toLowerCase().startsWith(input));
+
+    const channelMessages =
+      this.channelMessageService
+        .messages()
+        .filter((msg) => msg.content.toLowerCase().startsWith(input)) ?? [];
+
+    const directMessages =
+      this.directMessageService
+        .directMessages()
+        .filter((msg) => msg.content.toLowerCase().startsWith(input)) ?? [];
+
+    return {
+      users,
+      channels,
+      channelMessages,
+      directMessages,
+    };
   }
 
   isUserOnline(id: string) {

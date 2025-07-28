@@ -37,6 +37,30 @@
       <span>Keine Channels gefunden</span>
       }
     </div>
+    <!--Search for users, channels and messages-->
+    } @else if(getFilteredItems()?.channels?.length ||
+    getFilteredItems()?.users?.length) {
+    <div class="searchbar-dialog">
+      <!--Filtered Users-->
+      @if(getFilteredItems()?.users?.length) { @for(user of
+      getFilteredItems()?.users; track user.uid) {
+      <a [routerLink]="['/user', user.uid]">
+        <div class="avatar-wrapper">
+          <img [src]="user.avatarUrl" alt="Avatar" />
+          <span
+            class="status-dot"
+            [ngClass]="{ online: isUserOnline(user.uid) }"
+          ></span>
+        </div>
+        {{ user.displayName }}
+      </a>
+      } }
+      <!--Filtered Channels-->
+      @else if(getFilteredItems()?.channels) { @for(channel of
+      getFilteredChannels(); track channel.id) {
+      <a [routerLink]="['/channels', channel.id]"># {{ channel.name }}</a>
+      } }
+    </div>
     }
   </div>
   <div
