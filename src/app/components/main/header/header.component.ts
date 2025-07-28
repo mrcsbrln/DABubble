@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserService } from '../../../services/user.service';
@@ -21,7 +21,7 @@ import { DirectMessageService } from '../../../services/direct-message.service';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   private authService = inject(AuthService);
   private userService = inject(UserService);
   private directMessageService = inject(DirectMessageService);
@@ -34,6 +34,16 @@ export class HeaderComponent {
   isHashInInput = signal(false);
 
   searchBarInput = new FormControl('');
+
+  directMessages = this.directMessageService.directMessages;
+
+  ngOnInit() {
+    setTimeout(() => {
+      console.log(this.directMessages());
+    }, 1000);
+
+    console.log('DirectMessages:', this.directMessages());
+  }
 
   checkForAtOrHash() {
     const searchBarValue = this.searchBarInput.value || '';
@@ -108,12 +118,12 @@ export class HeaderComponent {
     const channelMessages =
       this.channelMessageService
         .messages()
-        .filter((msg) => msg.content.toLowerCase().startsWith(input)) ?? [];
+        .filter((msg) => msg.content.toLowerCase().includes(input)) ?? [];
 
     const directMessages =
-      this.directMessageService
-        .directMessages()
-        .filter((msg) => msg.content.toLowerCase().startsWith(input)) ?? [];
+      this.directMessages().filter((msg) =>
+        msg.content.toLowerCase().includes(input)
+      ) ?? [];
 
     return {
       users,

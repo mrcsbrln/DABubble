@@ -188,8 +188,12 @@
               hoveredReactionIndex() === $index ? 'visible' : 'hidden'
             "
             class="reaction-dialog"
-            >{{ reaction.emoji }}</span
           >
+            {{ reaction.emoji }} @for(userId of
+            getUserIdsOfReaction(reaction.emoji); track $index){
+            {{ getUserInfos(userId)?.displayName }}
+            }
+          </span>
           }</span
         >
 
@@ -220,12 +224,7 @@
           {{ getTimeOfLastThreadMessage()?.toDate() | date : "HH:mm" }}</span
         >
       </div>
-      }
-    </div>
-
-    @if( getThreadMessages().length > 1 ) {
-    <div class="last-row">
-      <div class="reactions-wrapper">Test1</div>
+      } @if( getThreadMessages().length > 1 ) {
       <div class="thread-wrapper">
         <span class="answer-amount"
           >{{ getThreadMessages().length }} Antworten</span
@@ -235,7 +234,7 @@
           {{ getTimeOfLastThreadMessage()?.toDate() | date : "HH:mm" }}</span
         >
       </div>
+      }
     </div>
-    }
   </div>
 </div>

@@ -60,6 +60,16 @@
       getFilteredChannels(); track channel.id) {
       <a [routerLink]="['/channels', channel.id]"># {{ channel.name }}</a>
       } }
+      <!--Direct Messages-->
+      @else if (getFilteredItems()?.directMessages) { @for(dm of
+      getFilteredItems()?.directMessages; track dm.id){
+      <a>{{ dm.content }}</a>
+      } }
+      <!--Channel Messages-->
+      @else if (getFilteredItems()?.channelMessages) { @for(cm of
+      getFilteredItems()?.channelMessages; track cm.id){
+      <a>{{ cm.content }}</a>
+      } }
     </div>
     }
   </div>

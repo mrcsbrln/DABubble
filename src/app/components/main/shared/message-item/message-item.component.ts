@@ -46,6 +46,7 @@ export class MessageItemComponent {
   isThreadItem = input<boolean>(false);
   isParentMessage = input<boolean>(false);
   openThread = output<void>();
+  currentUser = this.authService.currentUser();
 
   isReactionHovered = signal(false);
   isReaction2Hovered = signal(false);
@@ -110,11 +111,23 @@ export class MessageItemComponent {
     return timestamps.reduce((a, b) => (a.toMillis() > b.toMillis() ? a : b));
   }
 
+  getUserInfos(id: string) {
+    const users = this.userService.users();
+    if (!users) {
+      return;
+    }
+    return users.find((user) => user.uid === id);
+  }
+
+  getUserIdsOfReaction(emoji: string) {
+    const reactions = this.message()?.reactions;
+    return reactions?.find((reaction) => reaction.emoji === emoji)?.userIds;
+  }
+
   handleReaction(emoji: string, messageId: string) {
     const message = this.message();
     if (!message) return;
 
-    // Use property checks to distinguish message types
     if ('senderId' in message) {
       this.channelMessageService.addReactionToMessage(emoji, messageId);
     } else if ('participantIds' in message) {
