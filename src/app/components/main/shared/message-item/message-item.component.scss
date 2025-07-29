@@ -135,6 +135,7 @@
   position: absolute;
   top: -100%;
   transform: translateY(-50%);
+  min-width: 200px;
   background-color: $purple-1;
   color: #fff;
   padding: 15px 10px;

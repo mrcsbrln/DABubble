@@ -36,10 +36,11 @@
 
     &:hover {
       background-color: $bg-color;
+      transition: $hover-transition;
     }
   }
 
-  >div {
+  > div {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -54,7 +55,6 @@ input {
   width: 100%;
   font-size: 16px;
   border: 1px solid $light-purple;
-
 
   &:focus {
     outline: none;
@@ -77,20 +77,18 @@ textarea {
   }
 }
 
-button {
-  background-color: transparent;
+.edit-btn {
+  background-color: unset;
   color: $purple-3;
   font-size: 18px;
   font-weight: 500;
   cursor: pointer;
   text-align: center;
-  min-width: 100px;
-  border: none;
-  transition: font-weight 0.2s;
-
+  border: unset;
+  transition: text-shadow 0.2s;
 
   &:hover {
-    font-weight: 600;
+    text-shadow: 0 0 0.5px $purple-3;
   }
 }
 
@@ -161,4 +159,19 @@ button {
 
 .border-light-purple {
   border: 1px solid $light-purple;
+}
+
+.leave-channel-btn {
+  background-color: $purple-1;
+  border: unset;
+  border-radius: 25px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 12px 25px;
+  cursor: pointer;
+  &:hover {
+    background-color: $purple-2;
+    transition: $hover-transition;
+  }
 }

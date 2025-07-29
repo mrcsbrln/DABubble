@@ -9,6 +9,8 @@
     <div>
       <span># {{ channelName() }}</span>
       <img
+        (mouseenter)="isHovering.set(true)"
+        (mouseleave)="isHovering.set(false)"
         (click)="onCloseDialog()"
         [src]="isHovering() ? closeIconHoverSrc : closeIconSrc"
         tabindex="0"
@@ -29,8 +31,12 @@
       >
         <span>Channel-Name</span>
         @if (isInputNameReadonly()) {
-        <button (click)="confirmChannelNameEdit()">Bearbeiten</button>} @else {
-        <button (click)="onSaveChannelName()">Speichern</button>
+        <button class="edit-btn" (click)="confirmChannelNameEdit()">
+          Bearbeiten</button
+        >} @else {
+        <button class="edit-btn" (click)="onSaveChannelName()">
+          Speichern
+        </button>
         }
       </div>
     </div>
@@ -57,9 +63,13 @@
         <span>Beschreibung</span>
         @if (isInputDescriptionReadonly()) {
 
-        <button (click)="confirmChannelDescriptionEdit()">Bearbeiten</button>
+        <button class="edit-btn" (click)="confirmChannelDescriptionEdit()">
+          Bearbeiten
+        </button>
         }@else {
-        <button (click)="onSaveChannelDescription()">Speichern</button>
+        <button class="edit-btn" (click)="onSaveChannelDescription()">
+          Speichern
+        </button>
         }
       </div>
     </div>
@@ -84,5 +94,7 @@
       <span class="created-by"> {{ creatorName() }} </span>
     </div>
   </div>
-  <button (click)="leaveChannel()">Channel verlassen</button>
+  <button class="leave-channel-btn" (click)="leaveChannel()">
+    Channel verlassen
+  </button>
 </div>
