@@ -80,6 +80,32 @@ export class MessageItemComponent {
     return new Date(0);
   }
 
+  getFormattedUserNames(emoji: string) {
+    const userIds = this.getUserIdsOfReaction(emoji);
+    if (!userIds) {
+      return;
+    }
+    const names = userIds
+      .map((id) => this.getUserInfos(id)?.displayName)
+      .filter((name): name is string => !!name);
+
+    if (names.length === 0) return '';
+
+    let formattedNames: string;
+    if (names.length === 1) {
+      formattedNames = names[0];
+    } else if (names.length === 2) {
+      formattedNames = `${names[0]} und ${names[1]}`;
+    } else {
+      const allButLast = names.slice(0, -1).join(', ');
+      const last = names[names.length - 1];
+      formattedNames = `${allButLast} und ${last}`;
+    }
+
+    const verb = names.length > 1 ? 'haben' : 'hat';
+    return `${formattedNames} ${verb} reagiert`;
+  }
+
   getSenderOfMessage() {
     const message = this.message();
     if (!message) return;

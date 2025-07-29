@@ -183,17 +183,17 @@
           (mouseleave)="hoveredReactionIndex.set(null)"
           >{{ reaction.emoji }}
           {{ reaction.userIds.length }} @if(hoveredReactionIndex() === $index){
-          <span
+          <div
             [@fadeInOut]="
               hoveredReactionIndex() === $index ? 'visible' : 'hidden'
             "
             class="reaction-dialog"
           >
-            {{ reaction.emoji }} @for(userId of
-            getUserIdsOfReaction(reaction.emoji); track $index){
-            {{ getUserInfos(userId)?.displayName }}
-            }
-          </span>
+            <div>{{ reaction.emoji }}</div>
+            <div>
+              {{ getFormattedUserNames(reaction.emoji) }}
+            </div>
+          </div>
           }</span
         >
 
