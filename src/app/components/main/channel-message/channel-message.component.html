@@ -65,7 +65,12 @@
         [channelName]="getChannelName()"
       />
       } @if(isShowMembersDialogOpen()){
-      <div class="dialog-backdrop"></div>
+      <div
+        class="dialog-backdrop"
+        (click)="toggleShowMembersDialog()"
+        (keydown)="toggleShowMembersDialog()"
+        tabindex="0"
+      ></div>
       <div
         class="dialog"
         (click)="$event.stopPropagation()"
