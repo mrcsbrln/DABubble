@@ -51,6 +51,10 @@ export class HeaderComponent {
       .find((user) => user.uid === this.authService.currentUser()?.uid);
   }
 
+  getChannelById(id: string) {
+    return this.channelService.channels().find((channel) => channel.id === id);
+  }
+
   extractMention(input: string) {
     const match = input.match(/@(\w+)/);
     return match ? match[1] : null;
@@ -120,9 +124,14 @@ export class HeaderComponent {
         .messages()
         .filter((msg) => msg.content.toLowerCase().includes(input)) ?? [];
 
+    const currentUserId = this.authService.currentUser()?.uid;
+
     const directMessages =
-      this.directMessages().filter((msg) =>
-        msg.content.toLowerCase().includes(input)
+      this.directMessages().filter(
+        (msg) =>
+          msg.content.toLowerCase().includes(input) &&
+          currentUserId &&
+          msg.participantIds.includes(currentUserId)
       ) ?? [];
 
     return {

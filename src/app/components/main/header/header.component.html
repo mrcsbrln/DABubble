@@ -79,7 +79,7 @@
       <a
         (click)="searchBarInput.reset()"
         [routerLink]="['/channel', cm.channelId]"
-        >{{ cm.content }}</a
+        >{{ getChannelById(cm.channelId)?.name }} : {{ cm.content }}</a
       >
       }
     </div>
