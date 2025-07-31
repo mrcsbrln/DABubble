@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { ChannelMessageService } from '../../../services/channel-message.service';
 import { DirectMessageService } from '../../../services/direct-message.service';
+import { UserProfile } from '../../../interfaces/user-profile.interface';
 
 @Component({
   selector: 'app-header',
@@ -136,6 +137,14 @@ export class HeaderComponent {
       channelMessages,
       directMessages,
     };
+  }
+
+  getUserById(id: string): UserProfile {
+    const user = this.userService.getUserById(id);
+    if (!user) {
+      throw new Error(`User with id ${id} not found`);
+    }
+    return user;
   }
 
   isUserOnline(id: string) {

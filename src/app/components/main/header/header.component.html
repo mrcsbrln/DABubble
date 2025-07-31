@@ -15,7 +15,7 @@
     <div class="searchbar-dialog">
       @for(user of getFilteredUsers(); track user.uid) { @if(user.uid !==
       getCurrentUser()?.uid) {
-      <a [routerLink]="['/user', user.uid]">
+      <a (click)="searchBarInput.reset()" [routerLink]="['/user', user.uid]">
         <div class="avatar-wrapper">
           <img [src]="user.avatarUrl" alt="Avatar" />
           <span
@@ -32,7 +32,11 @@
     } @else if (isHashInInput()) {
     <div class="searchbar-dialog">
       @for(channel of getFilteredChannels(); track channel.id) {
-      <a [routerLink]="['/channels', channel.id]"># {{ channel.name }}</a>
+      <a
+        (click)="searchBarInput.reset()"
+        [routerLink]="['/channel', channel.id]"
+        ># {{ channel.name }}</a
+      >
       } @empty {
       <span>Keine Channels gefunden</span>
       }
@@ -42,7 +46,7 @@
     <div class="searchbar-dialog">
       <!--Filtered Users-->
       @for(user of getFilteredItems().users; track user.uid) {
-      <a [routerLink]="['/user', user.uid]">
+      <a (click)="searchBarInput.reset()" [routerLink]="['/user', user.uid]">
         <div class="avatar-wrapper">
           <img [src]="user.avatarUrl" alt="Avatar" />
           <span
@@ -55,15 +59,28 @@
       }
       <!--Filtered Channels-->
       @for(channel of getFilteredItems().channels; track channel.id) {
-      <a [routerLink]="['/channels', channel.id]"># {{ channel.name }}</a>
+      <a
+        (click)="searchBarInput.reset()"
+        [routerLink]="['/channel', channel.id]"
+        ># {{ channel.name }}</a
+      >
       }
       <!--Direct Messages-->
       @for(dm of getFilteredItems().directMessages; track dm.id){
-      <a>{{ dm.content }}</a>
+      <a
+        (click)="searchBarInput.reset()"
+        [routerLink]="['/user', dm.participantIds[0]]"
+      >
+        {{ dm.content }}</a
+      >
       }
       <!--Channel Messages-->
       @for(cm of getFilteredItems().channelMessages; track cm.id){
-      <a>{{ cm.content }}</a>
+      <a
+        (click)="searchBarInput.reset()"
+        [routerLink]="['/channel', cm.channelId]"
+        >{{ cm.content }}</a
+      >
       }
     </div>
     }

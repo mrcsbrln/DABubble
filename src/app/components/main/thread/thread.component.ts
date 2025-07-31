@@ -211,7 +211,7 @@ export class ThreadComponent implements OnInit {
     if (url.startsWith('/user/')) {
       this.type = 'user';
       this.id = this.route.snapshot.paramMap.get('id');
-    } else if (url.startsWith('/channels/')) {
+    } else if (url.startsWith('/channel/')) {
       this.type = 'channel';
       this.id = this.route.snapshot.paramMap.get('id');
     } else {
