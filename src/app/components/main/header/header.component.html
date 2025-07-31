@@ -38,12 +38,10 @@
       }
     </div>
     <!--Search for users, channels and messages-->
-    } @else if(getFilteredItems()?.channels?.length ||
-    getFilteredItems()?.users?.length) {
+    } @else if(getFilteredItems().hasResults ) {
     <div class="searchbar-dialog">
       <!--Filtered Users-->
-      @if(getFilteredItems()?.users?.length) { @for(user of
-      getFilteredItems()?.users; track user.uid) {
+      @for(user of getFilteredItems().users; track user.uid) {
       <a [routerLink]="['/user', user.uid]">
         <div class="avatar-wrapper">
           <img [src]="user.avatarUrl" alt="Avatar" />
@@ -54,22 +52,19 @@
         </div>
         {{ user.displayName }}
       </a>
-      } }
+      }
       <!--Filtered Channels-->
-      @else if(getFilteredItems()?.channels) { @for(channel of
-      getFilteredChannels(); track channel.id) {
+      @for(channel of getFilteredItems().channels; track channel.id) {
       <a [routerLink]="['/channels', channel.id]"># {{ channel.name }}</a>
-      } }
+      }
       <!--Direct Messages-->
-      @else if (getFilteredItems()?.directMessages) { @for(dm of
-      getFilteredItems()?.directMessages; track dm.id){
+      @for(dm of getFilteredItems().directMessages; track dm.id){
       <a>{{ dm.content }}</a>
-      } }
+      }
       <!--Channel Messages-->
-      @else if (getFilteredItems()?.channelMessages) { @for(cm of
-      getFilteredItems()?.channelMessages; track cm.id){
+      @for(cm of getFilteredItems().channelMessages; track cm.id){
       <a>{{ cm.content }}</a>
-      } }
+      }
     </div>
     }
   </div>

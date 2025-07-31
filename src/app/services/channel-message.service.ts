@@ -127,13 +127,14 @@ export class ChannelMessageService {
     );
   }
 
+  //todo: check for minimum required parameters
   setMessageObject(obj: Partial<ChannelMessage>, id: string): ChannelMessage {
     return {
       id: id,
       senderId: obj.senderId || '',
       content: obj.content || '',
       timestamp: obj.timestamp || serverTimestamp(),
-      channelId: obj.channelId,
+      channelId: obj.channelId || '',
       parentMessageId: obj.parentMessageId || null,
       reactions: obj.reactions || [],
     };

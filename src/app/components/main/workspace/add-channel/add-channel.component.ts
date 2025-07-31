@@ -45,7 +45,7 @@ export class AddChannelComponent {
     if (this.form.controls.channelName.valid && creatorId) {
       const channelToSend: AddChannelData = {
         name: channelName!,
-        description: description || null,
+        description: description || '',
         creatorId: creatorId!,
         memberIds: [creatorId],
         createdAt: serverTimestamp(),

@@ -31,6 +31,11 @@ button {
   }
 }
 
+.edit-btn:disabled {
+  color: $text-gray;
+  cursor: not-allowed;
+}
+
 .button-wrapper {
   display: flex;
   justify-content: center;

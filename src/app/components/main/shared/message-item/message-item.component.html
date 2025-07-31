@@ -47,6 +47,8 @@
     <button
       type="button"
       aria-label="reaction"
+      (click)="toggleEmojiPicker()"
+      (keydown)="toggleEmojiPicker()"
       (mouseenter)="isReactionHovered.set(true)"
       (mouseleave)="isReactionHovered.set(false)"
     >
@@ -88,6 +90,15 @@
         alt="edit"
       />
     </button>
+    @if(isEmojiPickerOpen()) {
+    <div class="emoji-picker" #emojiPicker>
+      @for (emoji of emojis; track $index) {
+      <button type="button" class="emoji-btns" (click)="addEmojiToInput(emoji)">
+        {{ emoji }}
+      </button>
+      }
+    </div>
+    }
   </div>
   } @else {
   <!--message from other users-->

@@ -44,6 +44,12 @@ export class CurrentUserProfileComponent {
     }
   }
 
+  isCurrentUserGuest() {
+    return (
+      this.authService.currentUser()?.uid === 'RlmORw3hSme1k6WjmBnVMQ8SCbI3'
+    );
+  }
+
   toggleEditMode() {
     this.isEditMode.update((value) => !value);
   }

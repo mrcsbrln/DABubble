@@ -37,7 +37,13 @@
       </span>
       @if(getCurrentUserInUserCollection()?.uid !==
       '5PZvnr5y76hp4ekDsdcnxwumN0F2') {
-      <button (click)="toggleEditMode()">Bearbeiten</button>
+      <button
+        class="edit-btn"
+        (click)="toggleEditMode()"
+        [disabled]="isCurrentUserGuest()"
+      >
+        Bearbeiten
+      </button>
       }
     </div>
     <div class="status-wrapper">

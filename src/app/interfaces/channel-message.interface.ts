@@ -6,7 +6,7 @@ export interface ChannelMessage {
   senderId: string;
   content: string;
   timestamp: FieldValue | Timestamp;
-  channelId?: string;
+  channelId: string;
   parentMessageId: string | null;
   reactions: Reaction[];
 }

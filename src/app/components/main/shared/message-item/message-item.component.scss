@@ -27,6 +27,26 @@
   border: 1px solid $light-purple;
 }
 
+.emoji-picker {
+  position: absolute;
+  top: -100%;
+  transform: translateY(70%);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  background-color: #fff;
+  border: 1px solid $light-purple;
+  border-radius: 25px;
+  padding: 16px;
+  box-shadow: $box-shadow-overlay;
+  z-index: 10;
+  .emoji-btns {
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+  }
+}
+
 .message-content {
   padding: 16px;
   background-color: $bg-color;

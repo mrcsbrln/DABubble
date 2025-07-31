@@ -1,4 +1,4 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserService } from '../../../services/user.service';
@@ -21,7 +21,7 @@ import { DirectMessageService } from '../../../services/direct-message.service';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   private authService = inject(AuthService);
   private userService = inject(UserService);
   private directMessageService = inject(DirectMessageService);
@@ -35,15 +35,8 @@ export class HeaderComponent implements OnInit {
 
   searchBarInput = new FormControl('');
 
+  channelMessages = this.channelMessageService.messages;
   directMessages = this.directMessageService.directMessages;
-
-  ngOnInit() {
-    setTimeout(() => {
-      console.log(this.directMessages());
-    }, 1000);
-
-    console.log('DirectMessages:', this.directMessages());
-  }
 
   checkForAtOrHash() {
     const searchBarValue = this.searchBarInput.value || '';
@@ -104,7 +97,13 @@ export class HeaderComponent implements OnInit {
   getFilteredItems() {
     const input = (this.searchBarInput.value ?? '').trim().toLowerCase();
     if (!input || input.startsWith('@') || input.startsWith('#')) {
-      return null;
+      return {
+        hasResults: false,
+        users: [],
+        channels: [],
+        channelMessages: [],
+        directMessages: [],
+      };
     }
 
     const users = this.userService
@@ -126,6 +125,12 @@ export class HeaderComponent implements OnInit {
       ) ?? [];
 
     return {
+      hasResults: Boolean(
+        users.length ||
+          channels.length ||
+          channelMessages.length ||
+          directMessages.length
+      ),
       users,
       channels,
       channelMessages,

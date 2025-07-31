@@ -21,6 +21,7 @@ import {
   reactionBarSlideOtherUser,
   fadeInOut,
 } from '../../../../services/site-animations.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 registerLocaleData(localeDe);
 
@@ -54,6 +55,35 @@ export class MessageItemComponent {
   isDotsHovered = signal(false);
   hoveredReactionIndex = signal<number | null>(null);
   reactionVisibleId = signal<string | null>(null);
+  isEmojiPickerOpen = signal(false);
+
+  readonly form = new FormGroup({
+    content: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.minLength(1)],
+    }),
+  });
+
+  emojis: string[] = [
+    '😀',
+    '😂',
+    '😢',
+    '🤓',
+    '😱',
+    '👍',
+    '👌',
+    '👋',
+    '🎉',
+    '🚀',
+    '🙏',
+    '✅',
+  ];
+
+  addEmojiToInput(emoji: string) {
+    const current = this.form.controls.content.value || '';
+    this.form.controls.content.setValue(current + emoji);
+    this.isEmojiPickerOpen.set(false);
+  }
 
   checkForReactions(): boolean {
     const message = this.message();
@@ -217,5 +247,9 @@ export class MessageItemComponent {
     } else if ('participantIds' in message) {
       this.directMessageService.parentDirectMessageId.set(message.id);
     }
+  }
+
+  toggleEmojiPicker() {
+    this.isEmojiPickerOpen.update((value) => !value);
   }
 }
