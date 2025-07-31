@@ -10,6 +10,7 @@ import { RouterLink } from '@angular/router';
 import { ChannelMessageService } from '../../../services/channel-message.service';
 import { DirectMessageService } from '../../../services/direct-message.service';
 import { UserProfile } from '../../../interfaces/user-profile.interface';
+import { DirectMessage } from '../../../interfaces/direct-message.interface';
 
 @Component({
   selector: 'app-header',
@@ -146,6 +147,16 @@ export class HeaderComponent {
       channelMessages,
       directMessages,
     };
+  }
+
+  getOtherParticipantId(dm: DirectMessage): string {
+    const currentUser = this.authService.currentUser();
+    if (!currentUser) {
+      throw new Error('No current user found');
+    }
+    return dm.participantIds[0] === currentUser.uid
+      ? dm.participantIds[1]
+      : dm.participantIds[0];
   }
 
   getUserById(id: string): UserProfile {

@@ -69,7 +69,7 @@
       @for(dm of getFilteredItems().directMessages; track dm.id){
       <a
         (click)="searchBarInput.reset()"
-        [routerLink]="['/user', dm.participantIds[0]]"
+        [routerLink]="['/user', getOtherParticipantId(dm)]"
       >
         {{ dm.content }}</a
       >
