@@ -80,10 +80,14 @@
       <!--Channel Messages-->
       @for(cm of getFilteredItems().channelMessages; track cm.id){
       <a
+        class="filtered-message-item"
         (click)="searchBarInput.reset()"
         [routerLink]="['/channel', cm.channelId]"
-        >{{ getChannelById(cm.channelId)?.name }} : {{ cm.content }}</a
       >
+        <span class="item-header">
+          {{ getChannelById(cm.channelId)?.name }}:</span
+        ><span class="item-content">{{ cm.content }}</span>
+      </a>
       }
     </div>
     }
