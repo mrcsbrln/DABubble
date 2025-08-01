@@ -187,4 +187,8 @@ export class HeaderComponent {
   toogleArrowDown() {
     this.arrowDownOpen.update((value) => !value);
   }
+
+  truncateText(text: string, maxLength: number): string {
+    return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
+  }
 }

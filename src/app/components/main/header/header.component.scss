@@ -39,6 +39,20 @@
   }
 }
 
+.filtered-message-item {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  .item-header {
+    align-self: flex-start;
+    color: #000;
+    font-size: 16px;
+  }
+  .item-content {
+    align-self: flex-start;
+  }
+}
+
 .first-overlay {
   position: absolute;
   top: 32px;
@@ -79,6 +93,7 @@
   width: 100%;
   input {
     height: 100%;
+    width: 100%;
     border-style: none;
     color: $text-gray;
     font-size: 24px;
@@ -110,7 +125,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 4px 20px;
+      padding: 16px 20px;
       font-size: 18px;
       cursor: pointer;
       &:hover {

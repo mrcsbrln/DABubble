@@ -68,12 +68,14 @@
       <!--Direct Messages-->
       @for(dm of getFilteredItems().directMessages; track dm.id){
       <a
+        class="filtered-message-item"
         (click)="searchBarInput.reset()"
         [routerLink]="['/user', getOtherParticipantId(dm)]"
-      >
-        {{ getUserById(getOtherParticipantId(dm)).displayName }}:
-        {{ dm.content }}</a
-      >
+        ><span class="item-header">
+          Unterhaltung mit
+          {{ getUserById(getOtherParticipantId(dm)).displayName }}:</span
+        ><span class="item-content"> {{ truncateText(dm.content, 25) }}</span>
+      </a>
       }
       <!--Channel Messages-->
       @for(cm of getFilteredItems().channelMessages; track cm.id){
