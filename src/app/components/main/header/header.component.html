@@ -71,6 +71,7 @@
         (click)="searchBarInput.reset()"
         [routerLink]="['/user', getOtherParticipantId(dm)]"
       >
+        {{ getUserById(getOtherParticipantId(dm)).displayName }}:
         {{ dm.content }}</a
       >
       }
