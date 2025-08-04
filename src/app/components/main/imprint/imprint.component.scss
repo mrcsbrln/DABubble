@@ -1,0 +1,73 @@
+@use "../../../../styles.scss" as *;
+
+:host {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: $bg-color;
+  height: 100vh;
+}
+
+h1,
+h2 {
+  color: $purple-1;
+  font-size: 46px;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 32px;
+  margin-top: 32px;
+}
+
+.address {
+  display: flex;
+  flex-direction: column;
+  span {
+    font-size: 20px;
+  }
+}
+
+.arrow-back {
+  cursor: pointer;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  margin-bottom: 16px;
+  img {
+    width: 16px;
+    height: 16px;
+  }
+  &:hover {
+    background-color: $bg-color;
+    transition: $hover-transition;
+  }
+}
+
+.imprint-card {
+  background-color: #fff;
+  padding: 48px 56px;
+  border-radius: 30px;
+  box-shadow: $box-shadow;
+}
+
+.logo-wrapper {
+  position: absolute;
+  top: 16px;
+  left: 46px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  img {
+    width: 70px;
+  }
+  span {
+    font-size: 32px;
+    font-weight: 700;
+  }
+}
