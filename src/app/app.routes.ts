@@ -11,7 +11,8 @@ import { ResetPasswordComponent } from './components/auth/reset-password/reset-p
 import { ChannelMessageComponent } from './components/main/channel-message/channel-message.component';
 import { NewMessageComponent } from './components/main/new-message/new-message.component';
 import { DirectMessageComponent } from './components/main/direct-message/direct-message.component';
-import { ImprintComponent } from './components/main/imprint/imprint.component';
+import { ImprintComponent } from './components/legal/imprint/imprint.component';
+import { PrivacyPolicyComponent } from './components/legal/privacy-policy/privacy-policy.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['']);
@@ -51,5 +52,9 @@ export const routes: Routes = [
   {
     path: 'imprint',
     component: ImprintComponent,
+  },
+  {
+    path: 'privacy-policy',
+    component: PrivacyPolicyComponent,
   },
 ];

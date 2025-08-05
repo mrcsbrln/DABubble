@@ -1,0 +1,66 @@
+@use "../../../../styles.scss" as *;
+
+:host {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: $bg-color;
+  height: 100vh;
+}
+
+main {
+  background-color: #fff;
+  border-radius: 30px;
+  box-shadow: $box-shadow;
+  max-width: 750px;
+  overflow: hidden;
+}
+
+.arrow-back {
+  position: relative;
+  top: 32px;
+  left: 32px;
+  cursor: pointer;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  margin-bottom: 16px;
+  img {
+    width: 16px;
+    height: 16px;
+  }
+  &:hover {
+    background-color: $bg-color;
+    transition: $hover-transition;
+  }
+}
+
+.logo-wrapper {
+  position: absolute;
+  top: 16px;
+  left: 46px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  img {
+    width: 70px;
+  }
+  span {
+    font-size: 32px;
+    font-weight: 700;
+  }
+}
+
+.scrollable-content {
+  max-height: 66vh;
+  overflow-y: auto;
+  padding: 48px 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
