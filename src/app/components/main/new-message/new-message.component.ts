@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MessageBoxComponent } from '../shared/message-box/message-box.component';
 import { ChannelService } from '../../../services/channel.service';
 import { UserService } from '../../../services/user.service';
@@ -18,14 +18,15 @@ export class NewMessageComponent {
 
   filterUsernames() {
     if (this.selected()) return [];
-    const allUsernames = computed(() =>
-      this.userService
-        .users()
-        .map((u) => u.displayName)
-        .filter(Boolean)
+    const usernames = this.userService
+      .users()
+      .map((u) => u.displayName)
+      .filter(Boolean);
+
+    const userInput = this.inputText().toLowerCase();
+    return usernames.filter((username) =>
+      username.toLowerCase().includes(userInput)
     );
-    const query = this.inputText().toLowerCase();
-    return allUsernames().filter((name) => name.toLowerCase().includes(query));
   }
 
   onInputChange(event: Event) {
