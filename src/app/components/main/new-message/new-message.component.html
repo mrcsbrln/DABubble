@@ -3,10 +3,10 @@
   <input
     type="text"
     placeholder="Name des Benutzers eingeben..."
-    [value]="inputText()"
-    (input)="onInputChange($event)"
+    [formControl]="userInputControl"
+    (input)="resetSelection()"
   />
-  @if(inputText() && filterUsernames().length) {
+  @if(userInputControl.value && filterUsernames().length) {
   <ul class="username-list">
     @for(username of filterUsernames(); track $index){
     <li class="list-item">
