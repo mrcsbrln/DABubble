@@ -49,6 +49,7 @@ export class ThreadComponent implements OnInit {
   closeThread = output<void>();
 
   isEmojiPickerOpen = signal(false);
+  isCloseBtnHovered = signal(false);
 
   form = new FormGroup({
     content: new FormControl('', [

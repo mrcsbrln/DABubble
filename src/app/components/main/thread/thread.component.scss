@@ -10,7 +10,21 @@
 button {
   background: unset;
   border: unset;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
   cursor: pointer;
+  &:hover {
+    background-color: $bg-color;
+    transition: $hover-transition;
+  }
+  img {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 .channel-name {
