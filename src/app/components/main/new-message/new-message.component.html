@@ -6,9 +6,9 @@
     [value]="inputText()"
     (input)="onInputChange($event)"
   />
-  @if(inputText() && filteredUsernames().length) {
+  @if(inputText() && filterUsernames().length) {
   <ul class="username-list">
-    @for(username of filteredUsernames(); track $index){
+    @for(username of filterUsernames(); track $index){
     <li class="list-item">
       <button (click)="selectSuggestion(username)">{{ username }}</button>
     </li>

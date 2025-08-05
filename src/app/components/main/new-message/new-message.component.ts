@@ -16,7 +16,7 @@ export class NewMessageComponent {
   inputText = signal('');
   selected = signal(false);
 
-  filteredUsernames = computed(() => {
+  filterUsernames() {
     if (this.selected()) return [];
     const allUsernames = computed(() =>
       this.userService
@@ -26,7 +26,7 @@ export class NewMessageComponent {
     );
     const query = this.inputText().toLowerCase();
     return allUsernames().filter((name) => name.toLowerCase().includes(query));
-  });
+  }
 
   onInputChange(event: Event) {
     const value = (event.target as HTMLInputElement).value;
