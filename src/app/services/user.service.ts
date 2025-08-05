@@ -107,6 +107,10 @@ export class UserService {
     return this.users().find((user) => user.uid === id);
   }
 
+  getUserByDisplayName(displayName: string) {
+    return this.users().find((user) => user.displayName === displayName);
+  }
+
   private sendHeartbeat() {
     const currentUserId = this.authService.currentUser()?.uid;
     const data = { heartbeat: serverTimestamp() };

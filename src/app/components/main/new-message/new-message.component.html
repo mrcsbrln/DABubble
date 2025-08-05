@@ -16,4 +16,7 @@
   </ul>
   }
 </div>
-<app-message-box placeholder="Starte eine neue Nachricht" />
+<app-message-box
+  placeholder="Starte eine neue Nachricht"
+  (send)="handleSend($event)"
+/>

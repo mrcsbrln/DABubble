@@ -1,8 +1,14 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { MessageBoxComponent } from '../shared/message-box/message-box.component';
-import { ChannelService } from '../../../services/channel.service';
 import { UserService } from '../../../services/user.service';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../../../services/auth/auth.service';
+import { DirectMessageService } from '../../../services/direct-message.service';
+import { serverTimestamp } from '@angular/fire/firestore';
+import { DirectMessage } from '../../../interfaces/direct-message.interface';
+import { Router } from '@angular/router';
+
+type DirectMessageData = Omit<DirectMessage, 'id'>;
 
 @Component({
   selector: 'app-new-message',
@@ -11,8 +17,10 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './new-message.component.scss',
 })
 export class NewMessageComponent {
-  private channelService = inject(ChannelService);
   private userService = inject(UserService);
+  private authService = inject(AuthService);
+  private directMessageService = inject(DirectMessageService);
+  private router = inject(Router);
 
   userInputControl = new FormControl('', { nonNullable: true });
   selected = signal(false);
@@ -33,6 +41,28 @@ export class NewMessageComponent {
       username.toLowerCase().includes(userInput)
     );
   });
+
+  handleSend(text: string) {
+    const senderId = this.authService.currentUser()?.uid;
+    const displayName = this.userInputControl.value;
+    const selectedMemberId =
+      this.userService.getUserByDisplayName(displayName)?.uid;
+
+    if (!senderId || !selectedMemberId) return;
+
+    const message: DirectMessageData = {
+      content: text,
+      participantIds: [senderId, selectedMemberId],
+      timestamp: serverTimestamp(),
+      parentMessageId: null,
+      reactions: [],
+    };
+
+    this.directMessageService.addMessage(message);
+    this.userInputControl.reset();
+    this.resetSelection();
+    this.router.navigateByUrl('/user/' + selectedMemberId);
+  }
 
   resetSelection() {
     this.selected.set(false);
