@@ -43,9 +43,18 @@ app-message-box {
 
 .list-item {
   list-style-type: none;
+  background-color: $bg-color;
+  border-radius: 12px;
+  padding: 4px 8px;
+  cursor: pointer;
   button {
     background: unset;
     border: unset;
     cursor: pointer;
   }
+}
+
+.username-list {
+  display: flex;
+  gap: 8px;
 }

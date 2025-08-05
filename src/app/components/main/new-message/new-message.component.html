@@ -2,12 +2,12 @@
   <span>Neue Nachricht</span>
   <input
     type="text"
-    placeholder="An: #channel, oder @jemand oder E-Mail Adresse"
+    placeholder="Name des Benutzers eingeben..."
     [value]="inputText()"
     (input)="onInputChange($event)"
   />
   @if(inputText() && filteredUsernames().length) {
-  <ul>
+  <ul class="username-list">
     @for(username of filteredUsernames(); track $index){
     <li class="list-item">
       <button (click)="selectSuggestion(username)">{{ username }}</button>
