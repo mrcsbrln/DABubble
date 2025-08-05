@@ -40,3 +40,12 @@ app-message-box {
     }
   }
 }
+
+.list-item {
+  list-style-type: none;
+  button {
+    background: unset;
+    border: unset;
+    cursor: pointer;
+  }
+}

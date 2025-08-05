@@ -119,6 +119,22 @@
   src: url("/fonts/Nunito/static/Nunito-BlackItalic.ttf") format("truetype");
 }
 
+$breakpoint-xs: 0px;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxl: 1400px;
+
+$breakpoints: (
+  xs: $breakpoint-xs,
+  sm: $breakpoint-sm,
+  md: $breakpoint-md,
+  lg: $breakpoint-lg,
+  xl: $breakpoint-xl,
+  xxl: $breakpoint-xxl,
+);
+
 $bg-color: #eceefe;
 $purple-1: #444df2;
 $purple-2: #797ef3;
@@ -159,4 +175,16 @@ $hover-transition: all 0.3s ease-in-out;
 
 body {
   font-family: "Nunito", sans-serif;
+}
+
+@mixin respond($breakpoint) {
+  $size: map-get($breakpoints, $breakpoint);
+
+  @if $size != null {
+    @media (min-width: $size) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint `#{$breakpoint}` is not defined.";
+  }
 }
