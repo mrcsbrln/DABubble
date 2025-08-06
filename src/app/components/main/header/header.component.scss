@@ -1,9 +1,5 @@
 @use "../../../../styles.scss" as *;
 
-:host {
-  padding-bottom: 16px;
-}
-
 .current-user-avatar {
   position: relative;
   width: 70px;

@@ -25,6 +25,9 @@
   &.workspace-hidden.thread-hidden {
     grid-template-columns: 0 1fr 0;
   }
+  @include respond(xl) {
+    grid-template-columns: 1fr 2fr 1fr;
+  }
 }
 
 app-header {
