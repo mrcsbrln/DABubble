@@ -7,6 +7,7 @@ import { DirectMessageService } from '../../../services/direct-message.service';
 import { serverTimestamp } from '@angular/fire/firestore';
 import { DirectMessage } from '../../../interfaces/direct-message.interface';
 import { Router } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 type DirectMessageData = Omit<DirectMessage, 'id'>;
 
@@ -23,6 +24,9 @@ export class NewMessageComponent {
   private router = inject(Router);
 
   userInputControl = new FormControl('', { nonNullable: true });
+  userInputSignal = toSignal(this.userInputControl.valueChanges, {
+    initialValue: '',
+  });
   selected = signal(false);
 
   filterUsernames = computed(() => {
@@ -35,10 +39,10 @@ export class NewMessageComponent {
       .map((user) => user.displayName)
       .filter(Boolean) as string[];
 
-    const userInput = this.userInputControl.value.toLowerCase();
+    const userInput = this.userInputSignal().toLowerCase();
 
     return usernames.filter((username) =>
-      username.toLowerCase().includes(userInput)
+      username.toLowerCase().startsWith(userInput)
     );
   });
 
