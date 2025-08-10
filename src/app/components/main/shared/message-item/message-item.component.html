@@ -207,14 +207,19 @@
             class="reaction-dialog"
           >
             <div>{{ reaction.emoji }}</div>
-            <div>
-              {{ getFormattedUserNames(reaction.emoji) }}
+            <div class="reaction">
+              @let p = getFormattedUserNamesParts(reaction.emoji); @if (p) {
+              <span class="reaction-username">{{ p.names }}</span
+              ><br />
+              <span class="nowrap">{{ p.verb }} reagiert</span>
+              }
             </div>
           </div>
           }
         </button>
 
-        } } @if(checkForReactions()){
+        } }
+        <!-- @if(checkForReactions()){
         <button
           class="add-reaction-emoji"
           (mouseenter)="isReaction2Hovered.set(true)"
@@ -230,7 +235,8 @@
             alt=""
           />
         </button>
-        } @if(isEmojiPickerOpen()) {
+        } -->
+        <!-- @if(isEmojiPickerOpen()) {
         <div class="emoji-picker" #emojiPicker>
           @for (emoji of emojis; track $index) {
           <button
@@ -242,7 +248,7 @@
           </button>
           }
         </div>
-        }
+        } -->
       </div>
       @if(getThreadMessages().length === 1) {
       <div class="thread-wrapper">

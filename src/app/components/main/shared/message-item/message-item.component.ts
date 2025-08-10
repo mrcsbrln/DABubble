@@ -101,16 +101,15 @@ export class MessageItemComponent {
     return new Date(0);
   }
 
-  getFormattedUserNames(emoji: string) {
+  getFormattedUserNamesParts(emoji: string) {
     const userIds = this.getUserIdsOfReaction(emoji);
-    if (!userIds) {
-      return;
-    }
+    if (!userIds) return null;
+
     const names = userIds
       .map((id) => this.getUserInfos(id)?.displayName)
       .filter((name): name is string => !!name);
 
-    if (names.length === 0) return '';
+    if (names.length === 0) return null;
 
     let formattedNames: string;
     if (names.length === 1) {
@@ -124,7 +123,7 @@ export class MessageItemComponent {
     }
 
     const verb = names.length > 1 ? 'haben' : 'hat';
-    return `${formattedNames} ${verb} reagiert`;
+    return { names: formattedNames, verb };
   }
 
   getSenderOfMessage() {

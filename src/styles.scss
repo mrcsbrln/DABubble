@@ -177,6 +177,10 @@ body {
   font-family: "Nunito", sans-serif;
 }
 
+.nowrap {
+  white-space: nowrap;
+}
+
 @mixin respond($breakpoint) {
   $size: map-get($breakpoints, $breakpoint);
 

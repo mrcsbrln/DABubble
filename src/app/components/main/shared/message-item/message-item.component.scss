@@ -161,9 +161,8 @@
 
 .reaction-dialog {
   position: absolute;
-  top: -100%;
-  transform: translateY(-50%);
-  min-width: 200px;
+  top: 0;
+  transform: translate(12.5%, -100%);
   background-color: $purple-1;
   color: #fff;
   padding: 15px 10px;
@@ -173,8 +172,13 @@
   z-index: 2;
 }
 
+.reaction-username {
+  font-weight: 700;
+}
+
 .reactions-wrapper {
   display: flex;
+  justify-content: flex-end;
   align-items: center;
   gap: 8px;
 }
