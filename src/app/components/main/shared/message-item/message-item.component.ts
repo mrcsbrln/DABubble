@@ -55,6 +55,7 @@ export class MessageItemComponent {
   isDotsHovered = signal(false);
   hoveredReactionIndex = signal<number | null>(null);
   reactionVisibleId = signal<string | null>(null);
+  isEmojiPickerInBarOpen = signal(false);
   isEmojiPickerOpen = signal(false);
 
   readonly form = new FormGroup({
@@ -247,6 +248,10 @@ export class MessageItemComponent {
     } else if ('participantIds' in message) {
       this.directMessageService.parentDirectMessageId.set(message.id);
     }
+  }
+
+  toggleEmojiPickerInBar() {
+    this.isEmojiPickerInBarOpen.update((value) => !value);
   }
 
   toggleEmojiPicker() {

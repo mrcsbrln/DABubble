@@ -1,5 +1,12 @@
 @use "../../../../styles.scss" as *;
 
+.arrow-down {
+  display: none;
+  @include respond(lg) {
+    display: inline;
+  }
+}
+
 .current-user-avatar {
   position: relative;
   width: 70px;
@@ -32,6 +39,13 @@
   span {
     font-size: 32px;
     font-weight: 700;
+  }
+}
+
+.display-name {
+  display: none;
+  @include respond(lg) {
+    display: inline;
   }
 }
 

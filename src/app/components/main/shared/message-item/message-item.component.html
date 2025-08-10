@@ -47,8 +47,8 @@
     <button
       type="button"
       aria-label="reaction"
-      (click)="toggleEmojiPicker()"
-      (keydown)="toggleEmojiPicker()"
+      (click)="toggleEmojiPickerInBar()"
+      (keydown)="toggleEmojiPickerInBar()"
       (mouseenter)="isReactionHovered.set(true)"
       (mouseleave)="isReactionHovered.set(false)"
     >
@@ -90,8 +90,8 @@
         alt="edit"
       />
     </button>
-    @if(isEmojiPickerOpen()) {
-    <div class="emoji-picker" #emojiPicker>
+    @if(isEmojiPickerInBarOpen()) {
+    <div class="emoji-picker in-bar" #emojiPicker>
       @for (emoji of emojis; track $index) {
       <button type="button" class="emoji-btns" (click)="addEmojiToInput(emoji)">
         {{ emoji }}
@@ -209,10 +209,11 @@
         >
 
         } } @if(checkForReactions()){
-        <span
+        <button
           class="add-reaction-emoji"
           (mouseenter)="isReaction2Hovered.set(true)"
           (mouseleave)="isReaction2Hovered.set(false)"
+          (click)="toggleEmojiPicker()"
         >
           <img
             [src]="
@@ -222,7 +223,19 @@
             "
             alt=""
           />
-        </span>
+        </button>
+        } @if(isEmojiPickerOpen()) {
+        <div class="emoji-picker" #emojiPicker>
+          @for (emoji of emojis; track $index) {
+          <button
+            type="button"
+            class="emoji-btns"
+            (click)="addEmojiToInput(emoji)"
+          >
+            {{ emoji }}
+          </button>
+          }
+        </div>
         }
       </div>
       @if(getThreadMessages().length === 1) {
