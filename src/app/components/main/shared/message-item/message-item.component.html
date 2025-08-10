@@ -93,7 +93,11 @@
     @if(isEmojiPickerInBarOpen()) {
     <div class="emoji-picker in-bar" #emojiPicker>
       @for (emoji of emojis; track $index) {
-      <button type="button" class="emoji-btns" (click)="addEmojiToInput(emoji)">
+      <button
+        type="button"
+        class="emoji-btns"
+        (click)="handleReaction(emoji, message()?.id ?? '')"
+      >
         {{ emoji }}
       </button>
       }
@@ -188,11 +192,13 @@
       <div class="reactions-wrapper">
         @for (reaction of message()?.reactions; track $index) { @if
         (reaction.userIds.length > 0) {
-        <span
+        <button
           class="emoji-box"
+          (click)="handleReaction(reaction.emoji, message()?.id ?? '')"
           (mouseenter)="hoveredReactionIndex.set($index)"
           (mouseleave)="hoveredReactionIndex.set(null)"
-          >{{ reaction.emoji }}
+        >
+          {{ reaction.emoji }}
           {{ reaction.userIds.length }} @if(hoveredReactionIndex() === $index){
           <div
             [@fadeInOut]="
@@ -205,8 +211,8 @@
               {{ getFormattedUserNames(reaction.emoji) }}
             </div>
           </div>
-          }</span
-        >
+          }
+        </button>
 
         } } @if(checkForReactions()){
         <button
@@ -230,7 +236,7 @@
           <button
             type="button"
             class="emoji-btns"
-            (click)="addEmojiToInput(emoji)"
+            (click)="handleReaction(emoji, message()?.id ?? '')"
           >
             {{ emoji }}
           </button>

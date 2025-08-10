@@ -21,7 +21,6 @@ import {
   reactionBarSlideOtherUser,
   fadeInOut,
 } from '../../../../services/site-animations.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 registerLocaleData(localeDe);
 
@@ -58,13 +57,6 @@ export class MessageItemComponent {
   isEmojiPickerInBarOpen = signal(false);
   isEmojiPickerOpen = signal(false);
 
-  readonly form = new FormGroup({
-    content: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required, Validators.minLength(1)],
-    }),
-  });
-
   emojis: string[] = [
     '😀',
     '😂',
@@ -80,11 +72,9 @@ export class MessageItemComponent {
     '✅',
   ];
 
-  addEmojiToInput(emoji: string) {
-    const current = this.form.controls.content.value || '';
-    this.form.controls.content.setValue(current + emoji);
-    this.isEmojiPickerOpen.set(false);
-  }
+  // addEmojiToReaction(emoji: string) {
+  //   //
+  // }
 
   checkForReactions(): boolean {
     const message = this.message();
