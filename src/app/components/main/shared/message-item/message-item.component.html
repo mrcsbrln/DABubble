@@ -189,7 +189,10 @@
     </div>
 
     <div class="last-row">
-      <div class="reactions-wrapper">
+      <div
+        class="reactions-wrapper"
+        [ngClass]="{ 'current-user': isMessageFromCurrentUser() }"
+      >
         @for (reaction of message()?.reactions; track $index) { @if
         (reaction.userIds.length > 0) {
         <button
