@@ -26,6 +26,8 @@ export class WorkspaceComponent {
   addChannelDialogOpen = signal(false);
   isNewMessageBtnHovered = signal(false);
   closeThread = output<void>();
+  isWorkspacesHovered = signal(false);
+  isChannelsBtnHovered = signal(false);
 
   getChannels() {
     return this.channelService.channels();

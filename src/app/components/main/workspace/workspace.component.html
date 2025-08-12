@@ -18,14 +18,29 @@
 </div>
 
 <div class="channel-container">
-  <button class="channel-img-container" (click)="toggleChannelList()">
+  <button
+    (click)="toggleChannelList()"
+    (mouseenter)="isChannelsBtnHovered.set(true)"
+    (mouseleave)="isChannelsBtnHovered.set(false)"
+  >
     <img
       class="arrow-drop-down"
       [class.open]="channelListOpen()"
-      src="img/arrow-drop-down.svg"
+      [src]="
+        isChannelsBtnHovered()
+          ? 'img/arrow-drop-down-hover.svg'
+          : 'img/arrow-drop-down.svg'
+      "
       alt="arrow-drop-down"
     />
-    <img src="img/workspaces.svg" alt="account-circle" />
+    <img
+      [src]="
+        isChannelsBtnHovered()
+          ? 'img/workspaces-hover.svg'
+          : 'img/workspaces.svg'
+      "
+      alt="account-circle"
+    />
     Channels
   </button>
   <button class="add-btn" (click)="onOpenChannelDialog()">

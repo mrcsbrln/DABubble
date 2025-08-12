@@ -6,7 +6,6 @@
   gap: 16px;
   background-color: #fff;
   border-radius: 30px;
-  padding: 16px;
   overflow: hidden;
 }
 
@@ -76,17 +75,8 @@ button .arrow-drop-down {
 .channel-container {
   display: flex;
   justify-content: space-between;
-}
-
-.channel-img-container {
-  @media (hover: hover) and (pointer: fine) {
-    &:hover :first-child {
-      content: url("/img/arrow-drop-down-hover.svg");
-    }
-
-    &:hover :nth-child(2) {
-      content: url("/img/workspace-hover.svg");
-    }
+  button {
+    font-weight: 700;
   }
 }
 

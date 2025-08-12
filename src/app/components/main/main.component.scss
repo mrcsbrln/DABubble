@@ -25,6 +25,16 @@ main {
   &.workspace-hidden {
     grid-template-columns: 0 1fr 350px;
   }
+  &.thread-hidden {
+    grid-template-columns: 300px 1fr 0;
+  }
+}
+
+app-workspace {
+  padding: 16px;
+  &.workspace-hidden {
+    padding: 0;
+  }
 }
 
 section {

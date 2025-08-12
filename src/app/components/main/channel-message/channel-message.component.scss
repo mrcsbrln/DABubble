@@ -1,7 +1,12 @@
 @use "../../../../styles.scss" as *;
 
 :host {
-  grid-area: chat;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
   overflow-y: scroll;
 }
 
@@ -67,15 +72,6 @@ button {
     align-items: center;
     gap: 16px;
   }
-}
-
-.main-chat {
-  background-color: #fff;
-  border-radius: 30px;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  position: relative;
 }
 
 .channel-info-container {

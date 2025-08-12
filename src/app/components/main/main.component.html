@@ -8,7 +8,7 @@
 </header>
 
 <main [ngClass]="gridClasses">
-  <app-workspace />
+  <app-workspace [ngClass]="{ 'workspace-hidden': isWorkspaceHidden() }" />
   <section><router-outlet /></section>
   <app-thread />
 </main>

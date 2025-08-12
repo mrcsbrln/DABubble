@@ -1,166 +1,164 @@
-<div class="main-chat">
-  <div class="channel-info-container">
-    <div class="channel-info-group">
-      <div
-        (click)="toggleEditChannelDialog()"
-        (keydown)="toggleEditChannelDialog()"
-        tabindex="0"
-        class="channel-info"
-      >
-        <img src="img/tag-black2.svg" alt="tag" />
-        <span class="channel-name">{{ getChannelName() }}</span>
-        <img src="img/channel-info-arrow-down.svg" alt="arrow" />
-      </div>
-      @if(isEditChannelDialogOpen()){
-      <div
-        (click)="toggleEditChannelDialog()"
-        (keydown)="toggleEditChannelDialog()"
-        tabindex="0"
-        class="dialog-backdrop"
-      ></div>
-      <app-edit-channel (closeDialogEditChannel)="toggleEditChannelDialog()" />
-      }
+<div class="channel-info-container">
+  <div class="channel-info-group">
+    <div
+      (click)="toggleEditChannelDialog()"
+      (keydown)="toggleEditChannelDialog()"
+      tabindex="0"
+      class="channel-info"
+    >
+      <img src="img/tag-black2.svg" alt="tag" />
+      <span class="channel-name">{{ getChannelName() }}</span>
+      <img src="img/channel-info-arrow-down.svg" alt="arrow" />
     </div>
-    <div class="channel-members-group">
-      <div
-        class="channel-members-info"
-        (click)="toggleShowMembersDialog()"
-        (keydown)="toggleShowMembersDialog()"
-        tabindex="0"
-      >
-        <div class="channel-members-img">
-          @for(member of getMembersOfCurrentChannel(); track member?.uid) {
-          <img [src]="member?.avatarUrl" alt="channel-members-profil-img" />
-          }
-        </div>
-        <span class="channel-members-count">{{
-          getMembersOfCurrentChannel()?.length
-        }}</span>
-      </div>
-      <button
-        (click)="toogleAddMemebersDialog()"
-        class="add-new-member"
-        (mouseenter)="isAddMemeberBtnHovered.set(true)"
-        (mouseleave)="isAddMemeberBtnHovered.set(false)"
-      >
-        <img
-          [src]="
-            isAddMemeberBtnHovered()
-              ? 'img/add-member-hover.svg'
-              : 'img/add-member.svg'
-          "
-          alt="add-members"
-        />
-      </button>
-
-      @if(isAddMembersDialogOpen()){
-      <div
-        (click)="toogleAddMemebersDialog()"
-        (keydown)="toogleAddMemebersDialog()"
-        tabindex="0"
-        class="dialog-backdrop"
-      ></div>
-      <app-add-members
-        (closeDialog)="toogleAddMemebersDialog()"
-        [channelName]="getChannelName()"
-      />
-      } @if(isShowMembersDialogOpen()){
-      <div
-        class="dialog-backdrop"
-        (click)="toggleShowMembersDialog()"
-        (keydown)="toggleShowMembersDialog()"
-        tabindex="0"
-      ></div>
-      <div
-        class="dialog"
-        (click)="$event.stopPropagation()"
-        (keydown)="$event.stopPropagation()"
-        tabindex="0"
-        class="dialog"
-      >
-        <div class="card-header">
-          <span>Mitglieder</span>
-          <img
-            (click)="toggleShowMembersDialog()"
-            (keydown)="toggleShowMembersDialog()"
-            tabindex="0"
-            (mouseover)="isHovering.set(true)"
-            (mouseout)="isHovering.set(false)"
-            (focus)="isHovering.set(true)"
-            (blur)="isHovering.set(false)"
-            [src]="isHovering() ? closeIconHoverSrc : closeIconSrc"
-            alt=""
-          />
-        </div>
-
-        <div class="members-list">
-          <button
-            class="user-entry"
-            (click)="toggleUserProfileDialog()"
-            (click)="toggleShowMembersDialog()"
-            (click)="setSelectedMemeberId(getCurrentUserData()?.uid!)"
-          >
-            <div class="avatar-wrapper">
-              <img [src]="getCurrentUserData()?.avatarUrl" alt="Avatar" />
-              <span class="status-dot" [ngClass]="{ online: true }"></span>
-            </div>
-            <span>{{ getCurrentUserData()?.displayName }} (Du)</span>
-          </button>
-
-          @for(member of getMembersOfCurrentChannel(); track member?.uid) {
-          @if(member?.uid !== getCurrentUserData()?.uid) {
-          <button
-            class="user-entry"
-            (click)="toggleUserProfileDialog()"
-            (click)="toggleShowMembersDialog()"
-            (click)="setSelectedMemeberId(member?.uid || '')"
-          >
-            <div class="avatar-wrapper">
-              <img [src]="member?.avatarUrl" alt="Avatar" />
-              <span
-                class="status-dot"
-                [ngClass]="{ online: isUserOnline(member?.uid!) }"
-              ></span>
-            </div>
-            <span>{{ member?.displayName }}</span>
-          </button>
-          }}
-          <button
-            class="user-entry"
-            (click)="toogleAddMemebersDialog()"
-            (click)="toggleShowMembersDialog()"
-            (mouseenter)="isAddMemeberBtnDialogHovered.set(true)"
-            (mouseleave)="isAddMemeberBtnDialogHovered.set(false)"
-          >
-            <span class="add-member-box">
-              <img
-                class="member-image"
-                [src]="
-                  isAddMemeberBtnDialogHovered()
-                    ? 'img/add-member-hover.svg'
-                    : 'img/add-member.svg'
-                "
-                alt="add-member"
-              />
-            </span>
-            Mitglieder hinzufügen
-          </button>
-        </div>
-      </div>
-      }
-    </div>
-  </div>
-  <div class="messages-container">
-    @for(message of getMessagesReversed(); track message.id; let i = $index) {
-
-    <app-message-item [message]="message" (openThread)="openThread.emit()" />
+    @if(isEditChannelDialogOpen()){
+    <div
+      (click)="toggleEditChannelDialog()"
+      (keydown)="toggleEditChannelDialog()"
+      tabindex="0"
+      class="dialog-backdrop"
+    ></div>
+    <app-edit-channel (closeDialogEditChannel)="toggleEditChannelDialog()" />
     }
   </div>
-  <app-message-box
-    [placeholder]="'Nachricht an ' + getChannelName()"
-    (send)="handleSend($event)"
-  />
+  <div class="channel-members-group">
+    <div
+      class="channel-members-info"
+      (click)="toggleShowMembersDialog()"
+      (keydown)="toggleShowMembersDialog()"
+      tabindex="0"
+    >
+      <div class="channel-members-img">
+        @for(member of getMembersOfCurrentChannel(); track member?.uid) {
+        <img [src]="member?.avatarUrl" alt="channel-members-profil-img" />
+        }
+      </div>
+      <span class="channel-members-count">{{
+        getMembersOfCurrentChannel()?.length
+      }}</span>
+    </div>
+    <button
+      (click)="toogleAddMemebersDialog()"
+      class="add-new-member"
+      (mouseenter)="isAddMemeberBtnHovered.set(true)"
+      (mouseleave)="isAddMemeberBtnHovered.set(false)"
+    >
+      <img
+        [src]="
+          isAddMemeberBtnHovered()
+            ? 'img/add-member-hover.svg'
+            : 'img/add-member.svg'
+        "
+        alt="add-members"
+      />
+    </button>
+
+    @if(isAddMembersDialogOpen()){
+    <div
+      (click)="toogleAddMemebersDialog()"
+      (keydown)="toogleAddMemebersDialog()"
+      tabindex="0"
+      class="dialog-backdrop"
+    ></div>
+    <app-add-members
+      (closeDialog)="toogleAddMemebersDialog()"
+      [channelName]="getChannelName()"
+    />
+    } @if(isShowMembersDialogOpen()){
+    <div
+      class="dialog-backdrop"
+      (click)="toggleShowMembersDialog()"
+      (keydown)="toggleShowMembersDialog()"
+      tabindex="0"
+    ></div>
+    <div
+      class="dialog"
+      (click)="$event.stopPropagation()"
+      (keydown)="$event.stopPropagation()"
+      tabindex="0"
+      class="dialog"
+    >
+      <div class="card-header">
+        <span>Mitglieder</span>
+        <img
+          (click)="toggleShowMembersDialog()"
+          (keydown)="toggleShowMembersDialog()"
+          tabindex="0"
+          (mouseover)="isHovering.set(true)"
+          (mouseout)="isHovering.set(false)"
+          (focus)="isHovering.set(true)"
+          (blur)="isHovering.set(false)"
+          [src]="isHovering() ? closeIconHoverSrc : closeIconSrc"
+          alt=""
+        />
+      </div>
+
+      <div class="members-list">
+        <button
+          class="user-entry"
+          (click)="toggleUserProfileDialog()"
+          (click)="toggleShowMembersDialog()"
+          (click)="setSelectedMemeberId(getCurrentUserData()?.uid!)"
+        >
+          <div class="avatar-wrapper">
+            <img [src]="getCurrentUserData()?.avatarUrl" alt="Avatar" />
+            <span class="status-dot" [ngClass]="{ online: true }"></span>
+          </div>
+          <span>{{ getCurrentUserData()?.displayName }} (Du)</span>
+        </button>
+
+        @for(member of getMembersOfCurrentChannel(); track member?.uid) {
+        @if(member?.uid !== getCurrentUserData()?.uid) {
+        <button
+          class="user-entry"
+          (click)="toggleUserProfileDialog()"
+          (click)="toggleShowMembersDialog()"
+          (click)="setSelectedMemeberId(member?.uid || '')"
+        >
+          <div class="avatar-wrapper">
+            <img [src]="member?.avatarUrl" alt="Avatar" />
+            <span
+              class="status-dot"
+              [ngClass]="{ online: isUserOnline(member?.uid!) }"
+            ></span>
+          </div>
+          <span>{{ member?.displayName }}</span>
+        </button>
+        }}
+        <button
+          class="user-entry"
+          (click)="toogleAddMemebersDialog()"
+          (click)="toggleShowMembersDialog()"
+          (mouseenter)="isAddMemeberBtnDialogHovered.set(true)"
+          (mouseleave)="isAddMemeberBtnDialogHovered.set(false)"
+        >
+          <span class="add-member-box">
+            <img
+              class="member-image"
+              [src]="
+                isAddMemeberBtnDialogHovered()
+                  ? 'img/add-member-hover.svg'
+                  : 'img/add-member.svg'
+              "
+              alt="add-member"
+            />
+          </span>
+          Mitglieder hinzufügen
+        </button>
+      </div>
+    </div>
+    }
+  </div>
 </div>
+<div class="messages-container">
+  @for(message of getMessagesReversed(); track message.id; let i = $index) {
+
+  <app-message-item [message]="message" (openThread)="openThread.emit()" />
+  }
+</div>
+<app-message-box
+  [placeholder]="'Nachricht an ' + getChannelName()"
+  (send)="handleSend($event)"
+/>
 @if(isUserProfileDialogOpen()) {
 <div class="dialog-backdrop"></div>
 <app-user-profile
