@@ -30,6 +30,8 @@ export class MainComponent {
     return {
       'workspace-hidden': this.isWorkspaceHidden(),
       'thread-hidden': this.isThreadHidden(),
+      'workspace-thread-hidden':
+        this.isWorkspaceHidden() && this.isThreadHidden(),
     };
   }
 

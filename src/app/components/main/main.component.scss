@@ -28,6 +28,9 @@ main {
   &.thread-hidden {
     grid-template-columns: 300px 1fr 0;
   }
+  &.workspace-thread-hidden {
+    grid-template-columns: 0 1fr 0;
+  }
 }
 
 app-workspace {
