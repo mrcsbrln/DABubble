@@ -1,33 +1,31 @@
-<div class="main-chat">
-  <div class="user-info-container">
-    @if(isSelectedUserCurrentUser()) {
-    <div class="avatar-wrapper">
-      <img [src]="getSelectedUser()?.avatarUrl" alt="" />
-      <span class="status-dot online"></span>
-    </div>
-    <span class="display-name">{{ getSelectedUser()?.displayName }} (Du) </span>
-    } @else {
-    <div class="avatar-wrapper">
-      <img [src]="getSelectedUser()?.avatarUrl" alt="" />
-      <span
-        class="status-dot"
-        [ngClass]="{ online: isUserOnline(getSelectedUser()?.uid!) }"
-      ></span>
-    </div>
-    <span class="display-name">{{ getSelectedUser()?.displayName }} </span>
-    }
+<div class="user-info-container">
+  @if(isSelectedUserCurrentUser()) {
+  <div class="avatar-wrapper">
+    <img [src]="getSelectedUser()?.avatarUrl" alt="" />
+    <span class="status-dot online"></span>
   </div>
-  <div class="messages-container">
-    @for(dm of getDirectMessagesOfSelectedUser(); track dm.id){
-    @if(dm.parentMessageId === null) {
-    <app-message-item [message]="dm" (openThread)="openThread.emit()" />
-    } }
+  <span class="display-name">{{ getSelectedUser()?.displayName }} (Du) </span>
+  } @else {
+  <div class="avatar-wrapper">
+    <img [src]="getSelectedUser()?.avatarUrl" alt="" />
+    <span
+      class="status-dot"
+      [ngClass]="{ online: isUserOnline(getSelectedUser()?.uid!) }"
+    ></span>
   </div>
-  <app-message-box
-    [placeholder]="'Nachricht an ' + getSelectedUser()?.displayName"
-    (send)="handleSend($event)"
-  />
+  <span class="display-name">{{ getSelectedUser()?.displayName }} </span>
+  }
 </div>
+<div class="messages-container">
+  @for(dm of getDirectMessagesOfSelectedUser(); track dm.id){
+  @if(dm.parentMessageId === null) {
+  <app-message-item [message]="dm" (openThread)="openThread.emit()" />
+  } }
+</div>
+<app-message-box
+  [placeholder]="'Nachricht an ' + getSelectedUser()?.displayName"
+  (send)="handleSend($event)"
+/>
 @if(isUserProfileDialogOpen()) {
 <div class="dialog-backdrop"></div>
 <app-user-profile

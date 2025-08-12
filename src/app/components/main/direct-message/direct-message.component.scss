@@ -1,7 +1,13 @@
 @use "../../../../styles.scss" as *;
 
 :host {
-  overflow-y: scroll;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  border-radius: 30px;
+  overflow: hidden;
 }
 
 app-message-box {
@@ -20,15 +26,6 @@ app-message-box {
   height: 100vh;
   background-color: $backdrop;
   z-index: 1000;
-}
-
-.main-chat {
-  background-color: #fff;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  position: relative;
-  border-radius: 30px;
 }
 
 .messages-container {
