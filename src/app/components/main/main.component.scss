@@ -21,10 +21,15 @@ main {
   display: grid;
   grid-template-columns: 300px 1fr 350px;
   column-gap: 16px;
-  overflow: hidden;
+  min-height: 0;
   &.workspace-hidden {
     grid-template-columns: 0 1fr 350px;
   }
+}
+
+section {
+  min-height: 0;
+  display: flex;
 }
 
 .logo-wrapper {

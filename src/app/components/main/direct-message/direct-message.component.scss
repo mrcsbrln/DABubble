@@ -1,13 +1,12 @@
 @use "../../../../styles.scss" as *;
 
 :host {
+  width: 100%;
   background-color: #fff;
   display: flex;
   flex-direction: column;
-  height: 100%;
   position: relative;
   border-radius: 30px;
-  overflow: hidden;
 }
 
 app-message-box {
@@ -32,6 +31,7 @@ app-message-box {
   display: flex;
   flex-direction: column-reverse;
   flex-grow: 1;
+  min-height: 0;
   overflow-y: auto;
 }
 
