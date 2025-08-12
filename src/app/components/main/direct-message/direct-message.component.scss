@@ -1,7 +1,6 @@
 @use "../../../../styles.scss" as *;
 
 :host {
-  grid-area: chat;
   overflow-y: scroll;
 }
 

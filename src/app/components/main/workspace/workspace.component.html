@@ -1,124 +1,122 @@
-<div class="wrapper">
-  <div class="devspace-container">
-    <img src="img/devspace.svg" alt="devspace-image" />
-    <a
-      [routerLink]="['/']"
-      (mouseenter)="isNewMessageBtnHovered.set(true)"
-      (mouseleave)="isNewMessageBtnHovered.set(false)"
-      (click)="resetSelectedUserId()"
-      (click)="resetCurrentChannelId()"
-    >
-      <img
-        [src]="
-          isNewMessageBtnHovered()
-            ? 'img/new-message-channel-hover.svg'
-            : 'img/new-message-channel.svg'
-        "
-        alt="new-message-channel"
-    /></a>
-  </div>
-
-  <div class="channel-container">
-    <button class="channel-img-container" (click)="toggleChannelList()">
-      <img
-        class="arrow-drop-down"
-        [class.open]="channelListOpen()"
-        src="img/arrow-drop-down.svg"
-        alt="arrow-drop-down"
-      />
-      <img src="img/workspaces.svg" alt="account-circle" />
-      Channels
-    </button>
-    <button class="add-btn" (click)="onOpenChannelDialog()">
-      <img src="img/add.svg" alt="add" />
-    </button>
-  </div>
-
-  @if(channelListOpen()) {
-  <div class="channels-list">
-    @for(channel of getChannels(); track channel.id) {
-    @if(checkIfUserIsMemberOfChannel(channel.id)) {
-    <div
-      class="channel-entry"
-      [ngClass]="{
-        'selected-channel': isChannelSelected(channel.id)
-      }"
-      (click)="resetSelectedUserId()"
-      (click)="onCloseThread()"
-      (keyup.enter)="resetSelectedUserId()"
-      tabindex="0"
-    >
-      <a [routerLink]="['/channel', channel.id]">
-        <span class="hash">#</span> {{ channel.name }}
-      </a>
-    </div>
-    } }
-  </div>
-  <div class="add-channel-container">
-    <button class="add-channel-btn" (click)="onOpenChannelDialog()">
-      <img src="img/add-circle.svg" alt="add-circle" />
-      Channel hinzufügen
-    </button>
-  </div>
-  @if(addChannelDialogOpen()) {
-  <app-add-channel (closeDialog)="onCloseAddChannel()" />
-  } }
-
-  <button
-    class="direct-message-container"
-    (click)="toggleDirectMessageUserList()"
+<div class="devspace-container">
+  <img src="img/devspace.svg" alt="devspace-image" />
+  <a
+    [routerLink]="['/']"
+    (mouseenter)="isNewMessageBtnHovered.set(true)"
+    (mouseleave)="isNewMessageBtnHovered.set(false)"
+    (click)="resetSelectedUserId()"
+    (click)="resetCurrentChannelId()"
   >
     <img
+      [src]="
+        isNewMessageBtnHovered()
+          ? 'img/new-message-channel-hover.svg'
+          : 'img/new-message-channel.svg'
+      "
+      alt="new-message-channel"
+  /></a>
+</div>
+
+<div class="channel-container">
+  <button class="channel-img-container" (click)="toggleChannelList()">
+    <img
       class="arrow-drop-down"
-      [class.open]="directMessageUserListOpen()"
+      [class.open]="channelListOpen()"
       src="img/arrow-drop-down.svg"
       alt="arrow-drop-down"
     />
-    <img src="img/account-circle.svg" alt="account-circle" />
-    Direktnachrichten
+    <img src="img/workspaces.svg" alt="account-circle" />
+    Channels
   </button>
-
-  @if(directMessageUserListOpen()) {
-  <div class="users-list">
-    <a
-      class="user-entry"
-      [ngClass]="{
-        'selected-user': isUserSelected(getCurrentUserData()?.uid || '')
-      }"
-      [routerLink]="['/user', getCurrentUserData()?.uid]"
-      (click)="resetCurrentChannelId()"
-      (click)="onCloseThread()"
-    >
-      <div class="avatar-wrapper">
-        <img [src]="getCurrentUserData()?.avatarUrl" alt="Avatar" />
-        <span class="status-dot" [ngClass]="{ online: true }"></span>
-      </div>
-      <span class="display-name"
-        >{{ getCurrentUserData()?.displayName }} (Du)</span
-      >
-    </a>
-
-    @for (user of getUserDataOfOtherParcipitants(); track user.uid) {
-    @if(user.uid !== getCurrentUserData()?.uid) {
-    <a
-      class="user-entry"
-      [ngClass]="{
-        'selected-user': isUserSelected(user.uid)
-      }"
-      [routerLink]="['/user', user.uid]"
-      (click)="resetCurrentChannelId()"
-      (click)="onCloseThread()"
-    >
-      <div class="avatar-wrapper">
-        <img [src]="user.avatarUrl" alt="Avatar" />
-        <span
-          class="status-dot"
-          [ngClass]="{ online: isUserOnline(user.uid) }"
-        ></span>
-      </div>
-      <span class="display-name">{{ user.displayName }}</span>
-    </a>
-    } }
-  </div>
-  }
+  <button class="add-btn" (click)="onOpenChannelDialog()">
+    <img src="img/add.svg" alt="add" />
+  </button>
 </div>
+
+@if(channelListOpen()) {
+<div class="channels-list">
+  @for(channel of getChannels(); track channel.id) {
+  @if(checkIfUserIsMemberOfChannel(channel.id)) {
+  <div
+    class="channel-entry"
+    [ngClass]="{
+      'selected-channel': isChannelSelected(channel.id)
+    }"
+    (click)="resetSelectedUserId()"
+    (click)="onCloseThread()"
+    (keyup.enter)="resetSelectedUserId()"
+    tabindex="0"
+  >
+    <a [routerLink]="['/channel', channel.id]">
+      <span class="hash">#</span> {{ channel.name }}
+    </a>
+  </div>
+  } }
+</div>
+<div class="add-channel-container">
+  <button class="add-channel-btn" (click)="onOpenChannelDialog()">
+    <img src="img/add-circle.svg" alt="add-circle" />
+    Channel hinzufügen
+  </button>
+</div>
+@if(addChannelDialogOpen()) {
+<app-add-channel (closeDialog)="onCloseAddChannel()" />
+} }
+
+<button
+  class="direct-message-container"
+  (click)="toggleDirectMessageUserList()"
+>
+  <img
+    class="arrow-drop-down"
+    [class.open]="directMessageUserListOpen()"
+    src="img/arrow-drop-down.svg"
+    alt="arrow-drop-down"
+  />
+  <img src="img/account-circle.svg" alt="account-circle" />
+  Direktnachrichten
+</button>
+
+@if(directMessageUserListOpen()) {
+<div class="users-list">
+  <a
+    class="user-entry"
+    [ngClass]="{
+      'selected-user': isUserSelected(getCurrentUserData()?.uid || '')
+    }"
+    [routerLink]="['/user', getCurrentUserData()?.uid]"
+    (click)="resetCurrentChannelId()"
+    (click)="onCloseThread()"
+  >
+    <div class="avatar-wrapper">
+      <img [src]="getCurrentUserData()?.avatarUrl" alt="Avatar" />
+      <span class="status-dot" [ngClass]="{ online: true }"></span>
+    </div>
+    <span class="display-name"
+      >{{ getCurrentUserData()?.displayName }} (Du)</span
+    >
+  </a>
+
+  @for (user of getUserDataOfOtherParcipitants(); track user.uid) { @if(user.uid
+  !== getCurrentUserData()?.uid) {
+  <a
+    class="user-entry"
+    [ngClass]="{
+      'selected-user': isUserSelected(user.uid)
+    }"
+    [routerLink]="['/user', user.uid]"
+    (click)="resetCurrentChannelId()"
+    (click)="onCloseThread()"
+  >
+    <div class="avatar-wrapper">
+      <img [src]="user.avatarUrl" alt="Avatar" />
+      <span
+        class="status-dot"
+        [ngClass]="{ online: isUserOnline(user.uid) }"
+      ></span>
+    </div>
+    <span class="display-name">{{ user.displayName }}</span>
+  </a>
+  } }
+</div>
+}

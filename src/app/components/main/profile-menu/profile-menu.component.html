@@ -1,0 +1,27 @@
+<div
+  (click)="toogleArrowDown()"
+  (keydown)="toogleArrowDown()"
+  tabindex="0"
+  class="current-user-wrapper"
+>
+  <span class="display-name">{{ getCurrentUser()?.displayName }}</span>
+  <span class="current-user-avatar">
+    <img [src]="getCurrentUser()?.avatarUrl" alt="" />
+    <span class="status"></span>
+  </span>
+  <img class="arrow-down" src="img/arrow-down.svg" alt="" />
+</div>
+@if(arrowDownOpen() && !userProfileDialogOpen()) {
+<div class="first-overlay">
+  <button (click)="onOpenDialog()">Profile</button>
+  <button class="btn-logout" (click)="onLogout()">Log out</button>
+</div>
+<div
+  (click)="toogleArrowDown()"
+  (keydown)="toogleArrowDown()"
+  tabindex="0"
+  class="backdrop"
+></div>
+} @if(userProfileDialogOpen()) {
+<app-current-user-profile (closeDialog)="onCloseUserProfileDialog()" />
+}

@@ -1,62 +1,48 @@
 @use "../../../styles.scss" as *;
 
-.grid-container {
-  display: grid;
-  position: relative;
-  grid-template-areas:
-    "header header header"
-    "workspace chat thread";
-  grid-template-rows: auto 1fr;
-  grid-template-columns: 1fr 0 0;
-  background-color: $bg-color;
+:host {
   height: 100vh;
-  gap: 16px;
   padding: 16px;
-  overflow-y: hidden;
+  background-color: $bg-color;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  row-gap: 16px;
+}
 
+header {
+  display: grid;
+  grid-template-columns: 300px 1fr 350px;
+  align-items: center;
+  column-gap: 16px;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 300px 1fr 350px;
+  column-gap: 16px;
+  overflow: hidden;
   &.workspace-hidden {
-    grid-template-columns: 0 4fr 1fr;
-  }
-
-  &.thread-hidden {
-    grid-template-columns: 1fr 0 0;
-    @include respond(md) {
-      grid-template-columns: 1fr 4fr 0;
-    }
-  }
-
-  &.workspace-hidden.thread-hidden {
-    grid-template-columns: 0 1fr 0;
-  }
-
-  @include respond(sm) {
-    grid-template-columns: 1fr 0 0;
-  }
-  @include respond(md) {
-    grid-template-columns: 1fr 1fr 0;
-  }
-  @include respond(xl) {
-    grid-template-columns: 1fr 2fr 1fr;
-  }
-  @include respond(xxl) {
-    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-columns: 0 1fr 350px;
   }
 }
 
-app-header {
-  grid-area: header;
-}
-
-app-workspace {
-  grid-area: workspace;
-}
-
-app-thread {
-  grid-area: thread;
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 30px;
+  img {
+    height: 70px;
+  }
+  span {
+    font-size: 32px;
+    font-weight: 700;
+  }
 }
 
 .workspace-button {
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 66%;
   display: flex;
@@ -75,7 +61,6 @@ app-thread {
   white-space: nowrap;
   font-size: 20px;
   width: 335px;
-
   img {
     width: 20px;
     height: 20px;
@@ -85,16 +70,8 @@ app-thread {
   .rotated {
     transform: rotate(-90deg);
   }
-
-  @media (hover: hover) and (pointer: fine) {
-    &:hover {
-      width: 330px;
-      padding: 16px 24px;
-      color: $purple-3;
-
-      img {
-        content: url("/img/workspace-open-hover.svg");
-      }
-    }
+  &:hover {
+    transition: $hover-transition;
+    color: $purple-3;
   }
 }

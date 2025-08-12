@@ -1,0 +1,71 @@
+@use "../../../../styles.scss" as *;
+
+.arrow-down {
+  display: none;
+  @include respond(lg) {
+    display: inline;
+  }
+}
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: $backdrop;
+  z-index: 1000;
+}
+
+.current-user-avatar {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  img {
+    border-radius: 100%;
+  }
+}
+
+.current-user-wrapper {
+  grid-area: current-user;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  padding-right: 30px;
+  cursor: pointer;
+  span {
+    font-size: 32px;
+    font-weight: 700;
+  }
+}
+
+.first-overlay {
+  position: absolute;
+  top: 32px;
+  right: 32px;
+  padding: 44px;
+  background: #fff;
+  border-radius: 30px 0 30px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 1001;
+  box-shadow: $box-shadow-overlay;
+  button {
+    background-color: transparent;
+    border-style: none;
+    cursor: pointer;
+    font-size: 24px;
+    padding: 16px;
+    border-radius: 30px;
+    &.btn-logout {
+      &:hover {
+        background-color: $bg-color;
+        transition: $hover-transition;
+      }
+    }
+  }
+}

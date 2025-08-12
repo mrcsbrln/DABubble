@@ -1,0 +1,95 @@
+<div class="input-wrapper">
+  <input
+    [formControl]="searchBarInput"
+    (input)="checkForAtOrHash()"
+    type="text"
+    placeholder="Devspace durchsuchen"
+  />
+  <img src="img/search.svg" alt="" />
+  @if(isAtInInput()) {
+  <div class="searchbar-dialog">
+    <div class="scrollable-content">
+      @for(user of getFilteredUsers(); track user.uid) { @if(user.uid !==
+      getCurrentUser()?.uid) {
+      <a (click)="searchBarInput.reset()" [routerLink]="['/user', user.uid]">
+        <div class="avatar-wrapper">
+          <img [src]="user.avatarUrl" alt="Avatar" />
+          <span
+            class="status-dot"
+            [ngClass]="{ online: isUserOnline(user.uid) }"
+          ></span>
+        </div>
+        {{ user.displayName }}
+      </a>
+      } } @empty {
+      <span>Keine Benutzer gefunden</span>
+      }
+    </div>
+  </div>
+  } @else if (isHashInInput()) {
+  <div class="searchbar-dialog">
+    <div class="scrollable-content">
+      @for(channel of getFilteredChannels(); track channel.id) {
+      <a
+        (click)="searchBarInput.reset()"
+        [routerLink]="['/channel', channel.id]"
+        ># {{ channel.name }}</a
+      >
+      } @empty {
+      <span>Keine Channels gefunden</span>
+      }
+    </div>
+  </div>
+  <!--Search for users, channels and messages-->
+  } @else if(getFilteredItems().hasResults ) {
+  <div class="searchbar-dialog">
+    <div class="scrollable-content">
+      <!--Filtered Users-->
+      @for(user of getFilteredItems().users; track user.uid) {
+      <a (click)="searchBarInput.reset()" [routerLink]="['/user', user.uid]">
+        <div class="avatar-wrapper">
+          <img [src]="user.avatarUrl" alt="Avatar" />
+          <span
+            class="status-dot"
+            [ngClass]="{ online: isUserOnline(user.uid) }"
+          ></span>
+        </div>
+        {{ user.displayName }}
+      </a>
+      }
+      <!--Filtered Channels-->
+      @for(channel of getFilteredItems().channels; track channel.id) {
+      <a
+        (click)="searchBarInput.reset()"
+        [routerLink]="['/channel', channel.id]"
+        ># {{ channel.name }}</a
+      >
+      }
+      <!--Direct Messages-->
+      @for(dm of getFilteredItems().directMessages; track dm.id){
+      <a
+        class="filtered-message-item"
+        (click)="searchBarInput.reset()"
+        [routerLink]="['/user', getOtherParticipantId(dm)]"
+        ><span class="item-header">
+          Unterhaltung mit
+          {{ getUserById(getOtherParticipantId(dm)).displayName }}:</span
+        ><span class="item-content"> {{ truncateText(dm.content, 25) }}</span>
+      </a>
+      }
+      <!--Channel Messages-->
+      @for(cm of getFilteredItems().channelMessages; track cm.id){
+      <a
+        class="filtered-message-item"
+        (click)="searchBarInput.reset()"
+        [routerLink]="['/channel', cm.channelId]"
+      >
+        <span class="item-header">
+          {{ getChannelById(cm.channelId)?.name }}:</span
+        ><span class="item-content">{{ cm.content }}</span>
+      </a>
+      }
+    </div>
+  </div>
+  }
+</div>

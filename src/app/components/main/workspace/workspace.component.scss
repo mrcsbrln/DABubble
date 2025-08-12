@@ -1,11 +1,10 @@
 @use "../../../../styles.scss" as *;
 
-.wrapper {
+:host {
   display: flex;
   flex-direction: column;
   gap: 16px;
   background-color: #fff;
-  height: 100%;
   border-radius: 30px;
   padding: 16px;
 }

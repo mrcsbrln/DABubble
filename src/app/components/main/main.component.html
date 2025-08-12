@@ -1,23 +1,46 @@
-<div class="grid-container" [ngClass]="gridClasses">
-  <app-header />
+<header>
+  <div class="logo-wrapper">
+    <img src="img/dabubble-logo.svg" alt="" />
+    <span>DABubble</span>
+  </div>
+  <app-search-bar />
+  <app-profile-menu />
+</header>
 
-  @if (!isWorkspaceHidden()) {
-  <app-workspace (closeThread)="isThreadHidden.set(true)" />
-  }
-  <router-outlet (activate)="onActivate($event)" />
+<main [ngClass]="gridClasses">
+  <app-workspace />
+  <section><router-outlet /></section>
+  <app-thread />
+</main>
 
-  @if (!isThreadHidden()) {
-  <app-thread (closeThread)="isThreadHidden.set(true)" />
+<button
+  class="workspace-button"
+  (click)="toggleWorkspaceVisibility()"
+  (mouseenter)="isWorkspaceBtnHovered.set(true)"
+  (mouseleave)="isWorkspaceBtnHovered.set(false)"
+>
+  <div>
+    Workspace-Menü
+    {{ isWorkspaceHidden() ? "öffnen" : "schließen" }}
+  </div>
+  @if(!isWorkspaceHidden()) {
+  <img
+    [class.rotated]="!isWorkspaceHidden()"
+    [src]="
+      isWorkspaceBtnHovered()
+        ? '/img/workspace-hide-hover.svg'
+        : '/img/workspace-hide.svg'
+    "
+    alt="Workspace Icon"
+  />} @else {
+  <img
+    [class.rotated]="isWorkspaceHidden()"
+    [src]="
+      isWorkspaceBtnHovered()
+        ? '/img/workspace-show-hover.svg'
+        : '/img/workspace-show.svg'
+    "
+    alt="Workspace Icon"
+  />
   }
-  <button class="workspace-button" (click)="toggleWorkspaceVisibility()">
-    <div>
-      Workspace-Menü
-      {{ isWorkspaceHidden() ? "öffnen" : "schließen" }}
-    </div>
-    <img
-      [class.rotated]="!isWorkspaceHidden()"
-      src="/img/workspace-open.svg"
-      alt="Workspace Icon"
-    />
-  </button>
-</div>
+</button>

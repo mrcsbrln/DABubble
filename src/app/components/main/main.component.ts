@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './header/header.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
+import { ProfileMenuComponent } from './profile-menu/profile-menu.component';
 import { ThreadComponent } from './thread/thread.component';
 import { WorkspaceComponent } from './workspace/workspace.component';
 import { RouterOutlet } from '@angular/router';
@@ -10,10 +11,11 @@ import { DirectMessageComponent } from './direct-message/direct-message.componen
   selector: 'app-main',
   imports: [
     CommonModule,
-    HeaderComponent,
     WorkspaceComponent,
     ThreadComponent,
     RouterOutlet,
+    ProfileMenuComponent,
+    SearchBarComponent,
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
@@ -21,6 +23,15 @@ import { DirectMessageComponent } from './direct-message/direct-message.componen
 export class MainComponent {
   isWorkspaceHidden = signal(false);
   isThreadHidden = signal(true);
+
+  isWorkspaceBtnHovered = signal(false);
+
+  get gridClasses() {
+    return {
+      'workspace-hidden': this.isWorkspaceHidden(),
+      'thread-hidden': this.isThreadHidden(),
+    };
+  }
 
   onActivate(component: DirectMessageComponent) {
     if ('openThread' in component && component.openThread?.subscribe) {
@@ -34,12 +45,5 @@ export class MainComponent {
 
   toggleThreadVisibility(): void {
     this.isThreadHidden.update((value) => !value);
-  }
-
-  get gridClasses() {
-    return {
-      'workspace-hidden': this.isWorkspaceHidden(),
-      'thread-hidden': this.isThreadHidden(),
-    };
   }
 }
