@@ -12,14 +12,17 @@
 
 header {
   display: grid;
-  grid-template-columns: 300px 1fr 350px;
+  grid-template-columns: 300px auto auto;
   align-items: center;
   column-gap: 16px;
+  @include respond(lg) {
+    grid-template-columns: 300px 1fr 350px;
+  }
 }
 
 main {
   display: grid;
-  grid-template-columns: 300px 1fr 350px;
+  grid-template-columns: 300px 1fr 0;
   column-gap: 16px;
   min-height: 0;
   &.workspace-hidden {
@@ -30,6 +33,9 @@ main {
   }
   &.workspace-thread-hidden {
     grid-template-columns: 0 1fr 0;
+  }
+  @include respond(xl) {
+    grid-template-columns: 300px 1fr 350px;
   }
 }
 
