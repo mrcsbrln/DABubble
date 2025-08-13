@@ -137,6 +137,10 @@ section {
   header {
     grid-template-columns: 300px 1fr auto;
   }
+  main {
+    grid-template-columns: 300px 1fr 0;
+    grid-template-areas: "workspace chat thread";
+  }
 }
 @include respond(xl) {
   main {
