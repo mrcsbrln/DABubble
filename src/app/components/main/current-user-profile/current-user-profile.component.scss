@@ -34,6 +34,7 @@ button {
 .edit-btn:disabled {
   color: $text-gray;
   cursor: not-allowed;
+  pointer-events: auto; /* erlaubt Tooltip trotz disabled */
 }
 
 .button-wrapper {

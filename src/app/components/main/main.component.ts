@@ -6,6 +6,7 @@ import { ThreadComponent } from './thread/thread.component';
 import { WorkspaceComponent } from './workspace/workspace.component';
 import { RouterOutlet } from '@angular/router';
 import { DirectMessageComponent } from './direct-message/direct-message.component';
+import { ChannelMessageComponent } from './channel-message/channel-message.component';
 
 @Component({
   selector: 'app-main',
@@ -35,7 +36,7 @@ export class MainComponent {
     };
   }
 
-  onActivate(component: DirectMessageComponent) {
+  onActivate(component: DirectMessageComponent | ChannelMessageComponent) {
     if ('openThread' in component && component.openThread?.subscribe) {
       component.openThread.subscribe(() => this.isThreadHidden.set(false));
     }

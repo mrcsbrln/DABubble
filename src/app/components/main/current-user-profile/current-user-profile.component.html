@@ -41,6 +41,9 @@
         class="edit-btn"
         (click)="toggleEditMode()"
         [disabled]="isCurrentUserGuest()"
+        [attr.title]="
+          isCurrentUserGuest() ? 'Gäste können nicht bearbeiten' : null
+        "
       >
         Bearbeiten
       </button>
