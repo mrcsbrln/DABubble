@@ -7,12 +7,15 @@
   <app-profile-menu />
 </header>
 
-<main [ngClass]="gridClasses">
-  <app-workspace [ngClass]="gridClasses" />
-  <section [ngClass]="gridClasses">
+<main>
+  <app-workspace [ngClass]="{ 'd-none': isWorkspaceHidden() }" />
+  <section>
     <router-outlet (activate)="onActivate($event)" />
   </section>
-  <app-thread (closeThread)="isThreadHidden.set(true)" />
+  <app-thread
+    [ngClass]="{ 'd-none': isThreadHidden() }"
+    (closeThread)="isThreadHidden.set(true)"
+  />
 </main>
 
 <button

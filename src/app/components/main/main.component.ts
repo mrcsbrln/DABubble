@@ -27,15 +27,6 @@ export class MainComponent {
 
   isWorkspaceBtnHovered = signal(false);
 
-  get gridClasses() {
-    return {
-      'workspace-hidden': this.isWorkspaceHidden(),
-      'thread-hidden': this.isThreadHidden(),
-      'workspace-thread-hidden':
-        this.isWorkspaceHidden() && this.isThreadHidden(),
-    };
-  }
-
   onActivate(component: DirectMessageComponent | ChannelMessageComponent) {
     if ('openThread' in component && component.openThread?.subscribe) {
       component.openThread.subscribe(() => this.isThreadHidden.set(false));
