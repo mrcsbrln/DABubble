@@ -8,8 +8,10 @@
 </header>
 
 <main [ngClass]="gridClasses">
-  <app-workspace [ngClass]="{ 'workspace-hidden': isWorkspaceHidden() }" />
-  <section><router-outlet (activate)="onActivate($event)" /></section>
+  <app-workspace [ngClass]="gridClasses" />
+  <section [ngClass]="gridClasses">
+    <router-outlet (activate)="onActivate($event)" />
+  </section>
   <app-thread (closeThread)="isThreadHidden.set(true)" />
 </main>
 

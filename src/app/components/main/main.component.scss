@@ -12,19 +12,43 @@
 
 header {
   display: grid;
-  grid-template-columns: 300px auto auto;
+  grid-template-columns: 300px auto;
+  grid-template-areas:
+    "logo profile"
+    "search search";
   align-items: center;
-  column-gap: 16px;
-  @include respond(lg) {
-    grid-template-columns: 300px 1fr auto;
+  row-gap: 16px;
+
+  .logo-wrapper {
+    grid-area: logo;
+    margin-right: 16px;
+  }
+
+  app-search-bar {
+    grid-area: search;
+    margin-right: 16px;
+  }
+
+  app-profile-menu {
+    grid-area: profile;
   }
 }
 
 main {
   display: grid;
   grid-template-columns: 300px 1fr 0;
-  column-gap: 16px;
+  grid-template-areas: "workspace chat thread";
   min-height: 0;
+
+  app-workspace {
+    grid-area: "workspace";
+    margin-right: 16px;
+  }
+
+  app-thread {
+    grid-area: "thread";
+  }
+
   &.workspace-hidden {
     grid-template-columns: 0 1fr 350px;
   }
@@ -34,9 +58,6 @@ main {
   &.workspace-thread-hidden {
     grid-template-columns: 0 1fr 0;
     gap: 0;
-  }
-  @include respond(xl) {
-    grid-template-columns: 300px 1fr 350px;
   }
 }
 
@@ -50,6 +71,11 @@ app-workspace {
 section {
   min-height: 0;
   display: flex;
+  grid-area: "chat";
+  margin-right: 16px;
+  &.thread-hidden {
+    margin-right: 0;
+  }
 }
 
 .logo-wrapper {
@@ -98,5 +124,22 @@ section {
   &:hover {
     transition: $hover-transition;
     color: $purple-3;
+  }
+}
+
+@include respond(md) {
+  header {
+    grid-template-columns: 300px auto auto;
+    grid-template-areas: "logo search profile";
+  }
+}
+@include respond(lg) {
+  header {
+    grid-template-columns: 300px 1fr auto;
+  }
+}
+@include respond(xl) {
+  main {
+    grid-template-columns: 300px 1fr 350px;
   }
 }

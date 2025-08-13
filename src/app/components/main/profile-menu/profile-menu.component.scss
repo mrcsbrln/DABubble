@@ -42,6 +42,13 @@
   }
 }
 
+.display-name {
+  display: none;
+  @include respond(lg) {
+    display: inline;
+  }
+}
+
 .first-overlay {
   position: absolute;
   top: 32px;
