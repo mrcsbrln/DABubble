@@ -4,9 +4,9 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  padding: 16px;
   background-color: #fff;
   border-radius: 30px;
-  overflow: hidden;
 }
 
 button {
@@ -250,14 +250,6 @@ button .arrow-drop-down {
       &.online {
         background-color: $online-green;
       }
-    }
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    &:hover {
-      cursor: pointer;
-      background-color: $bg-color;
-      color: $purple-3;
     }
   }
 }
