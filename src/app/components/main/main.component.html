@@ -4,7 +4,7 @@
     <span>DABubble</span>
   </div>
   <app-search-bar />
-  <app-profile-menu />
+  <app-profile-menu [ngClass]="{ 'thread-hidden': isThreadHidden() }" />
 </header>
 
 <main>
