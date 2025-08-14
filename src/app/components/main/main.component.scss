@@ -27,7 +27,6 @@ header {
     width: $first-column-width;
     gap: 8px;
     padding-left: 30px;
-    order: 1;
     img {
       height: 70px;
     }
@@ -39,9 +38,9 @@ header {
 
   app-search-bar {
     flex: 1;
-    order: 2;
     &.mobile {
-      order: 3;
+      flex: none;
+      width: 100%;
     }
   }
 
