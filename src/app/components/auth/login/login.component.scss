@@ -1,10 +1,23 @@
 @use "../../../../styles.scss" as *;
 
+:host {
+  background-color: $bg-color;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
 h1 {
   color: $purple-1;
   font-weight: 700;
-  font-size: 46px;
+  font-size: 32px;
   text-align: center;
+  @include respond(xl) {
+    font-size: 46px;
+  }
 }
 
 p {
@@ -118,8 +131,11 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 32px;
+  gap: 24px;
   width: 100%;
+  @include respond(xl) {
+    gap: 32px;
+  }
 }
 
 input {
@@ -167,7 +183,6 @@ input {
   }
 }
 
-
 .register-div {
   position: absolute;
   top: 75px;
@@ -190,16 +205,6 @@ input {
   }
 }
 
-.login-wrapper {
-  background-color: $bg-color;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
 .login-box {
   background-color: #fff;
   border-radius: 30px;
@@ -209,45 +214,15 @@ input {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 32px;
-  padding: 64px;
+  gap: 24px;
+  padding: 32px;
   box-shadow: $box-shadow;
-}
 
-// button {
-//   font-weight: 700;
-//   font-size: 18px;
-//   border-radius: 100px;
-//   border-style: none;
-//   cursor: pointer;
-//   height: 60px;
-//   padding: 0 25px;
-//   &.btn-submit {
-//     background-color: $purple-1;
-//     color: #fff;
-//     &:hover {
-//       background-color: $purple-2;
-//       transition: $hover-transition;
-//     }
-//     &:disabled {
-//       background-color: $text-gray;
-//     }
-//     &:not(:disabled):hover {
-//       background-color: $purple-2;
-//       transition: $hover-transition;
-//     }
-//   }
-//   &.btn-guest {
-//     background: none;
-//     border: 1px solid $purple-2;
-//     color: $purple-1;
-//     &:hover {
-//       background-color: $purple-3;
-//       color: #fff;
-//       transition: $hover-transition;
-//     }
-//   }
-// }
+  @include respond(xl) {
+    padding: 64px;
+    gap: 32px;
+  }
+}
 
 .btn-wrapper {
   display: flex;
@@ -270,7 +245,9 @@ input {
 
 .legal-wrapper {
   position: absolute;
-  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 16px;
 
   a {
     &:hover {
@@ -301,7 +278,6 @@ input {
   width: 660px;
 
   .logo-img-wrapper {
-    // background-color: red;
     position: relative;
     z-index: 2;
 
@@ -335,7 +311,6 @@ input {
       white-space: nowrap;
       transition: color 500ms linear, font-size 500ms linear;
 
-
       &.move-to-corner {
         color: black;
         font-size: 32px;
@@ -362,19 +337,39 @@ input {
   }
 }
 
+@keyframes moveLogoContainerMobile {
+  0% {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    gap: 32px;
+  }
+
+  100% {
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    gap: 16px;
+  }
+}
+
 .logo-container {
   position: fixed;
-  top: 50%;
-  left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1000;
   gap: 32px;
   display: flex;
   align-items: center;
-  width: 655px;
+  width: fit-content;
   z-index: 1000;
 
   &.move-to-corner {
+    animation: moveLogoContainerMobile 500ms linear forwards;
+  }
+
+  @include respond(xl) {
     animation: moveLogoContainer 500ms linear forwards;
   }
 }

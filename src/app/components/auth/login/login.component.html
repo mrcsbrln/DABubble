@@ -1,145 +1,144 @@
 <div class="background-overlay" [@overlayFadeOut]="'final'"></div>
-<div class="login-wrapper">
-  <div class="logo-container" [class.move-to-corner]="moveLogoContainer()">
-    <div class="logo-img-wrapper">
-      <img src="img/dabubble-logo.svg" alt="" @logoImgSlide />
-    </div>
-    <div class="logo-text-mask">
-      <span
-        @revealText
-        (@revealText.done)="onTextAnimationComplete()"
-        [class.move-to-corner]="moveLogoContainer()"
-        >DABubble</span
-      >
-    </div>
+
+<div class="logo-container" [class.move-to-corner]="moveLogoContainer()">
+  <div class="logo-img-wrapper">
+    <img src="img/dabubble-logo.svg" alt="" @logoImgSlide />
   </div>
-
-  <div class="register-div">
-    <span>Neu bei DABubble?</span>
-    <a routerLink="/register">Konto erstellen</a>
+  <div class="logo-text-mask">
+    <span
+      @revealText
+      (@revealText.done)="onTextAnimationComplete()"
+      [class.move-to-corner]="moveLogoContainer()"
+      >DABubble</span
+    >
   </div>
-  <div class="login-box">
-    @if (resetPassword()) {
-    <div class="header-wrapper">
-      <button
-        class="btn-second arrow"
-        type="button"
-        aria-label="Zurück"
-        (click)="resetPassword.set(false)"
-      >
-        <img src="img/arrow-back.svg" alt="" />
-      </button>
-      <h1>Passwort zurücksetzten</h1>
-    </div>
-    <p>Bitte geben Sie Ihre E-Mail-Adresse ein.</p>
-    @if (errorMessage) {
-    <div>{{ errorMessage }}</div>
-    }
+</div>
 
-    <form [formGroup]="form" (ngSubmit)="onResetPasswordSubmit()">
-      <div class="field-wrapper">
-        <div class="input-div">
-          <img src="img/mail-icon.svg" alt="" />
-          <input
-            type="email"
-            placeholder="beispielname@email.de"
-            formControlName="email"
-          />
-        </div>
-        @if(email?.hasError('required') && email?.touched) {
-        <p>*Diese E-Mail-Adresse ist leider ungültig.</p>
-        } @if(email?.hasError('email') && email?.touched) {
-        <p>*Diese E-Mail-Adresse ist leider ungültig.</p>
-        }
-      </div>
-      <p>
-        Wir senden Ihnen eine E-Mail, über die Sie Ihr Passwort ändern können.
-      </p>
-      <div class="btn-wrapper">
-        <button class="btn-submit" type="submit" [disabled]="!email?.valid">
-          E-mail senden
-        </button>
-      </div>
-    </form>
-
-    } @else {
-    <h1>Anmeldung</h1>
-    <p>
-      Wir empfehlen dir, die E-Mail-Adresse zu nutzen, die du bei der Arbeit
-      verwendest.
-    </p>
-    @if (errorMessage) {
-    <div>{{ errorMessage }}</div>
-    }
-
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div class="field-wrapper">
-        <div class="input-div">
-          <img src="img/mail-icon.svg" alt="" />
-          <input
-            type="email"
-            placeholder="beispielname@email.de"
-            formControlName="email"
-          />
-        </div>
-        @if(email?.hasError('required') && email?.touched) {
-        <p>*Diese E-Mail-Adresse ist leider ungültig.</p>
-        } @if(email?.hasError('email') && email?.touched) {
-        <p>*Diese E-Mail-Adresse ist leider ungültig.</p>
-        }
-      </div>
-      <div class="field-wrapper">
-        <div class="input-div">
-          <img src="img/password-icon.svg" alt="" />
-          <input
-            type="password"
-            placeholder="Password"
-            formControlName="password"
-          />
-        </div>
-        @if(password?.hasError('required') && password?.touched) {
-        <p>Bitte ein gültiges Passwort eingeben!</p>
-        }
-      </div>
-
-      <button
-        class="btn-second"
-        type="button"
-        (click)="this.resetPassword.set(true)"
-      >
-        Passwort vergessen?
-      </button>
-      <div class="seperator-wrapper">
-        <div class="seperator"></div>
-        ODER
-        <div class="seperator"></div>
-      </div>
-      <button
-        type="button"
-        class="input-div"
-        aria-label="Anmelden mit Google"
-        (click)="googleLogin()"
-      >
-        <img src="img/google-icon.svg" alt="" />
-        <span class="google">Anmelden mit Google</span>
-      </button>
-      <div class="btn-wrapper">
-        <button class="btn-submit" type="submit">Anmelden</button>
-        <button class="btn-guest" type="button" (click)="loginGuest()">
-          Gäste-Login
-        </button>
-      </div>
-    </form>
-    }
+<div class="register-div">
+  <span>Neu bei DABubble?</span>
+  <a routerLink="/register">Konto erstellen</a>
+</div>
+<div class="login-box">
+  @if (resetPassword()) {
+  <div class="header-wrapper">
+    <button
+      class="btn-second arrow"
+      type="button"
+      aria-label="Zurück"
+      (click)="resetPassword.set(false)"
+    >
+      <img src="img/arrow-back.svg" alt="" />
+    </button>
+    <h1>Passwort zurücksetzten</h1>
   </div>
-  @if (this.showConfirmation()) {
-  <div class="confirmation-overlay" @slideInFromRight>
-    <img src="img/send.svg" alt="" />
-    E-Mail gesendet.
-  </div>
+  <p>Bitte geben Sie Ihre E-Mail-Adresse ein.</p>
+  @if (errorMessage) {
+  <div>{{ errorMessage }}</div>
   }
-  <div class="legal-wrapper">
-    <a routerLink="/imprint" href="">Impressum</a>
-    <a routerLink="/privacy-policy" href="">Datenschutz</a>
-  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onResetPasswordSubmit()">
+    <div class="field-wrapper">
+      <div class="input-div">
+        <img src="img/mail-icon.svg" alt="" />
+        <input
+          type="email"
+          placeholder="beispielname@email.de"
+          formControlName="email"
+        />
+      </div>
+      @if(email?.hasError('required') && email?.touched) {
+      <p>*Diese E-Mail-Adresse ist leider ungültig.</p>
+      } @if(email?.hasError('email') && email?.touched) {
+      <p>*Diese E-Mail-Adresse ist leider ungültig.</p>
+      }
+    </div>
+    <p>
+      Wir senden Ihnen eine E-Mail, über die Sie Ihr Passwort ändern können.
+    </p>
+    <div class="btn-wrapper">
+      <button class="btn-submit" type="submit" [disabled]="!email?.valid">
+        E-mail senden
+      </button>
+    </div>
+  </form>
+
+  } @else {
+  <h1>Anmeldung</h1>
+  <p>
+    Wir empfehlen dir, die E-Mail-Adresse zu nutzen, die du bei der Arbeit
+    verwendest.
+  </p>
+  @if (errorMessage) {
+  <div>{{ errorMessage }}</div>
+  }
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="field-wrapper">
+      <div class="input-div">
+        <img src="img/mail-icon.svg" alt="" />
+        <input
+          type="email"
+          placeholder="beispielname@email.de"
+          formControlName="email"
+        />
+      </div>
+      @if(email?.hasError('required') && email?.touched) {
+      <p>*Diese E-Mail-Adresse ist leider ungültig.</p>
+      } @if(email?.hasError('email') && email?.touched) {
+      <p>*Diese E-Mail-Adresse ist leider ungültig.</p>
+      }
+    </div>
+    <div class="field-wrapper">
+      <div class="input-div">
+        <img src="img/password-icon.svg" alt="" />
+        <input
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+        />
+      </div>
+      @if(password?.hasError('required') && password?.touched) {
+      <p>Bitte ein gültiges Passwort eingeben!</p>
+      }
+    </div>
+
+    <button
+      class="btn-second"
+      type="button"
+      (click)="this.resetPassword.set(true)"
+    >
+      Passwort vergessen?
+    </button>
+    <div class="seperator-wrapper">
+      <div class="seperator"></div>
+      ODER
+      <div class="seperator"></div>
+    </div>
+    <button
+      type="button"
+      class="input-div"
+      aria-label="Anmelden mit Google"
+      (click)="googleLogin()"
+    >
+      <img src="img/google-icon.svg" alt="" />
+      <span class="google">Anmelden mit Google</span>
+    </button>
+    <div class="btn-wrapper">
+      <button class="btn-submit" type="submit">Anmelden</button>
+      <button class="btn-guest" type="button" (click)="loginGuest()">
+        Gäste-Login
+      </button>
+    </div>
+  </form>
+  }
+</div>
+@if (this.showConfirmation()) {
+<div class="confirmation-overlay" @slideInFromRight>
+  <img src="img/send.svg" alt="" />
+  E-Mail gesendet.
+</div>
+}
+<div class="legal-wrapper">
+  <a routerLink="/imprint" href="">Impressum</a>
+  <a routerLink="/privacy-policy" href="">Datenschutz</a>
 </div>
