@@ -48,6 +48,12 @@
     (closeWorkspace)="isWorkspaceHidden.set(true)"
     (closeWorkspace)="isChatHidden.set(false)"
   />
+  } @if(isWorkspaceHidden() && !isChatHidden() && !isThreadHidden()) {
+  <app-workspace
+    class="mobile"
+    (closeWorkspace)="isWorkspaceHidden.set(true)"
+    (closeWorkspace)="isChatHidden.set(false)"
+  />
   }}
 </main>
 
