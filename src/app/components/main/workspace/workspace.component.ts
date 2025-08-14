@@ -84,7 +84,7 @@ export class WorkspaceComponent {
     this.addChannelDialogOpen.set(false);
   }
 
-  onCloseThread() {
+  onCloseWorkspace() {
     this.closeWorkspace.emit();
   }
 

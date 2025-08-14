@@ -6,6 +6,7 @@
     (mouseleave)="isNewMessageBtnHovered.set(false)"
     (click)="resetSelectedUserId()"
     (click)="resetCurrentChannelId()"
+    (click)="onCloseWorkspace()"
   >
     <img
       [src]="
@@ -58,7 +59,7 @@
       'selected-channel': isChannelSelected(channel.id)
     }"
     (click)="resetSelectedUserId()"
-    (click)="onCloseThread()"
+    (click)="onCloseWorkspace()"
     (keyup.enter)="resetSelectedUserId()"
     tabindex="0"
   >
@@ -101,7 +102,7 @@
     }"
     [routerLink]="['/user', getCurrentUserData()?.uid]"
     (click)="resetCurrentChannelId()"
-    (click)="onCloseThread()"
+    (click)="onCloseWorkspace()"
   >
     <div class="avatar-wrapper">
       <img [src]="getCurrentUserData()?.avatarUrl" alt="Avatar" />
@@ -121,7 +122,7 @@
     }"
     [routerLink]="['/user', user.uid]"
     (click)="resetCurrentChannelId()"
-    (click)="onCloseThread()"
+    (click)="onCloseWorkspace()"
   >
     <div class="avatar-wrapper">
       <img [src]="user.avatarUrl" alt="Avatar" />
