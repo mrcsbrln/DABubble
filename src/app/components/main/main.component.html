@@ -9,7 +9,7 @@
 
 <main>
   <app-workspace [ngClass]="{ 'd-none': isWorkspaceHidden() }" />
-  <section>
+  <section [ngClass]="{ 'd-none': isChatHidden() }">
     <router-outlet (activate)="onActivate($event)" />
   </section>
   <app-thread

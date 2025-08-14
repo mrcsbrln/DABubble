@@ -23,9 +23,19 @@ import { ChannelMessageComponent } from './channel-message/channel-message.compo
 })
 export class MainComponent {
   isWorkspaceHidden = signal(false);
+  isChatHidden = signal(true);
   isThreadHidden = signal(true);
 
   isWorkspaceBtnHovered = signal(false);
+
+  // get hiddenClasses() {
+  //   return {
+  //     'workspace-hidden': this.isWorkspaceHidden(),
+  //     'thread-hidden': this.isThreadHidden(),
+  //     'workspace-thread-hidden':
+  //       this.isWorkspaceHidden() && this.isThreadHidden(),
+  //   };
+  // }
 
   onActivate(component: DirectMessageComponent | ChannelMessageComponent) {
     if ('openThread' in component && component.openThread?.subscribe) {
