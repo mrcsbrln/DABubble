@@ -26,8 +26,9 @@
   @if(breakpoint() === 'xs' || breakpoint() === 'sm' ) {
   @if(!isWorkspaceHidden() && isChatHidden() && isThreadHidden()) {
   <app-workspace
+    class="mobile"
     (closeWorkspace)="isWorkspaceHidden.set(true)"
-    (closeWorkspace)="isChatHidden.set(true)"
+    (closeWorkspace)="isChatHidden.set(false)"
   />
   } @if(isWorkspaceHidden() && !isChatHidden() && isThreadHidden()) {
   <section>
@@ -37,13 +38,15 @@
   <app-thread (closeThread)="isThreadHidden.set(true)" />
   }@if(!isWorkspaceHidden() && !isChatHidden() && !isThreadHidden()) {
   <app-workspace
+    class="mobile"
     (closeWorkspace)="isWorkspaceHidden.set(true)"
-    (closeWorkspace)="isChatHidden.set(true)"
+    (closeWorkspace)="isChatHidden.set(false)"
   />
   }@if(!isWorkspaceHidden() && !isChatHidden() && isThreadHidden()) {
   <app-workspace
+    class="mobile"
     (closeWorkspace)="isWorkspaceHidden.set(true)"
-    (closeWorkspace)="isChatHidden.set(true)"
+    (closeWorkspace)="isChatHidden.set(false)"
   />
   }}
 </main>

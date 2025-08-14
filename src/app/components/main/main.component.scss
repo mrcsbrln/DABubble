@@ -54,6 +54,9 @@ main {
 
   app-workspace {
     width: $first-column-width;
+    &.mobile {
+      flex: 1;
+    }
   }
 
   section {
