@@ -8,19 +8,52 @@
 </header>
 
 <main>
-  <app-workspace [ngClass]="{ 'd-none': isWorkspaceHidden() }" />
-  <section [ngClass]="{ 'd-none': isChatHidden() }">
+  <!--FOR DESKTOP-->
+
+  @if(breakpoint() !== 'xs' && breakpoint() !== 'sm') {
+  @if(!isWorkspaceHidden()){
+  <app-workspace />
+  }
+  <section>
     <router-outlet (activate)="onActivate($event)" />
   </section>
-  <app-thread
-    [ngClass]="{ 'd-none': isThreadHidden() }"
-    (closeThread)="isThreadHidden.set(true)"
+  @if(!isThreadHidden()) {
+  <app-thread (closeThread)="isThreadHidden.set(true)" />
+  } }
+
+  <!--FOR MOBILE-->
+
+  @if(breakpoint() === 'xs' || breakpoint() === 'sm' ) {
+  @if(!isWorkspaceHidden() && isChatHidden() && isThreadHidden()) {
+  <app-workspace
+    (closeWorkspace)="isWorkspaceHidden.set(true)"
+    (closeWorkspace)="isChatHidden.set(true)"
   />
+  } @if(isWorkspaceHidden() && !isChatHidden() && isThreadHidden()) {
+  <section>
+    <router-outlet (activate)="onActivate($event)" />
+  </section>
+  } @if(isWorkspaceHidden() && isChatHidden() && !isThreadHidden()) {
+  <app-thread (closeThread)="isThreadHidden.set(true)" />
+  }@if(!isWorkspaceHidden() && !isChatHidden() && !isThreadHidden()) {
+  <app-workspace
+    (closeWorkspace)="isWorkspaceHidden.set(true)"
+    (closeWorkspace)="isChatHidden.set(true)"
+  />
+  }@if(!isWorkspaceHidden() && !isChatHidden() && isThreadHidden()) {
+  <app-workspace
+    (closeWorkspace)="isWorkspaceHidden.set(true)"
+    (closeWorkspace)="isChatHidden.set(true)"
+  />
+  }}
 </main>
+
+<!--WORKSPACE-BUTTON-->
 
 <button
   class="workspace-button"
   (click)="toggleWorkspaceVisibility()"
+  (click)="isChatHidden.set(false)"
   (mouseenter)="isWorkspaceBtnHovered.set(true)"
   (mouseleave)="isWorkspaceBtnHovered.set(false)"
 >

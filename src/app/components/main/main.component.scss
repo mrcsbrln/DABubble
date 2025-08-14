@@ -53,15 +53,16 @@ main {
   height: 100%;
 
   app-workspace {
-    flex: 1;
+    width: $first-column-width;
   }
 
   section {
-    display: none;
+    display: flex;
+    flex: 1;
   }
 
   app-thread {
-    flex: 1;
+    width: $last-column-width;
   }
 }
 
@@ -97,18 +98,5 @@ main {
   &:hover {
     transition: $hover-transition;
     color: $purple-3;
-  }
-}
-
-@include respond(lg) {
-  main {
-    section {
-      display: flex;
-      flex: 1;
-    }
-    app-workspace {
-      width: $first-column-width;
-      flex: none;
-    }
   }
 }

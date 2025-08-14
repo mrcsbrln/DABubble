@@ -42,28 +42,25 @@ export class MainComponent implements OnInit {
     return 'xs';
   });
 
+  isWorkspaceHidden = signal(false);
+  isChatHidden = signal(true);
+  isThreadHidden = signal(true);
+
   ngOnInit() {
     this.updateViewport();
+    if (this.breakpoint() === 'sm' || this.breakpoint() === 'xs') {
+      this.isWorkspaceHidden.set(false);
+      this.isChatHidden.set(true);
+      this.isThreadHidden.set(true);
+    }
   }
 
   @HostListener('window:resize', ['$event'])
   onResize() {
     this.width.set(window.innerWidth);
   }
-  isWorkspaceHidden = signal(false);
-  isChatHidden = signal(false);
-  isThreadHidden = signal(true);
 
   isWorkspaceBtnHovered = signal(false);
-
-  // get hiddenClasses() {
-  //   return {
-  //     'workspace-hidden': this.isWorkspaceHidden(),
-  //     'thread-hidden': this.isThreadHidden(),
-  //     'workspace-thread-hidden':
-  //       this.isWorkspaceHidden() && this.isThreadHidden(),
-  //   };
-  // }
 
   onActivate(component: DirectMessageComponent | ChannelMessageComponent) {
     if ('openThread' in component && component.openThread?.subscribe) {
@@ -72,7 +69,13 @@ export class MainComponent implements OnInit {
   }
 
   toggleWorkspaceVisibility(): void {
-    this.isWorkspaceHidden.update((value) => !value);
+    if (this.breakpoint() === 'sm') {
+      this.isWorkspaceHidden.update((value) => !value);
+      this.isChatHidden.set(false);
+      this.isThreadHidden.set(true);
+    } else {
+      this.isWorkspaceHidden.update((value) => !value);
+    }
   }
 
   toggleThreadVisibility(): void {

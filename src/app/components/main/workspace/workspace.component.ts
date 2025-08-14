@@ -25,7 +25,7 @@ export class WorkspaceComponent {
   directMessageUserListOpen = signal(true);
   addChannelDialogOpen = signal(false);
   isNewMessageBtnHovered = signal(false);
-  closeThread = output<void>();
+  closeWorkspace = output<void>();
   isWorkspacesHovered = signal(false);
   isChannelsBtnHovered = signal(false);
 
@@ -85,7 +85,7 @@ export class WorkspaceComponent {
   }
 
   onCloseThread() {
-    this.closeThread.emit();
+    this.closeWorkspace.emit();
   }
 
   resetCurrentChannelId() {
