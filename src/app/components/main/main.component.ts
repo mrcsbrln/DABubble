@@ -23,7 +23,7 @@ import { ChannelMessageComponent } from './channel-message/channel-message.compo
 })
 export class MainComponent {
   isWorkspaceHidden = signal(false);
-  isChatHidden = signal(true);
+  isChatHidden = signal(false);
   isThreadHidden = signal(true);
 
   isWorkspaceBtnHovered = signal(false);

@@ -53,16 +53,15 @@ main {
   height: 100%;
 
   app-workspace {
-    width: $first-column-width;
-  }
-
-  section {
-    display: flex;
     flex: 1;
   }
 
+  section {
+    display: none;
+  }
+
   app-thread {
-    width: $last-column-width;
+    flex: 1;
   }
 }
 
@@ -102,5 +101,14 @@ main {
 }
 
 @include respond(lg) {
-  $last-column-width: 300px;
+  main {
+    section {
+      display: flex;
+      flex: 1;
+    }
+    app-workspace {
+      width: $first-column-width;
+      flex: none;
+    }
+  }
 }
