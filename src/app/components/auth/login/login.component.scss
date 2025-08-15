@@ -191,7 +191,6 @@ input {
   display: flex;
   flex-direction: column;
   gap: 4px;
-
   a {
     text-align: end;
 
@@ -202,12 +201,15 @@ input {
   }
 
   span {
-    margin-right: 12px;
+    margin-right: 0;
+    @include respond(xl) {
+      margin-right: 12px;
+    }
   }
 
   @include respond(xl) {
     top: 75px;
-    right: 75px;
+    right: 125px;
     bottom: unset;
   }
 }
@@ -255,12 +257,22 @@ input {
   left: 50%;
   transform: translateX(-50%);
   bottom: 16px;
+  display: flex;
+  gap: 32px;
+  width: 100%;
+  padding: 0 64px;
+  justify-content: space-between;
 
   a {
     &:hover {
       border: 1px solid $purple-2;
       transition: $hover-transition;
     }
+  }
+
+  @include respond(xl) {
+    width: fit-content;
+    padding: 0;
   }
 }
 
@@ -344,6 +356,37 @@ input {
   }
 }
 
+.logo-container {
+  position: fixed;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  gap: 32px;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  z-index: 1000;
+
+  &.move-to-corner {
+    animation: moveLogoContainerMobile 500ms linear forwards;
+
+    @include respond(xl) {
+      animation: moveLogoContainer 500ms linear forwards;
+    }
+  }
+}
+
+.background-overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(to bottom, #797ef3 0%, #444df2 100%);
+  opacity: 0;
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+}
+
 @keyframes moveLogoContainerMobile {
   0% {
     position: fixed;
@@ -360,35 +403,4 @@ input {
     transform: translate(-50%, 0);
     gap: 16px;
   }
-}
-
-.logo-container {
-  position: fixed;
-  transform: translate(-50%, -50%);
-  z-index: 1000;
-  gap: 32px;
-  display: flex;
-  align-items: center;
-  width: fit-content;
-  z-index: 1000;
-
-  &.move-to-corner {
-    animation: moveLogoContainerMobile 500ms linear forwards;
-  }
-
-  @include respond(xl) {
-    animation: moveLogoContainer 500ms linear forwards;
-  }
-}
-
-.background-overlay {
-  position: fixed;
-  inset: 0;
-  background: linear-gradient(to bottom, #797ef3 0%, #444df2 100%);
-  opacity: 0;
-  z-index: 2;
-  width: 100vw;
-  height: 100vh;
-  left: 0;
-  top: 0;
 }
