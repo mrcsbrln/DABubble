@@ -197,8 +197,9 @@ input {
 
 .logo-div {
   position: absolute;
-  top: 75px;
-  left: 50px;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   gap: 16px;
@@ -209,6 +210,11 @@ input {
     color: black;
     font-weight: 500;
     font-size: 32px;
+  }
+
+  @include respond(xl) {
+    top: 75px;
+    left: 50px;
   }
 }
 

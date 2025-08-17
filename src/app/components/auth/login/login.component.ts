@@ -4,12 +4,11 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserService } from '../../../services/user.service';
 import { RouterLink } from '@angular/router';
-import { state, transition, trigger, useAnimation } from '@angular/animations';
+import { transition, trigger, useAnimation } from '@angular/animations';
 import {
   slideInRight,
   slideOutRight,
 } from '../../../services/site-animations.service';
-import { style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-login',
@@ -20,27 +19,6 @@ import { style, animate } from '@angular/animations';
     trigger('slideInFromRight', [
       transition(':enter', [useAnimation(slideInRight)]),
       transition(':leave', [useAnimation(slideOutRight)]),
-    ]),
-    trigger('logoImgSlide', [
-      transition(':enter', [
-        style({ transform: 'translateX(100%)' }),
-        animate('250ms 500ms linear', style({ transform: 'translateX(0)' })),
-      ]),
-    ]),
-    trigger('revealText', [
-      transition(':enter', [
-        style({
-          transform: 'translateX(-422px)',
-        }),
-        animate('500ms 750ms linear', style({ transform: 'translateX(0)' })),
-      ]),
-    ]),
-    trigger('overlayFadeOut', [
-      state('final', style({ opacity: '0', display: 'none' })),
-      transition('* => final', [
-        style({ opacity: '1' }),
-        animate('750ms 2450ms cubic-bezier(0.4, 0, 0.9, 0.6)'),
-      ]),
     ]),
   ],
 })
@@ -61,8 +39,6 @@ export class LoginComponent {
 
   resetPassword = signal(false);
   showConfirmation = signal(false);
-
-  moveLogoContainer = signal(false);
 
   onSubmit(): void {
     if (this.form.invalid) {
@@ -142,11 +118,5 @@ export class LoginComponent {
       this.showConfirmation.set(false);
       this.resetPassword.set(false);
     }, 1000);
-  }
-
-  onTextAnimationComplete() {
-    setTimeout(() => {
-      this.moveLogoContainer.set(true);
-    }, 1200);
   }
 }

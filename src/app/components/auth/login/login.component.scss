@@ -14,19 +14,7 @@
   }
 }
 
-h1 {
-  color: $purple-1;
-  font-weight: 700;
-  font-size: 32px;
-  text-align: center;
-  @include respond(xl) {
-    font-size: 46px;
-  }
-}
-
-p {
-  text-align: center;
-}
+//TAGS
 
 a {
   text-decoration: none;
@@ -97,6 +85,68 @@ button {
   }
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  @include respond(xl) {
+    gap: 32px;
+  }
+}
+
+h1 {
+  color: $purple-1;
+  font-weight: 700;
+  font-size: 32px;
+  text-align: center;
+  @include respond(xl) {
+    font-size: 46px;
+  }
+}
+
+p {
+  text-align: center;
+}
+
+input {
+  border-style: none;
+  background: none;
+  height: 60px;
+  width: 100%;
+  color: $text-gray;
+  font-weight: 500;
+  font-size: 18px;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+//CLASSES
+
+.btn-wrapper {
+  display: flex;
+  gap: 32px;
+}
+
+.confirmation-overlay {
+  position: absolute;
+  bottom: 75px;
+  right: 75px;
+  background-color: $purple-1;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 32px;
+  border-radius: 30px 30px 0 30px;
+  font-weight: 700;
+  font-size: 36px;
+}
+
 .header-wrapper {
   position: relative;
   width: 100%;
@@ -131,32 +181,6 @@ button {
   }
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
-  width: 100%;
-  @include respond(xl) {
-    gap: 32px;
-  }
-}
-
-input {
-  border-style: none;
-  background: none;
-  height: 60px;
-  width: 100%;
-  color: $text-gray;
-  font-weight: 500;
-  font-size: 18px;
-  cursor: pointer;
-
-  &:focus {
-    outline: none;
-  }
-}
-
 .input-div {
   display: flex;
   align-items: center;
@@ -184,6 +208,77 @@ input {
 
   .google {
     color: $purple-1;
+  }
+}
+
+.legal-wrapper {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 16px;
+  display: flex;
+  gap: 32px;
+  width: 100%;
+  padding: 0 64px;
+  justify-content: space-between;
+
+  a {
+    &:hover {
+      border: 1px solid $purple-2;
+      transition: $hover-transition;
+    }
+  }
+
+  @include respond(xl) {
+    width: fit-content;
+    padding: 0;
+  }
+}
+
+.login-box {
+  background-color: #fff;
+  border-radius: 30px;
+  max-width: 600px;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  padding: 16px 32px;
+  box-shadow: $box-shadow;
+
+  @include respond(xxl) {
+    padding: 32px 64px;
+    gap: 32px;
+  }
+  @include respond(xxxl) {
+    padding: 64px;
+  }
+}
+
+.logo-container {
+  position: fixed;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  gap: 16px;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  z-index: 1000;
+  img {
+    width: 70px;
+    height: 70px;
+  }
+  span {
+    font-size: 32px;
+    font-weight: 500;
+  }
+
+  @include respond(xl) {
+    left: 50px;
   }
 }
 
@@ -220,33 +315,6 @@ input {
   }
 }
 
-.login-box {
-  background-color: #fff;
-  border-radius: 30px;
-  max-width: 600px;
-  min-width: 320px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 24px;
-  padding: 16px 32px;
-  box-shadow: $box-shadow;
-
-  @include respond(xxl) {
-    padding: 32px 64px;
-    gap: 32px;
-  }
-  @include respond(xxxl) {
-    padding: 64px;
-  }
-}
-
-.btn-wrapper {
-  display: flex;
-  gap: 32px;
-}
-
 .seperator-wrapper {
   display: flex;
   align-items: center;
@@ -259,158 +327,4 @@ input {
   height: 1px;
   width: 50%;
   border: 1px solid $light-purple;
-}
-
-.legal-wrapper {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 16px;
-  display: flex;
-  gap: 32px;
-  width: 100%;
-  padding: 0 64px;
-  justify-content: space-between;
-
-  a {
-    &:hover {
-      border: 1px solid $purple-2;
-      transition: $hover-transition;
-    }
-  }
-
-  @include respond(xl) {
-    width: fit-content;
-    padding: 0;
-  }
-}
-
-.confirmation-overlay {
-  position: absolute;
-  bottom: 75px;
-  right: 75px;
-  background-color: $purple-1;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 32px;
-  border-radius: 30px 30px 0 30px;
-  font-weight: 700;
-  font-size: 36px;
-}
-
-.logo-container {
-  display: flex;
-  align-items: center;
-  width: 660px;
-
-  .logo-img-wrapper {
-    position: relative;
-    z-index: 2;
-
-    img {
-      display: block;
-      width: 100%;
-      height: auto;
-      width: 200px;
-      transition: width 500ms linear;
-    }
-  }
-
-  &.move-to-corner .logo-img-wrapper img {
-    width: 70px;
-  }
-
-  .logo-text-mask {
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    flex: 1;
-
-    span {
-      background-color: transparent;
-      display: inline-block;
-      color: white;
-      font-weight: 700;
-      font-size: 88px;
-      white-space: nowrap;
-      transition: color 500ms linear, font-size 500ms linear;
-
-      &.move-to-corner {
-        color: black;
-        font-size: 32px;
-        font-weight: 500;
-      }
-    }
-  }
-}
-
-.logo-container {
-  position: fixed;
-  transform: translate(-50%, -50%);
-  z-index: 1000;
-  gap: 32px;
-  display: flex;
-  align-items: center;
-  width: fit-content;
-  z-index: 1000;
-
-  &.move-to-corner {
-    animation: moveLogoContainerMobile 500ms linear forwards;
-
-    @include respond(xl) {
-      animation: moveLogoContainer 500ms linear forwards;
-    }
-  }
-}
-
-.background-overlay {
-  position: fixed;
-  inset: 0;
-  background: linear-gradient(to bottom, #797ef3 0%, #444df2 100%);
-  opacity: 0;
-  z-index: 3;
-  width: 100vw;
-  height: 100vh;
-  left: 0;
-  top: 0;
-}
-
-@keyframes moveLogoContainerMobile {
-  0% {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    gap: 32px;
-  }
-
-  100% {
-    position: absolute;
-    top: 5dvh;
-    left: 50%;
-    transform: translate(-50%, 0);
-    gap: 16px;
-  }
-}
-
-@keyframes moveLogoContainer {
-  0% {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    gap: 32px;
-  }
-
-  100% {
-    position: absolute;
-    top: 75px;
-    left: 50px;
-    transform: translate(0, 0);
-    gap: 16px;
-  }
 }
