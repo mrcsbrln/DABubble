@@ -10,9 +10,6 @@
   position: relative;
   padding: 16px;
   gap: 32px;
-  @include respond(xl) {
-    min-height: 100dvh;
-  }
 }
 
 //TAGS

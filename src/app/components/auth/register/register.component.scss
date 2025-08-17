@@ -2,13 +2,14 @@
 
 :host {
   background-color: $bg-color;
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
   padding: 16px;
+  gap: 32px;
 }
 
 form {
@@ -196,23 +197,22 @@ input {
 }
 
 .logo-div {
-  position: absolute;
-  top: 25px;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
-  align-items: center;
   gap: 16px;
+  align-items: center;
+  width: fit-content;
+  z-index: 1000;
   img {
     width: 70px;
+    height: 70px;
   }
   span {
-    color: black;
-    font-weight: 500;
     font-size: 32px;
+    font-weight: 500;
   }
 
   @include respond(xl) {
+    position: fixed;
     top: 75px;
     left: 50px;
     transform: translateX(0);
@@ -222,16 +222,22 @@ input {
 .login-box {
   background-color: #fff;
   border-radius: 30px;
-  max-width: 600px;
+  max-width: 500px;
   min-width: 320px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 32px;
+  gap: 24px;
   padding: 16px 32px;
   box-shadow: $box-shadow;
-  @include respond(xl) {
+
+  @include respond(xxl) {
+    padding: 32px 64px;
+    gap: 32px;
+    max-width: 600px;
+  }
+  @include respond(xxxl) {
     padding: 64px;
   }
 }
@@ -257,16 +263,14 @@ input {
 }
 
 .legal-wrapper {
-  position: absolute;
+  position: relative;
   left: 50%;
   transform: translateX(-50%);
   bottom: 16px;
   display: flex;
-  gap: 32px;
+  justify-content: center;
   width: 100%;
   padding: 0 64px;
-  justify-content: space-between;
-
   a {
     &:hover {
       border: 1px solid $purple-2;
@@ -275,8 +279,10 @@ input {
   }
 
   @include respond(xl) {
+    position: absolute;
     width: fit-content;
     padding: 0;
+    justify-content: space-between;
   }
 }
 
