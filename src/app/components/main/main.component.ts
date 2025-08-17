@@ -48,11 +48,6 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     this.updateViewport();
-    if (this.breakpoint() === 'sm' || this.breakpoint() === 'xs') {
-      this.isWorkspaceHidden.set(false);
-      this.isChatHidden.set(true);
-      this.isThreadHidden.set(true);
-    }
   }
 
   @HostListener('window:resize', ['$event'])
@@ -69,9 +64,9 @@ export class MainComponent implements OnInit {
   }
 
   toggleWorkspaceVisibility(): void {
-    if (this.breakpoint() === 'sm') {
+    if (this.breakpoint() === 'sm' || this.breakpoint() === 'xs') {
       this.isWorkspaceHidden.update((value) => !value);
-      this.isChatHidden.set(false);
+      this.isChatHidden.update((value) => !value);
       this.isThreadHidden.set(true);
     } else {
       this.isWorkspaceHidden.update((value) => !value);

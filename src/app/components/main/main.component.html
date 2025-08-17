@@ -8,6 +8,9 @@
     <app-profile-menu class="mobile" />
   </div>
   <app-search-bar class="mobile" />
+  <!-- <span
+    >{{ isWorkspaceHidden() }} {{ isChatHidden() }} {{ isThreadHidden() }}</span
+  > -->
 </header>
 } @else {
 <header>
@@ -62,11 +65,7 @@
     (closeWorkspace)="isChatHidden.set(false)"
   />
   } @if(isWorkspaceHidden() && !isChatHidden() && !isThreadHidden()) {
-  <app-workspace
-    class="mobile"
-    (closeWorkspace)="isWorkspaceHidden.set(true)"
-    (closeWorkspace)="isChatHidden.set(false)"
-  />
+  <app-thread (closeThread)="isThreadHidden.set(true)" />
   }}
 </main>
 
