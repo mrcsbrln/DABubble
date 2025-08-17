@@ -215,6 +215,7 @@ input {
   @include respond(xl) {
     top: 75px;
     left: 50px;
+    transform: translateX(0);
   }
 }
 

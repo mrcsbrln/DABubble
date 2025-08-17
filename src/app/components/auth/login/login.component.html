@@ -4,11 +4,6 @@
     <span>DABubble</span>
   </div>
 </div>
-
-<div class="register-div">
-  <span>Neu bei DABubble?</span>
-  <a routerLink="/register">Konto erstellen</a>
-</div>
 <div class="login-box">
   @if (resetPassword()) {
   <div class="header-wrapper">
@@ -122,6 +117,10 @@
     </div>
   </form>
   }
+</div>
+<div class="register-div">
+  <span>Neu bei DABubble?</span>
+  <a routerLink="/register">Konto erstellen</a>
 </div>
 @if (this.showConfirmation()) {
 <div class="confirmation-overlay" @slideInFromRight>
