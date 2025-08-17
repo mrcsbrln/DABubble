@@ -3,7 +3,6 @@
 :host {
   position: absolute;
   top: 100%;
-  right: 0;
   z-index: 1001;
 }
 
@@ -15,7 +14,10 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  min-width: 500px;
+  text-wrap: nowrap;
+  @include respond(sm) {
+    min-width: 500px;
+  }
   .card-header {
     display: flex;
     justify-content: space-between;

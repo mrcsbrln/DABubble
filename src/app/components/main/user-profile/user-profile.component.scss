@@ -1,13 +1,16 @@
 @use "../../../../styles.scss" as *;
 
 :host {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1001;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
 }
-
 
 .msg-button {
   display: flex;
@@ -32,19 +35,20 @@
       background-color: $purple-2;
     }
   }
-
-
 }
 
 .dialog {
   background-color: #fff;
   border-radius: 0 30px 30px 30px;
   box-shadow: $box-shadow-overlay;
-  padding: 44px;
+  padding: 32px;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  min-width: 500px;
+
+  @include respond(md) {
+    padding: 48px 64px;
+  }
 
   .card-header {
     display: flex;
