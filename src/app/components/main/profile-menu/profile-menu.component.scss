@@ -33,11 +33,13 @@
   justify-content: flex-end;
   align-items: center;
   gap: 16px;
-  padding-right: 30px;
   cursor: pointer;
   span {
     font-size: 32px;
     font-weight: 700;
+  }
+  @include respond(lg) {
+    padding-right: 30px;
   }
 }
 
