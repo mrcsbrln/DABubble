@@ -1,118 +1,116 @@
-<div class="login-wrapper">
-  <div class="logo-div">
-    <img src="img/dabubble-logo.svg" alt="" />
-    <span>DABubble</span>
+<div class="logo-div">
+  <img src="img/dabubble-logo.svg" alt="" />
+  <span>DABubble</span>
+</div>
+@if(chooseAvatar()) {
+<div class="avatar-overlay login-box">
+  <div class="header-wrapper">
+    <button class="btn-second arrow" (click)="this.chooseAvatar.set(false)">
+      <img src="img/arrow-back.svg" alt="" />
+    </button>
+    <h2>Wähle deinen Avatar</h2>
   </div>
-  @if(chooseAvatar()) {
-  <div class="avatar-overlay login-box">
-    <div class="header-wrapper">
-      <button class="btn-second arrow" (click)="this.chooseAvatar.set(false)">
-        <img src="img/arrow-back.svg" alt="" />
-      </button>
-      <h2>Wähle deinen Avatar</h2>
-    </div>
-    <img class="selected-avatar" [src]="avatarUrl()" alt="" />
-    <span class="display-name">{{ newUser.displayName }}</span>
-    @if (errorMessage) {
-    <div>{{ errorMessage }}</div>
+  <img class="selected-avatar" [src]="avatarUrl()" alt="" />
+  <span class="display-name">{{ newUser.displayName }}</span>
+  @if (errorMessage) {
+  <div>{{ errorMessage }}</div>
+  }
+  <p>Aus der Liste wählen</p>
+  <div class="avatars-div">
+    @for(avatarUrl of avatarUrls; track $index) {
+    <button (click)="setAvatarUrl($index)">
+      <img class="avatar" [src]="avatarUrl" alt="" />
+    </button>
     }
-    <p>Aus der Liste wählen</p>
-    <div class="avatars-div">
-      @for(avatarUrl of avatarUrls; track $index) {
-      <button (click)="setAvatarUrl($index)">
-        <img class="avatar" [src]="avatarUrl" alt="" />
-      </button>
+  </div>
+  <button class="btn-submit btn-avatar" (click)="onSubmit()">Weiter</button>
+</div>
+} @else {
+<div class="login-box">
+  <div class="header-wrapper">
+    <a routerLink="/login">
+      <img src="img/arrow-back.svg" alt="" />
+    </a>
+    <h1>Konto erstellen</h1>
+  </div>
+  <p>
+    Mit deinem Namen und deiner E-Mail-Adresse hast du dein neues
+    DABubble-Konto.
+  </p>
+  @if (errorMessage) {
+  <div>{{ errorMessage }}</div>
+  }
+  <form [formGroup]="form" (ngSubmit)="setNewUser()">
+    <div class="field-wrapper">
+      <div class="input-div">
+        <img src="img/user-icon.svg" alt="" />
+        <input
+          type="text"
+          placeholder="Vorname und Nachname"
+          formControlName="username"
+        />
+      </div>
+      @if(username?.hasError('required') && username?.touched) {
+      <p>Bitte gültigen Benutzernamen eingeben.</p>
       }
     </div>
-    <button class="btn-submit btn-avatar" (click)="onSubmit()">Weiter</button>
-  </div>
-  } @else {
-  <div class="login-box">
-    <div class="header-wrapper">
-      <a routerLink="/login">
-        <img src="img/arrow-back.svg" alt="" />
-      </a>
-      <h1>Konto erstellen</h1>
+    <div class="field-wrapper">
+      <div class="input-div">
+        <img src="img/mail-icon.svg" alt="" />
+        <input type="email" placeholder="Email" formControlName="email" />
+      </div>
+      @if(email?.hasError('required') && email?.touched) {
+      <p>*Diese E-Mail-Adresse ist leider ungültig.</p>
+      } @if(email?.hasError('email') && email?.touched) {
+      <p>*Diese E-Mail-Adresse ist leider ungültig.</p>
+      }
     </div>
-    <p>
-      Mit deinem Namen und deiner E-Mail-Adresse hast du dein neues
-      DABubble-Konto.
-    </p>
-    @if (errorMessage) {
-    <div>{{ errorMessage }}</div>
-    }
-    <form [formGroup]="form" (ngSubmit)="setNewUser()">
-      <div class="field-wrapper">
-        <div class="input-div">
-          <img src="img/user-icon.svg" alt="" />
-          <input
-            type="text"
-            placeholder="Vorname und Nachname"
-            formControlName="username"
-          />
-        </div>
-        @if(username?.hasError('required') && username?.touched) {
-        <p>Bitte gültigen Benutzernamen eingeben.</p>
-        }
+    <div class="field-wrapper">
+      <div class="input-div">
+        <img src="img/password-icon.svg" alt="" />
+        <input
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+        />
       </div>
-      <div class="field-wrapper">
-        <div class="input-div">
-          <img src="img/mail-icon.svg" alt="" />
-          <input type="email" placeholder="Email" formControlName="email" />
-        </div>
-        @if(email?.hasError('required') && email?.touched) {
-        <p>*Diese E-Mail-Adresse ist leider ungültig.</p>
-        } @if(email?.hasError('email') && email?.touched) {
-        <p>*Diese E-Mail-Adresse ist leider ungültig.</p>
-        }
-      </div>
-      <div class="field-wrapper">
-        <div class="input-div">
-          <img src="img/password-icon.svg" alt="" />
-          <input
-            type="password"
-            placeholder="Password"
-            formControlName="password"
-          />
-        </div>
-        @if(password?.hasError('required') && password?.touched) {
-        <p>Bitte ein gültiges Passwort eingeben!</p>
-        }
-      </div>
-      <div class="checkbox-div">
-        <button
-          type="button"
-          class="checkbox-toggle"
-          (click)="toggleCheckbox()"
-          [attr.aria-checked]="isChecked()"
-          aria-label="Ich stimme der Datenschutzerklärung zu"
-        >
-          <img [src]="currentCheckBox()" alt="" />
-        </button>
-        <p>
-          Ich stimme der
-          <a routerLink="/privacy-policy">Datenschutzerklärung</a>
-          zu.
-        </p>
-      </div>
-      <div class="btn-wrapper">
-        <button
-          class="btn-submit"
-          type="submit"
-          [disabled]="form.invalid || !isChecked()"
-        >
-          Weiter
-        </button>
-      </div>
-    </form>
-  </div>
-  } @if (this.showConfirmation()) {
-  <div class="confirmation-overlay" @slideInFromRight>
-    Konto erfolgreich erstellt!
-  </div>
-  }
-  <div class="legal-wrapper">
-    <a href="">Impressum</a>
-    <a href="">Datenschutz</a>
-  </div>
+      @if(password?.hasError('required') && password?.touched) {
+      <p>Bitte ein gültiges Passwort eingeben!</p>
+      }
+    </div>
+    <div class="checkbox-div">
+      <button
+        type="button"
+        class="checkbox-toggle"
+        (click)="toggleCheckbox()"
+        [attr.aria-checked]="isChecked()"
+        aria-label="Ich stimme der Datenschutzerklärung zu"
+      >
+        <img [src]="currentCheckBox()" alt="" />
+      </button>
+      <p>
+        Ich stimme der
+        <a routerLink="/privacy-policy">Datenschutzerklärung</a>
+        zu.
+      </p>
+    </div>
+    <div class="btn-wrapper">
+      <button
+        class="btn-submit"
+        type="submit"
+        [disabled]="form.invalid || !isChecked()"
+      >
+        Weiter
+      </button>
+    </div>
+  </form>
+</div>
+} @if (this.showConfirmation()) {
+<div class="confirmation-overlay" @slideInFromRight>
+  Konto erfolgreich erstellt!
+</div>
+}
+<div class="legal-wrapper">
+  <a routerLink="/imprint" href="">Impressum</a>
+  <a routerLink="/privacy-policy" href="">Datenschutz</a>
 </div>

@@ -2,12 +2,16 @@
 
 :host {
   background-color: $bg-color;
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
+  padding: 16px;
+  @include respond(xl) {
+    min-height: 100dvh;
+  }
 }
 
 h1 {
@@ -185,7 +189,7 @@ input {
 
 .register-div {
   position: absolute;
-  bottom: 25px;
+  bottom: 5dvh;
   right: 50%;
   display: flex;
   flex-direction: column;
@@ -338,6 +342,7 @@ input {
       &.move-to-corner {
         color: black;
         font-size: 32px;
+        font-weight: 500;
       }
     }
   }
@@ -385,7 +390,7 @@ input {
 
   100% {
     position: absolute;
-    top: 25px;
+    top: 5dvh;
     left: 50%;
     transform: translate(-50%, 0);
     gap: 16px;

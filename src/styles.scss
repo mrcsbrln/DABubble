@@ -196,3 +196,24 @@ body {
     @warn "Breakpoint `#{$breakpoint}` is not defined.";
   }
 }
+
+@media screen and (orientation: landscape) and (hover: none) and (pointer: coarse) {
+  body::before {
+    content: "Querformat ist auf Touch-Geräten deaktiviert. Bitte ins Hochformat drehen.";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    z-index: 9999;
+    text-align: center;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+}

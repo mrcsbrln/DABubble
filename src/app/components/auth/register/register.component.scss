@@ -1,5 +1,16 @@
 @use "../../../../styles.scss" as *;
 
+:host {
+  background-color: $bg-color;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 16px;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -12,9 +23,15 @@ h1,
 h2 {
   color: $purple-1;
   font-weight: 700;
-  font-size: 46px;
+  font-size: 32px;
   text-align: center;
   width: 100%;
+}
+
+h1 {
+  @include respond(xl) {
+    font-size: 46px;
+  }
 }
 
 h2 {
@@ -23,6 +40,20 @@ h2 {
 
 p {
   text-align: center;
+}
+
+a {
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 100px;
+  border: 1px solid transparent;
+  background-color: transparent;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $bg-color;
+    transition: $hover-transition;
+  }
 }
 
 button {
@@ -167,7 +198,7 @@ input {
 .logo-div {
   position: absolute;
   top: 75px;
-  left: 75px;
+  left: 50px;
   display: flex;
   align-items: center;
   gap: 16px;
@@ -181,16 +212,6 @@ input {
   }
 }
 
-.login-wrapper {
-  background-color: $bg-color;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
 .login-box {
   background-color: #fff;
   border-radius: 30px;
@@ -201,8 +222,11 @@ input {
   justify-content: center;
   align-items: center;
   gap: 32px;
-  padding: 64px;
+  padding: 16px 32px;
   box-shadow: $box-shadow;
+  @include respond(xl) {
+    padding: 64px;
+  }
 }
 
 .checkbox-div {
@@ -227,12 +251,25 @@ input {
 
 .legal-wrapper {
   position: absolute;
-  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 16px;
+  display: flex;
+  gap: 32px;
+  width: 100%;
+  padding: 0 64px;
+  justify-content: space-between;
+
   a {
     &:hover {
       border: 1px solid $purple-2;
       transition: $hover-transition;
     }
+  }
+
+  @include respond(xl) {
+    width: fit-content;
+    padding: 0;
   }
 }
 
