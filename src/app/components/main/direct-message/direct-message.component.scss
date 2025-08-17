@@ -13,6 +13,21 @@ app-message-box {
   margin: 12px 24px 24px 24px;
 }
 
+.user-info {
+  border: unset;
+  background: unset;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 4px 8px;
+  border-radius: 30px;
+  cursor: pointer;
+  &:hover {
+    background-color: $bg-color;
+    transition: $hover-transition;
+  }
+}
+
 .online {
   color: $online-green;
 }

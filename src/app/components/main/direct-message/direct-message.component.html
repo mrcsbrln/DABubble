@@ -1,19 +1,35 @@
 <div class="user-info-container">
   @if(isSelectedUserCurrentUser()) {
-  <div class="avatar-wrapper">
-    <img [src]="getSelectedUser()?.avatarUrl" alt="" />
-    <span class="status-dot online"></span>
+  <div
+    class="user-info"
+    (click)="selectedMemberId.set(getSelectedUser()?.uid || '')"
+    (click)="isUserProfileDialogOpen.set(true)"
+    (keydown)="isUserProfileDialogOpen.set(true)"
+    tabindex="0"
+  >
+    <div class="avatar-wrapper">
+      <img [src]="getSelectedUser()?.avatarUrl" alt="" />
+      <span class="status-dot online"></span>
+    </div>
+    <span class="display-name">{{ getSelectedUser()?.displayName }} (Du) </span>
   </div>
-  <span class="display-name">{{ getSelectedUser()?.displayName }} (Du) </span>
   } @else {
-  <div class="avatar-wrapper">
-    <img [src]="getSelectedUser()?.avatarUrl" alt="" />
-    <span
-      class="status-dot"
-      [ngClass]="{ online: isUserOnline(getSelectedUser()?.uid!) }"
-    ></span>
+  <div
+    class="user-info"
+    (click)="selectedMemberId.set(getSelectedUser()?.uid || '')"
+    (click)="isUserProfileDialogOpen.set(true)"
+    (keydown)="isUserProfileDialogOpen.set(true)"
+    tabindex="0"
+  >
+    <div class="avatar-wrapper">
+      <img [src]="getSelectedUser()?.avatarUrl" alt="" />
+      <span
+        class="status-dot"
+        [ngClass]="{ online: isUserOnline(getSelectedUser()?.uid!) }"
+      ></span>
+    </div>
+    <span class="display-name">{{ getSelectedUser()?.displayName }} </span>
   </div>
-  <span class="display-name">{{ getSelectedUser()?.displayName }} </span>
   }
 </div>
 <div class="messages-container">
