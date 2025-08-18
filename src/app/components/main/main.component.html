@@ -1,10 +1,19 @@
 @if(breakpoint() === 'xs' || breakpoint() === 'sm' ) {
 <header class="mobile">
   <div class="mobile-wrapper">
+    @if(isWorkspaceHidden()) {
+    <div class="devspace">
+      <button (click)="isWorkspaceHidden.set(false)">
+        <img class="back" src="img/back.svg" alt="" />
+      </button>
+      <img class="devspace-logo" src="img/devspace.svg" alt="" />
+    </div>
+    } @else {
     <div class="logo-wrapper">
       <img src="img/dabubble-logo.svg" alt="" />
       <span>DABubble</span>
     </div>
+    }
     <app-profile-menu class="mobile" />
   </div>
   <app-search-bar class="mobile" />
@@ -71,6 +80,7 @@
 
 <!--WORKSPACE-BUTTON-->
 
+@if(breakpoint() !== 'xs' && breakpoint() !== 'sm') {
 <button
   class="workspace-button"
   (click)="toggleWorkspaceVisibility()"
@@ -103,3 +113,4 @@
   />
   }
 </button>
+}

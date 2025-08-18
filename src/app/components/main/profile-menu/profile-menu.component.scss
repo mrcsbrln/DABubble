@@ -19,9 +19,13 @@
 
 .current-user-avatar {
   position: relative;
-  width: 70px;
-  height: 70px;
+  width: 48px;
+  height: 48px;
   display: flex;
+  @include respond(md) {
+    width: 70px;
+    height: 70px;
+  }
   img {
     border-radius: 100%;
   }

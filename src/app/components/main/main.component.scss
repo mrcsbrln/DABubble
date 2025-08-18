@@ -30,11 +30,17 @@ header {
       width: $first-column-width;
     }
     img {
-      height: 70px;
+      height: 45px;
+      @include respond(md) {
+        height: 70px;
+      }
     }
     span {
-      font-size: 32px;
+      font-size: 24px;
       font-weight: 700;
+      @include respond(md) {
+        font-size: 32px;
+      }
     }
   }
 
@@ -86,6 +92,23 @@ main {
 
   app-thread {
     width: $last-column-width;
+  }
+}
+
+.devspace {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  button {
+    border: unset;
+    background: unset;
+    display: flex;
+  }
+  .back {
+    cursor: pointer;
+  }
+  .devspace-logo {
+    height: 50px;
   }
 }
 

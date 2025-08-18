@@ -1,7 +1,10 @@
 @use "../../../../styles.scss" as *;
 
 :host {
-  height: 70px;
+  height: 48px;
+  @include respond(md) {
+    height: 70px;
+  }
 }
 
 .display-name {
@@ -39,7 +42,10 @@
     width: 100%;
     border-style: none;
     color: $text-gray;
-    font-size: 24px;
+    font-size: 18px;
+    @include respond(md) {
+      font-size: 24px;
+    }
     &:focus {
       outline: none;
     }
