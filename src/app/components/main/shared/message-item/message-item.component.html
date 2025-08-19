@@ -97,6 +97,7 @@
         type="button"
         class="emoji-btns"
         (click)="handleReaction(emoji, message()?.id ?? '')"
+        (click)="isEmojiPickerInBarOpen.set(false)"
       >
         {{ emoji }}
       </button>
