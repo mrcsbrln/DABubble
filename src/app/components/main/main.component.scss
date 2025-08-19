@@ -103,9 +103,15 @@ main {
     border: unset;
     background: unset;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
   }
   .back {
-    cursor: pointer;
+    width: 16px;
+    height: 16px;
   }
   .devspace-logo {
     height: 50px;
