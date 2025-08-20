@@ -53,8 +53,10 @@ header {
   }
 
   app-profile-menu {
-    width: $last-column-width;
     order: 3;
+    @include respond(lg) {
+      width: $last-column-width;
+    }
     &.mobile {
       order: 2;
       width: fit-content;

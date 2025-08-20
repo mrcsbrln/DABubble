@@ -79,7 +79,7 @@
     }
 
     <!-- Dots-Button -->
-    <button
+    <!-- <button
       type="button"
       (mouseenter)="isDotsHovered.set(true)"
       (mouseleave)="isDotsHovered.set(false)"
@@ -89,7 +89,7 @@
         [src]="isDotsHovered() ? 'img/dots-hover.svg' : 'img/dots.svg'"
         alt="edit"
       />
-    </button>
+    </button> -->
     @if(isEmojiPickerInBarOpen()) {
     <div class="emoji-picker in-bar" #emojiPicker>
       @for (emoji of emojis; track $index) {
