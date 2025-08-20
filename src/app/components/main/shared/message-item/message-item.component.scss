@@ -69,9 +69,12 @@
 .message-data-container {
   position: relative;
   display: flex;
-  padding: 32px;
+  padding: 16px;
   gap: 32px;
   cursor: pointer;
+  @include respond(md) {
+    padding: 32px;
+  }
   &.current-user {
     justify-content: flex-end;
   }
@@ -198,5 +201,8 @@
 .seperator-wrapper {
   display: flex;
   align-items: center;
-  padding: 16px 32px;
+  padding: 8px;
+  @include respond(md) {
+    padding: 16px 16px;
+  }
 }

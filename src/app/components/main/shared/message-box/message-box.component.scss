@@ -1,5 +1,12 @@
 @use "../../../../../styles.scss" as *;
 
+:host {
+  margin: 16px !important;
+  @include respond(md) {
+    margin: 24px !important;
+  }
+}
+
 button {
   border: unset;
   background: unset;
