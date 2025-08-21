@@ -152,7 +152,11 @@
 <div class="messages-container">
   @for(message of getMessagesReversed(); track message.id; let i = $index) {
 
-  <app-message-item [message]="message" (openThread)="openThread.emit()" />
+  <app-message-item
+    [message]="message"
+    [id]="message.id"
+    (openThread)="openThread.emit()"
+  />
   }
 </div>
 <app-message-box
