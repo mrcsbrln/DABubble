@@ -1,15 +1,22 @@
 @use "../../../../styles.scss" as *;
 
+$min-height: 5dvh;
+
 :host {
-  background-color: $bg-color;
   min-height: 100dvh;
+  max-width: 1920px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   position: relative;
+  left: 50%;
+  transform: translateX(-50%);
   padding: 16px;
   gap: 32px;
+  @include respond(xl) {
+    justify-content: center;
+  }
 }
 
 //TAGS
@@ -211,13 +218,11 @@ input {
 
 .legal-wrapper {
   position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 16px;
   display: flex;
   justify-content: center;
   width: 100%;
   padding: 0 64px;
+  gap: 16px;
   a {
     &:hover {
       border: 1px solid $purple-2;
@@ -227,9 +232,9 @@ input {
 
   @include respond(xl) {
     position: absolute;
-    width: fit-content;
-    padding: 0;
-    justify-content: space-between;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 3dvh;
   }
 }
 
@@ -272,14 +277,15 @@ input {
   }
 
   @include respond(xl) {
-    position: fixed;
-    top: 75px;
+    position: absolute;
+    top: $min-height;
     left: 50px;
     transform: translateX(0);
   }
 }
 
 .register-div {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -300,8 +306,8 @@ input {
   }
 
   @include respond(xl) {
-    position: fixed;
-    top: 75px;
+    position: absolute;
+    top: $min-height;
     right: 50px;
     bottom: unset;
     transform: translateX(0);
