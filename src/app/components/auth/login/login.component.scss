@@ -178,11 +178,10 @@ input {
 .field-wrapper {
   position: relative;
   width: 100%;
-
+  margin-bottom: 8px;
   & p {
     text-align: start;
     color: red;
-    font-size: 16px;
     position: absolute;
     top: calc(100% + 4px);
   }

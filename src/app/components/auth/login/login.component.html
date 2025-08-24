@@ -34,7 +34,7 @@
       </div>
       @if(email?.hasError('required') && email?.touched) {
       <p class="error">*Diese E-Mail-Adresse ist leider ungültig.</p>
-      } @if(email?.hasError('email') && email?.touched) {
+      } @if(email?.hasError('pattern') && email?.touched) {
       <p>*Diese E-Mail-Adresse ist leider ungültig.</p>
       }
     </div>
@@ -70,7 +70,7 @@
       </div>
       @if(email?.hasError('required') && email?.touched) {
       <p>*Diese E-Mail-Adresse ist leider ungültig.</p>
-      } @if(email?.hasError('email') && email?.touched) {
+      } @if(email?.hasError('pattern') && email?.touched) {
       <p>*Diese E-Mail-Adresse ist leider ungültig.</p>
       }
     </div>
