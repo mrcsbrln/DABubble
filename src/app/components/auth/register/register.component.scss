@@ -28,9 +28,12 @@ h1,
 h2 {
   color: $purple-1;
   font-weight: 700;
-  font-size: 32px;
-  text-align: center;
+  font-size: 28px;
   width: 100%;
+  text-align: center;
+  @include respond(md) {
+    font-size: 32px;
+  }
 }
 
 h1 {
@@ -102,13 +105,14 @@ button {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  gap: 16px;
   a {
     display: flex;
-    position: absolute;
-    left: -8px;
     cursor: pointer;
     padding: 8px;
     border-radius: 100%;
+    position: absolute;
+    left: 0;
     &:hover {
       background-color: $bg-color;
       transition: $hover-transition;
@@ -259,6 +263,12 @@ input {
   }
   img {
     cursor: pointer;
+  }
+  p {
+    text-align: left;
+    @include respond(md) {
+      text-align: center;
+    }
   }
 }
 
