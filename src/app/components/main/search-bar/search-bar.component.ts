@@ -163,6 +163,16 @@ export class SearchBarComponent {
     return this.userService.onlineUsersIds().includes(id);
   }
 
+  isCurrentChannelMember(
+    currentUserId: string | undefined,
+    channelId: string
+  ): boolean {
+    if (!currentUserId) return false;
+    return (
+      this.getChannelById(channelId)?.memberIds.includes(currentUserId) ?? false
+    );
+  }
+
   truncateText(text: string, maxLength: number): string {
     return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
   }

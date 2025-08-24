@@ -80,6 +80,7 @@
       }
       <!--Channel Messages-->
       @for(cm of getFilteredItems().channelMessages; track cm.id){
+      @if(isCurrentChannelMember(getCurrentUser()?.uid, cm.id)){
       <a
         class="filtered-message-item"
         (click)="searchBarInput.reset()"
@@ -90,7 +91,7 @@
           {{ getChannelById(cm.channelId)?.name }}:</span
         ><span class="item-content">{{ cm.content }}</span>
       </a>
-      }
+      } }
     </div>
   </div>
   }
