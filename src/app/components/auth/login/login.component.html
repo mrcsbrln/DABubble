@@ -113,7 +113,7 @@
       <button
         class="btn-submit"
         type="submit"
-        [disabled]="email?.invalid && password?.invalid"
+        [disabled]="email?.invalid || password?.invalid"
       >
         Anmelden
       </button>
