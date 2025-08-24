@@ -198,7 +198,7 @@ body {
   }
 }
 
-@media screen and (orientation: landscape) and (hover: none) and (pointer: coarse) {
+@media screen and (orientation: landscape) and (hover: none) and (pointer: coarse) and (max-width: 932px) {
   body::before {
     content: "Querformat ist auf Touch-Geräten deaktiviert. Bitte ins Hochformat drehen.";
     position: fixed;
