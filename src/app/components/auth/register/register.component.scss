@@ -236,7 +236,7 @@ input {
   justify-content: center;
   align-items: center;
   gap: 24px;
-  padding: 16px 32px;
+  padding: 32px;
   box-shadow: $box-shadow;
 
   @include respond(xxl) {

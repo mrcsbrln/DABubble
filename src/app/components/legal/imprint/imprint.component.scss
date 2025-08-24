@@ -6,8 +6,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: $bg-color;
   height: 100vh;
+  max-width: 1920px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 h1,

@@ -33,7 +33,7 @@
         />
       </div>
       @if(email?.hasError('required') && email?.touched) {
-      <p>*Diese E-Mail-Adresse ist leider ungültig.</p>
+      <p class="error">*Diese E-Mail-Adresse ist leider ungültig.</p>
       } @if(email?.hasError('email') && email?.touched) {
       <p>*Diese E-Mail-Adresse ist leider ungültig.</p>
       }
@@ -110,7 +110,13 @@
       <span class="google">Anmelden mit Google</span>
     </button>
     <div class="btn-wrapper">
-      <button class="btn-submit" type="submit">Anmelden</button>
+      <button
+        class="btn-submit"
+        type="submit"
+        [disabled]="email?.invalid && password?.invalid"
+      >
+        Anmelden
+      </button>
       <button class="btn-guest" type="button" (click)="loginGuest()">
         Gäste-Login
       </button>

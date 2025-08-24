@@ -59,6 +59,7 @@ button {
 
     &:disabled {
       background-color: $text-gray;
+      cursor: not-allowed;
     }
   }
 
@@ -158,6 +159,7 @@ input {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 16px;
 
   a {
     display: flex;
@@ -179,7 +181,7 @@ input {
 
   & p {
     text-align: start;
-    color: $text-gray;
+    color: red;
     font-size: 12px;
     position: absolute;
     top: calc(100% + 4px);
@@ -248,7 +250,7 @@ input {
   justify-content: center;
   align-items: center;
   gap: 24px;
-  padding: 16px 32px;
+  padding: 32px;
   box-shadow: $box-shadow;
 
   @include respond(xxl) {
@@ -273,7 +275,7 @@ input {
   }
   span {
     font-size: 32px;
-    font-weight: 500;
+    font-weight: 700;
   }
 
   @include respond(xl) {
