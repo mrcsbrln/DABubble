@@ -200,7 +200,7 @@ body {
 
 @media screen and (orientation: landscape) and (hover: none) and (pointer: coarse) and (max-width: $breakpoint-lg) {
   body::before {
-    content: "Querformat ist auf Touch-Geräten deaktiviert. Bitte ins Hochformat drehen.";
+    content: "Querformat ist auf Touch-Geräten deaktiviert. Bitte ins Hochformat drehen 🔄";
     position: fixed;
     top: 0;
     left: 0;
