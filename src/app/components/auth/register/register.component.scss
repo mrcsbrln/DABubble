@@ -157,12 +157,20 @@ button {
 .field-wrapper {
   position: relative;
   width: 100%;
-  margin-bottom: 8px;
+  @include respond(md) {
+    margin-bottom: 8px;
+  }
   & p {
     text-align: start;
     color: red;
-    position: absolute;
-    top: calc(100% + 4px);
+    position: relative;
+    margin-top: 4px;
+    margin-bottom: -16px;
+    @include respond(md) {
+      margin-top: 0;
+      position: absolute;
+      top: calc(100% + 4px);
+    }
   }
 }
 
@@ -258,6 +266,7 @@ input {
   display: flex;
   align-items: center;
   gap: 16px;
+  position: relative;
   a {
     padding: 0;
   }
@@ -314,6 +323,22 @@ input {
   border-radius: 30px 30px 0 30px;
   font-weight: 700;
   font-size: 36px;
+}
+
+.privacy-policy-hint {
+  text-align: start;
+  color: red;
+  @include respond(md) {
+    position: absolute;
+    bottom: 0;
+  }
+}
+
+.privacy-policy-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 56px;
 }
 
 .tip-email {

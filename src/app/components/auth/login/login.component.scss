@@ -178,12 +178,20 @@ input {
 .field-wrapper {
   position: relative;
   width: 100%;
-  margin-bottom: 8px;
+  @include respond(md) {
+    margin-bottom: 8px;
+  }
   & p {
     text-align: start;
     color: red;
-    position: absolute;
-    top: calc(100% + 4px);
+    position: relative;
+    margin-top: 4px;
+    margin-bottom: -16px;
+    @include respond(md) {
+      margin-top: 0;
+      position: absolute;
+      top: calc(100% + 4px);
+    }
   }
 }
 

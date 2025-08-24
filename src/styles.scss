@@ -1,3 +1,5 @@
+@use "sass:map";
+
 /* Nunito – ExtraLight */
 @font-face {
   font-family: "Nunito";
@@ -187,7 +189,7 @@ body {
 }
 
 @mixin respond($breakpoint) {
-  $size: map-get($breakpoints, $breakpoint);
+  $size: map.get($breakpoints, $breakpoint);
 
   @if $size != null {
     @media (min-width: $size) {

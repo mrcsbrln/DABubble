@@ -59,9 +59,7 @@
         <img src="img/mail-icon.svg" alt="" />
         <input type="email" placeholder="Email" formControlName="email" />
       </div>
-      @if(email?.hasError('required') && email?.touched) {
-      <p>*Diese E-Mail-Adresse ist leider ungültig.</p>
-      } @if(email?.hasError('email') && email?.touched) {
+      @if(email?.hasError('pattern') && email?.touched) {
       <p>*Diese E-Mail-Adresse ist leider ungültig.</p>
       }
     </div>
@@ -74,31 +72,38 @@
           formControlName="password"
         />
       </div>
-      @if(password?.hasError('required') && password?.touched) {
-      <p>Bitte ein gültiges Passwort eingeben!</p>
+      @if(password?.hasError('minlength') && password?.touched) {
+      <p>Passwort muss mindestens 6 Zeichen beinhalten!</p>
       }
     </div>
-    <div class="checkbox-div">
-      <button
-        type="button"
-        class="checkbox-toggle"
-        (click)="toggleCheckbox()"
-        [attr.aria-checked]="isChecked()"
-        aria-label="Ich stimme der Datenschutzerklärung zu"
-      >
-        <img [src]="currentCheckBox()" alt="" />
-      </button>
-      <p>
-        Ich stimme der
-        <a routerLink="/privacy-policy">Datenschutzerklärung</a>
-        zu.
+    <div class="privacy-policy-wrapper">
+      <div class="checkbox-div">
+        <button
+          type="button"
+          class="checkbox-toggle"
+          (click)="toggleCheckbox()"
+          [attr.aria-checked]="privacyPolicyChecked()"
+          aria-label="Ich stimme der Datenschutzerklärung zu"
+        >
+          <img [src]="currentCheckBox()" alt="" />
+        </button>
+        <p>
+          Ich stimme der
+          <a routerLink="/privacy-policy">Datenschutzerklärung</a>
+          zu.
+        </p>
+      </div>
+      @if(!privacyPolicyChecked() && !privacyPolicyUnchecked()) {
+      <p class="privacy-policy-hint">
+        Bitte stimmen Sie der Datenschutz&shy;erklärung zu!
       </p>
+      }
     </div>
     <div class="btn-wrapper">
       <button
         class="btn-submit"
         type="submit"
-        [disabled]="form.invalid || !isChecked()"
+        [disabled]="form.invalid || !privacyPolicyChecked()"
       >
         Weiter
       </button>

@@ -33,9 +33,12 @@ export class RegisterComponent {
 
   checkBoxUnchecked = 'img/checkbox-unchecked.svg';
   checkBoxChecked = 'img/checkbox-checked.svg';
-  isChecked = signal(false);
+  privacyPolicyChecked = signal(false);
+  privacyPolicyUnchecked = signal(true);
   currentCheckBox = computed(() => {
-    return this.isChecked() ? this.checkBoxChecked : this.checkBoxUnchecked;
+    return this.privacyPolicyChecked()
+      ? this.checkBoxChecked
+      : this.checkBoxUnchecked;
   });
 
   chooseAvatar = signal(false);
@@ -53,8 +56,16 @@ export class RegisterComponent {
 
   form = this.fb.nonNullable.group({
     username: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required],
+    email: [
+      '',
+      [
+        Validators.required,
+        Validators.pattern(
+          /^(?!.*\.\.)[A-Za-z0-9](?:[A-Za-z0-9._%+-]*[A-Za-z0-9])?@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}$/
+        ),
+      ],
+    ],
+    password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
   username = this.form.get('username');
@@ -66,7 +77,7 @@ export class RegisterComponent {
 
   setNewUser() {
     const rawForm = this.form.getRawValue();
-    if (this.isChecked() && this.form.valid) {
+    if (this.privacyPolicyChecked() && this.form.valid) {
       const userWithoutUid: Omit<UserProfile, 'uid'> = {
         displayName: rawForm.username,
         email: rawForm.email,
@@ -85,7 +96,7 @@ export class RegisterComponent {
   }
 
   onSubmit(): void {
-    if (this.isChecked()) {
+    if (this.privacyPolicyChecked()) {
       const { email, displayName } = this.newUser;
 
       if (!email || !displayName) {
@@ -137,7 +148,8 @@ export class RegisterComponent {
   }
 
   toggleCheckbox(): void {
-    this.isChecked.update((value) => !value);
+    this.privacyPolicyChecked.update((value) => !value);
+    this.privacyPolicyUnchecked.set(false);
   }
 
   setAvatarUrl(index: number) {
