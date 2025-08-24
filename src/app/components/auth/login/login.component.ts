@@ -29,7 +29,15 @@ export class LoginComponent {
   private userService = inject(UserService);
 
   form = this.fb.nonNullable.group({
-    email: ['', [Validators.required, Validators.email]],
+    email: [
+      '',
+      [
+        Validators.required,
+        Validators.pattern(
+          /^(?!.*\.\.)[A-Za-z0-9](?:[A-Za-z0-9._%+-]*[A-Za-z0-9])?@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}$/
+        ),
+      ],
+    ],
     password: ['', Validators.required],
   });
   errorMessage: string | null = null;
