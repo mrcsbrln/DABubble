@@ -134,6 +134,8 @@
     <button
       type="button"
       aria-label="reaction"
+      (click)="toggleEmojiPickerInBar()"
+      (keydown)="toggleEmojiPickerInBar()"
       (mouseenter)="isReactionHovered.set(true)"
       (mouseleave)="isReactionHovered.set(false)"
     >
@@ -146,8 +148,20 @@
         alt="reaction"
       />
     </button>
-
-    @if(!isThreadItem()) {
+    @if(isEmojiPickerInBarOpen()) {
+    <div class="emoji-picker in-bar" #emojiPicker>
+      @for (emoji of emojis; track $index) {
+      <button
+        type="button"
+        class="emoji-btns"
+        (click)="handleReaction(emoji, message()?.id ?? '')"
+        (click)="isEmojiPickerInBarOpen.set(false)"
+      >
+        {{ emoji }}
+      </button>
+      }
+    </div>
+    } @if(!isThreadItem()) {
     <!-- Answer-Button -->
     <button
       type="button"
