@@ -43,7 +43,7 @@
     <router-outlet (activate)="onActivate($event)" />
   </section>
   @if(!isThreadHidden()) {
-  <app-thread (closeThread)="isThreadHidden.set(true)" />
+  <app-thread (closeThread)="isThreadHidden.set(true)" @slideRight />
   } }
 
   <!--FOR MOBILE-->

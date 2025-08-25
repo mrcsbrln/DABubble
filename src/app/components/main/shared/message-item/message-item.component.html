@@ -209,7 +209,7 @@
         [ngClass]="{ 'current-user': isMessageFromCurrentUser() }"
       >
         @for (reaction of message()?.reactions; track $index) { @if
-        (reaction.userIds.length > 0) {
+        (reaction.userIds.length > 0 && $index < 20) {
         <button
           class="emoji-box"
           (click)="handleReaction(reaction.emoji, message()?.id ?? '')"
@@ -269,7 +269,12 @@
         } -->
       </div>
       @if(getThreadMessages().length === 1) {
-      <div class="thread-wrapper">
+      <div
+        class="thread-wrapper"
+        (click)="onOpenThread()"
+        (keydown)="onOpenThread()"
+        tabindex="0"
+      >
         <span class="answer-amount"
           >{{ getThreadMessages().length }} Antwort</span
         >
@@ -279,7 +284,12 @@
         >
       </div>
       } @if( getThreadMessages().length > 1 ) {
-      <div class="thread-wrapper">
+      <div
+        class="thread-wrapper"
+        (click)="onOpenThread()"
+        (keydown)="onOpenThread()"
+        tabindex="0"
+      >
         <span class="answer-amount"
           >{{ getThreadMessages().length }} Antworten</span
         >

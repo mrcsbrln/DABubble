@@ -112,11 +112,13 @@
       gap: 8px;
       .thread-wrapper {
         display: flex;
-        gap: 16px;
+        gap: 4px;
         align-items: center;
+        flex-wrap: wrap;
         .answer-amount {
           font-size: 18px;
           color: $purple-3;
+          margin-right: 16px;
         }
         .last-answer-time {
           font-size: 14px;
@@ -191,6 +193,7 @@
   justify-content: flex-start;
   align-items: center;
   gap: 8px;
+  flex-wrap: wrap;
   &.current-user {
     justify-content: flex-end;
   }
