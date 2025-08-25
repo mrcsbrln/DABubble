@@ -1,11 +1,14 @@
 import {
   Component,
   DestroyRef,
+  ElementRef,
   inject,
   input,
   OnInit,
   output,
   signal,
+  ViewChild,
+  AfterViewInit,
 } from '@angular/core';
 import {
   FormControl,
@@ -20,8 +23,10 @@ import {
   templateUrl: './message-box.component.html',
   styleUrl: './message-box.component.scss',
 })
-export class MessageBoxComponent implements OnInit {
+export class MessageBoxComponent implements OnInit, AfterViewInit {
   private destroyRef = inject(DestroyRef);
+
+  @ViewChild('textareaRef') textareaRef!: ElementRef<HTMLTextAreaElement>;
 
   placeholder = input<string>();
 
@@ -56,6 +61,10 @@ export class MessageBoxComponent implements OnInit {
     }),
   });
 
+  ngAfterViewInit(): void {
+    setTimeout(() => this.textareaRef.nativeElement.focus());
+  }
+
   ngOnInit(): void {
     this.contentControlReady.emit(this.form.controls.content);
     this.destroyRef.onDestroy(() => {
@@ -67,6 +76,7 @@ export class MessageBoxComponent implements OnInit {
     const current = this.form.controls.content.value || '';
     this.form.controls.content.setValue(current + emoji);
     this.isEmojiPickerOpen.set(false);
+    this.focusTextarea();
   }
 
   toggleEmojiPicker(event: MouseEvent) {
@@ -79,5 +89,10 @@ export class MessageBoxComponent implements OnInit {
     if (!text) return;
     this.send.emit(text);
     this.form.reset();
+    this.focusTextarea();
+  }
+
+  private focusTextarea() {
+    setTimeout(() => this.textareaRef.nativeElement.focus());
   }
 }

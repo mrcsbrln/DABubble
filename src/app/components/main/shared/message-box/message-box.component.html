@@ -1,5 +1,6 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" (keydown.enter)="onSubmit()">
   <textarea
+    #textareaRef
     [formControl]="form.controls.content"
     [placeholder]="placeholder()"
   ></textarea>
