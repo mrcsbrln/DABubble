@@ -37,7 +37,7 @@
 
   @if(breakpoint() !== 'xs' && breakpoint() !== 'sm') {
   @if(!isWorkspaceHidden()){
-  <app-workspace />
+  <app-workspace @slideLeft />
   }
   <section>
     <router-outlet (activate)="onActivate($event)" />

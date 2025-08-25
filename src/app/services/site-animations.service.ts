@@ -122,3 +122,13 @@ export const reactionBarSlideOtherUser = trigger('reactionBarSlideOtherUser', [
     ),
   ]),
 ]);
+
+export const slideLeft = trigger('slideLeft', [
+  transition(':enter', [
+    style({ transform: 'translateX(-100%)' }),
+    animate('220ms ease-out', style({ transform: 'translateX(0)' })),
+  ]),
+  transition(':leave', [
+    animate('180ms ease-in', style({ transform: 'translateX(-100%)' })),
+  ]),
+]);

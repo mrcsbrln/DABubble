@@ -33,7 +33,14 @@
   }
 </div>
 <div class="messages-container">
-  @for(dm of getDirectMessagesOfSelectedUser(); track dm.id){
+  @if(isSelectedUserCurrentUser()) { @for(dm of getCurrentUserPrivateMessages();
+  track dm.id) { @if(dm.parentMessageId === null) {
+  <app-message-item
+    [message]="dm"
+    (openThread)="openThread.emit()"
+    [id]="dm.id"
+  />
+  } } } @for(dm of getDirectMessagesOfSelectedUser(); track dm.id){
   @if(dm.parentMessageId === null) {
   <app-message-item
     [message]="dm"

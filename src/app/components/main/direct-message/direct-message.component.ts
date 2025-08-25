@@ -97,6 +97,18 @@ export class DirectMessageComponent implements OnInit {
       });
   }
 
+  getCurrentUserPrivateMessages() {
+    return this.directMessageService
+      .getCurrentUserPrivateMessages()
+      .sort((a, b) => {
+        const aTime =
+          a.timestamp instanceof Timestamp ? a.timestamp.toDate().getTime() : 0;
+        const bTime =
+          b.timestamp instanceof Timestamp ? b.timestamp.toDate().getTime() : 0;
+        return bTime - aTime;
+      });
+  }
+
   getCurrentUserId() {
     return this.authService.currentUser()?.uid;
   }

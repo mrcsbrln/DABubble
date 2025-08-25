@@ -133,6 +133,17 @@ export class DirectMessageService {
     );
   }
 
+  getCurrentUserPrivateMessages() {
+    const currentUserId = this.authService.currentUser()?.uid;
+    if (!currentUserId) return [];
+
+    return this.directMessages().filter(
+      (dm) =>
+        dm.participantIds[0] === currentUserId &&
+        dm.participantIds[1] === currentUserId
+    );
+  }
+
   subMessageCollection() {
     return runInInjectionContext(this.injector, () =>
       onSnapshot(this.directMessagesCollectionRef(), (snapshot) => {

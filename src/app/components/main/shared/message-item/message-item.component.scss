@@ -145,7 +145,7 @@
   &.current-user {
     left: 0;
     @include respond(md) {
-      left: 64px;
+      left: 32px;
     }
   }
   button {
@@ -209,6 +209,6 @@
   align-items: center;
   padding: 8px;
   @include respond(md) {
-    padding: 16px 16px;
+    padding: 32px;
   }
 }

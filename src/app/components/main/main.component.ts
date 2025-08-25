@@ -13,6 +13,7 @@ import { WorkspaceComponent } from './workspace/workspace.component';
 import { RouterOutlet } from '@angular/router';
 import { DirectMessageComponent } from './direct-message/direct-message.component';
 import { ChannelMessageComponent } from './channel-message/channel-message.component';
+import { slideLeft } from '../../services/site-animations.service';
 
 type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 
@@ -28,6 +29,7 @@ type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
+  animations: [slideLeft],
 })
 export class MainComponent implements OnInit {
   width = signal(0);
