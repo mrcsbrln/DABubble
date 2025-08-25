@@ -68,13 +68,19 @@
     <div class="input-wrapper">
       <input
         type="text"
-        [placeholder]="getCurrentUserInUserCollection()?.displayName"
+        placeholder="Neuen Namen eingeben"
         [(ngModel)]="newDisplayedName"
       />
     </div>
     <div class="button-wrapper">
       <button class="cancel" (click)="onCloseDialog()">Abbrechen</button>
-      <button class="save" (click)="updateDisplayedName()">Speichern</button>
+      <button
+        class="save"
+        (click)="updateDisplayedName()"
+        [disabled]="newDisplayedName().length < 2"
+      >
+        Speichern
+      </button>
     </div>
     }
   </div>

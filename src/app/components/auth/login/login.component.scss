@@ -14,6 +14,7 @@ $min-height: 5dvh;
   transform: translateX(-50%);
   padding: 16px;
   gap: 32px;
+  overflow: hidden;
   @include respond(xl) {
     justify-content: center;
   }
@@ -151,6 +152,10 @@ input {
   border-radius: 30px 30px 0 30px;
   font-weight: 700;
   font-size: 36px;
+}
+
+.error-message {
+  color: red;
 }
 
 .header-wrapper {

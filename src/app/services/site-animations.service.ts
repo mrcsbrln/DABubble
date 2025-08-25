@@ -69,7 +69,6 @@ export const reactionBarSlideCurrentUser = trigger(
         opacity: 0,
         transform: 'translateX(48px) translateY(-50%)',
         display: 'none',
-        left: 32,
       })
     ),
     state(
@@ -78,7 +77,6 @@ export const reactionBarSlideCurrentUser = trigger(
         opacity: 1,
         transform: 'translateX(0) translateY(-50%)',
         display: 'flex',
-        left: 32,
       })
     ),
     transition('hidden => visible', [

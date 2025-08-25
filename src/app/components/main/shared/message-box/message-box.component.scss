@@ -75,6 +75,7 @@ form {
   top: -200%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  align-items: center;
   gap: 1rem;
   background-color: #fff;
   border: 1px solid $light-purple;
@@ -86,5 +87,10 @@ form {
     width: 20px;
     height: 20px;
     font-size: 20px;
+    border: unset;
+    background: unset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }

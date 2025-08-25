@@ -21,7 +21,7 @@
 >
   @if(isMessageFromCurrentUser()) {
   <div
-    class="reaction-bar"
+    class="reaction-bar current-user"
     [@reactionBarSlideCurrentUser]="
       reactionVisibleId() === message()?.id ? 'visible' : 'hidden'
     "

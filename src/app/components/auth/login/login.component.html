@@ -55,7 +55,7 @@
     verwendest.
   </p>
   @if (errorMessage) {
-  <div>{{ errorMessage }}</div>
+  <span class="error-message">{{ errorMessage }}</span>
   }
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
