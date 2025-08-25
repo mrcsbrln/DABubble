@@ -41,6 +41,7 @@
 
   } @if(!selectAll()) {
   <div class="input-wrapper">
+    <input type="text" placeholder="Name eingeben" [(ngModel)]="userInput" />
     @if(selectedUsers().length > 0) { @for(user of selectedUsers(); track
     user.uid){
     <span class="tag">
@@ -55,9 +56,7 @@
         <img src="img/close.svg" alt="" />
       </span>
     </span>
-    } }
-    <input type="text" placeholder="Name eingeben" [(ngModel)]="userInput" />
-    @if(filteredSelectableUsers().length > 0) {
+    } } @if(filteredSelectableUsers().length > 0) {
     <div class="filtered-users">
       @for(user of filteredSelectableUsers(); track user.uid) {
       <span

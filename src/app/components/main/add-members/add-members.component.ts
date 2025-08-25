@@ -39,7 +39,7 @@ export class AddMembersComponent {
     const userInput = this.userInput().toLowerCase().trim();
     if (!userInput) return [];
     return this.getUsers().filter((user) =>
-      user.displayName.toLowerCase().includes(this.userInput().toLowerCase())
+      user.displayName.toLowerCase().startsWith(this.userInput().toLowerCase())
     );
   });
 
