@@ -38,11 +38,22 @@ export class AddChannelComponent {
     this.closeDialog.emit();
   }
 
+  channelAlreadyExists() {
+    const channelName = this.form.controls.channelName.value;
+    return this.channelService
+      .channels()
+      .some((channel) => channel.name === channelName);
+  }
+
   onSubmit() {
     const channelName = this.form.controls.channelName.value;
     const description = this.form.controls.description.value;
     const creatorId = this.authService.currentUser()?.uid;
-    if (this.form.controls.channelName.valid && creatorId) {
+    if (
+      this.form.controls.channelName.valid &&
+      creatorId &&
+      !this.channelAlreadyExists()
+    ) {
       const channelToSend: AddChannelData = {
         name: channelName!,
         description: description || '',

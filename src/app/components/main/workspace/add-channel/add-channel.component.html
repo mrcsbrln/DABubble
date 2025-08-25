@@ -41,6 +41,9 @@
           />
           <img src="img/tag.svg" alt="tag" />
         </div>
+        @if(this.channelAlreadyExists()) {
+        <span class="error-message">Channelname bereits vergeben!</span>
+        }
       </div>
 
       <div class="form-field">
@@ -55,7 +58,12 @@
       </div>
 
       <div class="actions">
-        <button type="submit">Erstellen</button>
+        <button
+          type="submit"
+          [disabled]="form.invalid || channelAlreadyExists()"
+        >
+          Erstellen
+        </button>
       </div>
     </form>
   </dialog>

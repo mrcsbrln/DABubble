@@ -4,6 +4,10 @@
   width: 100%;
 }
 
+.error-message {
+  color: red;
+}
+
 .wrapper {
   background-color: $backdrop;
   position: absolute;
@@ -137,16 +141,18 @@ form .actions {
     color: white;
     border-radius: 40px;
     padding: 14px 20px;
-    border: 1px solid $purple-1;
     max-width: 120px;
     border-radius: 25px;
     background-color: $purple-1;
     margin-top: 8px;
     font-size: 18px;
     transition: background-color 150ms;
-
     &:hover {
       background-color: $purple-2;
+    }
+    &:disabled {
+      background-color: $text-gray;
+      cursor: not-allowed;
     }
   }
 }
