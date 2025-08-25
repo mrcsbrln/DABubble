@@ -52,6 +52,8 @@
       </div>
       @if(username?.hasError('required') && username?.touched) {
       <p>Bitte gültigen Benutzernamen eingeben.</p>
+      } @if(userDisplayedNameAlreadyExists()) {
+      <p>Benutzername bereits vergeben</p>
       }
     </div>
     <div class="field-wrapper">
@@ -103,7 +105,11 @@
       <button
         class="btn-submit"
         type="submit"
-        [disabled]="form.invalid || !privacyPolicyChecked()"
+        [disabled]="
+          form.invalid ||
+          !privacyPolicyChecked() ||
+          userDisplayedNameAlreadyExists()
+        "
       >
         Weiter
       </button>

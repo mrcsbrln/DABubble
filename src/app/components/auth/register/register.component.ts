@@ -79,7 +79,7 @@ export class RegisterComponent {
     const rawForm = this.form.getRawValue();
     if (this.privacyPolicyChecked() && this.form.valid) {
       const userWithoutUid: Omit<UserProfile, 'uid'> = {
-        displayName: rawForm.username,
+        displayName: rawForm.username.trim(),
         email: rawForm.email,
         avatarUrl: this.avatarUrl(),
         heartbeat: serverTimestamp(),
@@ -171,5 +171,15 @@ export class RegisterComponent {
       default:
         return 'Ein unbekannter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.';
     }
+  }
+
+  userDisplayedNameAlreadyExists(): boolean {
+    const username = this.username?.value;
+    if (!username) {
+      return false;
+    }
+    return this.userService
+      .users()
+      .some((user) => user.displayName === username.trim());
   }
 }
