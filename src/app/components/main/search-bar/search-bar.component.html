@@ -6,7 +6,7 @@
     placeholder="Devspace durchsuchen"
   />
   <img src="img/search.svg" alt="" />
-  @if(isAtInInput()) {
+  @if(isAtInInput() && searchBarInput.valid) {
   <div class="searchbar-dialog">
     <div class="scrollable-content">
       @for(user of getFilteredUsers(); track user.uid) { @if(user.uid !==
@@ -26,7 +26,7 @@
       }
     </div>
   </div>
-  } @else if (isHashInInput()) {
+  } @else if (isHashInInput() && searchBarInput.valid) {
   <div class="searchbar-dialog">
     <div class="scrollable-content">
       @for(channel of getFilteredChannels(); track channel.id) {
@@ -41,7 +41,7 @@
     </div>
   </div>
   <!--Search for users, channels and messages-->
-  } @else if(getFilteredItems().hasResults ) {
+  } @else if(getFilteredItems().hasResults && searchBarInput.valid ) {
   <div class="searchbar-dialog">
     <div class="scrollable-content">
       <!--Filtered Users-->

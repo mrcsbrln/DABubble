@@ -101,7 +101,6 @@ export class MessageBoxComponent implements OnInit, AfterViewInit {
   }
 
   private focusTextarea(moveCaretToEnd = false) {
-    // kurz warten, bis das Value-Update im DOM ist
     setTimeout(() => {
       const el = this.textareaRef.nativeElement;
       el.focus();
@@ -110,7 +109,6 @@ export class MessageBoxComponent implements OnInit, AfterViewInit {
         try {
           el.setSelectionRange(len, len);
         } catch {
-          // iOS-Fallback, falls nötig
           el.selectionStart = el.selectionEnd = len;
         }
       }

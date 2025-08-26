@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserService } from '../../../services/user.service';
 import { ChannelService } from '../../../services/channel.service';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { ChannelMessageService } from '../../../services/channel-message.service';
@@ -27,7 +27,7 @@ export class SearchBarComponent {
   isAtInInput = signal(false);
   isHashInInput = signal(false);
 
-  searchBarInput = new FormControl('');
+  searchBarInput = new FormControl('', Validators.required);
 
   channelMessages = this.channelMessageService.messages;
   directMessages = this.directMessageService.directMessages;
