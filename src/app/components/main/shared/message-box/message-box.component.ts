@@ -73,10 +73,12 @@ export class MessageBoxComponent implements OnInit, AfterViewInit {
   }
 
   addEmojiToInput(emoji: string) {
-    const current = this.form.controls.content.value || '';
-    this.form.controls.content.setValue(current + emoji);
+    const control = this.form.controls.content;
+    const current = control.value ?? '';
+    control.setValue(current + emoji);
+
     this.isEmojiPickerOpen.set(false);
-    this.focusTextarea();
+    this.focusTextarea(true); // Caret ans Ende setzen
   }
 
   toggleEmojiPicker(event: MouseEvent) {
@@ -92,7 +94,20 @@ export class MessageBoxComponent implements OnInit, AfterViewInit {
     this.focusTextarea();
   }
 
-  private focusTextarea() {
-    setTimeout(() => this.textareaRef.nativeElement.focus());
+  private focusTextarea(moveCaretToEnd = false) {
+    // kurz warten, bis das Value-Update im DOM ist
+    setTimeout(() => {
+      const el = this.textareaRef.nativeElement;
+      el.focus();
+      if (moveCaretToEnd) {
+        const len = el.value.length;
+        try {
+          el.setSelectionRange(len, len);
+        } catch {
+          // iOS-Fallback, falls nötig
+          el.selectionStart = el.selectionEnd = len;
+        }
+      }
+    });
   }
 }
