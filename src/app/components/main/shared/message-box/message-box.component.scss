@@ -68,6 +68,7 @@ form {
   z-index: 9999;
   max-height: 350px;
   overflow: hidden;
+  box-shadow: $box-shadow-overlay;
   span {
     cursor: pointer;
   }

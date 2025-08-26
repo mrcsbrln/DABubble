@@ -18,8 +18,8 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { UserService } from '../../../../services/user.service';
 import { RouterLink } from '@angular/router';
+import { ChannelService } from '../../../../services/channel.service';
 import { ChannelMessageService } from '../../../../services/channel-message.service';
 import { FilterService } from '../../../../services/filter.service';
 
@@ -32,8 +32,8 @@ import { FilterService } from '../../../../services/filter.service';
 export class MessageBoxComponent implements OnInit, AfterViewInit {
   private destroyRef = inject(DestroyRef);
   private route = inject(ActivatedRoute);
-  private userService = inject(UserService);
   private channelMessageService = inject(ChannelMessageService);
+  private channelService = inject(ChannelService);
   private filterService = inject(FilterService);
 
   @ViewChild('textareaRef') textareaRef!: ElementRef<HTMLTextAreaElement>;
@@ -133,6 +133,10 @@ export class MessageBoxComponent implements OnInit, AfterViewInit {
     });
   }
 
+  getChannels() {
+    return this.channelService.channels();
+  }
+
   getChannelMembers() {
     return this.filterService
       .getChannelById(this.channelIdFromRoute())
@@ -149,6 +153,17 @@ export class MessageBoxComponent implements OnInit, AfterViewInit {
 
   resetCurrentChannelId() {
     this.channelMessageService.currentChannelId.set('');
+  }
+
+  resetForm() {
+    this.form.controls.content.reset();
+    this.checkForAtOrHash();
+  }
+
+  toggleAtInInput() {
+    const c = this.form.controls.content;
+    c.setValue(c.value === '@' ? '' : '@');
+    this.checkForAtOrHash();
   }
 
   toggleEmojiPicker(event: MouseEvent) {

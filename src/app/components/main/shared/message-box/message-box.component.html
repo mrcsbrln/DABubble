@@ -37,10 +37,11 @@
         </button>
         }
       </div>
-      }
-      <!-- <button
+      } @if(isChannelMessage()){
+      <button
         (mouseenter)="isAtBtnHovered.set(true)"
         (mouseleave)="isAtBtnHovered.set(false)"
+        (click)="toggleAtInInput()"
         class="picker-btn"
         type="button"
       >
@@ -48,7 +49,8 @@
           [src]="isAtBtnHovered() ? 'img/at-icon-hover.svg' : 'img/at-icon.svg'"
           alt="at-icon"
         />
-      </button> -->
+      </button>
+      }
     </div>
     <button
       (mouseenter)="isSendBtnHovered.set(true)"
@@ -71,12 +73,28 @@
         class="user-entry"
         [routerLink]="['/user', cm?.uid]"
         (click)="resetCurrentChannelId()"
+        (click)="resetForm()"
       >
         <div class="avatar-wrapper">
           <img [src]="cm?.avatarUrl" alt="Avatar" />
           <span class="status-dot"></span>
         </div>
         <span class="display-name">{{ cm?.displayName }}</span>
+      </a>
+      }
+    </div>
+  </div>
+  } @if(isHashInInput()) {
+  <div class="dialog">
+    <div class="scrollable-content">
+      @for(channel of getChannels(); track channel.id ) {
+      <a
+        class="user-entry"
+        [routerLink]="['/channel', channel.id]"
+        (click)="resetCurrentChannelId()"
+        (click)="resetForm()"
+      >
+        <span class="display-name">{{ channel.name }}</span>
       </a>
       }
     </div>
