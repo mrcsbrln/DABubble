@@ -86,6 +86,14 @@ export class MessageBoxComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.contentControlReady.emit(this.form.controls.content);
+
+    this.route.paramMap
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((pm) => {
+        const id = pm.get('channelId') ?? '';
+        this.channelIdFromRoute.set(id);
+      });
+
     this.destroyRef.onDestroy(() => {
       this.form.reset();
     });
@@ -125,8 +133,10 @@ export class MessageBoxComponent implements OnInit, AfterViewInit {
     });
   }
 
-  getAllUsers() {
-    return this.userService.users();
+  getChannelMembers() {
+    return this.filterService
+      .getChannelById(this.channelIdFromRoute())
+      ?.memberIds.map((id) => this.filterService.getUserById(id));
   }
 
   onSubmit() {

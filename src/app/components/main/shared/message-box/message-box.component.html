@@ -66,17 +66,17 @@
   @if(isAtInInput() && isChannelMessage()) {
   <div class="dialog">
     <div class="scrollable-content">
-      @for(user of getAllUsers(); track user.uid ) {
+      @for(cm of getChannelMembers(); track cm?.uid ) {
       <a
         class="user-entry"
-        [routerLink]="['/user', user.uid]"
+        [routerLink]="['/user', cm?.uid]"
         (click)="resetCurrentChannelId()"
       >
         <div class="avatar-wrapper">
-          <img [src]="user.avatarUrl" alt="Avatar" />
+          <img [src]="cm?.avatarUrl" alt="Avatar" />
           <span class="status-dot"></span>
         </div>
-        <span class="display-name">{{ user.displayName }}</span>
+        <span class="display-name">{{ cm?.displayName }}</span>
       </a>
       }
     </div>
