@@ -52,6 +52,8 @@
 <app-message-box
   [placeholder]="'Nachricht an ' + getSelectedUser()?.displayName"
   (send)="handleSend($event)"
+  [isChannelMessage]="false"
+  [isDirectMessage]="true"
 />
 @if(isUserProfileDialogOpen()) {
 <div class="dialog-backdrop"></div>

@@ -18,29 +18,42 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { UserService } from '../../../../services/user.service';
+import { RouterLink } from '@angular/router';
+import { ChannelMessageService } from '../../../../services/channel-message.service';
+import { FilterService } from '../../../../services/filter.service';
 
 @Component({
   selector: 'app-message-box',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './message-box.component.html',
   styleUrl: './message-box.component.scss',
 })
 export class MessageBoxComponent implements OnInit, AfterViewInit {
   private destroyRef = inject(DestroyRef);
   private route = inject(ActivatedRoute);
+  private userService = inject(UserService);
+  private channelMessageService = inject(ChannelMessageService);
+  private filterService = inject(FilterService);
 
   @ViewChild('textareaRef') textareaRef!: ElementRef<HTMLTextAreaElement>;
 
   placeholder = input<string>();
+  isChannelMessage = input<boolean>();
+  isDirectMessage = input<boolean>();
 
   send = output<string>();
   contentControlReady = output<FormControl<string>>();
 
   isEmojiPickerOpen = signal(false);
+  isAtInInput = signal(false);
+  isHashInInput = signal(false);
 
   isEmojiBtnHovered = signal(false);
   isAtBtnHovered = signal(false);
   isSendBtnHovered = signal(false);
+
+  channelIdFromRoute = signal<string>('');
 
   emojis: string[] = [
     '😀',
@@ -84,20 +97,17 @@ export class MessageBoxComponent implements OnInit, AfterViewInit {
     control.setValue(current + emoji);
 
     this.isEmojiPickerOpen.set(false);
-    this.focusTextarea(true); // Caret ans Ende setzen
+    this.focusTextarea(true);
   }
 
-  toggleEmojiPicker(event: MouseEvent) {
-    event.stopPropagation();
-    this.isEmojiPickerOpen.update((open) => !open);
-  }
-
-  onSubmit() {
-    const text = this.form.value.content;
-    if (!text) return;
-    this.send.emit(text);
-    this.form.reset();
-    this.focusTextarea();
+  checkForAtOrHash() {
+    const searchBarValue = this.form.controls.content.value || '';
+    this.isAtInInput.set(
+      searchBarValue?.includes('@') && searchBarValue.length === 1
+    );
+    this.isHashInInput.set(
+      searchBarValue?.includes('#') && searchBarValue.length === 1
+    );
   }
 
   private focusTextarea(moveCaretToEnd = false) {
@@ -113,5 +123,26 @@ export class MessageBoxComponent implements OnInit, AfterViewInit {
         }
       }
     });
+  }
+
+  getAllUsers() {
+    return this.userService.users();
+  }
+
+  onSubmit() {
+    const text = this.form.value.content;
+    if (!text) return;
+    this.send.emit(text);
+    this.form.reset();
+    this.focusTextarea();
+  }
+
+  resetCurrentChannelId() {
+    this.channelMessageService.currentChannelId.set('');
+  }
+
+  toggleEmojiPicker(event: MouseEvent) {
+    event.stopPropagation();
+    this.isEmojiPickerOpen.update((open) => !open);
   }
 }

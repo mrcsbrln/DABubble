@@ -34,8 +34,12 @@ export class SearchBarComponent {
 
   checkForAtOrHash() {
     const searchBarValue = this.searchBarInput.value || '';
-    this.isAtInInput.set(searchBarValue?.includes('@'));
-    this.isHashInInput.set(searchBarValue?.includes('#'));
+    this.isAtInInput.set(
+      searchBarValue?.includes('@') && searchBarValue.length === 1
+    );
+    this.isHashInInput.set(
+      searchBarValue?.includes('#') && searchBarValue.length === 1
+    );
   }
 
   getCurrentUser() {

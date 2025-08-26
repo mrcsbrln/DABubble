@@ -3,6 +3,7 @@
     #textareaRef
     [formControl]="form.controls.content"
     [placeholder]="placeholder()"
+    (input)="checkForAtOrHash()"
   ></textarea>
   <div class="textarea-button-container">
     <div class="textarea-button-group">
@@ -62,4 +63,23 @@
       />
     </button>
   </div>
+  @if(isAtInInput() && isChannelMessage()) {
+  <div class="dialog">
+    <div class="scrollable-content">
+      @for(user of getAllUsers(); track user.uid ) {
+      <a
+        class="user-entry"
+        [routerLink]="['/user', user.uid]"
+        (click)="resetCurrentChannelId()"
+      >
+        <div class="avatar-wrapper">
+          <img [src]="user.avatarUrl" alt="Avatar" />
+          <span class="status-dot"></span>
+        </div>
+        <span class="display-name">{{ user.displayName }}</span>
+      </a>
+      }
+    </div>
+  </div>
+  }
 </form>

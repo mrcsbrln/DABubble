@@ -25,7 +25,7 @@ export const routes: Routes = [
     children: [
       { path: '', component: NewMessageComponent },
       {
-        path: 'channel/:channel',
+        path: 'channel/:channelId',
         component: ChannelMessageComponent,
       },
       {

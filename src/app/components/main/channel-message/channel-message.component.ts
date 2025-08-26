@@ -221,7 +221,7 @@ export class ChannelMessageComponent implements OnInit {
 
   subRouteParams() {
     this.route.paramMap.subscribe((params: ParamMap) => {
-      const channelId = params.get('channel');
+      const channelId = params.get('channelId');
       if (channelId) {
         this.channelMessageService.currentChannelId.set(channelId);
       } else {
