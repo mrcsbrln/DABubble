@@ -16,6 +16,8 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-message-box',
@@ -25,6 +27,7 @@ import {
 })
 export class MessageBoxComponent implements OnInit, AfterViewInit {
   private destroyRef = inject(DestroyRef);
+  private route = inject(ActivatedRoute);
 
   @ViewChild('textareaRef') textareaRef!: ElementRef<HTMLTextAreaElement>;
 
@@ -63,6 +66,9 @@ export class MessageBoxComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => this.textareaRef.nativeElement.focus());
+    this.route.paramMap
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => this.focusTextarea(true));
   }
 
   ngOnInit(): void {
