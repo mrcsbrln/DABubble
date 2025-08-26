@@ -60,6 +60,7 @@
   background-color: $bg-color;
   color: #000;
   border-radius: 0 30px 30px 30px;
+  white-space: pre-wrap;
   &.current-user {
     color: #fff;
     background-color: $purple-2;

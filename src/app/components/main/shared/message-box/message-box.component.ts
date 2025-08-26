@@ -93,7 +93,7 @@ export class MessageBoxComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
-    const text = this.form.value.content?.trim();
+    const text = this.form.value.content;
     if (!text) return;
     this.send.emit(text);
     this.form.reset();
