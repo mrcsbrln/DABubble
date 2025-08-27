@@ -81,6 +81,14 @@ main {
 
   app-workspace {
     width: $first-column-width;
+    overflow: hidden;
+    transition: all 0.5s ease;
+    animation: fadeInEarly 0.5s ease both;
+    &.workspace-hidden {
+      width: 0;
+      animation: fadeOutLate 0.5s ease both;
+    }
+
     &.mobile {
       flex: 1;
     }
@@ -88,11 +96,22 @@ main {
 
   section {
     display: flex;
-    flex: 1;
+    flex-grow: 1;
+    transition: width 0.5s ease;
   }
 
   app-thread {
-    width: $last-column-width;
+    width: 100%;
+    transition: all 0.5s ease;
+    animation: fadeInEarly 0.5s ease both;
+    overflow: hidden;
+    @include respond(lg) {
+      width: $last-column-width;
+    }
+    &.thread-hidden {
+      width: 0;
+      animation: fadeOutLate 0.5s ease both;
+    }
   }
 }
 
@@ -150,5 +169,34 @@ main {
   &:hover {
     transition: $hover-transition;
     color: $purple-3;
+  }
+}
+
+@keyframes fadeInEarly {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeOutLate {
+  0% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
   }
 }
