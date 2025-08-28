@@ -74,7 +74,6 @@ header {
 
 main {
   display: flex;
-  gap: 16px;
   width: 100%;
   min-height: 0;
   height: 100%;
@@ -83,10 +82,13 @@ main {
     width: $first-column-width;
     overflow: hidden;
     transition: all 0.5s ease;
-    @include respond(lg) {
+    margin-right: 0;
+    @include respond(md) {
       animation: fadeInEarly 0.5s ease both;
+      margin-right: 16px;
     }
     &.workspace-hidden {
+      margin-right: 0;
       width: 0;
       @include respond(lg) {
         animation: fadeOutLate 0.5s ease both;
@@ -108,11 +110,14 @@ main {
     width: 100%;
     transition: all 0.5s ease;
     overflow: hidden;
-    @include respond(lg) {
+    margin-left: 0;
+    @include respond(md) {
+      margin-left: 16px;
       animation: fadeInEarly 0.5s ease both;
       width: $last-column-width;
     }
     &.thread-hidden {
+      margin-left: 0;
       width: 0;
       @include respond(lg) {
         animation: fadeOutLate 0.5s ease both;

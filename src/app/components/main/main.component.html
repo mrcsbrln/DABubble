@@ -1,4 +1,4 @@
-@if(breakpoint() === 'xs' || breakpoint() === 'sm' ) {
+@if(breakpoint() === 'xs' || breakpoint() === 'sm') {
 <header class="mobile">
   <div class="mobile-wrapper">
     @if(isWorkspaceHidden()) {
@@ -17,9 +17,9 @@
     <app-profile-menu class="mobile" />
   </div>
   <app-search-bar class="mobile" />
-  <!-- <span
+  <span
     >{{ isWorkspaceHidden() }} {{ isChatHidden() }} {{ isThreadHidden() }}</span
-  > -->
+  >
 </header>
 } @else {
 <header>
@@ -29,6 +29,9 @@
   </div>
   <app-search-bar />
   <app-profile-menu />
+  <span
+    >{{ isWorkspaceHidden() }} {{ isChatHidden() }} {{ isThreadHidden() }}</span
+  >
 </header>
 }
 
@@ -56,8 +59,7 @@
   @if(!isWorkspaceHidden() && isChatHidden() && isThreadHidden()) {
   <app-workspace
     class="mobile"
-    (closeWorkspace)="isWorkspaceHidden.set(true)"
-    (closeWorkspace)="isChatHidden.set(false)"
+    (closeWorkspace)="isWorkspaceHidden.set(true); isChatHidden.set(false)"
   />
   } @if(isWorkspaceHidden() && !isChatHidden() && isThreadHidden()) {
   <section>
@@ -80,6 +82,8 @@
   } @if(isWorkspaceHidden() && !isChatHidden() && !isThreadHidden()) {
   <app-thread (closeThread)="isThreadHidden.set(true)" />
   }}
+
+  <!--FOR TABLETS AND NOTEBOOKS-->
 </main>
 
 <!--WORKSPACE-BUTTON-->

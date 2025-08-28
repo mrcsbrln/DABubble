@@ -271,8 +271,8 @@
       @if(getThreadMessages().length === 1) {
       <div
         class="thread-wrapper"
-        (click)="onOpenThread()"
-        (keydown)="onOpenThread()"
+        (click)="onOpenThread(); setParentMessageId()"
+        (keydown)="onOpenThread(); setParentMessageId()"
         tabindex="0"
       >
         <span class="answer-amount"
@@ -286,8 +286,8 @@
       } @if( getThreadMessages().length > 1 ) {
       <div
         class="thread-wrapper"
-        (click)="onOpenThread()"
-        (keydown)="onOpenThread()"
+        (click)="onOpenThread(); setParentMessageId()"
+        (keydown)="onOpenThread(); setParentMessageId()"
         tabindex="0"
       >
         <span class="answer-amount"

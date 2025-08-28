@@ -5,6 +5,7 @@ import {
   signal,
   OnInit,
   inject,
+  effect,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SearchBarComponent } from './search-bar/search-bar.component';
@@ -50,8 +51,18 @@ export class MainComponent implements OnInit {
   });
 
   isWorkspaceHidden = signal(false);
-  isChatHidden = signal(true);
+  isChatHidden = signal(false);
   isThreadHidden = signal(true);
+
+  private hideThreadOnLgEffect = effect(
+    () => {
+      const bp = this.breakpoint();
+      if (bp === 'lg') {
+        this.isThreadHidden.set(true);
+      }
+    },
+    { allowSignalWrites: true }
+  );
 
   ngOnInit() {
     this.directMessageService.selectedUserId.set('');
