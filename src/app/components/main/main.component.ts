@@ -4,6 +4,7 @@ import {
   HostListener,
   signal,
   OnInit,
+  inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SearchBarComponent } from './search-bar/search-bar.component';
@@ -14,6 +15,8 @@ import { RouterOutlet } from '@angular/router';
 import { DirectMessageComponent } from './direct-message/direct-message.component';
 import { ChannelMessageComponent } from './channel-message/channel-message.component';
 import { slideLeft, slideRight } from '../../services/site-animations.service';
+import { DirectMessageService } from '../../services/direct-message.service';
+import { ChannelMessageService } from '../../services/channel-message.service';
 
 type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 
@@ -32,6 +35,8 @@ type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
   animations: [slideLeft, slideRight],
 })
 export class MainComponent implements OnInit {
+  private directMessageService = inject(DirectMessageService);
+  private channelMessageService = inject(ChannelMessageService);
   width = signal(0);
 
   breakpoint = computed<Breakpoint>(() => {
@@ -49,6 +54,8 @@ export class MainComponent implements OnInit {
   isThreadHidden = signal(true);
 
   ngOnInit() {
+    this.directMessageService.selectedUserId.set('');
+    this.channelMessageService.currentChannelId.set('');
     this.updateViewport();
   }
 

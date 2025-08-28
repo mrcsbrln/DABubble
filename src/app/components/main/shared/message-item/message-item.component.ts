@@ -227,7 +227,7 @@ export class MessageItemComponent {
     this.openThread.emit();
   }
 
-  setParentDirectMessageId() {
+  setParentMessageId() {
     const message = this.message();
 
     if (!message) return;

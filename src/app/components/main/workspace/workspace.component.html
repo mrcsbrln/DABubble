@@ -59,7 +59,6 @@
       [ngClass]="{
         'selected-channel': isChannelSelected(channel.id)
       }"
-      (click)="resetSelectedUserId()"
       (click)="onCloseWorkspace()"
       (keyup.enter)="resetSelectedUserId()"
       tabindex="0"
@@ -102,7 +101,6 @@
         'selected-user': isUserSelected(getCurrentUserData()?.uid || '')
       }"
       [routerLink]="['/user', getCurrentUserData()?.uid]"
-      (click)="resetCurrentChannelId()"
       (click)="onCloseWorkspace()"
     >
       <div class="avatar-wrapper">

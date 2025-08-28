@@ -1,7 +1,7 @@
 <div class="header">
   <span class="thread-info">
     <span class="title">Thread</span>
-    @if(type === 'channel') {
+    @if(type() === 'channel') {
     <span class="channel-name"> # {{ getChannelName() }} </span>
     }
   </span>
@@ -20,7 +20,7 @@
 </div>
 
 <div class="thread-main">
-  @if(type === 'channel') {
+  @if(type() === 'channel') {
   <app-message-item
     [message]="getParentChannelMessage()"
     [isThreadItem]="true"
@@ -33,7 +33,7 @@
   </div>
   @for(message of getChannelThreadMessages(); track message.id) {
   <app-message-item [message]="message" [isThreadItem]="true" />
-  } } @else if (type === 'user') {
+  } } @else if (type() === 'user') {
   <app-message-item
     [message]="getParentDirectMessage()"
     [isThreadItem]="true"
@@ -50,12 +50,12 @@
 </div>
 
 <div class="message-box-wrapper">
-  @if(type === 'user') {
+  @if(type() === 'user') {
   <app-message-box
     [placeholder]="'Antworten...'"
     (send)="handleSendForDirectMessage($event)"
   />
-  } @else if (type === 'channel') {
+  } @else if (type() === 'channel') {
   <app-message-box
     [placeholder]="'Antworten...'"
     (send)="handleSendForChannelMessage($event)"

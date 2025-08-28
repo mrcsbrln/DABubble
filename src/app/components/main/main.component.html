@@ -42,9 +42,7 @@
   <section>
     <router-outlet (activate)="onActivate($event)" />
   </section>
-  <!-- @if(!isThreadHidden()) {
-  <app-thread (closeThread)="isThreadHidden.set(true)" @slideRight />
-  } -->
+
   <app-thread
     (closeThread)="isThreadHidden.set(true)"
     [ngClass]="{ 'thread-hidden': isThreadHidden() }"

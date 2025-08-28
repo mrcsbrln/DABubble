@@ -7,6 +7,7 @@ import {
   signal,
   ViewChild,
   OnInit,
+  OnDestroy,
 } from '@angular/core';
 import {
   FormControl,
@@ -23,8 +24,9 @@ import { MessageBoxComponent } from '../shared/message-box/message-box.component
 import { DirectMessageService } from '../../../services/direct-message.service';
 import { DirectMessage } from '../../../interfaces/direct-message.interface';
 import { UserService } from '../../../services/user.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { MessageItemComponent } from '../shared/message-item/message-item.component';
+import { filter, Subscription } from 'rxjs';
 
 type DirectMessageData = Omit<DirectMessage, 'id'>;
 
@@ -34,7 +36,7 @@ type DirectMessageData = Omit<DirectMessage, 'id'>;
   templateUrl: './thread.component.html',
   styleUrl: './thread.component.scss',
 })
-export class ThreadComponent implements OnInit {
+export class ThreadComponent implements OnInit, OnDestroy {
   private authService = inject(AuthService);
   private channelMessageService = inject(ChannelMessageService);
   private channelService = inject(ChannelService);
@@ -58,8 +60,8 @@ export class ThreadComponent implements OnInit {
     ]),
   });
 
-  type: 'user' | 'channel' | null = null;
-  id: string | null = null;
+  type = signal<'user' | 'channel' | null>(null);
+  id = signal<string>('');
 
   emojis: string[] = [
     '😀',
@@ -76,7 +78,23 @@ export class ThreadComponent implements OnInit {
     '✅',
   ];
 
+  private subscription!: Subscription;
+
   ngOnInit(): void {
+    this.checkRouteType();
+    this.subscription = this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.onRouteChange();
+      });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  onRouteChange() {
+    this.onCloseThread();
     this.checkRouteType();
   }
 
@@ -145,10 +163,6 @@ export class ThreadComponent implements OnInit {
       .filter((dm) => dm.parentMessageId === parentMessageId);
   }
 
-  getDirectThreadMessages() {
-    return;
-  }
-
   getChannelThreadMessages() {
     return this.channelMessageService.threadMessages();
   }
@@ -210,14 +224,11 @@ export class ThreadComponent implements OnInit {
     const url = this.router.url;
 
     if (url.startsWith('/user/')) {
-      this.type = 'user';
-      this.id = this.route.snapshot.paramMap.get('id');
+      this.type.set('user');
+      this.id.set(this.route.snapshot.paramMap.get('id') ?? '');
     } else if (url.startsWith('/channel/')) {
-      this.type = 'channel';
-      this.id = this.route.snapshot.paramMap.get('id');
-    } else {
-      this.type = null;
-      this.id = null;
+      this.type.set('channel');
+      this.id.set(this.route.snapshot.paramMap.get('id') ?? '');
     }
   }
 }

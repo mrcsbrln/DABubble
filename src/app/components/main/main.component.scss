@@ -83,10 +83,14 @@ main {
     width: $first-column-width;
     overflow: hidden;
     transition: all 0.5s ease;
-    animation: fadeInEarly 0.5s ease both;
+    @include respond(lg) {
+      animation: fadeInEarly 0.5s ease both;
+    }
     &.workspace-hidden {
       width: 0;
-      animation: fadeOutLate 0.5s ease both;
+      @include respond(lg) {
+        animation: fadeOutLate 0.5s ease both;
+      }
     }
 
     &.mobile {
@@ -103,14 +107,16 @@ main {
   app-thread {
     width: 100%;
     transition: all 0.5s ease;
-    animation: fadeInEarly 0.5s ease both;
     overflow: hidden;
     @include respond(lg) {
+      animation: fadeInEarly 0.5s ease both;
       width: $last-column-width;
     }
     &.thread-hidden {
       width: 0;
-      animation: fadeOutLate 0.5s ease both;
+      @include respond(lg) {
+        animation: fadeOutLate 0.5s ease both;
+      }
     }
   }
 }
