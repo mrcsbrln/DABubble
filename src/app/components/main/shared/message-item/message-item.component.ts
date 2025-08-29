@@ -241,7 +241,6 @@ export class MessageItemComponent {
 
   toggleEmojiPickerInBar() {
     this.isEmojiPickerInBarOpen.update((value) => !value);
-    console.log(this.isEmojiPickerInBarOpen());
   }
 
   toggleEmojiPicker() {

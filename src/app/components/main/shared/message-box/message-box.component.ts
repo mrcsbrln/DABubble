@@ -91,9 +91,6 @@ export class MessageBoxComponent implements OnInit {
       });
 
     this.destroyRef.onDestroy(() => this.form.reset());
-    if (this.isNewMessage()) {
-      console.log(this.getAllUsers());
-    }
   }
 
   addEmojiToInput(emoji: string) {

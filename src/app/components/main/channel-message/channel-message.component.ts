@@ -225,7 +225,7 @@ export class ChannelMessageComponent implements OnInit {
       if (channelId) {
         this.channelMessageService.currentChannelId.set(channelId);
       } else {
-        console.log('No route');
+        console.error('No route');
       }
     });
   }

@@ -53,9 +53,8 @@ export class ResetPasswordComponent implements OnInit {
       const code = params['oobCode'];
       if (code) {
         this.actionCode.set(code);
-        console.log(code);
       } else {
-        console.log('kein action code');
+        console.error('kein action code');
       }
     });
   }
