@@ -63,19 +63,14 @@ button {
   padding-left: 32px;
 }
 
-.input-wrapper {
+input {
   border: 1px solid $light-purple;
   border-radius: 30px;
   padding: 15px 20px;
-
-  input {
-    border-style: none;
-    width: 100%;
-    font-size: 18px;
-
-    &:focus {
-      outline: none;
-    }
+  font-size: 18px;
+  &:focus {
+    outline: none;
+    border-color: $purple-1;
   }
 }
 

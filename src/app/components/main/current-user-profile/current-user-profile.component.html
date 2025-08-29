@@ -65,19 +65,26 @@
       <img src="img/account-circle.svg" alt="" />
       <span class="edit-name">Vollständiger Name</span>
     </div>
-    <div class="input-wrapper">
-      <input
-        type="text"
-        placeholder="Neuen Namen eingeben"
-        [(ngModel)]="newDisplayedName"
-      />
-    </div>
+
+    <input
+      type="text"
+      placeholder="Neuen Namen eingeben"
+      [(ngModel)]="newDisplayedName"
+      name="displayName"
+      required
+      minlength="2"
+      maxlength="30"
+      pattern="^[a-zA-ZäöüÄÖÜß0-9 ]+$"
+      #nameInput="ngModel"
+      appAutofocus
+    />
+
     <div class="button-wrapper">
       <button class="cancel" (click)="onCloseDialog()">Abbrechen</button>
       <button
         class="save"
         (click)="updateDisplayedName()"
-        [disabled]="newDisplayedName().length < 2"
+        [disabled]="nameInput.invalid"
       >
         Speichern
       </button>

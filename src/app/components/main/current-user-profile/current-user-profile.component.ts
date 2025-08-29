@@ -2,10 +2,11 @@ import { Component, inject, output, signal } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { AuthService } from '../../../services/auth/auth.service';
 import { FormsModule } from '@angular/forms';
+import { AutofocusDirective } from '../../../directives/autofocus.directive';
 
 @Component({
   selector: 'app-current-user-profile',
-  imports: [FormsModule],
+  imports: [FormsModule, AutofocusDirective],
   templateUrl: './current-user-profile.component.html',
   styleUrl: './current-user-profile.component.scss',
 })
