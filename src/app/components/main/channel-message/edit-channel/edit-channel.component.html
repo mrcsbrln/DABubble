@@ -44,6 +44,7 @@
     <div class="channel-name-readonly">{{ inputNameValue() }}</div>
     } @else {
     <input
+      appAutofocus
       [readonly]="isInputNameReadonly()"
       [value]="inputNameValue()"
       (input)="onInputName($event)"
@@ -79,6 +80,7 @@
     </div>
     } @else {
     <textarea
+      appAutofocus
       [readonly]="isInputDescriptionReadonly()"
       [value]="inputDescriptionValue()"
       (input)="onInputDescription($event)"

@@ -4,10 +4,11 @@ import { ChannelService } from '../../../../services/channel.service';
 import { UserService } from '../../../../services/user.service';
 import { AuthService } from '../../../../services/auth/auth.service';
 import { Router } from '@angular/router';
+import { AutofocusDirective } from '../../../directives/autofocus.directive';
 
 @Component({
   selector: 'app-edit-channel',
-  imports: [FormsModule],
+  imports: [FormsModule, AutofocusDirective],
   templateUrl: './edit-channel.component.html',
   styleUrl: './edit-channel.component.scss',
 })

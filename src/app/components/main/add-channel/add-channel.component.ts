@@ -9,12 +9,13 @@ import { Channel } from '../../../interfaces/channel.interface';
 import { ChannelService } from '../../../services/channel.service';
 import { serverTimestamp } from '@angular/fire/firestore';
 import { AuthService } from '../../../services/auth/auth.service';
+import { AutofocusDirective } from '../../directives/autofocus.directive';
 
 type AddChannelData = Omit<Channel, 'id'>;
 
 @Component({
   selector: 'app-add-channel',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, AutofocusDirective],
   templateUrl: './add-channel.component.html',
   styleUrl: './add-channel.component.scss',
 })
