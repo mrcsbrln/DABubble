@@ -10,6 +10,7 @@ import {
 } from '../../../services/site-animations.service';
 import { UserProfile } from '../../../interfaces/user-profile.interface';
 import { serverTimestamp } from '@angular/fire/firestore';
+import { ChannelService } from '../../../services/channel.service';
 
 @Component({
   selector: 'app-register',
@@ -26,6 +27,7 @@ import { serverTimestamp } from '@angular/fire/firestore';
 export class RegisterComponent {
   private authService = inject(AuthService);
   private userService = inject(UserService);
+  private channelService = inject(ChannelService);
   private fb = inject(FormBuilder);
   private router = inject(Router);
 
@@ -128,6 +130,13 @@ export class RegisterComponent {
             console.error(err);
           },
         });
+
+      if (typeof this.newUser.uid === 'string') {
+        this.channelService.addUserToChannel(
+          this.newUser.uid,
+          'RSuPQxnyCQgf6ukFaCL9'
+        );
+      }
     }
   }
 

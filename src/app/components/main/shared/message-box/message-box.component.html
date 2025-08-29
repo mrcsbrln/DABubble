@@ -107,7 +107,7 @@
   } @if(isHashInInput()) {
   <div class="dialog">
     <div class="scrollable-content">
-      @for(channel of getChannels(); track channel.id ) {
+      @for(channel of getChannelsOfCurrentUser(); track channel.id ) {
       <a
         class="user-entry"
         [routerLink]="['/channel', channel.id]"

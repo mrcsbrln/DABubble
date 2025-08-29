@@ -127,8 +127,8 @@ export class MessageBoxComponent implements OnInit {
     });
   }
 
-  getChannels() {
-    return this.channelService.channels();
+  getChannelsOfCurrentUser() {
+    return this.filterService.getChannelsOfCurrentUser();
   }
 
   getAllUsers() {
