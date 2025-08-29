@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal, DestroyRef } from '@angular/core';
 import { MessageBoxComponent } from '../shared/message-box/message-box.component';
 import { UserService } from '../../../services/user.service';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -22,6 +22,7 @@ export class NewMessageComponent {
   private authService = inject(AuthService);
   private directMessageService = inject(DirectMessageService);
   private router = inject(Router);
+  private destroyRef = inject(DestroyRef);
 
   userInputControl = new FormControl('', { nonNullable: true });
   userInputSignal = toSignal(this.userInputControl.valueChanges, {

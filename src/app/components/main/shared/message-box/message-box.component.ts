@@ -8,7 +8,6 @@ import {
   output,
   signal,
   ViewChild,
-  AfterViewInit,
 } from '@angular/core';
 import {
   FormControl,
@@ -22,6 +21,7 @@ import { RouterLink } from '@angular/router';
 import { ChannelService } from '../../../../services/channel.service';
 import { ChannelMessageService } from '../../../../services/channel-message.service';
 import { FilterService } from '../../../../services/filter.service';
+import { UserService } from '../../../../services/user.service';
 
 @Component({
   selector: 'app-message-box',
@@ -29,11 +29,12 @@ import { FilterService } from '../../../../services/filter.service';
   templateUrl: './message-box.component.html',
   styleUrl: './message-box.component.scss',
 })
-export class MessageBoxComponent implements OnInit, AfterViewInit {
+export class MessageBoxComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
   private route = inject(ActivatedRoute);
   private channelMessageService = inject(ChannelMessageService);
   private channelService = inject(ChannelService);
+  private userService = inject(UserService);
   private filterService = inject(FilterService);
 
   @ViewChild('textareaRef') textareaRef!: ElementRef<HTMLTextAreaElement>;
@@ -41,6 +42,7 @@ export class MessageBoxComponent implements OnInit, AfterViewInit {
   placeholder = input<string>();
   isChannelMessage = input<boolean>();
   isDirectMessage = input<boolean>();
+  isNewMessage = input<boolean>();
 
   send = output<string>();
   contentControlReady = output<FormControl<string>>();
@@ -77,13 +79,6 @@ export class MessageBoxComponent implements OnInit, AfterViewInit {
     }),
   });
 
-  ngAfterViewInit(): void {
-    setTimeout(() => this.textareaRef.nativeElement.focus());
-    this.route.paramMap
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => this.focusTextarea(true));
-  }
-
   ngOnInit(): void {
     this.contentControlReady.emit(this.form.controls.content);
 
@@ -92,11 +87,13 @@ export class MessageBoxComponent implements OnInit, AfterViewInit {
       .subscribe((pm) => {
         const id = pm.get('channelId') ?? '';
         this.channelIdFromRoute.set(id);
+        this.focusTextarea(true);
       });
 
-    this.destroyRef.onDestroy(() => {
-      this.form.reset();
-    });
+    this.destroyRef.onDestroy(() => this.form.reset());
+    if (this.isNewMessage()) {
+      console.log(this.getAllUsers());
+    }
   }
 
   addEmojiToInput(emoji: string) {
@@ -135,6 +132,10 @@ export class MessageBoxComponent implements OnInit, AfterViewInit {
 
   getChannels() {
     return this.channelService.channels();
+  }
+
+  getAllUsers() {
+    return this.userService.users();
   }
 
   getChannelMembers() {

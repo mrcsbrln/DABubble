@@ -37,7 +37,7 @@
         </button>
         }
       </div>
-      } @if(isChannelMessage()){
+      } @if(isChannelMessage() || isNewMessage()){
       <button
         (mouseenter)="isAtBtnHovered.set(true)"
         (mouseleave)="isAtBtnHovered.set(false)"
@@ -68,7 +68,8 @@
   @if(isAtInInput() && isChannelMessage()) {
   <div class="dialog">
     <div class="scrollable-content">
-      @for(cm of getChannelMembers(); track cm?.uid ) {
+      @if(isChannelMessage()) { @for(cm of getChannelMembers(); track cm?.uid )
+      {
       <a
         class="user-entry"
         [routerLink]="['/user', cm?.uid]"
@@ -80,6 +81,25 @@
           <span class="status-dot"></span>
         </div>
         <span class="display-name">{{ cm?.displayName }}</span>
+      </a>
+      } }
+    </div>
+  </div>
+  } @if(isAtInInput() && isNewMessage()) {
+  <div class="dialog">
+    <div class="scrollable-content">
+      @for(user of getAllUsers(); track user.uid ) {
+      <a
+        class="user-entry"
+        [routerLink]="['/user', user.uid]"
+        (click)="resetCurrentChannelId()"
+        (click)="resetForm()"
+      >
+        <div class="avatar-wrapper">
+          <img [src]="user.avatarUrl" alt="Avatar" />
+          <span class="status-dot"></span>
+        </div>
+        <span class="display-name">{{ user.displayName }}</span>
       </a>
       }
     </div>
