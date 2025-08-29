@@ -122,6 +122,10 @@ export class RegisterComponent {
 
               await this.userService.addUser(completedUser);
               await this.updateAvatarUrl();
+              this.channelService.addUserToChannel(
+                currentUser.uid,
+                'RSuPQxnyCQgf6ukFaCL9'
+              );
             }
           },
           error: (err) => {
@@ -130,13 +134,6 @@ export class RegisterComponent {
             console.error(err);
           },
         });
-
-      if (typeof this.newUser.uid === 'string') {
-        this.channelService.addUserToChannel(
-          this.newUser.uid,
-          'RSuPQxnyCQgf6ukFaCL9'
-        );
-      }
     }
   }
 
