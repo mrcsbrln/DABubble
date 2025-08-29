@@ -18,6 +18,7 @@ import { ChannelMessageComponent } from './channel-message/channel-message.compo
 import { slideLeft, slideRight } from '../../services/site-animations.service';
 import { DirectMessageService } from '../../services/direct-message.service';
 import { ChannelMessageService } from '../../services/channel-message.service';
+import { AddChannelComponent } from './add-channel/add-channel.component';
 
 type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 
@@ -30,6 +31,7 @@ type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
     RouterOutlet,
     ProfileMenuComponent,
     SearchBarComponent,
+    AddChannelComponent,
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
@@ -53,6 +55,8 @@ export class MainComponent implements OnInit {
   isWorkspaceHidden = signal(false);
   isChatHidden = signal(false);
   isThreadHidden = signal(true);
+
+  isAddChannelDialogOpen = signal(false);
 
   private hideThreadOnLgEffect = effect(
     () => {
@@ -81,6 +85,14 @@ export class MainComponent implements OnInit {
     if ('openThread' in component && component.openThread?.subscribe) {
       component.openThread.subscribe(() => this.isThreadHidden.set(false));
     }
+  }
+
+  handleOpenAddChannel() {
+    this.isAddChannelDialogOpen.set(true);
+  }
+
+  handleCloseAddChannel() {
+    this.isAddChannelDialogOpen.set(false);
   }
 
   toggleWorkspaceVisibility(): void {

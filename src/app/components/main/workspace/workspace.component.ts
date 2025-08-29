@@ -1,7 +1,6 @@
 import { Component, inject, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChannelService } from '../../../services/channel.service';
-import { AddChannelComponent } from './add-channel/add-channel.component';
 import { UserService } from '../../../services/user.service';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
@@ -10,7 +9,7 @@ import { ChannelMessageService } from '../../../services/channel-message.service
 
 @Component({
   selector: 'app-workspace',
-  imports: [AddChannelComponent, CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink],
   templateUrl: './workspace.component.html',
   styleUrl: './workspace.component.scss',
 })
@@ -28,6 +27,8 @@ export class WorkspaceComponent {
   closeWorkspace = output<void>();
   isWorkspacesHovered = signal(false);
   isChannelsBtnHovered = signal(false);
+
+  openAddChannelDialog = output<void>();
 
   getChannels() {
     return this.channelService.channels();
@@ -74,14 +75,6 @@ export class WorkspaceComponent {
 
   toggleDirectMessageUserList() {
     this.directMessageUserListOpen.update((open) => !open);
-  }
-
-  onOpenChannelDialog() {
-    this.addChannelDialogOpen.set(true);
-  }
-
-  onCloseAddChannel() {
-    this.addChannelDialogOpen.set(false);
   }
 
   onCloseWorkspace() {

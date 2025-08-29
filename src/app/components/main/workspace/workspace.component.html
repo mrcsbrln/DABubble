@@ -45,7 +45,7 @@
       />
       Channels
     </button>
-    <button class="add-btn" (click)="onOpenChannelDialog()">
+    <button class="add-btn" (click)="openAddChannelDialog.emit()">
       <img src="img/add.svg" alt="add" />
     </button>
   </div>
@@ -71,14 +71,12 @@
     } }
   </div>
   <div class="add-channel-container">
-    <button class="add-channel-btn" (click)="onOpenChannelDialog()">
+    <button class="add-channel-btn" (click)="openAddChannelDialog.emit()">
       <img src="img/add-circle.svg" alt="add-circle" />
       Channel hinzufügen
     </button>
   </div>
-  @if(addChannelDialogOpen()) {
-  <app-add-channel (closeDialog)="onCloseAddChannel()" />
-  } }
+  }
 
   <button
     class="direct-message-container"

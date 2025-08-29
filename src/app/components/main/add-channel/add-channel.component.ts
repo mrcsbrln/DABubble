@@ -5,10 +5,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Channel } from '../../../../interfaces/channel.interface';
-import { ChannelService } from '../../../../services/channel.service';
+import { Channel } from '../../../interfaces/channel.interface';
+import { ChannelService } from '../../../services/channel.service';
 import { serverTimestamp } from '@angular/fire/firestore';
-import { AuthService } from '../../../../services/auth/auth.service';
+import { AuthService } from '../../../services/auth/auth.service';
 
 type AddChannelData = Omit<Channel, 'id'>;
 

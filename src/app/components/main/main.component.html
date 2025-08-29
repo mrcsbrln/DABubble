@@ -40,7 +40,10 @@
 
   @if(breakpoint() !== 'xs' && breakpoint() !== 'sm') {
 
-  <app-workspace [ngClass]="{ 'workspace-hidden': isWorkspaceHidden() }" />
+  <app-workspace
+    [ngClass]="{ 'workspace-hidden': isWorkspaceHidden() }"
+    (openAddChannelDialog)="handleOpenAddChannel()"
+  />
 
   <section>
     <router-outlet (activate)="onActivate($event)" />
@@ -60,6 +63,7 @@
   <app-workspace
     class="mobile"
     (closeWorkspace)="isWorkspaceHidden.set(true); isChatHidden.set(false)"
+    (openAddChannelDialog)="handleOpenAddChannel()"
   />
   } @if(isWorkspaceHidden() && !isChatHidden() && isThreadHidden()) {
   <section>
@@ -72,12 +76,14 @@
     class="mobile"
     (closeWorkspace)="isWorkspaceHidden.set(true)"
     (closeWorkspace)="isChatHidden.set(false)"
+    (openAddChannelDialog)="handleOpenAddChannel()"
   />
   }@if(!isWorkspaceHidden() && !isChatHidden() && isThreadHidden()) {
   <app-workspace
     class="mobile"
     (closeWorkspace)="isWorkspaceHidden.set(true)"
     (closeWorkspace)="isChatHidden.set(false)"
+    (openAddChannelDialog)="handleOpenAddChannel()"
   />
   } @if(isWorkspaceHidden() && !isChatHidden() && !isThreadHidden()) {
   <app-thread (closeThread)="isThreadHidden.set(true)" />
@@ -121,4 +127,6 @@
   />
   }
 </button>
+} @if(isAddChannelDialogOpen()) {
+<app-add-channel (closeDialog)="handleCloseAddChannel()" />
 }
