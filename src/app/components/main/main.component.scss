@@ -55,6 +55,9 @@ header {
     order: 3;
     @include respond(lg) {
       width: $last-column-width;
+      &.thread-hidden {
+        width: auto;
+      }
     }
     &.mobile {
       order: 2;
