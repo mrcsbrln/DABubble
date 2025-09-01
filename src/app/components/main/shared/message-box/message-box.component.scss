@@ -65,7 +65,7 @@ form {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  z-index: 9999;
+  z-index: 2;
   max-height: 350px;
   overflow: hidden;
   box-shadow: $box-shadow-overlay;
