@@ -73,8 +73,7 @@
       <a
         class="user-entry"
         [routerLink]="['/user', cm?.uid]"
-        (click)="resetCurrentChannelId()"
-        (click)="resetForm()"
+        (click)="resetCurrentChannelId(); resetForm()"
       >
         <div class="avatar-wrapper">
           <img [src]="cm?.avatarUrl" alt="Avatar" />

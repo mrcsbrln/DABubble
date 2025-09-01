@@ -1,13 +1,14 @@
 import {
   Component,
   DestroyRef,
-  ElementRef,
   inject,
   input,
   OnInit,
   output,
   signal,
-  ViewChild,
+  viewChild,
+  AfterViewInit,
+  ElementRef,
 } from '@angular/core';
 import {
   FormControl,
@@ -29,7 +30,7 @@ import { UserService } from '../../../../services/user.service';
   templateUrl: './message-box.component.html',
   styleUrl: './message-box.component.scss',
 })
-export class MessageBoxComponent implements OnInit {
+export class MessageBoxComponent implements OnInit, AfterViewInit {
   private destroyRef = inject(DestroyRef);
   private route = inject(ActivatedRoute);
   private channelMessageService = inject(ChannelMessageService);
@@ -37,7 +38,7 @@ export class MessageBoxComponent implements OnInit {
   private userService = inject(UserService);
   private filterService = inject(FilterService);
 
-  @ViewChild('textareaRef') textareaRef!: ElementRef<HTMLTextAreaElement>;
+  textareaRef = viewChild<ElementRef<HTMLTextAreaElement>>('textareaRef');
 
   placeholder = input<string>();
   isChannelMessage = input<boolean>();
@@ -56,6 +57,10 @@ export class MessageBoxComponent implements OnInit {
   isSendBtnHovered = signal(false);
 
   channelIdFromRoute = signal<string>('');
+
+  private focusTextarea() {
+    this.textareaRef()?.nativeElement?.focus();
+  }
 
   emojis: string[] = [
     '😀',
@@ -84,13 +89,15 @@ export class MessageBoxComponent implements OnInit {
 
     this.route.paramMap
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((pm) => {
-        const id = pm.get('channelId') ?? '';
-        this.channelIdFromRoute.set(id);
-        this.focusTextarea(true);
+      .subscribe(() => {
+        this.focusTextarea();
       });
 
     this.destroyRef.onDestroy(() => this.form.reset());
+  }
+
+  ngAfterViewInit() {
+    this.focusTextarea();
   }
 
   addEmojiToInput(emoji: string) {
@@ -99,7 +106,7 @@ export class MessageBoxComponent implements OnInit {
     control.setValue(current + emoji);
 
     this.isEmojiPickerOpen.set(false);
-    this.focusTextarea(true);
+    this.focusTextarea();
   }
 
   checkForAtOrHash() {
@@ -110,21 +117,6 @@ export class MessageBoxComponent implements OnInit {
     this.isHashInInput.set(
       searchBarValue?.includes('#') && searchBarValue.length === 1
     );
-  }
-
-  private focusTextarea(moveCaretToEnd = false) {
-    setTimeout(() => {
-      const el = this.textareaRef.nativeElement;
-      el.focus();
-      if (moveCaretToEnd) {
-        const len = el.value.length;
-        try {
-          el.setSelectionRange(len, len);
-        } catch {
-          el.selectionStart = el.selectionEnd = len;
-        }
-      }
-    });
   }
 
   getChannelsOfCurrentUser() {
