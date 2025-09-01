@@ -9,6 +9,7 @@ import {
   viewChild,
   AfterViewInit,
   ElementRef,
+  OnChanges,
 } from '@angular/core';
 import {
   FormControl,
@@ -16,10 +17,7 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
-import { ChannelService } from '../../../../services/channel.service';
 import { ChannelMessageService } from '../../../../services/channel-message.service';
 import { FilterService } from '../../../../services/filter.service';
 import { UserService } from '../../../../services/user.service';
@@ -30,15 +28,14 @@ import { UserService } from '../../../../services/user.service';
   templateUrl: './message-box.component.html',
   styleUrl: './message-box.component.scss',
 })
-export class MessageBoxComponent implements OnInit, AfterViewInit {
+export class MessageBoxComponent implements OnInit, AfterViewInit, OnChanges {
   private destroyRef = inject(DestroyRef);
-  private route = inject(ActivatedRoute);
   private channelMessageService = inject(ChannelMessageService);
-  private channelService = inject(ChannelService);
   private userService = inject(UserService);
   private filterService = inject(FilterService);
 
-  textareaRef = viewChild<ElementRef<HTMLTextAreaElement>>('textareaRef');
+  protected textareaRef =
+    viewChild.required<ElementRef<HTMLTextAreaElement>>('textareaRef');
 
   placeholder = input<string>();
   isChannelMessage = input<boolean>();
@@ -86,17 +83,22 @@ export class MessageBoxComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.contentControlReady.emit(this.form.controls.content);
+    console.log(this.textareaRef().nativeElement);
 
-    this.route.paramMap
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => {
-        this.focusTextarea();
-      });
+    // this.route.paramMap
+    //   .pipe(takeUntilDestroyed(this.destroyRef))
+    //   .subscribe(() => {
+    //     this.focusTextarea();
+    //   });
 
     this.destroyRef.onDestroy(() => this.form.reset());
   }
 
   ngAfterViewInit() {
+    this.focusTextarea();
+  }
+
+  ngOnChanges() {
     this.focusTextarea();
   }
 

@@ -66,8 +66,7 @@
     @if (!isThreadItem()) {
     <button
       type="button"
-      (click)="onOpenThread()"
-      (click)="setParentMessageId()"
+      (click)="onOpenThread(); setParentMessageId()"
       (mouseenter)="isAnswerHovered.set(true)"
       (mouseleave)="isAnswerHovered.set(false)"
     >

@@ -15,7 +15,10 @@ import { WorkspaceComponent } from './workspace/workspace.component';
 import { RouterOutlet } from '@angular/router';
 import { DirectMessageComponent } from './direct-message/direct-message.component';
 import { ChannelMessageComponent } from './channel-message/channel-message.component';
-import { slideLeft, slideRight } from '../../services/site-animations.service';
+import {
+  slideThread,
+  slideWorkspace,
+} from '../../services/site-animations.service';
 import { DirectMessageService } from '../../services/direct-message.service';
 import { ChannelMessageService } from '../../services/channel-message.service';
 import { AddChannelComponent } from './add-channel/add-channel.component';
@@ -35,7 +38,7 @@ type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
-  animations: [slideLeft, slideRight],
+  animations: [slideThread, slideWorkspace],
 })
 export class MainComponent implements OnInit {
   private directMessageService = inject(DirectMessageService);

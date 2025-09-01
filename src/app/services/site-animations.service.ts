@@ -123,22 +123,24 @@ export const reactionBarSlideOtherUser = trigger('reactionBarSlideOtherUser', [
   ]),
 ]);
 
-export const slideLeft = trigger('slideLeft', [
-  transition(':enter', [
-    style({ transform: 'translateX(-100%)' }),
-    animate('220ms ease-out', style({ transform: 'translateX(0)' })),
-  ]),
+export const slideThread = trigger('slideThread', [
   transition(':leave', [
-    animate('180ms ease-in', style({ transform: 'translateX(-100%)' })),
+    style({ width: '$last-column-width' }),
+    animate('500ms ease', style({ width: 0 })),
+  ]),
+  transition(':enter', [
+    style({ width: 0 }),
+    animate('500ms ease', style({ width: '$last-column-width' })),
   ]),
 ]);
 
-export const slideRight = trigger('slideRight', [
-  transition(':enter', [
-    style({ transform: 'translateX(100%)' }),
-    animate('220ms ease-out', style({ transform: 'translateX(0)' })),
-  ]),
+export const slideWorkspace = trigger('slideWorkspace', [
   transition(':leave', [
-    animate('180ms ease-in', style({ transform: 'translateX(100%)' })),
+    style({ width: '$first-column-width' }),
+    animate('500ms ease', style({ width: 0 })),
+  ]),
+  transition(':enter', [
+    style({ width: 0 }),
+    animate('500ms ease', style({ width: '$first-column-width' })),
   ]),
 ]);

@@ -39,22 +39,25 @@
   <!--FOR DESKTOP-->
 
   @if(breakpoint() !== 'xs' && breakpoint() !== 'sm') {
-
+  @if(!isWorkspaceHidden()) {
   <app-workspace
     [ngClass]="{ 'workspace-hidden': isWorkspaceHidden() }"
     (openAddChannelDialog)="handleOpenAddChannel()"
+    @slideWorkspace
   />
+  }
 
   <section>
     <router-outlet (activate)="onActivate($event)" />
   </section>
 
+  @if(!isThreadHidden()) {
   <app-thread
     (closeThread)="isThreadHidden.set(true)"
     [ngClass]="{ 'thread-hidden': isThreadHidden() }"
+    @slideThread
   />
-
-  }
+  } }
 
   <!--FOR MOBILE-->
 
