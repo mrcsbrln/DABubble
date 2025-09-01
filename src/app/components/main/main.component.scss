@@ -57,6 +57,7 @@ header {
       width: $last-column-width;
       &.thread-hidden {
         width: auto;
+        margin-left: 16px;
       }
     }
     &.mobile {

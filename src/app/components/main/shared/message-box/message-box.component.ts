@@ -17,7 +17,7 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ChannelMessageService } from '../../../../services/channel-message.service';
 import { FilterService } from '../../../../services/filter.service';
 import { UserService } from '../../../../services/user.service';
@@ -33,6 +33,7 @@ export class MessageBoxComponent implements OnInit, AfterViewInit, OnChanges {
   private channelMessageService = inject(ChannelMessageService);
   private userService = inject(UserService);
   private filterService = inject(FilterService);
+  private route = inject(ActivatedRoute);
 
   protected textareaRef =
     viewChild.required<ElementRef<HTMLTextAreaElement>>('textareaRef');
@@ -83,13 +84,9 @@ export class MessageBoxComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnInit(): void {
     this.contentControlReady.emit(this.form.controls.content);
-    console.log(this.textareaRef().nativeElement);
-
-    // this.route.paramMap
-    //   .pipe(takeUntilDestroyed(this.destroyRef))
-    //   .subscribe(() => {
-    //     this.focusTextarea();
-    //   });
+    this.route.paramMap.subscribe((params) => {
+      this.channelIdFromRoute.set(params.get('channelId')!);
+    });
 
     this.destroyRef.onDestroy(() => this.form.reset());
   }
