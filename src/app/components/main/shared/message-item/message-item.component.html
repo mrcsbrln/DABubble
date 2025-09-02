@@ -95,8 +95,10 @@
       <button
         type="button"
         class="emoji-btns"
-        (click)="handleReaction(emoji, message()?.id ?? '')"
-        (click)="isEmojiPickerInBarOpen.set(false)"
+        (click)="
+          handleReaction(emoji, message()?.id ?? '');
+          isEmojiPickerInBarOpen.set(false)
+        "
       >
         {{ emoji }}
       </button>
@@ -153,8 +155,10 @@
       <button
         type="button"
         class="emoji-btns"
-        (click)="handleReaction(emoji, message()?.id ?? '')"
-        (click)="isEmojiPickerInBarOpen.set(false)"
+        (click)="
+          handleReaction(emoji, message()?.id ?? '');
+          isEmojiPickerInBarOpen.set(false)
+        "
       >
         {{ emoji }}
       </button>
@@ -164,8 +168,7 @@
     <!-- Answer-Button -->
     <button
       type="button"
-      (click)="onOpenThread()"
-      (click)="setParentMessageId()"
+      (click)="onOpenThread(); setParentMessageId()"
       (mouseenter)="isAnswerHovered.set(true)"
       (mouseleave)="isAnswerHovered.set(false)"
     >
@@ -236,36 +239,6 @@
         </button>
 
         } }
-        <!-- @if(checkForReactions()){
-        <button
-          class="add-reaction-emoji"
-          (mouseenter)="isReaction2Hovered.set(true)"
-          (mouseleave)="isReaction2Hovered.set(false)"
-          (click)="toggleEmojiPicker()"
-        >
-          <img
-            [src]="
-              isReaction2Hovered()
-                ? 'img/add-reaction-comment-hover.svg'
-                : 'img/add-reaction-comment.svg'
-            "
-            alt=""
-          />
-        </button>
-        } -->
-        <!-- @if(isEmojiPickerOpen()) {
-        <div class="emoji-picker" #emojiPicker>
-          @for (emoji of emojis; track $index) {
-          <button
-            type="button"
-            class="emoji-btns"
-            (click)="handleReaction(emoji, message()?.id ?? '')"
-          >
-            {{ emoji }}
-          </button>
-          }
-        </div>
-        } -->
       </div>
       @if(getThreadMessages().length === 1) {
       <div
@@ -282,7 +255,7 @@
           {{ getTimeOfLastThreadMessage()?.toDate() | date : "HH:mm" }}</span
         >
       </div>
-      } @if( getThreadMessages().length > 1 ) {
+      } @if( getThreadMessages().length > 1) {
       <div
         class="thread-wrapper"
         (click)="onOpenThread(); setParentMessageId()"

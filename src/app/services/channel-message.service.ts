@@ -41,7 +41,7 @@ export class ChannelMessageService {
 
   parentChannelMessageId = signal('');
 
-  parentMessage = computed(() => {
+  parentChannelMessage = computed(() => {
     const id = this.parentChannelMessageId();
     return this.messagesByChannelId().find((message) => message.id === id);
   });
@@ -127,7 +127,6 @@ export class ChannelMessageService {
     );
   }
 
-  //todo: check for minimum required parameters
   setMessageObject(obj: Partial<ChannelMessage>, id: string): ChannelMessage {
     return {
       id: id,

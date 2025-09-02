@@ -151,13 +151,13 @@
 </div>
 <div class="messages-container">
   @for(message of getMessagesReversed(); track message.id; let i = $index) {
-
+  @if(message.parentMessageId === null) {
   <app-message-item
     [message]="message"
     [id]="message.id"
     (openThread)="openThread.emit()"
   />
-  }
+  } }
 </div>
 <app-message-box
   [placeholder]="'Nachricht an ' + getChannelName()"

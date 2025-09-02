@@ -72,10 +72,6 @@ export class MessageItemComponent {
     '✅',
   ];
 
-  // addEmojiToReaction(emoji: string) {
-  //   //
-  // }
-
   checkForReactions(): boolean {
     const message = this.message();
     if (!message) {
@@ -142,9 +138,17 @@ export class MessageItemComponent {
   }
 
   getThreadMessages() {
-    return this.directMessageService
-      .directMessages()
-      .filter((dm) => dm.parentMessageId === this.message()?.id);
+    const message = this.message();
+    if (!message) return [];
+    if ('participantIds' in this.message()!) {
+      return this.directMessageService
+        .directMessages()
+        .filter((dm) => dm.parentMessageId === this.message()?.id);
+    } else if ('senderId' in message) {
+      return this.channelMessageService
+        .messages()
+        .filter((cm) => cm.parentMessageId === this.message()?.id);
+    } else return [];
   }
 
   getTimeOfLastThreadMessage() {

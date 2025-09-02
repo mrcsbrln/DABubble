@@ -29,6 +29,7 @@ import { MessageItemComponent } from '../shared/message-item/message-item.compon
 import { filter, Subscription } from 'rxjs';
 
 type DirectMessageData = Omit<DirectMessage, 'id'>;
+type ChannelMessageData = Omit<ChannelMessage, 'id'>;
 
 @Component({
   selector: 'app-thread',
@@ -108,6 +109,7 @@ export class ThreadComponent implements OnInit, OnDestroy {
     const currentChannelId = this.channelMessageService.currentChannelId();
     const parentChannelMessageId =
       this.channelMessageService.parentChannelMessageId();
+    console.log(currentChannelId);
     if (
       this.form.controls.content.valid &&
       messageText &&
@@ -145,7 +147,7 @@ export class ThreadComponent implements OnInit, OnDestroy {
   }
 
   getParentChannelMessage() {
-    return this.channelMessageService.parentMessage();
+    return this.channelMessageService.parentChannelMessage();
   }
 
   getParentDirectMessage() {
@@ -163,8 +165,18 @@ export class ThreadComponent implements OnInit, OnDestroy {
       .filter((dm) => dm.parentMessageId === parentMessageId);
   }
 
-  getChannelThreadMessages() {
+  getThreadMessagesOfChannelMessage() {
     return this.channelMessageService.threadMessages();
+  }
+
+  getThreadMessagesOfDirectMessage(parentId: string) {
+    return this.directMessageService
+      .directMessages()
+      .filter((tm) => tm.id === parentId);
+  }
+
+  getThreadMessagesCount() {
+    return;
   }
 
   getSelectedUser() {
@@ -217,7 +229,22 @@ export class ThreadComponent implements OnInit, OnDestroy {
   }
 
   handleSendForChannelMessage(text: string) {
-    return text;
+    const senderId = this.authService.currentUser()?.uid;
+    const currentChannelId = this.channelService.getCurrentChannel()?.id;
+    const parentChannelMessageId = this.getParentChannelMessage()?.id;
+
+    if (!senderId || !parentChannelMessageId || !currentChannelId) return;
+
+    const message: ChannelMessageData = {
+      channelId: currentChannelId,
+      content: text,
+      senderId: senderId,
+      timestamp: serverTimestamp(),
+      parentMessageId: parentChannelMessageId,
+      reactions: [],
+    };
+
+    this.channelMessageService.addMessage(message);
   }
 
   checkRouteType(): void {

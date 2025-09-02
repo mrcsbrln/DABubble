@@ -27,21 +27,31 @@
     [isParentMessage]="true"
     style="margin-top: 24px"
   />
-  @if(getChannelThreadMessages().length > 0) {
+  @if(getThreadMessagesOfChannelMessage().length === 1) {
   <div class="parent-seperator-wrapper">
-    {{ getChannelThreadMessages().length }} Antworten
+    {{ getThreadMessagesOfChannelMessage().length }} Antwort
     <span class="parent-seperator"></span>
   </div>
-  } @for(message of getChannelThreadMessages(); track message.id) {
+  } @if(getThreadMessagesOfChannelMessage().length > 1) {
+  <div class="parent-seperator-wrapper">
+    {{ getThreadMessagesOfChannelMessage().length }} Antworten
+    <span class="parent-seperator"></span>
+  </div>
+  } @for(message of getThreadMessagesOfChannelMessage(); track message.id) {
   <app-message-item [message]="message" [isThreadItem]="true" />
-  } } @else if (type() === 'user') {
+  } } @if (type() === 'user') {
   <app-message-item
     [message]="getParentDirectMessage()"
     [isThreadItem]="true"
     [isParentMessage]="true"
     style="margin-top: 24px"
   />
-  @if(getDirectThreadMessagesByParentId().length > 0) {
+  @if(getDirectThreadMessagesByParentId().length === 1) {
+  <div class="parent-seperator-wrapper">
+    {{ getDirectThreadMessagesByParentId().length }} Antwort
+    <span class="parent-seperator"></span>
+  </div>
+  } @if(getDirectThreadMessagesByParentId().length > 1) {
   <div class="parent-seperator-wrapper">
     {{ getDirectThreadMessagesByParentId().length }} Antworten
     <span class="parent-seperator"></span>
