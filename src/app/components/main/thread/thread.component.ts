@@ -18,7 +18,7 @@ import {
 import { AuthService } from '../../../services/auth/auth.service';
 import { ChannelMessageService } from '../../../services/channel-message.service';
 import { ChannelService } from '../../../services/channel.service';
-import { serverTimestamp } from '@angular/fire/firestore';
+import { serverTimestamp, Timestamp } from '@angular/fire/firestore';
 import { ChannelMessage } from '../../../interfaces/channel-message.interface';
 import { MessageBoxComponent } from '../shared/message-box/message-box.component';
 import { DirectMessageService } from '../../../services/direct-message.service';
@@ -175,16 +175,56 @@ export class ThreadComponent implements OnInit, OnDestroy {
       .filter((tm) => tm.id === parentId);
   }
 
-  getThreadMessagesCount() {
-    return;
-  }
-
   getSelectedUser() {
     const selecetedUserId = this.directMessageService.selectedUserId();
     if (!selecetedUserId) return;
     return this.userService
       .users()
       .find((user) => user.uid === selecetedUserId);
+  }
+
+  getSortedThreadChannelMessages() {
+    return this.getThreadMessagesOfChannelMessage()
+      .slice()
+      .sort((a, b) => {
+        const dateA = this.getDateOfChannelThreadMessageById(a.id);
+        const dateB = this.getDateOfChannelThreadMessageById(b.id);
+        return dateA.getTime() - dateB.getTime();
+      });
+  }
+
+  getDateOfChannelThreadMessageById(messageId: string): Date {
+    const timestamp = this.channelMessageService
+      .messages()
+      .find((message) => message.id === messageId)?.timestamp;
+
+    if (timestamp instanceof Timestamp) {
+      return timestamp.toDate();
+    }
+
+    return new Date(0);
+  }
+
+  getSortedThreadDirectMessages() {
+    return this.getDirectThreadMessagesByParentId()
+      .slice()
+      .sort((a, b) => {
+        const dateA = this.getDateOfDirectThreadMessageById(a.id);
+        const dateB = this.getDateOfDirectThreadMessageById(b.id);
+        return dateA.getTime() - dateB.getTime();
+      });
+  }
+
+  getDateOfDirectThreadMessageById(messageId: string): Date {
+    const timestamp = this.directMessageService
+      .directMessages()
+      .find((message) => message.id === messageId)?.timestamp;
+
+    if (timestamp instanceof Timestamp) {
+      return timestamp.toDate();
+    }
+
+    return new Date(0);
   }
 
   @HostListener('document:mousedown', ['$event'])

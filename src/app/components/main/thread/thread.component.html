@@ -37,7 +37,7 @@
     {{ getThreadMessagesOfChannelMessage().length }} Antworten
     <span class="parent-seperator"></span>
   </div>
-  } @for(message of getThreadMessagesOfChannelMessage(); track message.id) {
+  } @for(message of getSortedThreadChannelMessages(); track message.id) {
   <app-message-item [message]="message" [isThreadItem]="true" />
   } } @if (type() === 'user') {
   <app-message-item
