@@ -46,6 +46,10 @@ export class ChannelService {
     }
   }
 
+  channelAlreadyExists(channelName: string) {
+    return this.channels().some((channel) => channel.name === channelName);
+  }
+
   getChannelDocRef(docId: string) {
     return doc(this.getChannelsCollectionRef(), docId);
   }

@@ -35,15 +35,15 @@ export class AddChannelComponent {
     description: new FormControl('', Validators.minLength(1)),
   });
 
-  onCloseDialog() {
-    this.closeDialog.emit();
+  get channelAlreadyExisting() {
+    const channelName = this.form.controls.channelName.value;
+    return channelName
+      ? this.channelService.channelAlreadyExists(channelName)
+      : false;
   }
 
-  channelAlreadyExists() {
-    const channelName = this.form.controls.channelName.value;
-    return this.channelService
-      .channels()
-      .some((channel) => channel.name === channelName);
+  onCloseDialog() {
+    this.closeDialog.emit();
   }
 
   onSubmit() {
@@ -53,7 +53,7 @@ export class AddChannelComponent {
     if (
       this.form.controls.channelName.valid &&
       creatorId &&
-      !this.channelAlreadyExists()
+      !this.channelAlreadyExisting
     ) {
       const channelToSend: AddChannelData = {
         name: channelName!,
